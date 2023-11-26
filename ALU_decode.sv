@@ -1,4 +1,9 @@
 //This module is managed by Guanxi Lu
+//Need to decode for 
+//R-type: add, sub, and
+//I-type: addi, lw, lbu
+//S-type: sw, sb
+//B-type: beq, bne
 module ALU_decode(
     input logic op5, 
     input logic [2:0] func3, 
@@ -7,21 +12,23 @@ module ALU_decode(
     output logic [2:0] ALUControl
 );
 
-logic [6:0] decode; 
-assign decode = {ALUOp, func3, op5, func75};
+logic [2:0] decode;
+assign decode = {op5, func75};
 
-always_comb
-case (decode)
-    00?????: ALUControl = 3'b000; //add for lw, sw
-    01?????: ALUControl = 3'b001; //sub for beq
-    100000?: ALUControl = 3'b000; //add
-    1000010: ALUControl = 3'b000; //add
-    1000011: ALUControl = 3'b001; //sub
-    10010??: ALUControl = 3'b101; //slt
-    10110??: ALUControl = 3'b011; //or
-    10111??: ALUControl = 3'b010; //and
-    default: ALUControl = 3'b000;
-endcase
-
+always_comb begin
+    if (ALUOp == 2'b00) ALUControl = 3'b000; 
+    else if (ALUOp == 2'b01) ALUControl = 3'b001; 
+    else if (ALUOp == 2'b10) begin
+        if (func3 == 3'b000) begin
+            if (decode == 2'b00) ALUControl = 3'b000; //add
+            else if (decode == 2'b01) ALUControl = 3'b000; //add
+            else if (decode == 2'b10) ALUControl = 3'b000; //add
+            else if (decode == 2'b11) ALUControl = 3'b001; //sub
+        end
+        else if (func3 == 3'b010) ALUControl = 3'b101; //slt
+        else if (func3 == 3'b110) ALUControl = 3'b011; //or
+        else if (func3 == 3'b111) ALUControl = 3'b010; //and
+    end
+end
 
 endmodule
