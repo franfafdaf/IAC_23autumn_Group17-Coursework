@@ -19,6 +19,23 @@
 - When `PCSrc` is high, PC jumps to the `PCTarget`.
 - When `PCSrc` is low, PC increments sequentially.
 
+# `DataMemory` Module Overview
+
+## Inputs
+- `clk`: Clock signal for synchronizing the memory operations.
+- `WE`: Write Enable signal, allows data to be written to the memory.
+- `A`: Address input, specifies the memory location for read/write operations.
+- `WD`: Write Data input, the data to be written to the specified address.
+
+## Output
+- `RD`: Read Data output, the data read from the specified memory address.
+
+## Memory Initialization
+- The memory is initialized with the contents from the file `gaussian.mem`.(simply choose one from REFERENCE)
+
+
+
+
 
 
 
