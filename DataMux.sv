@@ -1,10 +1,10 @@
 module DataMUX (
-    input logic sel,             // Selector bit
-    input logic [31:0] aluResult, // ALU result
-    input logic [31:0] readData,  // Data memory read data
-    output logic [31:0] result    // Output result
+    input logic ResultSrc,             // Selector bit
+    input logic [31:0] ALUResult, // ALU result
+    input logic [31:0] RD,  // Data memory read data
+    output logic [31:0] Result    // Output result
 );
 
-    assign result = sel ? readData : aluResult;
+    assign Result = ResultSrc ? RD : ALUResult;
 
 endmodule
