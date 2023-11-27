@@ -71,7 +71,7 @@ end
     ImmSrc = 3'b001;
     RegWrite = 0;
     ALUOp = 2'b00;
-    StSrc = ~(&func3);
+    StSrc = ~{&{func3}};
 end
 
 1100011: begin //B-type
