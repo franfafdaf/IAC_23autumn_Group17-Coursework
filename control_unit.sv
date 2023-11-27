@@ -8,7 +8,8 @@ module control_unit (
     output logic PCSrc,
     output logic ResultSrc,
     output logic MemWrite, 
-    output logic ALUSrc, 
+    output logic ALUSrcA, 
+    output logic ALUSrcB,
     output logic [2:0] ImmSrc, 
     output logic RegWrite
     output logic [2:0] ALUControl,

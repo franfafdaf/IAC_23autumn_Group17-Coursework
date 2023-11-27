@@ -1,0 +1,111 @@
+module top(
+    input logic clk, 
+    input logic trigger, 
+    input logic reset, 
+    output logic [31:0] a0
+);
+
+    logic PCSrc; 
+    logic [31:0] PC_Plus;
+    logic [31:0] ImmExt; 
+    logic [31:0] PC; 
+    logic [31:0] Instr;
+    logic [6:0] opcode;
+    logic [2:0] func3;
+    logic func75;
+    logic Zero;
+    logic ResultSrc;
+    logic MemWrite;
+    logic ALUSrcA;
+    logic ALUSrcB;
+    logic [2:0] ImmSrc;
+    logic RegWrite;
+    logic [2:0] ALUControl;
+    logic LdSrc;
+    logic StSrc;
+    logic [4:0] A1;
+    logic [4:0] A2;
+    logic [4:0] A3;
+    logic [31:0] WD3;
+    logic [31:0] RD1;
+    logic [31:0] RD2;
+    logic [24:0] Imm;
+    logic [31:0] ImmExt;
+    logic [31:0] ALUResult;
+
+
+pc_top my_pc_top(
+    .clk(clk),
+    .rst(reset),
+    .PCSrc(PCSrc),
+    .ImmExt(ImmExt),
+    .PC(PC)
+);
+
+instr_mem my_instr_mem(
+    .A(A),
+    .RD(Instr)
+);
+
+control_unit my_control_unit(
+    .opcode(opcode),
+    .funct3(func3),
+    .func75(func75),
+    .Zero(Zero),
+    .PCSrc(PCSrc),
+    .ResultSrc(ResultSrc),
+    .MemWrite(MemWrite),
+    .ALUSrc(ALUSrc),
+    .ImmSrc(ImmSrc),
+    .RegWrite(RegWrite),
+    .ALUControl(ALUControl),
+    .LdSrc(LdSrc),
+    .StSrc(StSrc)
+);
+
+reg_file my_reg_file(
+    .clk(clk),
+    .A1(A1),
+    .A2(A2),
+    .A3(A3),
+    .WD3(WD3),
+    .RD1(RD1),
+    .RD2(RD2)
+);
+
+extend my_extend(
+    .ImmSrc(ImmSrc),
+    .Imm(Imm)
+    .ImmExt(ImmExt)
+);
+
+alu_top_level my_alu_top_level(
+    .clk(clk),
+    .A1(A1),
+    .A2(A2),
+    .A3(A3),
+    .WD3(WD3),
+    .ImmExt(ImmExt),
+    .ALUsrcB(ALUsrcB),
+    .ALUControl(ALUControl),
+    .PC(PC),
+    .ALUSrcA(ALUSrcA),
+    .ALUResult(ALUResult)
+);
+
+// assignment for instr_mem
+assign A = PC[11:0];
+// assignment for control_unit
+assign opcode = Instr[6:0];
+assign func3 = Instr[14:12];
+assign func75 = Instr[30];
+// assignment for reg_file
+assign A1 = Instr[19:15];
+assign A2 = Instr[24:20];
+assign A3 = Instr[11:7];
+// assignment for extend
+assign Imm = Instr[31:7];
+
+
+
+endmodule
