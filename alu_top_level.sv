@@ -1,18 +1,18 @@
 module alu_top_level(
-    input logic clk,
-    input logic [4:0] A1,
-    input logic [4:0] A2,
-    input logic [4:0] A3,
-    input logic [31:0] WD3,
-    input logic [31:0] ImmExt,
-    input logic ALUsrcB,
-    input logic [2:0] ALUControl,
-    input logic [31:0] PC,
-    input logic ALUSrcA,
-    output logic [31:0] ALUResult, 
-    output logic [31:0] RD2, 
-    output logic Zero,
-    output logic [31:0] a0,
+    input logic             clk,
+    input logic [4:0]       A1,
+    input logic [4:0]       A2,
+    input logic [4:0]       A3,
+    input logic [31:0]      WD3,
+    input logic [31:0]      ImmExt,
+    input logic             ALUsrcB,
+    input logic [2:0]       ALUControl,
+    input logic [31:0]      PC,
+    input logic             ALUSrcA,
+    output logic [31:0]     ALUResult, 
+    output logic [31:0]     RD2, 
+    output logic            Zero,
+    output logic [31:0]     a0
 );
 
     logic [31:0] RD1;
