@@ -1,15 +1,18 @@
 //This module is managed by Guanxi Lu
 module main_decode(
     input logic [6:0] opcode,
+    input logic [2:0] funct3,
     output logic Branch, 
     output logic Jump, 
     output logic [1:0] ResultSrc,
     output logic MemWrite,
-    output logic ALUSrc, 
-    output logic [1:0] ImmSrc,
+    output logic ALUSrcA, 
+    output logic ALUSrcB,
+    output logic [2:0] ImmSrc,
     output logic RegWrite, 
     output logic [1:0] ALUOp, 
-    output logic UpSrc
+    output logic LdSrc,
+    output logic StSrc
 ); 
 
 always_comb
@@ -19,11 +22,10 @@ case (opcode)
     Jump = 0; 
     ResultSrc = 2'b00;
     MemWrite = 0;
-    ALUSrc = 0;
-    ImmSrc = 2'bxx;
+    ALUSrcA = 0;
+    ALUSrcB = 0;
     RegWrite = 1;
     ALUOp = 2'b10;
-    UpSrc = 1'x;
 end
 
 0010011: begin //I-type ALU
@@ -31,11 +33,11 @@ end
     Jump = 0; 
     ResultSrc = 2'b00;
     MemWrite = 0;
-    ALUSrc = 1;
-    ImmSrc = 2'b00;
+    ALUSrcA = 0;
+    ALUSrcB = 1;
+    ImmSrc = 3'b000;
     RegWrite = 1;
     ALUOp = 2'b00;
-    UpSrc = 1'x;
 end
 
 0000011: begin //I-type load
@@ -43,11 +45,12 @@ end
     Jump = 0; 
     ResultSrc = 2'b01;
     MemWrite = 0;
-    ALUSrc = 1;
-    ImmSrc = 2'b00;
+    ALUSrcA = 0;
+    ALUSrcB = 1;
+    ImmSrc = 3'b000;
     RegWrite = 1;
     ALUOp = 2'b00;
-    UpSrc = 1'x;
+    LdSrc = {func3[2]};
 end
 
 1100111: begin //I-type jump
@@ -55,59 +58,54 @@ end
     Jump = 1; 
     ResultSrc = 2'b10;
     MemWrite = 0;
-    ALUSrc = 1'bx;
-    ImmSrc = 2'b00;
+    ImmSrc = 3'b000;
     RegWrite = 1;
-    ALUOp = 2'bxx;
-    UpSrc = 1'x;
 end
 
 0100011: begin //S-type
     Branch = 0; 
     Jump = 0; 
-    ResultSrc = 2'bxx;
     MemWrite = 1;
-    ALUSrc = 1;
-    ImmSrc = 2'b01;
+    ALUSrcA = 0;
+    ALUSrcB = 1;
+    ImmSrc = 3'b001;
     RegWrite = 0;
     ALUOp = 2'b00;
-    UpSrc = 1'x;
+    StSrc = ~(&func3);
 end
 
 1100011: begin //B-type
     Branch = 1; 
     Jump = 0; 
-    ResultSrc = 2'bxx;
     MemWrite = 0;
-    ALUSrc = 0;
-    ImmSrc = 2'b10;
+    ALUSrcA = 0;
+    ALUSrcB = 0;
+    ImmSrc = 3'b010;
     RegWrite = 0;
     ALUOp = 2'b01;
-    UpSrc = 1'x;
 end
 
 0110111: begin //U-type LUI
     Branch = 0; 
     Jump = 0; 
-    ResultSrc = 2'b11;
+    ResultSrc = 2'b00;
     MemWrite = 0;
-    ALUSrc = 1'bx;
-    ImmSrc = 2'bxx;
+    ALUSrcB = 1'b1;
+    ImmSrc = 3'b100;
     RegWrite = 1;
-    ALUOp = 2'bxx;
-    UpSrc = 1'b0;
+    ALUOp = 2'b11;
 end
 
 0010111: begin //U-type AUIPC
     Branch = 0; 
     Jump = 0; 
-    ResultSrc = 2'b11;
+    ResultSrc = 2'b00;
     MemWrite = 0;
-    ALUSrc = 1'bx;
-    ImmSrc = 2'bxx;
+    ALUSrcA = 1'b1;
+    ALUSrcB = 1'b1;
+    ImmSrc = 3'b100;
     RegWrite = 1;
-    ALUOp = 2'bxx;
-    UpSrc = 1'b1;
+    ALUOp = 2'b11;
 end
 
 1101111: begin //J-type
@@ -115,23 +113,12 @@ end
     Jump = 1; 
     ResultSrc = 2'b10;
     MemWrite = 0;
-    ALUSrc = 1'bx;
-    ImmSrc = 2'b11;
+    ImmSrc = 3'b011;
     RegWrite = 1;
-    ALUOp = 2'bxx;
-    UpSrc = 1'x;
 end
 
 default: begin
-    Branch = 0; 
-    Jump = 0; 
-    ResultSrc = 2'bxx;
-    MemWrite = 0;
-    ALUSrc = 1'bx;
-    ImmSrc = 2'bxx;
-    RegWrite = 0;
-    ALUOp = 2'bxx;
-    UpSrc = 1'x;
+
 end
 
 endcase
