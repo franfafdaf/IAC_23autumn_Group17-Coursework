@@ -1,7 +1,7 @@
 //This module is managed by Guanxi Lu
 module main_decode(
     input logic [6:0]       opcode,
-    input logic [2:0]       func3,
+    input logic [2:0]       funct3,
     output logic            Branch, 
     output logic            Jump, 
     output logic [1:0]      ResultSrc,
@@ -50,7 +50,7 @@ end
     ImmSrc = 3'b000;
     RegWrite = 1;
     ALUOp = 2'b00;
-    LdSrc = {func3[2]};
+    LdSrc = {funct3[2]};
 end
 
 1100111: begin //I-type jump
@@ -71,7 +71,7 @@ end
     ImmSrc = 3'b001;
     RegWrite = 0;
     ALUOp = 2'b00;
-    StSrc = ~{&{func3}};
+    StSrc = ~{&{funct3}};
 end
 
 1100011: begin //B-type

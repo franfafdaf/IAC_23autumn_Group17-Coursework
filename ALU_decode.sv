@@ -6,7 +6,7 @@
 //B-type: beq, bne
 module ALU_decode(
     input logic         op5, 
-    input logic [2:0]   func3, 
+    input logic [2:0]   funct3, 
     input logic         func75, 
     input logic [1:0]   ALUOp,
     output logic [2:0]  ALUControl
@@ -21,15 +21,15 @@ always_comb begin
     if (ALUOp == 2'b00) ALUControl = 3'b000; //add 
     else if (ALUOp == 2'b01) ALUControl = 3'b001; //sub
     else if (ALUOp == 2'b10) begin
-        if (func3 == 3'b000) begin
+        if (funct3 == 3'b000) begin
             if (decode == 2'b00) ALUControl = 3'b000; //add
             else if (decode == 2'b01) ALUControl = 3'b000; //add
             else if (decode == 2'b10) ALUControl = 3'b000; //add
             else if (decode == 2'b11) ALUControl = 3'b001; //sub
         end
-        else if (func3 == 3'b010) ALUControl = 3'b101; //slt
-        else if (func3 == 3'b110) ALUControl = 3'b011; //or
-        else if (func3 == 3'b111) ALUControl = 3'b010; //and
+        else if (funct3 == 3'b010) ALUControl = 3'b101; //slt
+        else if (funct3 == 3'b110) ALUControl = 3'b011; //or
+        else if (funct3 == 3'b111) ALUControl = 3'b010; //and
     end
     else if (ALUOp == 2'b11) begin
         if (op5 == 0) ALUControl = 3'b000; // add

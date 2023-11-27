@@ -11,7 +11,7 @@ module top(
     logic [31:0]        PC; 
     logic [31:0]        Instr;
     logic [6:0]         opcode;
-    logic [2:0]         func3;
+    logic [2:0]         funct3;
     logic               func75;
     logic               Zero;
     logic               ResultSrc;
@@ -47,7 +47,7 @@ instr_mem my_instr_mem(
 
 control_unit my_control_unit(
     .opcode(opcode),
-    .func3(func3),
+    .funct3(funct3),
     .func75(func75),
     .Zero(Zero),
     .PCSrc(PCSrc),
@@ -107,7 +107,7 @@ DataMux my_DataMux(
 assign A = PC[11:0];
 // assignment for control_unit
 assign opcode = Instr[6:0];
-assign func3 = Instr[14:12];
+assign funct3 = Instr[14:12];
 assign func75 = Instr[30];
 // assignment for reg_file
 assign A1 = Instr[19:15];

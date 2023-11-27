@@ -2,7 +2,7 @@
 
 module control_unit (
     input logic [6:0]   opcode,
-    input logic [2:0]   func3,
+    input logic [2:0]   funct3,
     input logic         func75,
     // used for determination of branch
     input logic         Zero, 
@@ -25,7 +25,7 @@ logic                   op5;
 
 main_decode main_decode(
     .opcode(opcode),
-    .func3(func3),
+    .funct3(funct3),
     .Branch(Branch),
     .Jump(Jump),
     .ResultSrc(ResultSrc),
@@ -49,7 +49,7 @@ PCSrc_decode PCSrc_decode(
 
 ALU_decode ALU_decode(
     .op5(op5),
-    .func3(func3),
+    .funct3(funct3),
     .func75(func75),
     .ALUOp(ALUOp),
     .ALUControl(ALUControl)
