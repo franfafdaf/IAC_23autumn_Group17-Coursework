@@ -5,7 +5,7 @@ module alu_top_level(
     input logic [4:0]       A3,
     input logic [31:0]      WD3,
     input logic [31:0]      ImmExt,
-    input logic             ALUsrcB,
+    input logic             ALUSrcB,
     input logic [2:0]       ALUControl,
     input logic [31:0]      PC,
     input logic             ALUSrcA,
@@ -33,14 +33,14 @@ module alu_top_level(
     alu_muxA mymuxA(
         .RD1(RD1),
         .PC(PC),
-        .ALUSrcA(ALUsrcA),
+        .ALUSrcA(ALUSrcA),
         .SrcA(SrcA)
     );
 
     alu_muxB mymuxB(
         .RD2(RD2),
         .ImmExt(ImmExt),
-        .ALUSrcB(ALUsrcB),
+        .ALUSrcB(ALUSrcB),
         .SrcB(SrcB)
     );
 
