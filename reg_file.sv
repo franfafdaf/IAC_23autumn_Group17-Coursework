@@ -15,7 +15,7 @@ assign RD1 = mem[A1];
 assign RD2 = mem[A2];
 
 always_ff @(posedge clk) begin
-    mem[AD3] <= WD3;
+    mem[A3] <= WD3;
     a0 <= WD3;
 end
 

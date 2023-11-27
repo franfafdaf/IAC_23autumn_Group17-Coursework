@@ -1,36 +1,35 @@
 module top(
-    input logic clk, 
+    input logic             clk, 
     // input logic trigger, 
-    input logic reset, 
-    output logic [31:0] a0
+    input logic             reset, 
+    output logic [31:0]     a0
 );
 
-    logic PCSrc; 
-    logic [31:0] PC_Plus;
-    logic [31:0] ImmExt; 
-    logic [31:0] PC; 
-    logic [31:0] Instr;
-    logic [6:0] opcode;
-    logic [2:0] func3;
-    logic func75;
-    logic Zero;
-    logic ResultSrc;
-    logic MemWrite;
-    logic ALUSrcA;
-    logic ALUSrcB;
-    logic [2:0] ImmSrc;
-    logic RegWrite;
-    logic [2:0] ALUControl;
-    logic LdSrc;
-    logic StSrc;
-    logic [4:0] A1;
-    logic [4:0] A2;
-    logic [4:0] A3;
-    logic [31:0] Result;
-    logic [31:0] WriteData;
-    logic [24:0] Imm;
-    logic [31:0] ImmExt;
-    logic [31:0] ALUResult;
+    logic               PCSrc; 
+    logic [31:0]        PC_Plus;
+    logic [31:0]        ImmExt; 
+    logic [31:0]        PC; 
+    logic [31:0]        Instr;
+    logic [6:0]         opcode;
+    logic [2:0]         func3;
+    logic               func75;
+    logic               Zero;
+    logic               ResultSrc;
+    logic               MemWrite;
+    logic               ALUSrcA;
+    logic               ALUSrcB;
+    logic [2:0]         ImmSrc;
+    logic               RegWrite;
+    logic [2:0]         ALUControl;
+    logic               LdSrc;
+    logic               StSrc;
+    logic [4:0]         A1;
+    logic [4:0]         A2;
+    logic [4:0]         A3;
+    logic [31:0]        Result;
+    logic [31:0]        WriteData;
+    logic [24:0]        Imm;
+    logic [31:0]        ALUResult;
 
 
 pc_top my_pc_top(
