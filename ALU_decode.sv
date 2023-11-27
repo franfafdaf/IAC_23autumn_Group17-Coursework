@@ -5,14 +5,16 @@
 //S-type: sw, sb
 //B-type: beq, bne
 module ALU_decode(
-    input logic op5, 
-    input logic [2:0] func3, 
-    input logic func75, 
-    input logic [1:0] ALUOp
-    output logic [2:0] ALUControl
+    input logic         op5, 
+    input logic [2:0]   func3, 
+    input logic         func75, 
+    input logic [1:0]   ALUOp,
+    output logic [2:0]  ALUControl
 );
 
 logic [2:0] decode;
+
+
 assign decode = {op5, func75};
 
 always_comb begin

@@ -1,5 +1,5 @@
 // <<<<<<< HEAD
-module DataMUX (
+module DataMux (
     input logic [1:0]   ResultSrc, // 2-bit selector
     input logic [31:0]  ALUResult, // ALU result
     input logic [31:0]  RD,        // Data memory read data
