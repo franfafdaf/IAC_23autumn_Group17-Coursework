@@ -15,8 +15,8 @@ always_comb begin
     if (ALUControl == 3'b000) begin 
         ALUResult = SrcA + SrcB;//add
     end
-    if (ALUControl == 3'b001) begin 
-        ALUResult = SrcA - SrcB;//subtract
+    if (ALUControl == 3'b001) begin
+        ALUResult = SrcA + (SrcB ^ {32{1'b1}}) + 32'b1  ;//subtract
     end
     if (ALUControl == 3'b010) begin 
         ALUResult = SrcA & SrcB;//and
@@ -24,9 +24,9 @@ always_comb begin
     if (ALUControl == 3'b011) begin 
         ALUResult = SrcA | SrcB;//or
     end
-    if (ALUControl == 3'b100) begin 
-        //shift
-    end
+    // if (ALUControl == 3'b100) begin 
+    //     //shift
+    // end
     if (ALUControl == 3'b101) begin 
         ALUResult = (SrcA < SrcB) ? 32'b1 : 32'b0;//SLT
     end
