@@ -1,6 +1,6 @@
 module top(
     input logic clk, 
-    input logic trigger, 
+    // input logic trigger, 
     input logic reset, 
     output logic [31:0] a0
 );
@@ -65,7 +65,7 @@ control_unit my_control_unit(
 
 extend my_extend(
     .ImmSrc(ImmSrc),
-    .Imm(Imm)
+    .Imm(Imm),
     .ImmExt(ImmExt)
 );
 
@@ -82,7 +82,7 @@ alu_top_level my_alu_top_level(
     .ALUSrcA(ALUSrcA),
     .ALUResult(ALUResult), 
     .RD2(WriteData),
-    .Zero(Zero)
+    .Zero(Zero),
     .a0(a0)
 );
 
