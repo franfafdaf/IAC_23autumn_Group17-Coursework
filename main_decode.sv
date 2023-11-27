@@ -1,18 +1,18 @@
 //This module is managed by Guanxi Lu
 module main_decode(
-    input logic [6:0] opcode,
-    input logic [2:0] funct3,
-    output logic Branch, 
-    output logic Jump, 
-    output logic [1:0] ResultSrc,
-    output logic MemWrite,
-    output logic ALUSrcA, 
-    output logic ALUSrcB,
-    output logic [2:0] ImmSrc,
-    output logic RegWrite, 
-    output logic [1:0] ALUOp, 
-    output logic LdSrc,
-    output logic StSrc
+    input logic [6:0]       opcode,
+    input logic [2:0]       func3,
+    output logic            Branch, 
+    output logic            Jump, 
+    output logic [1:0]      ResultSrc,
+    output logic            MemWrite,
+    output logic            ALUSrcA, 
+    output logic            ALUSrcB,
+    output logic [2:0]      ImmSrc,
+    output logic            RegWrite, 
+    output logic [1:0]      ALUOp, 
+    output logic            LdSrc,
+    output logic            StSrc
 ); 
 
 always_comb

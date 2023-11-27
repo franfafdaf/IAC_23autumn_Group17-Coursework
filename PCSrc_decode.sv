@@ -1,10 +1,10 @@
 //This module is managed by Guanxi Lu
 module PCSrc_decode(
-    input logic Zero, 
-    input logic Branch,
-    input logic Jump,
-    input logic [2:0] funct3,
-    output logic PCSrc
+    input logic         Zero, 
+    input logic         Branch,
+    input logic         Jump,
+    input logic [2:0]   func3,
+    output logic        PCSrc
 ); 
 
 always_comb begin 
