@@ -1,30 +1,31 @@
 //This module is managed by Guanxi Lu
 
 module control_unit (
-    input logic [6:0] opcode,
-    input logic [2:0] funct3,
-    input logic func75,
-    input logic Zero, // used for determination of branch
-    output logic PCSrc,
-    output logic ResultSrc,
-    output logic MemWrite, 
-    output logic ALUSrcA, 
-    output logic ALUSrcB,
-    output logic [2:0] ImmSrc, 
-    output logic RegWrite,
-    output logic [2:0] ALUControl,
-    output logic LdSrc, 
-    output logic StSrc
+    input logic [6:0]   opcode,
+    input logic [2:0]   func3,
+    input logic         func75,
+    // used for determination of branch
+    input logic         Zero, 
+    output logic        PCSrc,
+    output logic        ResultSrc,
+    output logic        MemWrite, 
+    output logic        ALUSrcA, 
+    output logic        ALUSrcB,
+    output logic [2:0]  ImmSrc, 
+    output logic        RegWrite,
+    output logic [2:0]  ALUControl,
+    output logic        LdSrc, 
+    output logic        StSrc
 );
 
-logic [1:0] ALUOp;
-logic Branch;
-logic Jump;
-logic op5;
+logic [1:0]             ALUOp;
+logic                   Branch;
+logic                   Jump;
+logic                   op5;
 
 main_decode main_decode(
     .opcode(opcode),
-    .funct3(funct3),
+    .func3(func3),
     .Branch(Branch),
     .Jump(Jump),
     .ResultSrc(ResultSrc),

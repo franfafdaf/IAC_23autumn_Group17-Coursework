@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+// <<<<<<< HEAD
 module DataMemory#(
     parameter DATA_WIDTH = 32
 )(

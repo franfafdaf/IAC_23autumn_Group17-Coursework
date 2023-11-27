@@ -47,7 +47,7 @@ instr_mem my_instr_mem(
 
 control_unit my_control_unit(
     .opcode(opcode),
-    .funct3(func3),
+    .func3(func3),
     .func75(func75),
     .Zero(Zero),
     .PCSrc(PCSrc),
@@ -68,14 +68,14 @@ extend my_extend(
     .ImmExt(ImmExt)
 );
 
-alu_top_level my_alu_top_level(
+alu_top my_alu_top(
     .clk(clk),
     .A1(A1),
     .A2(A2),
     .A3(A3),
     .WD3(Result),
     .ImmExt(ImmExt),
-    .ALUsrcB(ALUsrcB),
+    .ALUSrcB(ALUSrcB),
     .ALUControl(ALUControl),
     .PC(PC),
     .ALUSrcA(ALUSrcA),
