@@ -3,12 +3,14 @@ module alu(
     input logic [31:0]  SrcB,
     input logic [2:0] ALUControl,
     output logic [31:0] ALUResult,
+    output logic Zero
 );
 
 
 always_comb begin
     
     ALUResult = 32'b0;
+    Zero = 1'b0;
 
     if (ALUControl == 3'b000) begin 
         ALUResult = SrcA + SrcB;//add
@@ -31,6 +33,7 @@ always_comb begin
     if (ALUControl == 3'b110) begin 
         ALUResult = SrcB;//select SrcB
     end
+    Zero = (ALUResult == 32'b0);
 end
 
 endmodule
