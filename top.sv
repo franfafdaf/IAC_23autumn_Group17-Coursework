@@ -63,16 +63,6 @@ control_unit my_control_unit(
     .StSrc(StSrc)
 );
 
-reg_file my_reg_file(
-    .clk(clk),
-    .A1(A1),
-    .A2(A2),
-    .A3(A3),
-    .WD3(WD3),
-    .RD1(RD1),
-    .RD2(RD2)
-);
-
 extend my_extend(
     .ImmSrc(ImmSrc),
     .Imm(Imm)
@@ -91,6 +81,18 @@ alu_top_level my_alu_top_level(
     .PC(PC),
     .ALUSrcA(ALUSrcA),
     .ALUResult(ALUResult)
+    .RD2(RD2)
+    .Zero(Zero)
+);
+
+data_memory my_data_memory(
+    .clk(clk),
+    .WE(MemWrite),
+    .StSrc(StSrc),
+    .LdSrc(LdSrc),
+    .A(ALUResult),
+    .WD(WD),
+    .RD(RD)
 );
 
 // assignment for instr_mem

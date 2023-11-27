@@ -9,7 +9,9 @@ module alu_top_level(
     input logic [2:0] ALUControl,
     input logic [31:0] PC,
     input logic ALUSrcA,
-    output logic [31:0] ALUResult
+    output logic [31:0] ALUResult, 
+    output logic [31:0] RD2, 
+    output logic Zero
 );
 
     logic [31:0] RD1;
