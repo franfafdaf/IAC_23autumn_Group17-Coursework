@@ -27,8 +27,7 @@ module top(
     logic [4:0] A2;
     logic [4:0] A3;
     logic [31:0] Result;
-    logic [31:0] RD1;
-    logic [31:0] RD2;
+    logic [31:0] WriteData;
     logic [24:0] Imm;
     logic [31:0] ImmExt;
     logic [31:0] ALUResult;
@@ -55,7 +54,8 @@ control_unit my_control_unit(
     .PCSrc(PCSrc),
     .ResultSrc(ResultSrc),
     .MemWrite(MemWrite),
-    .ALUSrc(ALUSrc),
+    .ALUSrcA(ALUSrcA),
+    .ALUSrcB(ALUSrcB),
     .ImmSrc(ImmSrc),
     .RegWrite(RegWrite),
     .ALUControl(ALUControl),
@@ -81,8 +81,9 @@ alu_top_level my_alu_top_level(
     .PC(PC),
     .ALUSrcA(ALUSrcA),
     .ALUResult(ALUResult), 
-    .RD2(RD2), 
+    .RD2(WriteData),
     .Zero(Zero)
+    .a0(a0)
 );
 
 data_memory my_data_memory(
@@ -91,7 +92,7 @@ data_memory my_data_memory(
     .StSrc(StSrc),
     .LdSrc(LdSrc),
     .A(ALUResult),
-    .WD(WD),
+    .WD(WriteData),
     .RD(ReadData)
 );
 
@@ -115,7 +116,5 @@ assign A2 = Instr[24:20];
 assign A3 = Instr[11:7];
 // assignment for extend
 assign Imm = Instr[31:7];
-
-
 
 endmodule

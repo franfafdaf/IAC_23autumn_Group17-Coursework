@@ -49,7 +49,7 @@ module alu_top_level(
         .SrcB(SrcB),
         .ALUControl(ALUControl),
         .ALUResult(ALUResult),
-        .zero(zero),
+        .Zero(Zero),
     );
 
 endmodule
