@@ -22,8 +22,14 @@ always_comb begin
     if (ALUControl == 3'b011) begin 
         ALUResult = SrcA | SrcB;//or
     end
+    if (ALUControl == 3'b100) begin 
+        //shift
+    end
     if (ALUControl == 3'b101) begin 
         ALUResult = (SrcA < SrcB) ? 32'b1 : 32'b0;//SLT
+    end
+    if (ALUControl == 3'b110) begin 
+        ALUResult = SrcB;//select SrcB
     end
 end
 
