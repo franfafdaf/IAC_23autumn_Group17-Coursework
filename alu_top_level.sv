@@ -12,7 +12,7 @@ module alu_top_level(
     output logic [31:0] ALUResult, 
     output logic [31:0] RD2, 
     output logic Zero,
-    output logic [31:0] a0,
+    output logic [31:0] a0
 );
 
     logic [31:0] RD1;
@@ -49,7 +49,7 @@ module alu_top_level(
         .SrcB(SrcB),
         .ALUControl(ALUControl),
         .ALUResult(ALUResult),
-        .zero(zero),
+        .Zero(Zero)
     );
 
 endmodule
