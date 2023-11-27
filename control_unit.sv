@@ -12,7 +12,27 @@ module control_unit (
     output logic ALUSrc, 
     output logic [1:0] ImmSrc, 
     output logic RegWrite
-)
+);
+
+ALU_decode myALU_decode(
+    input logic [2:0] funct3,
+    input logic func75,
+    output logic [2:0] ALUControl
+);
+
+PCSrc_decode myPCSrc_decode(
+    input logic Zero,
+    output logic PCSrc
+);
+
+main_decode mymain_decode(
+    input logic [6:0] opcode,
+    output logic ResultSrc,
+    output logic MemWrite, 
+    output logic ALUSrc, 
+    output logic [1:0] ImmSrc, 
+    output logic RegWrite
+);
 
 
 
