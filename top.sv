@@ -26,7 +26,7 @@ module top(
     logic [4:0] A1;
     logic [4:0] A2;
     logic [4:0] A3;
-    logic [31:0] WD3;
+    logic [31:0] Result;
     logic [31:0] RD1;
     logic [31:0] RD2;
     logic [24:0] Imm;
@@ -74,14 +74,14 @@ alu_top_level my_alu_top_level(
     .A1(A1),
     .A2(A2),
     .A3(A3),
-    .WD3(WD3),
+    .WD3(Result),
     .ImmExt(ImmExt),
     .ALUsrcB(ALUsrcB),
     .ALUControl(ALUControl),
     .PC(PC),
     .ALUSrcA(ALUSrcA),
-    .ALUResult(ALUResult)
-    .RD2(RD2)
+    .ALUResult(ALUResult), 
+    .RD2(RD2), 
     .Zero(Zero)
 );
 
@@ -92,7 +92,15 @@ data_memory my_data_memory(
     .LdSrc(LdSrc),
     .A(ALUResult),
     .WD(WD),
-    .RD(RD)
+    .RD(ReadData)
+);
+
+DataMux my_DataMux(
+    .ResultSrc(ResultSrc),
+    .ALUResult(ALUResult),
+    .RD(ReadData),
+    .PCPlus(PC_Plus),
+    .Result(Result)
 );
 
 // assignment for instr_mem
