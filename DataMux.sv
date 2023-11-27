@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 module DataMUX (
     input logic [1:0]   ResultSrc, // 2-bit selector
     input logic [31:0]  ALUResult, // ALU result
@@ -18,3 +19,15 @@ module DataMUX (
     end
 endmodule
 
+=======
+module DataMux(
+    input logic [31:0] RD,
+    input logic [31:0] A,
+    input logic        ResultSrc,
+    output logic [31:0] Result
+);
+
+assign Result = ResultSrc ? RD : A;
+
+endmodule
+>>>>>>> origin/fhc
