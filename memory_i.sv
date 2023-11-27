@@ -12,7 +12,7 @@ module memory_i #(
 
 always_comb begin
     if (StSrc) begin                 //SB
-        WD_o ={RD[31:8], WD_i[7:0]};
+        WD_o ={RD[31:8], WD_i[7:0]}; 
     end
     else begin                      //SW
         WD_o = WD_i;
