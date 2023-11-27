@@ -11,11 +11,11 @@ module alu_top_level(
     input logic ALUSrcA,
     output logic [31:0] ALUResult, 
     output logic [31:0] RD2, 
-    output logic Zero
+    output logic Zero,
+    output logic [31:0] a0,
 );
 
     logic [31:0] RD1;
-    logic [31:0] RD2;
     logic [31:0] SrcA;
     logic [31:0] SrcB;
 
@@ -26,7 +26,8 @@ module alu_top_level(
         .A3(A3),
         .WD3(WD3),
         .RD1(RD1),
-        .RD2(RD2)
+        .RD2(RD2),
+        .a0(a0)
     );
 
     alu_muxA mymuxA(
