@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+// <<<<<<< HEAD
 module DataMUX (
     input logic [1:0]   ResultSrc, // 2-bit selector
     input logic [31:0]  ALUResult, // ALU result
