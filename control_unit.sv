@@ -11,7 +11,7 @@ module control_unit (
     output logic ALUSrcA, 
     output logic ALUSrcB,
     output logic [2:0] ImmSrc, 
-    output logic RegWrite
+    output logic RegWrite,
     output logic [2:0] ALUControl,
     output logic LdSrc, 
     output logic StSrc
