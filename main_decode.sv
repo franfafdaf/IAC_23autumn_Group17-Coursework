@@ -58,8 +58,11 @@ end
     Jump = 1; 
     ResultSrc = 2'b10;
     MemWrite = 0;
+    ALUSrcA = 0;
+    ALUSrcB = 1;
     ImmSrc = 3'b000;
     RegWrite = 1;
+    ALUOp = 2'b00;
 end
 
 7'b0100011: begin //S-type
