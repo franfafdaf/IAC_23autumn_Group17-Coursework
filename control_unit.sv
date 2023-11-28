@@ -15,7 +15,8 @@ module control_unit (
     output logic        RegWrite,
     output logic [2:0]  ALUControl,
     output logic        LdSrc, 
-    output logic        StSrc
+    output logic        StSrc, 
+    output logic        JSrc
 );
 
 logic [1:0]             ALUOp;
@@ -36,7 +37,8 @@ main_decode main_decode(
     .RegWrite(RegWrite),
     .ALUOp(ALUOp),
     .LdSrc(LdSrc),
-    .StSrc(StSrc)
+    .StSrc(StSrc), 
+    .JSrc(JSrc)
 );
 
 PCSrc_decode PCSrc_decode(
