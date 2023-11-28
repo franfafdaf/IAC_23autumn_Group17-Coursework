@@ -1,55 +1,54 @@
 module alu_top(
-    input logic             clk,
-    input logic [4:0]       A1,
-    input logic [4:0]       A2,
-    input logic [4:0]       A3,
-    input logic [31:0]      WD3,
+    input logic [31:0]      PC,
+    input logic [31:0]      RD1, 
+    input logic [31:0]      RD2, 
     input logic [31:0]      ImmExt,
     input logic [2:0]       ALUControl,
-    input logic [31:0]      PC,
     input logic             ALUSrcA,
     input logic             ALUSrcB,
-    output logic [31:0]     ALUResult, 
-    output logic [31:0]     RD2, 
-    output logic            Zero,
-    output logic [31:0]     a0
+    
+    output logic [31:0]     ALUResult,     
+    output logic            Zero
 );
 
-    logic [31:0] RD1;
-    logic [31:0] SrcA;
-    logic [31:0] SrcB;
+assign SrcA = ALUSrcA ? PC : RD1;
+assign SrcB = ALUSrcB ? ImmExt : RD2;
 
-    reg_file myreg_file(
-        .clk(clk),
-        .A1(A1),
-        .A2(A2),
-        .A3(A3),
-        .WD3(WD3),
-        .RD1(RD1),
-        .RD2(RD2),
-        .a0(a0)
-    );
 
-    alu_muxA mymuxA(
-        .RD1(RD1),
-        .PC(PC),
-        .ALUSrcA(ALUSrcA),
-        .SrcA(SrcA)
-    );
+always_comb begin
+    
+    ALUResult = 32'b0;
+    Zero = 1'b0;
 
-    alu_muxB mymuxB(
-        .RD2(RD2),
-        .ImmExt(ImmExt),
-        .ALUSrcB(ALUSrcB),
-        .SrcB(SrcB)
-    );
+    if (ALUControl == 3'b000) begin 
+        ALUResult = SrcA + SrcB;//add
+    end
+    
+    if (ALUControl == 3'b001) begin
+        ALUResult = SrcA + (SrcB ^ {32{1'b1}}) + 32'b1  ;//subtract
+    end
 
-    alu myalu(
-        .SrcA(SrcA),
-        .SrcB(SrcB),
-        .ALUControl(ALUControl),
-        .ALUResult(ALUResult),
-        .Zero(Zero)
-    );
+    if (ALUControl == 3'b010) begin 
+        ALUResult = SrcA & SrcB;//and
+    end
+
+    if (ALUControl == 3'b011) begin 
+        ALUResult = SrcA | SrcB;//or
+    end
+
+    // if (ALUControl == 3'b100) begin 
+    //     //shift
+    // end
+
+    if (ALUControl == 3'b101) begin 
+        ALUResult = (SrcA < SrcB) ? 32'b1 : 32'b0;//SLT
+    end
+    
+    if (ALUControl == 3'b110) begin 
+        ALUResult = SrcB;//select SrcB
+    end
+
+    Zero = (ALUResult == 32'b0);
+end
 
 endmodule
