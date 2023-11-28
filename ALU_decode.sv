@@ -12,7 +12,7 @@ module ALU_decode(
     output logic [2:0]  ALUControl
 );
 
-logic [2:0] decode;
+logic [1:0] decode;
 
 
 assign decode = {op5, func75};

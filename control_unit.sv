@@ -7,7 +7,7 @@ module control_unit (
     // used for determination of branch
     input logic         Zero, 
     output logic        PCSrc,
-    output logic        ResultSrc,
+    output logic [2:0]  ResultSrc,
     output logic        MemWrite, 
     output logic        ALUSrcA, 
     output logic        ALUSrcB,

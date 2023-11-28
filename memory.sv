@@ -9,10 +9,10 @@ module memory #(
     output logic [ADDRESS_WIDTH-1:0]    RD
 );
 
-    logic [DATA_WIDTH-1:0] mem_array [32'h0001FFFF:32'h00000000]; 
+    logic [DATA_WIDTH-1:0] mem_array [2**17-1:0]; 
 
     initial begin 
-        $readmemh("gaussian.mem", mem_array, 32'h10000);
+        $readmemh("gaussian.mem", mem_array);
     end;
 
     assign RD = {mem_array[A+3], mem_array[A+2], mem_array[A+1], mem_array[A]};

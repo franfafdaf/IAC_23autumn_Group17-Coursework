@@ -9,8 +9,8 @@ module PCSrc_decode(
 
 always_comb begin 
 if (Jump == 1) PCSrc = 1;
-else if (Branch == 1 && Zero == 1 && funct3 == {000}) PCSrc = 1;
-else if (Branch == 1 && Zero == 0 && funct3 == {001}) PCSrc = 1;
+else if (Branch == 1 && Zero == 1 && funct3 == {3'b000}) PCSrc = 1;
+else if (Branch == 1 && Zero == 0 && funct3 == {3'b001}) PCSrc = 1;
 else PCSrc = 0;
 end
 

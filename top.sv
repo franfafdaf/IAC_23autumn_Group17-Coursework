@@ -1,7 +1,7 @@
 module top(
     input logic             clk, 
     // input logic trigger, 
-    input logic             reset, 
+    input logic             rst, 
     output logic [31:0]     a0
 );
 
@@ -14,7 +14,7 @@ module top(
     logic [2:0]         funct3;
     logic               func75;
     logic               Zero;
-    logic               ResultSrc;
+    logic [2:0]         ResultSrc;
     logic               MemWrite;
     logic               ALUSrcA;
     logic               ALUSrcB;
@@ -87,7 +87,7 @@ alu_top my_alu_top(
     .a0(a0)
 );
 
-data_memory my_data_memory(
+DataMemory my_data_memory(
     .clk(clk),
     .WE(MemWrite),
     .StSrc(StSrc),
