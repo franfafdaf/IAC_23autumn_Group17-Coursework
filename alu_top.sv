@@ -5,7 +5,6 @@ module alu_top(
     input logic [4:0]       A3,
     input logic [31:0]      WD3,
     input logic [31:0]      ImmExt,
-    input logic             ALUSrcB,
     input logic [2:0]       ALUControl,
     input logic [31:0]      PC,
     input logic             ALUSrcA,

@@ -9,7 +9,7 @@ module instr_mem#(
     output logic [31:0] RD
 );
 
-logic [D_length-1:0] rom_array [2**A_length-1:0]; // Array size is 4096
+logic [D_length-1:0] rom_array [0xBFC00FFF:0xBFC00000]; // Array size is 4096
 
 initial 
     $readmemh("instrmem.mem", rom_array);

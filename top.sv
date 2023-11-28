@@ -23,11 +23,13 @@ module top(
     logic [2:0]         ALUControl;
     logic               LdSrc;
     logic               StSrc;
+    logic [11:0]        A;
     logic [4:0]         A1;
     logic [4:0]         A2;
     logic [4:0]         A3;
     logic [31:0]        Result;
     logic [31:0]        WriteData;
+    logic [31:0]        ReadData;
     logic [24:0]        Imm;
     logic [31:0]        ALUResult;
 
