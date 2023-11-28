@@ -11,8 +11,8 @@ module alu_top(
     output logic            Zero
 );
 
-logic       SrcA;
-logic       SrcB;
+logic [31:0]      SrcA;
+logic [31:0]      SrcB;
 
 assign SrcA = ALUSrcA ? PC : RD1;
 assign SrcB = ALUSrcB ? ImmExt : RD2;

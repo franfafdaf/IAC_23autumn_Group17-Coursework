@@ -5,8 +5,8 @@ module top(
     output logic [31:0]     a0
 );
 
-    logic               PCSrc; 
-    logic [31:0]        PC_Plus;
+    logic               PCSrc;
+    logic [31:0]        PC_Plus; 
     logic [31:0]        ImmExt; 
     logic [31:0]        PC; 
     logic [31:0]        Instr;
@@ -14,7 +14,7 @@ module top(
     logic [2:0]         funct3;
     logic               func75;
     logic               Zero;
-    logic [2:0]         ResultSrc;
+    logic [1:0]         ResultSrc;
     logic               MemWrite;
     logic               ALUSrcA;
     logic               ALUSrcB;
@@ -69,7 +69,7 @@ alu_top my_alu_top(
     .ALUControl(ALUControl),
     .ALUSrcA(ALUSrcA),
     .ALUSrcB(ALUSrcB),
-
+    //outputs
     .ALUResult(ALUResult), 
     .Zero(Zero)
 );
@@ -79,14 +79,15 @@ control_unit my_control_unit(
     .funct3(funct3),
     .func75(func75),
     .Zero(Zero),
+    //outputs
     .PCSrc(PCSrc),
     .ResultSrc(ResultSrc),
     .MemWrite(MemWrite),
+    .ALUControl(ALUControl),
     .ALUSrcA(ALUSrcA),
     .ALUSrcB(ALUSrcB),
     .ImmSrc(ImmSrc),
     .RegWrite(RegWrite),
-    .ALUControl(ALUControl),
     .LdSrc(LdSrc),
     .StSrc(StSrc)
 );
@@ -127,5 +128,7 @@ assign A2 = Instr[24:20];
 assign A3 = Instr[11:7];
 // assignment for extend
 assign Imm = Instr[31:7];
+
+assign a0 = Result;
 
 endmodule
