@@ -41,7 +41,10 @@ pc_top my_pc_top(
     .PCSrc(PCSrc),
     .ImmExt(ImmExt),
     .PC_Plus(PC_Plus),
-    .PC(PC)
+    .PC(PC),
+    .RD1(RD1),
+    .JalSrc(JalSrc)
+
 );
 
 instr_mem my_instr_mem(
