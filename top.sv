@@ -21,8 +21,9 @@ module top(
     logic [2:0]         ImmSrc;
     logic               RegWrite;
     logic [2:0]         ALUControl;
-    logic               LdSrc;
+    logic               LdSrc;  
     logic               StSrc;
+    logic               JalSrc;
     logic [11:0]        A;
     logic [4:0]         A1;
     logic [4:0]         A2;
@@ -92,7 +93,8 @@ control_unit my_control_unit(
     .ImmSrc(ImmSrc),
     .RegWrite(RegWrite),
     .LdSrc(LdSrc),
-    .StSrc(StSrc)
+    .StSrc(StSrc),
+    .JalSrc(JalSrc)
 );
 
 extend my_extend(

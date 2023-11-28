@@ -26,6 +26,7 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop___024root final : public VerilatedModule
     CData/*2:0*/ top__DOT__ALUControl;
     CData/*0:0*/ top__DOT__LdSrc;
     CData/*0:0*/ top__DOT__StSrc;
+    CData/*0:0*/ top__DOT__JalSrc;
     CData/*1:0*/ top__DOT__my_control_unit__DOT__ALUOp;
     CData/*0:0*/ top__DOT__my_control_unit__DOT__Branch;
     CData/*0:0*/ top__DOT__my_control_unit__DOT__Jump;
@@ -41,6 +42,7 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop___024root final : public VerilatedModule
     VL_OUT(a0,31,0);
     IData/*31:0*/ top__DOT__ImmExt;
     IData/*31:0*/ top__DOT__PC;
+    IData/*31:0*/ top__DOT__RD1;
     IData/*31:0*/ top__DOT__WriteData;
     IData/*24:0*/ top__DOT__Imm;
     IData/*31:0*/ top__DOT__ALUResult;

@@ -16,7 +16,7 @@ module control_unit (
     output logic [2:0]  ALUControl,
     output logic        LdSrc, 
     output logic        StSrc, 
-    output logic        JSrc
+    output logic        JalSrc
 );
 
 logic [1:0]             ALUOp;
@@ -38,7 +38,7 @@ main_decode main_decode(
     .ALUOp(ALUOp),
     .LdSrc(LdSrc),
     .StSrc(StSrc), 
-    .JSrc(JSrc)
+    .JalSrc(JalSrc)
 );
 
 PCSrc_decode PCSrc_decode(

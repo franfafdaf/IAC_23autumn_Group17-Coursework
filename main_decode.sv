@@ -13,7 +13,7 @@ module main_decode(
     output logic [1:0]      ALUOp, 
     output logic            LdSrc,
     output logic            StSrc, 
-    output logic            JSrc
+    output logic            JalSrc
 ); 
 
 always_comb
@@ -64,7 +64,7 @@ end
     ImmSrc = 3'b000;
     RegWrite = 1;
     ALUOp = 2'b00;
-    JSrc = 1'b0;
+    JalSrc = 1'b0;
 end
 
 7'b0100011: begin //S-type
@@ -120,7 +120,7 @@ end
     MemWrite = 0;
     ImmSrc = 3'b011;
     RegWrite = 1;
-    JSrc = 1'b1;
+    JalSrc = 1'b1;
 end
 
 default: begin
