@@ -1,4 +1,3 @@
-// <<<<<<< HEAD
 module DataMemory#(
     parameter DATA_WIDTH = 32
 )(
@@ -26,7 +25,6 @@ module DataMemory#(
     memory_i my_mem_i (
         .StSrc(StSrc),
         .WD_i(WD),
-        .RD(read_data_internal),
         .WD_o(corrected_WD)
     );
 

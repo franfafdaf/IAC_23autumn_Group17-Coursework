@@ -25,15 +25,16 @@ always_comb begin
             if (decode == 2'b00) ALUControl = 3'b000; //add
             else if (decode == 2'b01) ALUControl = 3'b000; //add
             else if (decode == 2'b10) ALUControl = 3'b000; //add
-            else if (decode == 2'b11) ALUControl = 3'b001; //sub
+            else  ALUControl = 3'b001; //sub， decode == 2'b11
         end
         else if (funct3 == 3'b010) ALUControl = 3'b101; //slt
         else if (funct3 == 3'b110) ALUControl = 3'b011; //or
         else if (funct3 == 3'b111) ALUControl = 3'b010; //and
+        else ALUControl = 3'b000;
     end
     else if (ALUOp == 2'b11) begin
         if (op5 == 0) ALUControl = 3'b000; // add
-        else if (op5 == 1) ALUControl = 3'b110; // extract out SrcB
+        else  ALUControl = 3'b110; // extract out SrcB, op5 == 1
     end
     else ALUControl = 3'b000;
 end

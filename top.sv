@@ -28,8 +28,6 @@ module top(
     logic [4:0]         A2;
     logic [4:0]         A3;
     logic [31:0]        RD1;
-    logic [31:0]        RD2;
-
     logic [31:0]        Result;
     logic [31:0]        WriteData;
     logic [31:0]        ReadData;
@@ -42,6 +40,7 @@ pc_top my_pc_top(
     .rst(rst),
     .PCSrc(PCSrc),
     .ImmExt(ImmExt),
+    .PC_Plus(PC_Plus),
     .PC(PC)
 );
 
@@ -58,7 +57,8 @@ reg_file my_reg_file(
     .WD3(Result),
     .WE3(RegWrite),
     .RD1(RD1),
-    .RD2(WriteData)
+    .RD2(WriteData),
+    .a0(a0)
 );
 
 alu_top my_alu_top(
@@ -128,7 +128,5 @@ assign A2 = Instr[24:20];
 assign A3 = Instr[11:7];
 // assignment for extend
 assign Imm = Instr[31:7];
-
-assign a0 = Result;
 
 endmodule

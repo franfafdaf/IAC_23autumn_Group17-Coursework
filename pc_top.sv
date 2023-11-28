@@ -5,10 +5,10 @@ module pc_top#(
     input logic                 rst,
     input logic                 PCSrc,
     input logic [PC_WIDTH-1:0]  ImmExt,
+    output logic [PC_WIDTH-1:0] PC_Plus,
     output logic [PC_WIDTH-1:0] PC
 );
 
-    logic [PC_WIDTH-1:0] PC_Plus;
     logic [PC_WIDTH-1:0] PC_Target;
     logic [PC_WIDTH-1:0] PC_Next;
 

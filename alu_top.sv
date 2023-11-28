@@ -28,7 +28,7 @@ always_comb begin
     end
     
     if (ALUControl == 3'b001) begin
-        ALUResult = SrcA + (SrcB ^ {32{1'b1}}) + 32'b1  ;//subtract
+        ALUResult = SrcA - SrcB ;//subtract
     end
 
     if (ALUControl == 3'b010) begin 
