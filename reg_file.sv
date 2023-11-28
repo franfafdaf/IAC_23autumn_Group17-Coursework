@@ -5,9 +5,10 @@ module reg_file(
     input logic [4:0]       A3,
     input logic [31:0]      WD3,
     input logic             WE3,
+
     output logic [31:0]     RD1,
-    output logic [31:0]     RD2,
-    output logic [31:0]     a0
+    output logic [31:0]     RD2
+    // output logic [31:0]     a0
 );
 
 logic [31:0] mem [31:0];
@@ -18,7 +19,7 @@ assign RD2 = mem[A2];
 always_ff @(posedge clk) begin
     if (WE3 == 1'b1)
         mem[A3] <= WD3;
-        a0 <= WD3;
+        // a0 <= WD3;
 end
 
 endmodule

@@ -10,16 +10,16 @@ module pc_top#(
 
     logic [PC_WIDTH-1:0] PC_Plus;
     logic [PC_WIDTH-1:0] PC_Target;
-    logic [PC_WIDTH-1:0] PCNext;
+    logic [PC_WIDTH-1:0] PC_Next;
 
 
-    assign  NextPC = PC + 4;
+    assign  PC_Plus = PC + 4;
     assign  PC_Target = PC + ImmExt;
     assign  PC_Next = PCSrc ? PC_Target : PC_Plus;
 
     always_ff @(posedge clk or posedge rst)begin
         if (rst) PC <= 0;
-        else PC <= PCNext;
+        else PC <= PC_Next;
     end
 
 endmodule

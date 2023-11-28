@@ -4,7 +4,7 @@ module main_decode(
     input logic [2:0]       funct3,
     output logic            Branch, 
     output logic            Jump, 
-    output logic [2:0]      ResultSrc,
+    output logic [1:0]      ResultSrc,
     output logic            MemWrite,
     output logic            ALUSrcA, 
     output logic            ALUSrcB,

@@ -12,7 +12,6 @@ module instr_mem#(
 logic [D_length-1:0] rom_array [2**A_length-1:0]; // Array size is 4096
 
 initial 
-    $display ("Loading InstrMem.");
     $readmemh("instrmem.mem", rom_array);
 
 // Assuming A already has the offset (0xBFC00000) subtracted by the system ???

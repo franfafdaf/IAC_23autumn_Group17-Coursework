@@ -27,6 +27,9 @@ module top(
     logic [4:0]         A1;
     logic [4:0]         A2;
     logic [4:0]         A3;
+    logic [31:0]        RD1;
+    logic [31:0]        RD2;
+
     logic [31:0]        Result;
     logic [31:0]        WriteData;
     logic [31:0]        ReadData;
@@ -36,7 +39,7 @@ module top(
 
 pc_top my_pc_top(
     .clk(clk),
-    .rst(reset),
+    .rst(rst),
     .PCSrc(PCSrc),
     .ImmExt(ImmExt),
     .PC(PC)
@@ -45,6 +48,30 @@ pc_top my_pc_top(
 instr_mem my_instr_mem(
     .A(A),
     .RD(Instr)
+);
+
+reg_file my_reg_file(
+    .clk(clk),
+    .A1(A1),
+    .A2(A2),
+    .A3(A3),
+    .WD3(Result),
+    .WE3(RegWrite),
+    .RD1(RD1),
+    .RD2(WriteData)
+);
+
+alu_top my_alu_top(
+    .PC(PC),
+    .RD1(RD1),
+    .RD2(WriteData),
+    .ImmExt(ImmExt),
+    .ALUControl(ALUControl),
+    .ALUSrcA(ALUSrcA),
+    .ALUSrcB(ALUSrcB),
+
+    .ALUResult(ALUResult), 
+    .Zero(Zero)
 );
 
 control_unit my_control_unit(
@@ -68,23 +95,6 @@ extend my_extend(
     .ImmSrc(ImmSrc),
     .Imm(Imm),
     .ImmExt(ImmExt)
-);
-
-alu_top my_alu_top(
-    .clk(clk),
-    .A1(A1),
-    .A2(A2),
-    .A3(A3),
-    .WD3(Result),
-    .ImmExt(ImmExt),
-    .ALUSrcB(ALUSrcB),
-    .ALUControl(ALUControl),
-    .PC(PC),
-    .ALUSrcA(ALUSrcA),
-    .ALUResult(ALUResult), 
-    .RD2(WriteData),
-    .Zero(Zero),
-    .a0(a0)
 );
 
 DataMemory my_data_memory(
