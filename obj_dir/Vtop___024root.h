@@ -31,14 +31,14 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop___024root final : public VerilatedModule
     CData/*0:0*/ top__DOT__my_control_unit__DOT__Branch;
     CData/*0:0*/ top__DOT__my_control_unit__DOT__Jump;
     CData/*1:0*/ top__DOT__my_control_unit__DOT__ALU_decode__DOT__decode;
-    CData/*7:0*/ __VdfgTmp_h2214dd4b__0;
-    CData/*7:0*/ __VdfgTmp_h23e32fae__0;
     CData/*7:0*/ __VdfgTmp_h95d868b5__0;
+    CData/*7:0*/ __VdfgTmp_h23c00ae3__0;
+    CData/*7:0*/ __VdfgTmp_h2214dd4b__0;
     CData/*7:0*/ __VdfgTmp_h88913f45__0;
     CData/*0:0*/ __Vtrigprevexpr___TOP__clk__0;
     CData/*0:0*/ __Vtrigprevexpr___TOP__rst__0;
     CData/*0:0*/ __VactContinue;
-    SData/*15:0*/ __VdfgTmp_hbf3bde7e__0;
+    SData/*15:0*/ __VdfgTmp_h3a3ab0c8__0;
     VL_OUT(a0,31,0);
     IData/*31:0*/ top__DOT__ImmExt;
     IData/*31:0*/ top__DOT__PC;
@@ -50,7 +50,7 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop___024root final : public VerilatedModule
     IData/*31:0*/ top__DOT__my_alu_top__DOT__SrcA;
     IData/*31:0*/ top__DOT__my_alu_top__DOT__SrcB;
     IData/*31:0*/ top__DOT__my_data_memory__DOT__corrected_WD;
-    IData/*23:0*/ __VdfgTmp_hdd528194__0;
+    IData/*23:0*/ __VdfgTmp_h5b56bba3__0;
     IData/*31:0*/ __VstlIterCount;
     IData/*31:0*/ __VactIterCount;
     VlUnpacked<CData/*7:0*/, 4096> top__DOT__my_instr_mem__DOT__rom_array;
