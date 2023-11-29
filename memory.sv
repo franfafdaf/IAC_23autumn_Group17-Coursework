@@ -1,5 +1,4 @@
 module memory #(
-    parameter ADDRESS_WIDTH = 17, 
     parameter DATA_WIDTH = 8
 ) (
     input  logic                        clk,
@@ -9,9 +8,9 @@ module memory #(
     output logic [31:0]                 RD
 );
 
-    logic [DATA_WIDTH-1:0] data_array [2**ADDRESS_WIDTH-1:0]; 
+    logic [DATA_WIDTH-1:0] data_array [17'h1FFFF : 17'h0]; 
 
-    initial $readmemh("gaussian.mem", data_array, 17'h10000, 17'h1FFFF);
+    initial $readmemh("sine.mem", data_array, 17'h10000);
 
     assign RD = {data_array[A+3], data_array[A+2], data_array[A+1], data_array[A]};
         

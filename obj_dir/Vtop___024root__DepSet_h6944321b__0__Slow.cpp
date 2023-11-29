@@ -29,18 +29,13 @@ VL_ATTR_COLD void Vtop___024root___eval_initial__TOP(Vtop___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
     Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___eval_initial__TOP\n"); );
-    // Init
-    VlWide<3>/*95:0*/ __Vtemp_1;
     // Body
     VL_READMEM_N(true, 8, 4096, 0, std::string{"pdf.hex"}
                  ,  &(vlSelf->top__DOT__my_instr_mem__DOT__rom_array)
                  , 0, ~0ULL);
-    __Vtemp_1[0U] = 0x2e6d656dU;
-    __Vtemp_1[1U] = 0x7369616eU;
-    __Vtemp_1[2U] = 0x67617573U;
-    VL_READMEM_N(true, 8, 131072, 0, VL_CVT_PACK_STR_NW(3, __Vtemp_1)
+    VL_READMEM_N(true, 8, 131072, 0, std::string{"sine.mem"}
                  ,  &(vlSelf->top__DOT__my_data_memory__DOT__my_mem__DOT__data_array)
-                 , 0x10000U, 0x1ffffU);
+                 , 0x10000U, ~0ULL);
 }
 
 VL_ATTR_COLD void Vtop___024root___eval_final(Vtop___024root* vlSelf) {
