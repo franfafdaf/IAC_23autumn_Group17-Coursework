@@ -34,14 +34,13 @@ int main(int argc, char **argv, char **env){
     // vbdHex(3, (int(top->a0) >> 8) & 0xF);
     // vbdHex(2, (int(top->a0) >> 4) & 0xF);
     // vbdHex(1, int(top->a0) & 0xF);
-
     // vbdBar(top->a0);
 
-    // vbdPlot(int(top->a0), 0, 255);
-
-  
-
-    vbdCycle(simcyc+1);
+    if (top->a0!=0){
+      vbdPlot(int(top->a0) & 0xff, 0, 255);
+      vbdCycle(simcyc);
+    }
+   
 
     if ((Verilated::gotFinish()) || (vbdGetkey()=='q'))
         exit(0);                
