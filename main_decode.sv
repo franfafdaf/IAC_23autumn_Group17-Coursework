@@ -76,7 +76,7 @@ module main_decode(
             ImmSrc = 3'b001;
             RegWrite = 0;
             ALUOp = 2'b00;
-            StSrc = ~{&{funct3}};
+            StSrc = ~{|funct3};
         end
 
         7'b1100011: begin //B-type

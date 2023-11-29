@@ -17,7 +17,7 @@ initial $readmemh("instrmem1.mem", rom_array);
 
 
 // Assuming A already has the offset (0xBFC00000) subtracted by the system ???
-//assign RD = {rom_array[A+3], rom_array[A+2], rom_array[A+1], rom_array[A]};
+// assign RD = {rom_array[A+3], rom_array[A+2], rom_array[A+1], rom_array[A]};
 assign RD = {rom_array[A], rom_array[A+1], rom_array[A+2], rom_array[A+3]};
 
 endmodule

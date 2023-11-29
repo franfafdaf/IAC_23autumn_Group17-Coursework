@@ -109,7 +109,7 @@ extern const VlUnpacked<CData/*0:0*/, 1024> Vtop__ConstPool__TABLE_hbc1fa718_0;
 extern const VlUnpacked<CData/*0:0*/, 1024> Vtop__ConstPool__TABLE_h07357e9c_0;
 extern const VlUnpacked<CData/*0:0*/, 1024> Vtop__ConstPool__TABLE_h9449ed6c_0;
 extern const VlUnpacked<CData/*1:0*/, 1024> Vtop__ConstPool__TABLE_hc6ea8798_0;
-extern const VlUnpacked<CData/*0:0*/, 1024> Vtop__ConstPool__TABLE_h490e2dbe_0;
+extern const VlUnpacked<CData/*0:0*/, 1024> Vtop__ConstPool__TABLE_ha01f9546_0;
 extern const VlUnpacked<CData/*0:0*/, 1024> Vtop__ConstPool__TABLE_h7bc57967_0;
 extern const VlUnpacked<CData/*2:0*/, 512> Vtop__ConstPool__TABLE_haaa0e0dc_0;
 
@@ -191,7 +191,7 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
     }
     if ((0x400U & Vtop__ConstPool__TABLE_he5a506cc_0
          [__Vtableidx1])) {
-        vlSelf->top__DOT__StSrc = Vtop__ConstPool__TABLE_h490e2dbe_0
+        vlSelf->top__DOT__StSrc = Vtop__ConstPool__TABLE_ha01f9546_0
             [__Vtableidx1];
     }
     if ((0x800U & Vtop__ConstPool__TABLE_he5a506cc_0
