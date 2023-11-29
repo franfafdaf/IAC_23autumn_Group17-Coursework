@@ -8,7 +8,7 @@ module memory #(
     output logic [31:0]                 RD
 );
 
-    logic [DATA_WIDTH-1:0] data_array [17'h1FFFF : 17'h0]; 
+    logic [DATA_WIDTH-1:0] data_array [2**17-1 : 0]; 
 
     initial $readmemh("sine.mem", data_array, 17'h10000);
 
