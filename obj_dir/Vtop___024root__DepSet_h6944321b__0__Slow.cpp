@@ -40,7 +40,7 @@ VL_ATTR_COLD void Vtop___024root___eval_initial__TOP(Vtop___024root* vlSelf) {
     __Vtemp_1[2U] = 0x67617573U;
     VL_READMEM_N(true, 8, 131072, 0, VL_CVT_PACK_STR_NW(3, __Vtemp_1)
                  ,  &(vlSelf->top__DOT__my_data_memory__DOT__my_mem__DOT__data_array)
-                 , 0, ~0ULL);
+                 , 0x10000U, 0x1ffffU);
 }
 
 VL_ATTR_COLD void Vtop___024root___eval_final(Vtop___024root* vlSelf) {

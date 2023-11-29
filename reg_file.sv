@@ -18,6 +18,7 @@ assign RD2 = mem[A2];
 assign a0= mem[10];
 
 always_ff @(posedge clk) begin
+    assign mem[0] = 0;
     if (WE3 == 1'b1)
         mem[A3] <= WD3;
 end

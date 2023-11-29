@@ -45,6 +45,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
     // Body
     __Vdlyvset__top__DOT__my_data_memory__DOT__my_mem__DOT__data_array__v0 = 0U;
     __Vdlyvset__top__DOT__my_reg_file__DOT__mem__v0 = 0U;
+    vlSelf->top__DOT__my_reg_file__DOT__mem[0U] = 0U;
     if (vlSelf->top__DOT__MemWrite) {
         __Vdlyvval__top__DOT__my_data_memory__DOT__my_mem__DOT__data_array__v0 
             = (0xffU & vlSelf->top__DOT__my_data_memory__DOT__corrected_WD);

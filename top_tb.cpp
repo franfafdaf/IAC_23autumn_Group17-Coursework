@@ -2,7 +2,7 @@
 #include "verilated_vcd_c.h"
 #include "Vtop.h"
 #include "vbuddy.cpp"    
-#define MAX_SIM_CYC 10000
+#define MAX_SIM_CYC 100000
 
 int main(int argc, char **argv, char **env){
   int simcyc;
@@ -37,7 +37,7 @@ int main(int argc, char **argv, char **env){
 
     // vbdBar(top->a0);
 
-    vbdPlot(int(top->a0), 0, 255);
+    // vbdPlot(int(top->a0), 0, 255);
 
   
 
