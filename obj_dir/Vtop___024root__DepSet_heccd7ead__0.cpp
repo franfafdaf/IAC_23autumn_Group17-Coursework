@@ -26,7 +26,6 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__0(Vtop___024root* vlSelf) {
     // Body
     __Vdlyvset__top__DOT__my_data_memory__DOT__my_mem__DOT__data_array__v0 = 0U;
     __Vdlyvset__top__DOT__my_reg_file__DOT__mem__v0 = 0U;
-    vlSelf->top__DOT__my_reg_file__DOT__mem[0U] = 0U;
     if (vlSelf->top__DOT__MemWrite) {
         __Vdlyvval__top__DOT__my_data_memory__DOT__my_mem__DOT__data_array__v0 
             = (0xffU & vlSelf->top__DOT__my_data_memory__DOT__corrected_WD);
@@ -85,8 +84,6 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__0(Vtop___024root* vlSelf) {
         vlSelf->top__DOT__my_reg_file__DOT__mem[__Vdlyvdim0__top__DOT__my_reg_file__DOT__mem__v0] 
             = __Vdlyvval__top__DOT__my_reg_file__DOT__mem__v0;
     }
-    vlSelf->a0 = vlSelf->top__DOT__my_reg_file__DOT__mem
-        [0xaU];
 }
 
 extern const VlUnpacked<CData/*0:0*/, 1024> Vtop__ConstPool__TABLE_hff092405_0;
@@ -100,7 +97,7 @@ extern const VlUnpacked<CData/*0:0*/, 1024> Vtop__ConstPool__TABLE_h43bc9916_0;
 extern const VlUnpacked<CData/*0:0*/, 1024> Vtop__ConstPool__TABLE_hbad56271_0;
 extern const VlUnpacked<CData/*0:0*/, 1024> Vtop__ConstPool__TABLE_h17877086_0;
 extern const VlUnpacked<CData/*1:0*/, 1024> Vtop__ConstPool__TABLE_h4191d61c_0;
-extern const VlUnpacked<CData/*0:0*/, 1024> Vtop__ConstPool__TABLE_ha35a2930_0;
+extern const VlUnpacked<CData/*0:0*/, 1024> Vtop__ConstPool__TABLE_h789adb00_0;
 extern const VlUnpacked<CData/*0:0*/, 1024> Vtop__ConstPool__TABLE_h20175f08_0;
 extern const VlUnpacked<CData/*2:0*/, 256> Vtop__ConstPool__TABLE_h5baae6ba_0;
 
@@ -115,25 +112,21 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__1(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__PC = ((IData)(vlSelf->rst) ? 0U
                              : vlSelf->top__DOT__my_pc_top__DOT__PC_Next);
     vlSelf->top__DOT__Instr = ((vlSelf->top__DOT__my_instr_mem__DOT__rom_array
-                                [(0xfffU & vlSelf->top__DOT__PC)] 
+                                [(0xfffU & ((IData)(3U) 
+                                            + vlSelf->top__DOT__PC))] 
                                 << 0x18U) | ((vlSelf->top__DOT__my_instr_mem__DOT__rom_array
                                               [(0xfffU 
-                                                & ((IData)(1U) 
+                                                & ((IData)(2U) 
                                                    + vlSelf->top__DOT__PC))] 
                                               << 0x10U) 
                                              | ((vlSelf->top__DOT__my_instr_mem__DOT__rom_array
                                                  [(0xfffU 
-                                                   & ((IData)(2U) 
+                                                   & ((IData)(1U) 
                                                       + vlSelf->top__DOT__PC))] 
                                                  << 8U) 
                                                 | vlSelf->top__DOT__my_instr_mem__DOT__rom_array
                                                 [(0xfffU 
-                                                  & ((IData)(3U) 
-                                                     + vlSelf->top__DOT__PC))])));
-    vlSelf->top__DOT__WriteData = vlSelf->top__DOT__my_reg_file__DOT__mem
-        [(0x1fU & (vlSelf->top__DOT__Instr >> 0x14U))];
-    vlSelf->top__DOT__RD1 = vlSelf->top__DOT__my_reg_file__DOT__mem
-        [(0x1fU & (vlSelf->top__DOT__Instr >> 0xfU))];
+                                                  & vlSelf->top__DOT__PC)])));
     __Vtableidx1 = ((0x380U & (vlSelf->top__DOT__Instr 
                                >> 5U)) | (0x7fU & vlSelf->top__DOT__Instr));
     vlSelf->top__DOT__my_control_unit__DOT__Branch 
@@ -176,7 +169,7 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__1(Vtop___024root* vlSelf) {
     }
     if ((0x400U & Vtop__ConstPool__TABLE_h17acd1c3_0
          [__Vtableidx1])) {
-        vlSelf->top__DOT__StSrc = Vtop__ConstPool__TABLE_ha35a2930_0
+        vlSelf->top__DOT__StSrc = Vtop__ConstPool__TABLE_h789adb00_0
             [__Vtableidx1];
     }
     if ((0x800U & Vtop__ConstPool__TABLE_h17acd1c3_0
@@ -184,13 +177,6 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__1(Vtop___024root* vlSelf) {
         vlSelf->top__DOT__LdSrc = Vtop__ConstPool__TABLE_h20175f08_0
             [__Vtableidx1];
     }
-    vlSelf->top__DOT__my_data_memory__DOT__corrected_WD 
-        = ((IData)(vlSelf->top__DOT__StSrc) ? (0xffU 
-                                               & vlSelf->top__DOT__WriteData)
-            : vlSelf->top__DOT__WriteData);
-    vlSelf->top__DOT__my_alu_top__DOT__SrcA = ((IData)(vlSelf->top__DOT__ALUSrcA)
-                                                ? vlSelf->top__DOT__PC
-                                                : vlSelf->top__DOT__RD1);
     __Vtableidx2 = ((0x80U & (vlSelf->top__DOT__Instr 
                               << 2U)) | (((0x40U & 
                                            (vlSelf->top__DOT__Instr 
@@ -254,9 +240,30 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__1(Vtop___024root* vlSelf) {
                                              << 0xcU) 
                                             | (vlSelf->top__DOT__Instr 
                                                >> 0x14U)))));
+}
+
+VL_INLINE_OPT void Vtop___024root___combo__TOP__0(Vtop___024root* vlSelf) {
+    if (false && vlSelf) {}  // Prevent unused
+    Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
+    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___combo__TOP__0\n"); );
+    // Body
+    vlSelf->top__DOT__RD1 = vlSelf->top__DOT__my_reg_file__DOT__mem
+        [(0x1fU & (vlSelf->top__DOT__Instr >> 0xfU))];
+    vlSelf->top__DOT__WriteData = vlSelf->top__DOT__my_reg_file__DOT__mem
+        [(0x1fU & (vlSelf->top__DOT__Instr >> 0x14U))];
+    vlSelf->a0 = vlSelf->top__DOT__my_reg_file__DOT__mem
+        [0xaU];
+    vlSelf->top__DOT__my_reg_file__DOT__mem[0U] = 0U;
+    vlSelf->top__DOT__my_data_memory__DOT__corrected_WD 
+        = ((IData)(vlSelf->top__DOT__StSrc) ? (0xffU 
+                                               & vlSelf->top__DOT__WriteData)
+            : vlSelf->top__DOT__WriteData);
     vlSelf->top__DOT__my_alu_top__DOT__SrcB = ((IData)(vlSelf->top__DOT__ALUSrcB)
                                                 ? vlSelf->top__DOT__ImmExt
                                                 : vlSelf->top__DOT__WriteData);
+    vlSelf->top__DOT__my_alu_top__DOT__SrcA = ((IData)(vlSelf->top__DOT__ALUSrcA)
+                                                ? vlSelf->top__DOT__PC
+                                                : vlSelf->top__DOT__RD1);
     vlSelf->top__DOT__ALUResult = 0U;
     if ((0U == (IData)(vlSelf->top__DOT__ALUControl))) {
         vlSelf->top__DOT__ALUResult = (vlSelf->top__DOT__my_alu_top__DOT__SrcA 
@@ -333,9 +340,288 @@ void Vtop___024root___eval(Vtop___024root* vlSelf) {
         Vtop___024root___sequent__TOP__1(vlSelf);
         vlSelf->__Vm_traceActivity[2U] = 1U;
     }
+    Vtop___024root___combo__TOP__0(vlSelf);
+    vlSelf->__Vm_traceActivity[3U] = 1U;
     // Final
     vlSelf->__Vclklast__TOP__clk = vlSelf->clk;
     vlSelf->__Vclklast__TOP__rst = vlSelf->rst;
+}
+
+QData Vtop___024root___change_request_1(Vtop___024root* vlSelf);
+
+VL_INLINE_OPT QData Vtop___024root___change_request(Vtop___024root* vlSelf) {
+    if (false && vlSelf) {}  // Prevent unused
+    Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
+    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___change_request\n"); );
+    // Body
+    return (Vtop___024root___change_request_1(vlSelf));
+}
+
+VL_INLINE_OPT QData Vtop___024root___change_request_1(Vtop___024root* vlSelf) {
+    if (false && vlSelf) {}  // Prevent unused
+    Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
+    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___change_request_1\n"); );
+    // Body
+    // Change detection
+    QData __req = false;  // Logically a bool
+    __req |= ((vlSelf->top__DOT__my_reg_file__DOT__mem
+               [0U] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+               [0U])
+         | (vlSelf->top__DOT__my_reg_file__DOT__mem
+            [1U] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+            [1U])
+         | (vlSelf->top__DOT__my_reg_file__DOT__mem
+            [2U] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+            [2U])
+         | (vlSelf->top__DOT__my_reg_file__DOT__mem
+            [3U] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+            [3U])
+         | (vlSelf->top__DOT__my_reg_file__DOT__mem
+            [4U] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+            [4U])
+         | (vlSelf->top__DOT__my_reg_file__DOT__mem
+            [5U] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+            [5U])
+         | (vlSelf->top__DOT__my_reg_file__DOT__mem
+            [6U] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+            [6U])
+         | (vlSelf->top__DOT__my_reg_file__DOT__mem
+            [7U] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+            [7U])
+         | (vlSelf->top__DOT__my_reg_file__DOT__mem
+            [8U] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+            [8U])
+         | (vlSelf->top__DOT__my_reg_file__DOT__mem
+            [9U] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+            [9U])
+        || (vlSelf->top__DOT__my_reg_file__DOT__mem
+            [0xaU] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+            [0xaU])
+         | (vlSelf->top__DOT__my_reg_file__DOT__mem
+            [0xbU] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+            [0xbU])
+         | (vlSelf->top__DOT__my_reg_file__DOT__mem
+            [0xcU] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+            [0xcU])
+         | (vlSelf->top__DOT__my_reg_file__DOT__mem
+            [0xdU] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+            [0xdU])
+         | (vlSelf->top__DOT__my_reg_file__DOT__mem
+            [0xeU] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+            [0xeU])
+         | (vlSelf->top__DOT__my_reg_file__DOT__mem
+            [0xfU] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+            [0xfU])
+         | (vlSelf->top__DOT__my_reg_file__DOT__mem
+            [0x10U] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+            [0x10U])
+         | (vlSelf->top__DOT__my_reg_file__DOT__mem
+            [0x11U] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+            [0x11U])
+         | (vlSelf->top__DOT__my_reg_file__DOT__mem
+            [0x12U] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+            [0x12U])
+         | (vlSelf->top__DOT__my_reg_file__DOT__mem
+            [0x13U] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+            [0x13U])
+        || (vlSelf->top__DOT__my_reg_file__DOT__mem
+            [0x14U] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+            [0x14U])
+         | (vlSelf->top__DOT__my_reg_file__DOT__mem
+            [0x15U] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+            [0x15U])
+         | (vlSelf->top__DOT__my_reg_file__DOT__mem
+            [0x16U] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+            [0x16U])
+         | (vlSelf->top__DOT__my_reg_file__DOT__mem
+            [0x17U] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+            [0x17U])
+         | (vlSelf->top__DOT__my_reg_file__DOT__mem
+            [0x18U] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+            [0x18U])
+         | (vlSelf->top__DOT__my_reg_file__DOT__mem
+            [0x19U] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+            [0x19U])
+         | (vlSelf->top__DOT__my_reg_file__DOT__mem
+            [0x1aU] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+            [0x1aU])
+         | (vlSelf->top__DOT__my_reg_file__DOT__mem
+            [0x1bU] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+            [0x1bU])
+         | (vlSelf->top__DOT__my_reg_file__DOT__mem
+            [0x1cU] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+            [0x1cU])
+         | (vlSelf->top__DOT__my_reg_file__DOT__mem
+            [0x1dU] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+            [0x1dU])
+        || (vlSelf->top__DOT__my_reg_file__DOT__mem
+            [0x1eU] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+            [0x1eU])
+         | (vlSelf->top__DOT__my_reg_file__DOT__mem
+            [0x1fU] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+            [0x1fU]));
+    VL_DEBUG_IF( if(__req && ((vlSelf->top__DOT__my_reg_file__DOT__mem
+                               [0U] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+                               [0U]))) VL_DBG_MSGF("        CHANGE: reg_file.sv:14\n"); );
+    VL_DEBUG_IF( if(__req && ((vlSelf->top__DOT__my_reg_file__DOT__mem
+                               [1U] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+                               [1U]))) VL_DBG_MSGF("        CHANGE: reg_file.sv:14\n"); );
+    VL_DEBUG_IF( if(__req && ((vlSelf->top__DOT__my_reg_file__DOT__mem
+                               [2U] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+                               [2U]))) VL_DBG_MSGF("        CHANGE: reg_file.sv:14\n"); );
+    VL_DEBUG_IF( if(__req && ((vlSelf->top__DOT__my_reg_file__DOT__mem
+                               [3U] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+                               [3U]))) VL_DBG_MSGF("        CHANGE: reg_file.sv:14\n"); );
+    VL_DEBUG_IF( if(__req && ((vlSelf->top__DOT__my_reg_file__DOT__mem
+                               [4U] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+                               [4U]))) VL_DBG_MSGF("        CHANGE: reg_file.sv:14\n"); );
+    VL_DEBUG_IF( if(__req && ((vlSelf->top__DOT__my_reg_file__DOT__mem
+                               [5U] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+                               [5U]))) VL_DBG_MSGF("        CHANGE: reg_file.sv:14\n"); );
+    VL_DEBUG_IF( if(__req && ((vlSelf->top__DOT__my_reg_file__DOT__mem
+                               [6U] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+                               [6U]))) VL_DBG_MSGF("        CHANGE: reg_file.sv:14\n"); );
+    VL_DEBUG_IF( if(__req && ((vlSelf->top__DOT__my_reg_file__DOT__mem
+                               [7U] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+                               [7U]))) VL_DBG_MSGF("        CHANGE: reg_file.sv:14\n"); );
+    VL_DEBUG_IF( if(__req && ((vlSelf->top__DOT__my_reg_file__DOT__mem
+                               [8U] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+                               [8U]))) VL_DBG_MSGF("        CHANGE: reg_file.sv:14\n"); );
+    VL_DEBUG_IF( if(__req && ((vlSelf->top__DOT__my_reg_file__DOT__mem
+                               [9U] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+                               [9U]))) VL_DBG_MSGF("        CHANGE: reg_file.sv:14\n"); );
+    VL_DEBUG_IF( if(__req && ((vlSelf->top__DOT__my_reg_file__DOT__mem
+                               [0xaU] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+                               [0xaU]))) VL_DBG_MSGF("        CHANGE: reg_file.sv:14\n"); );
+    VL_DEBUG_IF( if(__req && ((vlSelf->top__DOT__my_reg_file__DOT__mem
+                               [0xbU] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+                               [0xbU]))) VL_DBG_MSGF("        CHANGE: reg_file.sv:14\n"); );
+    VL_DEBUG_IF( if(__req && ((vlSelf->top__DOT__my_reg_file__DOT__mem
+                               [0xcU] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+                               [0xcU]))) VL_DBG_MSGF("        CHANGE: reg_file.sv:14\n"); );
+    VL_DEBUG_IF( if(__req && ((vlSelf->top__DOT__my_reg_file__DOT__mem
+                               [0xdU] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+                               [0xdU]))) VL_DBG_MSGF("        CHANGE: reg_file.sv:14\n"); );
+    VL_DEBUG_IF( if(__req && ((vlSelf->top__DOT__my_reg_file__DOT__mem
+                               [0xeU] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+                               [0xeU]))) VL_DBG_MSGF("        CHANGE: reg_file.sv:14\n"); );
+    VL_DEBUG_IF( if(__req && ((vlSelf->top__DOT__my_reg_file__DOT__mem
+                               [0xfU] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+                               [0xfU]))) VL_DBG_MSGF("        CHANGE: reg_file.sv:14\n"); );
+    VL_DEBUG_IF( if(__req && ((vlSelf->top__DOT__my_reg_file__DOT__mem
+                               [0x10U] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+                               [0x10U]))) VL_DBG_MSGF("        CHANGE: reg_file.sv:14\n"); );
+    VL_DEBUG_IF( if(__req && ((vlSelf->top__DOT__my_reg_file__DOT__mem
+                               [0x11U] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+                               [0x11U]))) VL_DBG_MSGF("        CHANGE: reg_file.sv:14\n"); );
+    VL_DEBUG_IF( if(__req && ((vlSelf->top__DOT__my_reg_file__DOT__mem
+                               [0x12U] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+                               [0x12U]))) VL_DBG_MSGF("        CHANGE: reg_file.sv:14\n"); );
+    VL_DEBUG_IF( if(__req && ((vlSelf->top__DOT__my_reg_file__DOT__mem
+                               [0x13U] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+                               [0x13U]))) VL_DBG_MSGF("        CHANGE: reg_file.sv:14\n"); );
+    VL_DEBUG_IF( if(__req && ((vlSelf->top__DOT__my_reg_file__DOT__mem
+                               [0x14U] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+                               [0x14U]))) VL_DBG_MSGF("        CHANGE: reg_file.sv:14\n"); );
+    VL_DEBUG_IF( if(__req && ((vlSelf->top__DOT__my_reg_file__DOT__mem
+                               [0x15U] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+                               [0x15U]))) VL_DBG_MSGF("        CHANGE: reg_file.sv:14\n"); );
+    VL_DEBUG_IF( if(__req && ((vlSelf->top__DOT__my_reg_file__DOT__mem
+                               [0x16U] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+                               [0x16U]))) VL_DBG_MSGF("        CHANGE: reg_file.sv:14\n"); );
+    VL_DEBUG_IF( if(__req && ((vlSelf->top__DOT__my_reg_file__DOT__mem
+                               [0x17U] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+                               [0x17U]))) VL_DBG_MSGF("        CHANGE: reg_file.sv:14\n"); );
+    VL_DEBUG_IF( if(__req && ((vlSelf->top__DOT__my_reg_file__DOT__mem
+                               [0x18U] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+                               [0x18U]))) VL_DBG_MSGF("        CHANGE: reg_file.sv:14\n"); );
+    VL_DEBUG_IF( if(__req && ((vlSelf->top__DOT__my_reg_file__DOT__mem
+                               [0x19U] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+                               [0x19U]))) VL_DBG_MSGF("        CHANGE: reg_file.sv:14\n"); );
+    VL_DEBUG_IF( if(__req && ((vlSelf->top__DOT__my_reg_file__DOT__mem
+                               [0x1aU] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+                               [0x1aU]))) VL_DBG_MSGF("        CHANGE: reg_file.sv:14\n"); );
+    VL_DEBUG_IF( if(__req && ((vlSelf->top__DOT__my_reg_file__DOT__mem
+                               [0x1bU] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+                               [0x1bU]))) VL_DBG_MSGF("        CHANGE: reg_file.sv:14\n"); );
+    VL_DEBUG_IF( if(__req && ((vlSelf->top__DOT__my_reg_file__DOT__mem
+                               [0x1cU] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+                               [0x1cU]))) VL_DBG_MSGF("        CHANGE: reg_file.sv:14\n"); );
+    VL_DEBUG_IF( if(__req && ((vlSelf->top__DOT__my_reg_file__DOT__mem
+                               [0x1dU] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+                               [0x1dU]))) VL_DBG_MSGF("        CHANGE: reg_file.sv:14\n"); );
+    VL_DEBUG_IF( if(__req && ((vlSelf->top__DOT__my_reg_file__DOT__mem
+                               [0x1eU] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+                               [0x1eU]))) VL_DBG_MSGF("        CHANGE: reg_file.sv:14\n"); );
+    VL_DEBUG_IF( if(__req && ((vlSelf->top__DOT__my_reg_file__DOT__mem
+                               [0x1fU] ^ vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem
+                               [0x1fU]))) VL_DBG_MSGF("        CHANGE: reg_file.sv:14\n"); );
+    // Final
+    vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem[0U] 
+        = vlSelf->top__DOT__my_reg_file__DOT__mem[0U];
+    vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem[1U] 
+        = vlSelf->top__DOT__my_reg_file__DOT__mem[1U];
+    vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem[2U] 
+        = vlSelf->top__DOT__my_reg_file__DOT__mem[2U];
+    vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem[3U] 
+        = vlSelf->top__DOT__my_reg_file__DOT__mem[3U];
+    vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem[4U] 
+        = vlSelf->top__DOT__my_reg_file__DOT__mem[4U];
+    vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem[5U] 
+        = vlSelf->top__DOT__my_reg_file__DOT__mem[5U];
+    vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem[6U] 
+        = vlSelf->top__DOT__my_reg_file__DOT__mem[6U];
+    vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem[7U] 
+        = vlSelf->top__DOT__my_reg_file__DOT__mem[7U];
+    vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem[8U] 
+        = vlSelf->top__DOT__my_reg_file__DOT__mem[8U];
+    vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem[9U] 
+        = vlSelf->top__DOT__my_reg_file__DOT__mem[9U];
+    vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem[0xaU] 
+        = vlSelf->top__DOT__my_reg_file__DOT__mem[0xaU];
+    vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem[0xbU] 
+        = vlSelf->top__DOT__my_reg_file__DOT__mem[0xbU];
+    vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem[0xcU] 
+        = vlSelf->top__DOT__my_reg_file__DOT__mem[0xcU];
+    vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem[0xdU] 
+        = vlSelf->top__DOT__my_reg_file__DOT__mem[0xdU];
+    vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem[0xeU] 
+        = vlSelf->top__DOT__my_reg_file__DOT__mem[0xeU];
+    vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem[0xfU] 
+        = vlSelf->top__DOT__my_reg_file__DOT__mem[0xfU];
+    vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem[0x10U] 
+        = vlSelf->top__DOT__my_reg_file__DOT__mem[0x10U];
+    vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem[0x11U] 
+        = vlSelf->top__DOT__my_reg_file__DOT__mem[0x11U];
+    vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem[0x12U] 
+        = vlSelf->top__DOT__my_reg_file__DOT__mem[0x12U];
+    vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem[0x13U] 
+        = vlSelf->top__DOT__my_reg_file__DOT__mem[0x13U];
+    vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem[0x14U] 
+        = vlSelf->top__DOT__my_reg_file__DOT__mem[0x14U];
+    vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem[0x15U] 
+        = vlSelf->top__DOT__my_reg_file__DOT__mem[0x15U];
+    vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem[0x16U] 
+        = vlSelf->top__DOT__my_reg_file__DOT__mem[0x16U];
+    vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem[0x17U] 
+        = vlSelf->top__DOT__my_reg_file__DOT__mem[0x17U];
+    vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem[0x18U] 
+        = vlSelf->top__DOT__my_reg_file__DOT__mem[0x18U];
+    vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem[0x19U] 
+        = vlSelf->top__DOT__my_reg_file__DOT__mem[0x19U];
+    vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem[0x1aU] 
+        = vlSelf->top__DOT__my_reg_file__DOT__mem[0x1aU];
+    vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem[0x1bU] 
+        = vlSelf->top__DOT__my_reg_file__DOT__mem[0x1bU];
+    vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem[0x1cU] 
+        = vlSelf->top__DOT__my_reg_file__DOT__mem[0x1cU];
+    vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem[0x1dU] 
+        = vlSelf->top__DOT__my_reg_file__DOT__mem[0x1dU];
+    vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem[0x1eU] 
+        = vlSelf->top__DOT__my_reg_file__DOT__mem[0x1eU];
+    vlSelf->__Vchglast__TOP__top__DOT__my_reg_file__DOT__mem[0x1fU] 
+        = vlSelf->top__DOT__my_reg_file__DOT__mem[0x1fU];
+    return __req;
 }
 
 #ifdef VL_DEBUG

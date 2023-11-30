@@ -13,12 +13,14 @@ module reg_file(
 
 logic [31:0] mem [31:0];
 
-assign RD1 = mem[A1];
-assign RD2 = mem[A2];
-assign a0= mem[10];
+always_comb begin
+    RD1 = mem[A1];
+    RD2 = mem[A2];
+    a0 = mem[10];
+    mem[0] = 32'b0;
+end
 
 always_ff @(posedge clk) begin
-    assign mem[0] = 0;
     if (WE3 == 1'b1)
         mem[A3] <= WD3;
 end
