@@ -10,7 +10,6 @@ module DataMemory#(
     output logic [DATA_WIDTH-1:0] RD           // Read Data output
 );
 
-    logic [31:0] corrected_WD;
     logic [31:0] read_data_internal;
 
 
@@ -18,14 +17,9 @@ module DataMemory#(
         .clk(clk),
         .A(A),
         .WE(WE),
-        .WD(corrected_WD),
-        .RD(read_data_internal)
-    );
-
-    memory_i my_mem_i (
         .StSrc(StSrc),
-        .WD_i(WD),
-        .WD_o(corrected_WD)
+        .WD(WD),
+        .RD(read_data_internal)
     );
 
     memory_o my_mem_o (
