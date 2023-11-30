@@ -26,12 +26,12 @@ module main_decode(
             MemWrite = 0;
             ALUSrcA = 0;
             ALUSrcB = 0;
+            ImmSrc = 3'b000;
             RegWrite = 1;
             ALUOp = 2'b10;
             LdSrc = 0;
             StSrc = 0;
             JalSrc = 0;
-            ImmSrc = 3'b000;
         end
 
         7'b0010011: begin //I-type ALU
@@ -74,36 +74,36 @@ module main_decode(
             ImmSrc = 3'b000;
             RegWrite = 1;
             ALUOp = 2'b00;
-            JalSrc = 1'b0;
             LdSrc = 0;
             StSrc = 0;
+            JalSrc = 1'b0;
         end
 
         7'b0100011: begin //S-type
             Branch = 0; 
             Jump = 0; 
+            ResultSrc = 2'b00;
             MemWrite = 1;
             ALUSrcA = 0;
             ALUSrcB = 1;
             ImmSrc = 3'b001;
             RegWrite = 0;
             ALUOp = 2'b00;
-            StSrc = ~{|funct3};
-            ResultSrc = 2'b00;
             LdSrc = 0;
+            StSrc = ~{|funct3};
             JalSrc = 0;
         end
 
         7'b1100011: begin //B-type
             Branch = 1; 
             Jump = 0; 
+            ResultSrc = 2'b00;
             MemWrite = 0;
             ALUSrcA = 0;
             ALUSrcB = 0;
             ImmSrc = 3'b010;
             RegWrite = 0;
             ALUOp = 2'b01;
-            ResultSrc = 2'b00;
             LdSrc = 0;
             StSrc = 0;
             JalSrc = 1;
@@ -114,11 +114,11 @@ module main_decode(
             Jump = 0; 
             ResultSrc = 2'b00;
             MemWrite = 0;
+            ALUSrcA = 0;
             ALUSrcB = 1'b1;
             ImmSrc = 3'b100;
             RegWrite = 1;
             ALUOp = 2'b11;
-            ALUSrcA = 0;
             LdSrc = 0;
             StSrc = 0;
             JalSrc = 0;
@@ -144,14 +144,14 @@ module main_decode(
             Jump = 1; 
             ResultSrc = 2'b10;
             MemWrite = 0;
-            ImmSrc = 3'b011;
-            RegWrite = 1;
-            JalSrc = 1'b1;
             ALUSrcA = 0;
             ALUSrcB = 0;
+            ImmSrc = 3'b011;
+            RegWrite = 1;
             ALUOp = 2'b00;
             LdSrc = 0;
             StSrc = 0;
+            JalSrc = 1'b1;
         end
 
         default: begin
@@ -170,6 +170,7 @@ module main_decode(
         end
 
         endcase
+
     end
     
 endmodule
