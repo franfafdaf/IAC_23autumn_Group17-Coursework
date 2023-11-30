@@ -46,9 +46,9 @@ int main(int argc, char **argv, char **env){
     }
     
     
-    if (plot > 512) {
-      break;
-    }
+    // if (plot > 512) {
+    //   break;
+    // }
     
 
     // either simulation finished, or 'q' is pressed
