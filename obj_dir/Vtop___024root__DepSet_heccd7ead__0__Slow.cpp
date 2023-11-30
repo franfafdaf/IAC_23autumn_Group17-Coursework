@@ -11,12 +11,12 @@ VL_ATTR_COLD void Vtop___024root___initial__TOP__0(Vtop___024root* vlSelf) {
     Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___initial__TOP__0\n"); );
     // Init
-    VlWide<3>/*95:0*/ __Vtemp_h2553e7c1__0;
+    VlWide<3>/*95:0*/ __Vtemp_h27e1a69c__0;
     // Body
-    __Vtemp_h2553e7c1__0[0U] = 0x2e6d656dU;
-    __Vtemp_h2553e7c1__0[1U] = 0x7369616eU;
-    __Vtemp_h2553e7c1__0[2U] = 0x67617573U;
-    VL_READMEM_N(true, 8, 131072, 0, VL_CVT_PACK_STR_NW(3, __Vtemp_h2553e7c1__0)
+    __Vtemp_h27e1a69c__0[0U] = 0x2e6d656dU;
+    __Vtemp_h27e1a69c__0[1U] = 0x6f697379U;
+    __Vtemp_h27e1a69c__0[2U] = 0x6eU;
+    VL_READMEM_N(true, 8, 131072, 0, VL_CVT_PACK_STR_NW(3, __Vtemp_h27e1a69c__0)
                  ,  &(vlSelf->top__DOT__my_data_memory__DOT__my_mem__DOT__data_array)
                  , 0x10000U, ~0ULL);
     VL_READMEM_N(true, 8, 4096, 0, std::string{"pdf.hex"}
