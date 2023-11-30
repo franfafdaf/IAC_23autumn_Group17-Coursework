@@ -23,5 +23,4 @@ always_ff @(posedge clk) begin
         mem[A3] <= WD3;
 end
 
-
 endmodule
