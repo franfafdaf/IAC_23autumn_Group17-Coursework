@@ -18,7 +18,7 @@ int main(int argc, char **argv, char **env){
   tfp->open ("top.vcd");
  
   if (vbdOpen()!=1) return(-1);
-  vbdHeader("Coursework");
+  vbdHeader("F1 light");
 
   top->clk = 1;
   top->rst = 0;
@@ -34,23 +34,27 @@ int main(int argc, char **argv, char **env){
     top->rst = 0;
 
     
-    if (plot == 0 && top->a0 != 0) {
-       plot = 1;
-    }
-    
-    // plot ROM output and print cycle count
-    if (plot >= 1) {
-       vbdPlot(int(top->a0), 0, 255);
-       vbdCycle(simcyc+1);
-       plot += 1;
-    }
-    
-    
-    if (plot > 960) {
-      break;
-    }
-    
+    vbdBar(top->a0&& 0xFF);
 
+    vbdHex(4, (int(top->a0) >> 16)& 0xF);
+    vbdHex(3, (int(top->a0) >> 8)& 0xF);
+    vbdHex(2, (int(top->a0) >> 4)& 0xF);
+    vbdHex(1, int(top->a0)& 0xF);
+
+
+    // if (plot == 0 && top->a0 != 0) {
+    //    plot = 1;
+    // }
+    // // plot ROM output and print cycle count
+    // if (plot >= 1) {
+    //    vbdPlot(int(top->a0), 0, 255);
+    //    vbdCycle(simcyc+1);
+    //    plot += 1;
+    // }
+    // if (plot > 960) {
+    //   break;
+    // }
+    
     // either simulation finished, or 'q' is pressed
     if ((Verilated::gotFinish()) || (vbdGetkey()=='q')) 
       exit(0);                // ... exit if finish OR 'q' pressed
