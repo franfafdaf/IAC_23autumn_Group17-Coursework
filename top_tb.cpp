@@ -22,7 +22,7 @@ int main(int argc, char **argv, char **env){
 
   top->clk = 1;
   top->rst = 0;
-  int plot =0;
+  // int plot =0;
 
   for (simcyc=0; simcyc<MAX_SIM_CYC; simcyc++) {
     // dump variables into VCD file and toggle clock
