@@ -46,7 +46,7 @@ int main(int argc, char **argv, char **env){
     }
     
     
-    if (plot > 512) {
+    if (plot > 960) {
       break;
     }
     
