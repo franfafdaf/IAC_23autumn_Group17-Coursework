@@ -52,21 +52,21 @@ VL_ATTR_COLD void Vtop___024root___settle__TOP__0(Vtop___024root* vlSelf) {
     // Body
     vlSelf->top__DOT__my_reg_file__DOT__mem[5U] = vlSelf->trigger;
     vlSelf->top__DOT__Instr = ((vlSelf->top__DOT__my_instr_mem__DOT__rom_array
-                                [(0xfffU & ((IData)(3U) 
-                                            + vlSelf->top__DOT__PC))] 
+                                [(0xfffU & vlSelf->top__DOT__PC)] 
                                 << 0x18U) | ((vlSelf->top__DOT__my_instr_mem__DOT__rom_array
                                               [(0xfffU 
-                                                & ((IData)(2U) 
+                                                & ((IData)(1U) 
                                                    + vlSelf->top__DOT__PC))] 
                                               << 0x10U) 
                                              | ((vlSelf->top__DOT__my_instr_mem__DOT__rom_array
                                                  [(0xfffU 
-                                                   & ((IData)(1U) 
+                                                   & ((IData)(2U) 
                                                       + vlSelf->top__DOT__PC))] 
                                                  << 8U) 
                                                 | vlSelf->top__DOT__my_instr_mem__DOT__rom_array
                                                 [(0xfffU 
-                                                  & vlSelf->top__DOT__PC)])));
+                                                  & ((IData)(3U) 
+                                                     + vlSelf->top__DOT__PC))])));
     vlSelf->a0 = vlSelf->top__DOT__my_reg_file__DOT__mem
         [0xaU];
     vlSelf->top__DOT__WriteData = vlSelf->top__DOT__my_reg_file__DOT__mem
