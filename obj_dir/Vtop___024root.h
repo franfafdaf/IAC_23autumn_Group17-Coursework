@@ -46,8 +46,7 @@ class Vtop___024root final : public VerilatedModule {
     VlUnpacked<CData/*7:0*/, 4096> top__DOT__my_instr_mem__DOT__rom_array;
     VlUnpacked<IData/*31:0*/, 32> top__DOT__my_reg_file__DOT__mem;
     VlUnpacked<CData/*7:0*/, 131072> top__DOT__my_data_memory__DOT__my_mem__DOT__data_array;
-    VlUnpacked<IData/*31:0*/, 32> __Vchglast__TOP__top__DOT__my_reg_file__DOT__mem;
-    VlUnpacked<CData/*0:0*/, 4> __Vm_traceActivity;
+    VlUnpacked<CData/*0:0*/, 3> __Vm_traceActivity;
 
     // INTERNAL VARIABLES
     Vtop__Syms* const vlSymsp;
