@@ -39,9 +39,9 @@ always_comb begin
         ALUResult = SrcA | SrcB;//or
     end
 
-    // if (ALUControl == 3'b100) begin 
-    //     ALUResult = SrcA >> SrcB[4:0];//shift right
-    // end
+    if (ALUControl == 3'b100) begin 
+        ALUResult = SrcA >> SrcB[4:0];//shift right
+    end
 
     if (ALUControl == 3'b101) begin 
         ALUResult = (SrcA < SrcB) ? 32'b1 : 32'b0;//SLT
@@ -51,9 +51,9 @@ always_comb begin
         ALUResult = SrcB;//select SrcB
     end
 
-    // if (ALUControl == 3'b111) begin 
-    //     ALUResult = SrcA << SrcB[4:0];//shift left
-    // end
+    if (ALUControl == 3'b111) begin 
+        ALUResult = SrcA << SrcB[4:0];//shift left
+    end
 
     Zero = (ALUResult == 32'b0);
 end

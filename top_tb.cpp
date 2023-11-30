@@ -21,7 +21,7 @@ int main(int argc, char **argv, char **env){
   vbdHeader("Coursework");
 
   top->clk = 1;
-  top->rst = 1;
+  top->rst = 0;
   int plot =0;
 
   for (simcyc=0; simcyc<MAX_SIM_CYC; simcyc++) {
