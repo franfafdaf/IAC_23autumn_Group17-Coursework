@@ -7,7 +7,7 @@ init:
 rst:
     addi a0, zero, 0x0      // Turn off all lights
     addi a4, zero, 0x0      // Reset random delay counter
-    addi t0, zero, 0x0      // Reset temp register
+    addi t0, zero, 0x1      // Reset temp register
 
 mainloop:
     beq  t0, s1, fsm       // Check if it's time to start light sequence
