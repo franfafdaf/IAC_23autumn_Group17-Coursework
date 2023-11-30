@@ -1,6 +1,6 @@
 module top(
     input logic             clk, 
-    // input logic trigger, 
+    input logic trigger, 
     input logic             rst, 
     output logic [31:0]     a0
 );
@@ -62,7 +62,8 @@ reg_file my_reg_file(
     .WE3(RegWrite),
     .RD1(RD1),
     .RD2(WriteData),
-    .a0(a0)
+    .a0(a0), 
+    .trigger(trigger)
 );
 
 alu_top my_alu_top(
