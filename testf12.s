@@ -1,14 +1,15 @@
 init:
-    addi s1, zero, 0x1  /* assigning required values */
-    addi s2, zero, 0xff 
-    addi s3, zero, 0x3  /* determines delay between lights */
-    addi a3, zero, 0x7f
+    addi s1, zero, 0x1  /* trigger destination set as 1 */
+    addi s2, zero, 0xff /* light destination set as 0xff */
+    addi s3, zero, 0x3  /* regular delay set as 0x3 */
+    addi a3, zero, 0x7f /* the initial value of lfsr */
 
 rst:
     addi a0, zero, 0x0 /* reset all */
     addi a4, zero, 0x0 
     addi t0, zero, 0x0 
 
+mainloop:
 mainloop:
     beq  t0, s1, fsm    /* trigger? */ 
     srli a2, a3, 0x3    /* LFSR */
@@ -18,7 +19,6 @@ mainloop:
     slli a3, a3, 0x1 
     add  a3, a3, a2 
     andi a3, a3, 0xf
-    lbu a3, 0(a3)
     jal  ra, mainloop   /* Loop  */
 
 fsm:
@@ -33,7 +33,7 @@ increment:
     addi a4, a4, 0x1    /* inc delay */
     jal  ra, increment  /* run until delay finished */
 
-lightdelay:
+lightdelay: 
     addi  a1, a1, 0x1   /* inc count */
     bne   a1, s3, lightdelay
     addi  a1, zero, 0x0 /* reset count */

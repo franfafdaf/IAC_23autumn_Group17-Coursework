@@ -140,21 +140,21 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__2(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__PC = ((IData)(vlSelf->rst) ? 0U
                              : vlSelf->top__DOT__my_pc_top__DOT__PC_Next);
     vlSelf->top__DOT__Instr = ((vlSelf->top__DOT__my_instr_mem__DOT__rom_array
-                                [(0xfffU & ((IData)(3U) 
-                                            + vlSelf->top__DOT__PC))] 
+                                [(0xfffU & vlSelf->top__DOT__PC)] 
                                 << 0x18U) | ((vlSelf->top__DOT__my_instr_mem__DOT__rom_array
                                               [(0xfffU 
-                                                & ((IData)(2U) 
+                                                & ((IData)(1U) 
                                                    + vlSelf->top__DOT__PC))] 
                                               << 0x10U) 
                                              | ((vlSelf->top__DOT__my_instr_mem__DOT__rom_array
                                                  [(0xfffU 
-                                                   & ((IData)(1U) 
+                                                   & ((IData)(2U) 
                                                       + vlSelf->top__DOT__PC))] 
                                                  << 8U) 
                                                 | vlSelf->top__DOT__my_instr_mem__DOT__rom_array
                                                 [(0xfffU 
-                                                  & vlSelf->top__DOT__PC)])));
+                                                  & ((IData)(3U) 
+                                                     + vlSelf->top__DOT__PC))])));
     __Vtableidx1 = ((0x380U & (vlSelf->top__DOT__Instr 
                                >> 5U)) | (0x7fU & vlSelf->top__DOT__Instr));
     vlSelf->top__DOT__my_control_unit__DOT__Branch 
