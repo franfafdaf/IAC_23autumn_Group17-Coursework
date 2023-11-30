@@ -10,22 +10,25 @@ module DataMemory#(
     output logic [DATA_WIDTH-1:0] RD           // Read Data output
 );
 
-    logic [31:0] read_data_internal;
+    logic [DATA_WIDTH-1:0] data_array [2**17-1 : 0]; 
 
+    initial $readmemh("gaussian.mem", data_array, 17'h10000);
 
-    memory my_mem (
-        .clk(clk),
-        .A(A),
-        .WE(WE),
-        .StSrc(StSrc),
-        .WD(WD),
-        .RD(read_data_internal)
-    );
-
-    memory_o my_mem_o (
-        .LdSrc(LdSrc),
-        .RD_i(read_data_internal),
-        .RD_o(RD)
-    );
+    always_comb begin
+        if (LdSrc) RD = {{24{1'b0}}, data_array[A]}; //LBU
+        else RD = {data_array[A+3], data_array[A+2], data_array[A+1], data_array[A]}; //LW
+    end
+        
+    always_ff @(posedge clk) begin
+        if (WE == 1 && StSrc == 0) begin // SW
+            data_array[A] <= WD[7:0];
+            data_array[A+1] <= WD[15:8];
+            data_array[A+2] <= WD[23:16];
+            data_array[A+3] <= WD[31:24];
+        end
+        else if(WE ==1 && StSrc ==1 ) begin
+            data_array[A] <= WD[7:0]; // SB
+        end
+    end 
 
 endmodule

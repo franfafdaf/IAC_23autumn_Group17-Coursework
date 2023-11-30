@@ -34,7 +34,6 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop___024root final : public VerilatedModule
     CData/*7:0*/ __VdfgTmp_h2214dd4b__0;
     CData/*7:0*/ __VdfgTmp_h23e32fae__0;
     CData/*7:0*/ __VdfgTmp_h95d868b5__0;
-    CData/*7:0*/ __VdfgTmp_h88913f45__0;
     CData/*0:0*/ __Vtrigprevexpr___TOP__clk__0;
     CData/*0:0*/ __Vtrigprevexpr___TOP__rst__0;
     CData/*0:0*/ __VactContinue;
@@ -54,7 +53,7 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop___024root final : public VerilatedModule
     IData/*31:0*/ __VactIterCount;
     VlUnpacked<CData/*7:0*/, 4096> top__DOT__my_instr_mem__DOT__rom_array;
     VlUnpacked<IData/*31:0*/, 32> top__DOT__my_reg_file__DOT__mem;
-    VlUnpacked<CData/*7:0*/, 131072> top__DOT__my_data_memory__DOT__my_mem__DOT__data_array;
+    VlUnpacked<IData/*31:0*/, 131072> top__DOT__my_data_memory__DOT__data_array;
     VlUnpacked<CData/*0:0*/, 4> __Vm_traceActivity;
     VlTriggerVec<1> __VstlTriggered;
     VlTriggerVec<2> __VactTriggered;

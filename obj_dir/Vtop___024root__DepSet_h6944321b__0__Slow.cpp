@@ -36,10 +36,10 @@ VL_ATTR_COLD void Vtop___024root___eval_initial__TOP(Vtop___024root* vlSelf) {
                  ,  &(vlSelf->top__DOT__my_instr_mem__DOT__rom_array)
                  , 0, ~0ULL);
     __Vtemp_1[0U] = 0x2e6d656dU;
-    __Vtemp_1[1U] = 0x6e676c65U;
-    __Vtemp_1[2U] = 0x74726961U;
-    VL_READMEM_N(true, 8, 131072, 0, VL_CVT_PACK_STR_NW(3, __Vtemp_1)
-                 ,  &(vlSelf->top__DOT__my_data_memory__DOT__my_mem__DOT__data_array)
+    __Vtemp_1[1U] = 0x7369616eU;
+    __Vtemp_1[2U] = 0x67617573U;
+    VL_READMEM_N(true, 32, 131072, 0, VL_CVT_PACK_STR_NW(3, __Vtemp_1)
+                 ,  &(vlSelf->top__DOT__my_data_memory__DOT__data_array)
                  , 0x10000U, ~0ULL);
 }
 
@@ -283,8 +283,6 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
         vlSelf->top__DOT__ALUResult = vlSelf->top__DOT__my_alu_top__DOT__SrcB;
     }
     vlSelf->top__DOT__Zero = (0U == vlSelf->top__DOT__ALUResult);
-    vlSelf->__VdfgTmp_h88913f45__0 = vlSelf->top__DOT__my_data_memory__DOT__my_mem__DOT__data_array
-        [(0x1ffffU & vlSelf->top__DOT__ALUResult)];
     vlSelf->top__DOT__my_pc_top__DOT__PC_Next = (((IData)(vlSelf->top__DOT__my_control_unit__DOT__Jump) 
                                                   | ((IData)(vlSelf->top__DOT__my_control_unit__DOT__Branch) 
                                                      & (((IData)(vlSelf->top__DOT__Zero) 
@@ -397,14 +395,13 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__my_control_unit__DOT__Jump = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__my_control_unit__DOT__ALU_decode__DOT__decode = VL_RAND_RESET_I(2);
     for (int __Vi0 = 0; __Vi0 < 131072; ++__Vi0) {
-        vlSelf->top__DOT__my_data_memory__DOT__my_mem__DOT__data_array[__Vi0] = VL_RAND_RESET_I(8);
+        vlSelf->top__DOT__my_data_memory__DOT__data_array[__Vi0] = VL_RAND_RESET_I(32);
     }
     vlSelf->__VdfgTmp_h2214dd4b__0 = 0;
     vlSelf->__VdfgTmp_h23e32fae__0 = 0;
     vlSelf->__VdfgTmp_h95d868b5__0 = 0;
     vlSelf->__VdfgTmp_hdd528194__0 = 0;
     vlSelf->__VdfgTmp_hbf3bde7e__0 = 0;
-    vlSelf->__VdfgTmp_h88913f45__0 = 0;
     vlSelf->__Vtrigprevexpr___TOP__clk__0 = VL_RAND_RESET_I(1);
     vlSelf->__Vtrigprevexpr___TOP__rst__0 = VL_RAND_RESET_I(1);
     for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
