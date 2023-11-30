@@ -10,8 +10,13 @@ VL_ATTR_COLD void Vtop___024root___initial__TOP__0(Vtop___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
     Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___initial__TOP__0\n"); );
+    // Init
+    VlWide<3>/*95:0*/ __Vtemp_h2553e7c1__0;
     // Body
-    VL_READMEM_N(true, 8, 131072, 0, std::string{"sine.mem"}
+    __Vtemp_h2553e7c1__0[0U] = 0x2e6d656dU;
+    __Vtemp_h2553e7c1__0[1U] = 0x7369616eU;
+    __Vtemp_h2553e7c1__0[2U] = 0x67617573U;
+    VL_READMEM_N(true, 8, 131072, 0, VL_CVT_PACK_STR_NW(3, __Vtemp_h2553e7c1__0)
                  ,  &(vlSelf->top__DOT__my_data_memory__DOT__my_mem__DOT__data_array)
                  , 0x10000U, ~0ULL);
     VL_READMEM_N(true, 8, 4096, 0, std::string{"pdf.hex"}
@@ -89,10 +94,6 @@ VL_ATTR_COLD void Vtop___024root___settle__TOP__0(Vtop___024root* vlSelf) {
         [__Vtableidx1];
     vlSelf->top__DOT__JalSrc = Vtop__ConstPool__TABLE_hf246a450_0
         [__Vtableidx1];
-    vlSelf->top__DOT__my_data_memory__DOT__corrected_WD 
-        = ((IData)(vlSelf->top__DOT__StSrc) ? (0xffU 
-                                               & vlSelf->top__DOT__WriteData)
-            : vlSelf->top__DOT__WriteData);
     vlSelf->top__DOT__my_alu_top__DOT__SrcA = ((IData)(vlSelf->top__DOT__ALUSrcA)
                                                 ? vlSelf->top__DOT__PC
                                                 : vlSelf->top__DOT__RD1);
@@ -288,7 +289,6 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__my_control_unit__DOT__ALUOp = VL_RAND_RESET_I(2);
     vlSelf->top__DOT__my_control_unit__DOT__Branch = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__my_control_unit__DOT__Jump = VL_RAND_RESET_I(1);
-    vlSelf->top__DOT__my_data_memory__DOT__corrected_WD = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__my_data_memory__DOT__read_data_internal = VL_RAND_RESET_I(32);
     for (int __Vi0=0; __Vi0<131072; ++__Vi0) {
         vlSelf->top__DOT__my_data_memory__DOT__my_mem__DOT__data_array[__Vi0] = VL_RAND_RESET_I(8);
