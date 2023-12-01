@@ -32,7 +32,7 @@ int main(int argc, char **argv, char **env){
       top->eval ();
     }
     top->rst = 0;
-    //Guanxi Lu test 2023.11.30
+    
     // Display toggle neopixel
     uint32_t value_32bit = top->a0; // 32-bit value from top->a0
     uint8_t data_out = static_cast<uint8_t>(value_32bit & 0xFF); // Masking to get the lowest 8 bits
