@@ -1,9 +1,0 @@
-    srli t0, a5, 2
-    andi t0, t0, 0x1
-    srli t1, a5, 6
-    andi t1, t1, 0x1
-    xor t0, t0, t1
-    andi t1, a5, 0x3f //0011_1111
-    slli t1, t1, 1
-    add t0, t0, t1
-    jal ra, countdown_random
