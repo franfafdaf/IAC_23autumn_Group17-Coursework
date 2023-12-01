@@ -36,7 +36,7 @@ module top(
     logic [31:0]        ALUResult;
 
 
-pc_top my_pc_top(
+PC my_pc_top(
     .clk(clk),
     .rst(rst),
     .PCSrc(PCSrc),
@@ -48,12 +48,12 @@ pc_top my_pc_top(
 
 );
 
-instr_mem my_instr_mem(
+Instruction my_instr_mem(
     .A(A),
     .RD(Instr)
 );
 
-reg_file my_reg_file(
+RegFile my_reg_file(
     .clk(clk),
     .A1(A1),
     .A2(A2),
@@ -66,7 +66,7 @@ reg_file my_reg_file(
     .trigger(trigger)
 );
 
-alu_top my_alu_top(
+ALU my_alu_top(
     .PC(PC),
     .RD1(RD1),
     .RD2(WriteData),
@@ -79,7 +79,7 @@ alu_top my_alu_top(
     .Zero(Zero)
 );
 
-control_unit my_control_unit(
+ControlUnit my_control_unit(
     .opcode(opcode),
     .funct3(funct3),
     .func75(func75),
@@ -98,7 +98,7 @@ control_unit my_control_unit(
     .JalSrc(JalSrc)
 );
 
-extend my_extend(
+Extend my_extend(
     .ImmSrc(ImmSrc),
     .Imm(Imm),
     .ImmExt(ImmExt)
