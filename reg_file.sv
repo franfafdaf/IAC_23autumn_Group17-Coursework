@@ -8,7 +8,8 @@ module reg_file(
 
     output logic [31:0]     RD1,
     output logic [31:0]     RD2,
-    output logic [31:0]     a0
+    output logic [31:0]     a0, 
+    input logic            trigger
 );
 
 logic [31:0] mem [31:0];
@@ -16,6 +17,7 @@ logic [31:0] mem [31:0];
 assign     RD1 = mem[A1];
 assign     RD2 = mem[A2];
 assign     a0 = mem[10];
+assign     mem[18] = trigger;
 
 // always_comb begin
     // mem[0] = 32'b0;
