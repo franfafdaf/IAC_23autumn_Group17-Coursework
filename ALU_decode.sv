@@ -21,6 +21,7 @@ always_comb begin
     if (ALUOp == 2'b00) begin 
         if (funct3 == 3'b001) ALUControl = 3'b111; //shift to left
         else if (funct3 == 3'b101) ALUControl = 3'b100; //shift to right
+        else if (funct3 == 3'b111) ALUControl = 3'b010; //and
         else ALUControl = 3'b000; //add
     end 
     else if (ALUOp == 2'b01) ALUControl = 3'b001; //sub
