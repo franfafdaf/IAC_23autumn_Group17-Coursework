@@ -11,7 +11,8 @@ VL_INLINE_OPT void Vtop___024root___combo__TOP__0(Vtop___024root* vlSelf) {
     Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___combo__TOP__0\n"); );
     // Body
-    vlSelf->top__DOT__my_reg_file__DOT__mem[5U] = vlSelf->trigger;
+    vlSelf->top__DOT__my_reg_file__DOT__mem[0x12U] 
+        = vlSelf->trigger;
 }
 
 VL_INLINE_OPT void Vtop___024root___sequent__TOP__1(Vtop___024root* vlSelf) {
@@ -127,7 +128,7 @@ extern const VlUnpacked<CData/*1:0*/, 1024> Vtop__ConstPool__TABLE_h4191d61c_0;
 extern const VlUnpacked<CData/*0:0*/, 1024> Vtop__ConstPool__TABLE_h20175f08_0;
 extern const VlUnpacked<CData/*0:0*/, 1024> Vtop__ConstPool__TABLE_h789adb00_0;
 extern const VlUnpacked<CData/*0:0*/, 1024> Vtop__ConstPool__TABLE_hf246a450_0;
-extern const VlUnpacked<CData/*2:0*/, 256> Vtop__ConstPool__TABLE_h9c696dfc_0;
+extern const VlUnpacked<CData/*2:0*/, 256> Vtop__ConstPool__TABLE_hf7f745e5_0;
 
 VL_INLINE_OPT void Vtop___024root___sequent__TOP__2(Vtop___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
@@ -192,7 +193,7 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__2(Vtop___024root* vlSelf) {
                                              & (vlSelf->top__DOT__Instr 
                                                 >> 0xaU)) 
                                             | (IData)(vlSelf->top__DOT__my_control_unit__DOT__ALUOp))));
-    vlSelf->top__DOT__ALUControl = Vtop__ConstPool__TABLE_h9c696dfc_0
+    vlSelf->top__DOT__ALUControl = Vtop__ConstPool__TABLE_hf7f745e5_0
         [__Vtableidx2];
     vlSelf->top__DOT__ImmExt = ((4U & (IData)(vlSelf->top__DOT__ImmSrc))
                                  ? ((2U & (IData)(vlSelf->top__DOT__ImmSrc))
@@ -285,9 +286,8 @@ VL_INLINE_OPT void Vtop___024root___combo__TOP__1(Vtop___024root* vlSelf) {
                                        >> (0x1fU & vlSelf->top__DOT__my_alu_top__DOT__SrcB));
     }
     if ((5U == (IData)(vlSelf->top__DOT__ALUControl))) {
-        vlSelf->top__DOT__ALUResult = ((vlSelf->top__DOT__my_alu_top__DOT__SrcA 
-                                        < vlSelf->top__DOT__my_alu_top__DOT__SrcB)
-                                        ? 1U : 0U);
+        vlSelf->top__DOT__ALUResult = (vlSelf->top__DOT__my_alu_top__DOT__SrcA 
+                                       ^ vlSelf->top__DOT__my_alu_top__DOT__SrcB);
     }
     if ((6U == (IData)(vlSelf->top__DOT__ALUControl))) {
         vlSelf->top__DOT__ALUResult = vlSelf->top__DOT__my_alu_top__DOT__SrcB;

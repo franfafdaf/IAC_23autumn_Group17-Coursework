@@ -44,7 +44,7 @@ always_comb begin
     end
 
     if (ALUControl == 3'b101) begin 
-        ALUResult = (SrcA < SrcB) ? 32'b1 : 32'b0;//SLT
+        ALUResult = SrcA ^ SrcB;//xor
     end
     
     if (ALUControl == 3'b110) begin 
