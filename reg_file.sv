@@ -19,9 +19,6 @@ assign     RD2 = mem[A2];
 assign     a0 = mem[10];
 assign     mem[18] = trigger;
 
-// always_comb begin
-    // mem[0] = 32'b0;
-// end
 
 always_ff @(posedge clk) begin
     mem[0] <= 32'b0;
