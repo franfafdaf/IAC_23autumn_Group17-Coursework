@@ -1,5 +1,6 @@
 module reg_file(
     input logic             clk,
+    input logic             trigger,
     input logic [4:0]       A1,
     input logic [4:0]       A2,
     input logic [4:0]       A3,
@@ -8,8 +9,7 @@ module reg_file(
 
     output logic [31:0]     RD1,
     output logic [31:0]     RD2,
-    output logic [31:0]     a0, 
-    input logic            trigger
+    output logic [31:0]     a0 
 );
 
 logic [31:0] mem [31:0];
