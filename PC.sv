@@ -4,27 +4,30 @@ module pc_top#(
 )(
     input logic                 clk,
     input logic                 rst,
-    input logic                 PCSrc,
-    input logic                 JalSrc,
-    input logic [PC_WIDTH-1:0]  ImmExt,
-    input logic [PC_WIDTH-1:0]  RD1,
-    output logic [PC_WIDTH-1:0] PC_Plus,
-    output logic [PC_WIDTH-1:0] PC
+
+    input logic                 PCSrcE,
+    input logic                 JalSrcE,
+    input logic [PC_WIDTH-1:0]  ImmExtE,
+    input logic [PC_WIDTH-1:0]  PCE,
+    input logic [PC_WIDTH-1:0]  RD1E,
+
+    output logic [PC_WIDTH-1:0] PC_PlusF,
+    output logic [PC_WIDTH-1:0] PCF
 );
 
-    logic [PC_WIDTH-1:0] PC_Target;
+    logic [PC_WIDTH-1:0] PC_TargetE;
     logic [PC_WIDTH-1:0] PC_Jump;
-    logic [PC_WIDTH-1:0] PC_Next;
+    logic [PC_WIDTH-1:0] PCF';
 
 
-    assign  PC_Plus = PC + 4;
-    assign  PC_Jump = PC + ImmExt;
-    assign  PC_Target = JalSrc ? PC_Jump : RD1; 
-    assign  PC_Next = PCSrc ? PC_Target : PC_Plus;
+    assign  PC_PlusF = PCF + 4;
+    assign  PC_Jump = PCE + ImmExtE;
+    assign  PC_TargetE = JalSrcE ? PC_Jump : RD1E; 
+    assign  PCF_Next = PCSrcE ? PC_TargetE : PC_Plus;
 
     always_ff @(posedge clk or posedge rst)begin
-        if (rst) PC <= 0;
-        else PC <= PC_Next;
+        if (rst) PCF <= 0;
+        else PCF <= PCF_Next;
     end
 
 endmodule
