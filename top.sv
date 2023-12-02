@@ -5,35 +5,93 @@ module top(
     output logic [31:0]     a0
 );
 
-    logic               PCSrc;
-    logic [31:0]        PC_Plus; 
-    logic [31:0]        ImmExt; 
-    logic [31:0]        PC; 
+    logic               PCSrcE;
+    logic [31:0]        PC_PlusF; 
+    logic [31:0]        PC_PlusD; 
+    logic [31:0]        PC_PlusE; 
+    logic [31:0]        PC_PlusM; 
+    logic [31:0]        PC_PlusW; 
+    logic [31:0]        ImmExtD;
+    logic [31:0]        ImmExtE; 
+
+    logic [31:0]        PCF; 
+    logic [31:0]        PCD; 
+    logic [31:0]        PCE; 
+
     logic [31:0]        InstrD;
+    
     logic [6:0]         opcode;
     logic [2:0]         funct3;
     logic               func75;
-    logic               Zero;
-    logic [1:0]         ResultSrc;
-    logic               MemWrite;
-    logic               ALUSrcA;
-    logic               ALUSrcB;
-    logic [2:0]         ImmSrc;
-    logic               RegWrite;
-    logic [2:0]         ALUControl;
-    logic               LdSrc;  
-    logic               StSrc;
-    logic               JalSrc;
+    
+    logic               ZeroE;
+    
+    logic [1:0]         ResultSrcD;
+    logic [1:0]         ResultSrcE;
+    logic [1:0]         ResultSrcM;
+    logic [1:0]         ResultSrcW;
+    
+    logic               MemWriteD;
+    logic               MemWriteE;
+    logic               MemWriteM;
+
+    logic               ALUSrcAD;
+    logic               ALUSrcBD;
+    logic               ALUSrcAE;
+    logic               ALUSrcBE;
+
+    logic [2:0]         ImmSrcD;
+    logic [2:0]         ImmSrcE;
+
+    logic               RegWriteD;
+    logic               RegWriteE;
+    logic               RegWriteM;
+    logic               RegWriteW;
+
+    logic [2:0]         ALUControlD;
+    logic [2:0]         ALUControlE;
+    
+    logic               LdSrcD;  
+    logic               StSrcD;
+    logic               JalSrcD;
+    logic               LdSrcE;  
+    logic               StSrcE;
+    logic               JalSrcE;
+    logic               LdSrcM;  
+    logic               StSrcM;
+    logic               JalSrcM;
+
     logic [11:0]        A;
     logic [4:0]         A1;
     logic [4:0]         A2;
     logic [4:0]         A3;
+
+    logic [31:0]        RDi;
+    logic [31:0]        RD;
     logic [31:0]        RD1;
-    logic [31:0]        Result;
-    logic [31:0]        WriteData;
-    logic [31:0]        ReadData;
+    logic [31:0]        RD1E;
+
+    logic [31:0]        RD2;
+    logic [31:0]        RD2E;
+    logic [31:0]        ResultW;
+
+    logic [31:0]        WriteDataE;
+    logic [31:0]        WriteDataM;
+    logic [31:0]        ReadDataW;
     logic [24:0]        Imm;
+
     logic [31:0]        ALUResult;
+    logic [31:0]        ALUResultM;
+    logic [31:0]        ALUResultW;
+    logic               JumpD;
+    logic               JumpE;
+    logic               BranchD;
+    logic               BranchE;
+
+    logic[4:0]          RdD;
+    logic[4:0]          RdE;
+    logic[4:0]          RdM;
+    logic[4:0]          RdW;
 
 
 PC my_pc(
@@ -41,7 +99,7 @@ PC my_pc(
     .rst(rst),
     // input
     .PCSrcE(PCSrcE),
-    .JalSrcE(JalSrcE)
+    .JalSrcE(JalSrcE),
     .ImmExtE(ImmExtE),
     .PCE(PCE),
     .RD1E(RD1E),
@@ -53,14 +111,14 @@ PC my_pc(
 
 InstrDuction my_InstrD_mem(
     .A(PCF),
-    .RD(RD)
+    .RDi(RDi)
 );
 
 Stage1 Stage1(
     .clk(clk),
     .rst(rst),
     
-    .RD(RD),
+    .RDi(RDi),
     .PCF(PCF),
     .PC_PlusF(PC_PlusF),
 
@@ -81,6 +139,8 @@ ControlUnit my_control_unit(
     .ALUSrcBD(ALUSrcBD),
     .ImmSrcD(ImmSrcD),
     .RegWriteD(RegWriteD),
+    .JumpD(JumpD),
+    .BranchD(BranchD),
     .LdSrcD(LdSrcD),
     .StSrcD(StSrcD),
     .JalSrcD(JalSrcD)
@@ -95,7 +155,7 @@ RegFile my_reg_file(
     .WE3(RegWriteW),
     .RD1(RD1),
     .RD2(RD2),
-    
+
     .a0(a0), 
     .trigger(trigger)
 );
@@ -141,6 +201,8 @@ Stage2 Stage2(
     .RD1E(RD1E),
     .RD2E(RD2E),
     .RdE(RdE),
+    .ImmExtE(ImmExtE),
+    .PCE(PCE),
     .PC_PlusE(PC_PlusE)
 );
 
@@ -161,7 +223,7 @@ ALU my_alu(
     .ALUSrcAE(ALUSrcAE),
     .ALUSrcBE(ALUSrcBE),
     //outputs
-    .ALUResultE(ALUResultE), 
+    .ALUResult(ALUResult), 
     .ZeroE(ZeroE)
 );
 
@@ -195,18 +257,18 @@ DataMemory my_data_memory(
     .LdSrcM(LdSrcM),
     .A(ALUResultM),
     .WD(WriteDataM),
-    .RD(ReadDataM)
+    .RD(RD)
 );
 
 Stage4 Stage4(
     .clk(clk),
-    .RegWritM(RegWritM),
+    .RegWriteM(RegWriteM),
     .ResultSrcM(ResultSrcM),
     .ALUResultM(ALUResultM),
     .RD(RD),
     .RdM(RdM),
     .PC_PlusM(PC_PlusM),
-    .RegWritW(RegWritW),
+    .RegWriteW(RegWriteW),
     .ResultSrcW(ResultSrcW),
     .ALUResultW(ALUResultW),
     .ReadDataW(ReadDataW),
@@ -223,7 +285,7 @@ DataMux my_DataMux(
 );
 
 // assignment for Instr_mem
-assign A = PC[11:0];
+assign A = PCF[11:0];
 // assignment for control_unit
 assign opcode = InstrD[6:0];
 assign funct3 = InstrD[14:12];

@@ -1,4 +1,4 @@
-module alu_top(
+module ALU(
     input logic [31:0]      PCE,
     input logic [31:0]      RD1E, 
     input logic [31:0]      RD2E, 
@@ -14,8 +14,8 @@ module alu_top(
 logic [31:0]      SrcA;
 logic [31:0]      SrcB;
 
-assign SrcA = ALUSrcAE ? PC : RD1;
-assign SrcB = ALUSrcBE ? ImmExtE : RD2;
+assign SrcA = ALUSrcAE ? PCE : RD1E;
+assign SrcB = ALUSrcBE ? ImmExtE : RD2E;
 
 
 always_comb begin

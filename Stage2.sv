@@ -45,7 +45,10 @@ module Stage2#(
     output logic[DATA_WIDTH-1:0]     RD2E,
     //rd
     output logic[4:0]                RdE,
+    // extend output
+    output logic[DATA_WIDTH-1:0]     ImmExtE,
     //PC output
+    output logic[DATA_WIDTH-1:0]     PCE,
     output logic[DATA_WIDTH-1:0]     PC_PlusE
 
 );
@@ -54,7 +57,7 @@ always_ff @(posedge clk) begin
     //control
     RegWriteE <= RegWriteD;
     ResultSrcE <= ResultSrcD;
-    MemWriteD <= MemWriteD;
+    MemWriteE <= MemWriteD;
     JumpE <= JumpD;
     BranchE <= BranchD;
     ALUControlE <= ALUControlD;
