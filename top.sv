@@ -9,7 +9,7 @@ module top(
     logic [31:0]        PC_Plus; 
     logic [31:0]        ImmExt; 
     logic [31:0]        PC; 
-    logic [31:0]        Instr;
+    logic [31:0]        InstrD;
     logic [6:0]         opcode;
     logic [2:0]         funct3;
     logic               func75;
@@ -51,7 +51,7 @@ PC my_pc_top(
 
 );
 
-Instruction my_instr_mem(
+InstrDuction my_InstrD_mem(
     .A(PCF),
     .RD(RD)
 );
@@ -64,7 +64,7 @@ Stage1 Stage1(
     .PCF(PCF),
     .PC_PlusF(PC_PlusF),
 
-    .InstrD(InstrD),
+    .InstrDD(InstrDD),
     .PCD(PCD),
     .PC_PlusD(PC_PlusD)
 );
@@ -145,17 +145,18 @@ DataMux my_DataMux(
     .Result(Result)
 );
 
-// assignment for instr_mem
+// assignment for InstrD_mem
 assign A = PC[11:0];
 // assignment for control_unit
-assign opcode = Instr[6:0];
-assign funct3 = Instr[14:12];
-assign func75 = Instr[30];
+assign opcode = InstrD[6:0];
+assign funct3 = InstrD[14:12];
+assign func75 = InstrD[30];
 // assignment for reg_file
-assign A1 = Instr[19:15];
-assign A2 = Instr[24:20];
-assign A3 = Instr[11:7];
+assign A1 = InstrD[19:15];
+assign A2 = InstrD[24:20];
+assign A3 = InstrD[11:7];
 // assignment for extend
-assign Imm = Instr[31:7];
+assign Imm = InstrD[31:7];
+assign RdD =InstrD[11:7];
 
 endmodule

@@ -7,6 +7,8 @@ module Stage3#(
     input logic                        RegWriteE,
     input logic[1:0]                   ResultSrcE,
     input logic                        MemWriteE,
+    input  logic                       StSrcE,       
+    input  logic                       LdSrcE,
     // ALU input
     input logic[DATA_WIDTH-1:0]        ALUResult,
     //regfile input
@@ -20,6 +22,8 @@ module Stage3#(
     output logic                        RegWriteM,
     output logic[1:0]                   ResultSrcM,
     output logic                        MemWriteM,
+    output  logic                        StSrcM, 
+    output  logic                        LdSrcM,
     // ALU output
     output logic[DATA_WIDTH-1:0]        ALUResultM,
     //regfile output
