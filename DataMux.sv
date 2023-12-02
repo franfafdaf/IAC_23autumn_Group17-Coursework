@@ -1,18 +1,17 @@
-// <<<<<<< HEAD
 module DataMux (
-    input logic [1:0]   ResultSrc, // 2-bit selector
-    input logic [31:0]  ALUResult, // ALU result
-    input logic [31:0]  RD,        // Data memory read data
-    input logic [31:0]  PCPlus,    // PC + 4
-    output logic [31:0] Result    // Output result
+    input logic [1:0]   ResultWSrcW, // 2-bit selector
+    input logic [31:0]  ALUResultWW, // ALU ResultW
+    input logic [31:0]  ReadDataW,        // Data memory read data
+    input logic [31:0]  PCPlusW,    // PC + 4
+    output logic [31:0] ResultW    // Output ResultW
 );
 
     always_comb begin
-        case (ResultSrc)
-            2'b00: Result = ALUResult; 
-            2'b01: Result = RD;        
-            2'b10: Result = PCPlus;     
-            default: Result = 32'b0;   
+        case (ResultWSrcW)
+            2'b00: ResultW = ALUResultWW; 
+            2'b01: ResultW = ReadDataW;        
+            2'b10: ResultW = PCPlusW;     
+            default: ResultW = 32'b0;   
         endcase
     end
 endmodule
