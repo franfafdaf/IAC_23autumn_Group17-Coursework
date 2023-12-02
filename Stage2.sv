@@ -9,10 +9,9 @@ module Stage2#(
     input logic                     MemWriteD,
     input logic                     JumpD,
     input logic                     BranchD,
-    input logic                     ALUControlD,
+    input logic [2:0]                    ALUControlD,
     input logic                     ALUSrcAD,
     input logic                     ALUSrcBD,
-    input logic [2:0]               ImmSrcD, 
     input logic                     LdSrcD, 
     input logic                     StSrcD, 
     input logic                     JalSrcD,
@@ -33,10 +32,9 @@ module Stage2#(
     output logic                    MemWriteE,
     output logic                    JumpE,
     output logic                    BranchE,
-    output logic                    ALUControlE,
+    output logic [2:0]                   ALUControlE,
     output logic                    ALUSrcAE,
     output logic                    ALUSrcBE,
-    output logic [2:0]              ImmSrcE, 
     output logic                    LdSrcE, 
     output logic                    StSrcE, 
     output logic                    JalSrcE,
@@ -63,7 +61,6 @@ always_ff @(posedge clk) begin
     ALUControlE <= ALUControlD;
     ALUSrcAE <= ALUSrcAD;
     ALUSrcBE <= ALUSrcBD;
-    ImmSrcE <= ImmSrcD;
     LdSrcE <= LdSrcD;
     StSrcE <= StSrcD;
     JalSrcE <= JalSrcD;

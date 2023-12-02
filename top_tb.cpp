@@ -38,7 +38,7 @@ int main(int argc, char **argv, char **env){
     // uint8_t data_out = static_cast<uint8_t>(value_32bit & 0xFF); // Masking to get the lowest 8 bits
 
     // set up input signals of testbench
-    top->trigger = vbdFlag();
+    // top->trigger = vbdFlag();
     vbdCycle(simcyc);
     
 

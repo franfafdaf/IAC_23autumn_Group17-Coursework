@@ -1,7 +1,7 @@
 //This module is managed by Guanxi Lu
 //Instruction memory is from 0xBFC00000 to 0xBFC00FFF
 
-module instr_mem#(
+module Instruction#(
     parameter A_length = 12, // Address width is 12 bits
     parameter D_length = 8   // Data width is 8 bits = 2 bytes
 )(

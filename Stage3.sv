@@ -40,6 +40,8 @@ always_ff @(posedge clk) begin
     RegWriteM <= RegWriteE;
     ResultSrcM <= ResultSrcE;
     MemWriteM <= MemWriteE;
+    StSrcM <= StSrcE;
+    LdSrcM <= LdSrcE;
     //alu
     ALUResultM <= ALUResult;
     //regfile

@@ -1,6 +1,6 @@
 module top(
     input logic             clk, 
-    input logic             trigger, 
+    // input logic             trigger, 
     input logic             rst, 
     output logic [31:0]     a0
 );
@@ -41,7 +41,6 @@ module top(
     logic               ALUSrcBE;
 
     logic [2:0]         ImmSrcD;
-    logic [2:0]         ImmSrcE;
 
     logic               RegWriteD;
     logic               RegWriteE;
@@ -59,12 +58,10 @@ module top(
     logic               JalSrcE;
     logic               LdSrcM;  
     logic               StSrcM;
-    logic               JalSrcM;
 
     logic [11:0]        A;
     logic [4:0]         A1;
     logic [4:0]         A2;
-    logic [4:0]         A3;
 
     logic [31:0]        RDi;
     logic [31:0]        RD;
@@ -75,7 +72,6 @@ module top(
     logic [31:0]        RD2E;
     logic [31:0]        ResultW;
 
-    logic [31:0]        WriteDataE;
     logic [31:0]        WriteDataM;
     logic [31:0]        ReadDataW;
     logic [24:0]        Imm;
@@ -109,8 +105,8 @@ PC my_pc(
 
 );
 
-InstrDuction my_InstrD_mem(
-    .A(PCF),
+Instruction my_InstrD_mem(
+    .A(A),
     .RDi(RDi)
 );
 
@@ -156,8 +152,8 @@ RegFile my_reg_file(
     .RD1(RD1),
     .RD2(RD2),
 
-    .a0(a0), 
-    .trigger(trigger)
+    .a0(a0)
+    // .trigger(trigger)
 );
 
 Extend my_extend(
@@ -176,7 +172,6 @@ Stage2 Stage2(
     .ALUControlD(ALUControlD),
     .ALUSrcAD(ALUSrcAD),
     .ALUSrcBD(ALUSrcBD),
-    .ImmSrcD(ImmSrcD),
     .LdSrcD(LdSrcD),
     .StSrcD(StSrcD),
     .JalSrcD(JalSrcD),
@@ -194,7 +189,6 @@ Stage2 Stage2(
     .ALUControlE(ALUControlE),
     .ALUSrcAE(ALUSrcAE),
     .ALUSrcBE(ALUSrcBE),
-    .ImmSrcE(ImmSrcE),
     .LdSrcE(LdSrcE),
     .StSrcE(StSrcE),
     .JalSrcE(JalSrcE),
@@ -206,12 +200,12 @@ Stage2 Stage2(
     .PC_PlusE(PC_PlusE)
 );
 
-PCSrc_decode PCSrc_decode(
-    .Zero(Zero),
-    .Branch(Branch),
-    .Jump(Jump),
+PCSrcE_decode PCSrcE_decode(
+    .ZeroE(ZeroE),
+    .BranchE(BranchE),
+    .JumpE(JumpE),
     // .funct3(funct3),
-    .PCSrc(PCSrc)
+    .PCSrcE(PCSrcE)
 );
 
 ALU my_alu(
@@ -235,7 +229,7 @@ Stage3 Stage3(
     .StSrcE(StSrcE),
     .LdSrcE(LdSrcE),
     .ALUResult(ALUResult),
-    .WriteDataE(WriteDataE),
+    .WriteDataE(RD2E),
     .RdE(RdE),
     .PC_PlusE(PC_PlusE),
 
@@ -293,7 +287,6 @@ assign func75 = InstrD[30];
 // assignment for reg_file
 assign A1 = InstrD[19:15];
 assign A2 = InstrD[24:20];
-assign A3 = InstrD[11:7];
 // assignment for extend
 assign Imm = InstrD[31:7];
 assign RdD =InstrD[11:7];
