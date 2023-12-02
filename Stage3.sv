@@ -39,7 +39,7 @@ always_ff @(posedge clk) begin
     //alu
     ALUResultM <= ALUResult;
     //regfile
-    WriteDataM <= WriteDataE
+    WriteDataM <= WriteDataE;
     //rd
     RdM <= RdE;
     //PC
