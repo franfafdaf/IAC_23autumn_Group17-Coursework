@@ -14,7 +14,7 @@ module MemStage#(
     //rd
     input logic[4:0]                   RdE,
     //PC input
-    input logic[DATA_WIDTH-1:0]        PC_PlusE
+    input logic[DATA_WIDTH-1:0]        PC_PlusE,
 
     // control output 
     output logic                        RegWriteM,
