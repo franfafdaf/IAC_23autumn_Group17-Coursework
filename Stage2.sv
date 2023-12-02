@@ -38,9 +38,9 @@ module Stage2#(
     output logic[DATA_WIDTH-1:0]     RD2E,
     output logic[DATA_WIDTH-1:0]     a0E,
     //rd
-    output logic[4:0]                RdM,
+    output logic[4:0]                RdE,
     //PC output
-    output logic[DATA_WIDTH-1:0]     PC_PlusM
+    output logic[DATA_WIDTH-1:0]     PC_PlusE
 
 );
 
