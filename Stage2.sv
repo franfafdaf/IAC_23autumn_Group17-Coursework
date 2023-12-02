@@ -1,4 +1,4 @@
-module ExecuteStage#(
+module Stage2#(
     parameter DATA_WIDTH = 32
 )(
     input logic                     clk,

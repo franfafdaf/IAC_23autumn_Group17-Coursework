@@ -1,4 +1,4 @@
-module  WriteStage#(
+module  Stage4#(
     parameter DATA_WIDTH = 32
 )(
     input logic                     clk,
