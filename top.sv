@@ -39,18 +39,34 @@ module top(
 PC my_pc_top(
     .clk(clk),
     .rst(rst),
-    .PCSrc(PCSrc),
-    .ImmExt(ImmExt),
-    .PC_Plus(PC_Plus),
-    .PC(PC),
-    .RD1(RD1),
-    .JalSrc(JalSrc)
+    // input
+    .PCSrcE(PCSrcE),
+    .JalSrcE(JalSrcE)
+    .ImmExtE(ImmExtE),
+    .PCE(PCE),
+    .RD1E(RD1E),
+    //output
+    .PC_PlusF(PC_PlusF),
+    .PCF(PCF)
 
 );
 
 Instruction my_instr_mem(
-    .A(A),
-    .RD(Instr)
+    .A(PCF),
+    .RD(RD)
+);
+
+Stage1 Stage1(
+    .clk(clk),
+    .rst(rst),
+    
+    .RD(RD),
+    .PCF(PCF),
+    .PC_PlusF(PC_PlusF),
+
+    .InstrD(InstrD),
+    .PCD(PCD),
+    .PC_PlusD(PC_PlusD)
 );
 
 RegFile my_reg_file(
