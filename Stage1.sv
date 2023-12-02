@@ -2,6 +2,7 @@ module  Stage1#(
     parameter DATA_WIDTH = 32
 )(
     input logic                     clk,
+    input logic                     rst,
 
     //instrmem input
     input logic[DATA_WIDTH-1:0]        RD,
@@ -17,7 +18,7 @@ module  Stage1#(
 
 );
 
-always_ff @(posedge clk) begin
+always_ff @(posedge clk or posedge rst) begin
     //instrmem
     InstrD <= RD;
     //pc
