@@ -26,7 +26,7 @@ module ExecuteStage#(
 
     // control output 
     output logic                    RegWriteE,
-    output logic                    ResultSrcE,
+    output logic[1:0]               ResultSrcE,
     output logic                    MemWriteE,
     output logic                    JumpE,
     output logic                    BranchE,
@@ -38,12 +38,9 @@ module ExecuteStage#(
     output logic[DATA_WIDTH-1:0]     RD2E,
     output logic[DATA_WIDTH-1:0]     a0E,
     //rd
-    output logic[4:0]                RdE,
-    // extend output
-    output logic[DATA_WIDTH-1:0]     ImmExtE,
+    output logic[4:0]                RdM,
     //PC output
-    output logic[DATA_WIDTH-1:0]     PCE,
-    output logic[DATA_WIDTH-1:0]     PC_PlusE
+    output logic[DATA_WIDTH-1:0]     PC_PlusM
 
 );
 
