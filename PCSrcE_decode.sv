@@ -18,6 +18,6 @@ module PCSrcE_decode(
 // //     PCSrc = 0;
 // end
 
-assign PCSrcE = JumpE | (BranchE & ZeroE)
+assign PCSrcE = JumpE | (BranchE & ZeroE);
 
 endmodule
