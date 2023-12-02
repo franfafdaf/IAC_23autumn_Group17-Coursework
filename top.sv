@@ -1,6 +1,6 @@
 module top(
     input logic             clk, 
-    input logic trigger, 
+    input logic             trigger, 
     input logic             rst, 
     output logic [31:0]     a0
 );
