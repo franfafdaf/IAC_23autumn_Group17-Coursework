@@ -36,7 +36,7 @@ module top(
     logic [31:0]        ALUResult;
 
 
-PC my_pc_top(
+PC my_pc(
     .clk(clk),
     .rst(rst),
     // input
@@ -64,59 +64,84 @@ Stage1 Stage1(
     .PCF(PCF),
     .PC_PlusF(PC_PlusF),
 
-    .InstrDD(InstrDD),
+    .InstrD(InstrD),
     .PCD(PCD),
     .PC_PlusD(PC_PlusD)
-);
-
-RegFile my_reg_file(
-    .clk(clk),
-    .A1(A1),
-    .A2(A2),
-    .A3(A3),
-    .WD3(Result),
-    .WE3(RegWrite),
-    .RD1(RD1),
-    .RD2(WriteData),
-    .a0(a0), 
-    .trigger(trigger)
-);
-
-ALU my_alu_top(
-    .PC(PC),
-    .RD1(RD1),
-    .RD2(WriteData),
-    .ImmExt(ImmExt),
-    .ALUControl(ALUControl),
-    .ALUSrcA(ALUSrcA),
-    .ALUSrcB(ALUSrcB),
-    //outputs
-    .ALUResult(ALUResult), 
-    .Zero(Zero)
 );
 
 ControlUnit my_control_unit(
     .opcode(opcode),
     .funct3(funct3),
     .func75(func75),
-    .Zero(Zero),
     //outputs
-    .ResultSrc(ResultSrc),
-    .MemWrite(MemWrite),
-    .ALUControl(ALUControl),
-    .ALUSrcA(ALUSrcA),
-    .ALUSrcB(ALUSrcB),
-    .ImmSrc(ImmSrc),
-    .RegWrite(RegWrite),
-    .LdSrc(LdSrc),
-    .StSrc(StSrc),
-    .JalSrc(JalSrc)
+    .ResultSrcD(ResultSrcD),
+    .MemWriteD(MemWriteD),
+    .ALUControlD(ALUControlD),
+    .ALUSrcAD(ALUSrcAD),
+    .ALUSrcBD(ALUSrcBD),
+    .ImmSrcD(ImmSrcD),
+    .RegWriteD(RegWriteD),
+    .LdSrcD(LdSrcD),
+    .StSrcD(StSrcD),
+    .JalSrcD(JalSrcD)
+);
+
+RegFile my_reg_file(
+    .clk(clk),
+    .A1(A1),
+    .A2(A2),
+    .A3(RdW),
+    .WD3(ResultW),
+    .WE3(RegWriteW),
+    .RD1(RD1),
+    .RD2(RD2),
+    
+    .a0(a0), 
+    .trigger(trigger)
 );
 
 Extend my_extend(
     .ImmSrcD(ImmSrcD),
     .Imm(Imm),
     .ImmExtD(ImmExtD)
+);
+
+Stage2 Stage2(
+    .clk(clk),
+    .RegWriteD(RegWriteD),
+    .ResultSrcD(ResultSrcD),
+    .MemWriteD(MemWriteD),
+    .JumpD(JumpD),
+    .BranchD(BranchD),
+    .ALUControlD(ALUControlD),
+    .ALUSrcAD(ALUSrcAD),
+    .ALUSrcBD(ALUSrcBD),
+    .ImmSrcD(ImmSrcD),
+    .LdSrcD(LdSrcD),
+    .StSrcD(StSrcD),
+    .JalSrcD(JalSrcD),
+    .RD1(RD1),
+    .RD2(RD2),
+    .RdD(RdD),
+    .ImmExtD(ImmExtD),
+    .PCD(PCD),
+    .PC_PlusD(PC_PlusD),
+    .RegWriteE(RegWriteE),
+    .ResultSrcE(ResultSrcE),
+    .MemWriteE(MemWriteE),
+    .JumpE(JumpE),
+    .BranchE(BranchE),
+    .ALUControlE(ALUControlE),
+    .ALUSrcAE(ALUSrcAE),
+    .ALUSrcBE(ALUSrcBE),
+    .ImmSrcE(ImmSrcE),
+    .LdSrcE(LdSrcE),
+    .StSrcE(StSrcE),
+    .JalSrcE(JalSrcE),
+    .RD1E(RD1E),
+    .RD2E(RD2E),
+    .RdE(RdE),
+    .PC_PlusE(PC_PlusE)
 );
 
 PCSrc_decode PCSrc_decode(
@@ -127,25 +152,77 @@ PCSrc_decode PCSrc_decode(
     .PCSrc(PCSrc)
 );
 
+ALU my_alu(
+    .PCE(PCE),
+    .RD1E(RD1E),
+    .RD2E(RD2E),
+    .ImmExtE(ImmExtE),
+    .ALUControlE(ALUControlE),
+    .ALUSrcAE(ALUSrcAE),
+    .ALUSrcBE(ALUSrcBE),
+    //outputs
+    .ALUResultE(ALUResultE), 
+    .ZeroE(ZeroE)
+);
+
+Stage3 Stage3(
+    .clk(clk),
+    .RegWriteE(RegWriteE),
+    .ResultSrcE(ResultSrcE),
+    .MemWriteE(MemWriteE),
+    .StSrcE(StSrcE),
+    .LdSrcE(LdSrcE),
+    .ALUResult(ALUResult),
+    .WriteDataE(WriteDataE),
+    .RdE(RdE),
+    .PC_PlusE(PC_PlusE),
+
+    .RegWriteM(RegWriteM),
+    .ResultSrcM(ResultSrcM),
+    .MemWriteM(MemWriteM),
+    .StSrcM(StSrcM),
+    .LdSrcM(LdSrcM),
+    .ALUResultM(ALUResultM),
+    .WriteDataM(WriteDataM),
+    .RdM(RdM),
+    .PC_PlusM(PC_PlusM)
+);
+
 DataMemory my_data_memory(
     .clk(clk),
-    .WE(MemWrite),
-    .StSrc(StSrc),
-    .LdSrc(LdSrc),
-    .A(ALUResult),
-    .WD(WriteData),
-    .RD(ReadData)
+    .WE(MemWriteM),
+    .StSrcM(StSrcM),
+    .LdSrcM(LdSrcM),
+    .A(ALUResultM),
+    .WD(WriteDataM),
+    .RD(ReadDataM)
+);
+
+Stage4 Stage4(
+    .clk(clk),
+    .RegWritM(RegWritM),
+    .ResultSrcM(ResultSrcM),
+    .ALUResultM(ALUResultM),
+    .RD(RD),
+    .RdM(RdM),
+    .PC_PlusM(PC_PlusM),
+    .RegWritW(RegWritW),
+    .ResultSrcW(ResultSrcW),
+    .ALUResultW(ALUResultW),
+    .ReadDataW(ReadDataW),
+    .RdW(RdW),
+    .PC_PlusW(PC_PlusW)
 );
 
 DataMux my_DataMux(
-    .ResultSrc(ResultSrc),
-    .ALUResult(ALUResult),
-    .RD(ReadData),
-    .PCPlus(PC_Plus),
-    .Result(Result)
+    .ResultSrcW(ResultSrcW),
+    .ALUResultW(ALUResultW),
+    .ReadDataW(ReadDataW),
+    .PC_PlusW(PC_PlusW),
+    .ResultW(ResultW)
 );
 
-// assignment for InstrD_mem
+// assignment for Instr_mem
 assign A = PC[11:0];
 // assignment for control_unit
 assign opcode = InstrD[6:0];
