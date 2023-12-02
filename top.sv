@@ -101,7 +101,6 @@ ControlUnit my_control_unit(
     .func75(func75),
     .Zero(Zero),
     //outputs
-    .PCSrc(PCSrc),
     .ResultSrc(ResultSrc),
     .MemWrite(MemWrite),
     .ALUControl(ALUControl),
@@ -115,9 +114,17 @@ ControlUnit my_control_unit(
 );
 
 Extend my_extend(
-    .ImmSrc(ImmSrc),
+    .ImmSrcD(ImmSrcD),
     .Imm(Imm),
-    .ImmExt(ImmExt)
+    .ImmExtD(ImmExtD)
+);
+
+PCSrc_decode PCSrc_decode(
+    .Zero(Zero),
+    .Branch(Branch),
+    .Jump(Jump),
+    // .funct3(funct3),
+    .PCSrc(PCSrc)
 );
 
 DataMemory my_data_memory(
