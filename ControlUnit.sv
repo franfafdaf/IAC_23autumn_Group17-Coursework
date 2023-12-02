@@ -1,13 +1,13 @@
 //This module is managed by Guanxi Lu
 
-module control_unit (
+module ControlUnit (
     input logic [6:0]   opcode,
     input logic [2:0]   funct3,
     input logic         func75,
     //output
     output logic        RegWriteD,
     output logic [1:0]  ResultSrcD,
-    output logic        MemWritDeD,
+    output logic        MemWriteD,
     output logic        JumpD,
     output logic        BranchD,
     output logic [2:0]  ALUControlD,
@@ -33,7 +33,7 @@ always_comb begin
         BranchD = 0; 
         JumpD = 0; 
         ResultSrcD = 2'b00;
-        MemWritDe = 0;
+        MemWriteD = 0;
         ALUSrcAD = 0;
         ALUSrcBD = 0;
         ImmSrcD = 3'b000;
@@ -48,7 +48,7 @@ always_comb begin
         BranchD = 0; 
         JumpD = 0; 
         ResultSrcD = 2'b00;
-        MemWritDe = 0;
+        MemWriteD = 0;
         ALUSrcAD = 0;
         ALUSrcBD = 1;
         ImmSrcD = 3'b000;
@@ -63,7 +63,7 @@ always_comb begin
         BranchD = 0; 
         JumpD = 0; 
         ResultSrcD = 2'b01;
-        MemWritDe = 0;
+        MemWriteD = 0;
         ALUSrcAD = 0;
         ALUSrcBD = 1;
         ImmSrcD = 3'b000;
@@ -78,7 +78,7 @@ always_comb begin
         BranchD = 0; 
         JumpD = 1; 
         ResultSrcD = 2'b10;
-        MemWritDe = 0;
+        MemWriteD = 0;
         ALUSrcAD = 0;
         ALUSrcBD = 1;
         ImmSrcD = 3'b000;
@@ -93,7 +93,7 @@ always_comb begin
         BranchD = 0; 
         JumpD = 0; 
         ResultSrcD = 2'b00;
-        MemWritDe = 1;
+        MemWriteD = 1;
         ALUSrcAD = 0;
         ALUSrcBD = 1;
         ImmSrcD = 3'b001;
@@ -108,7 +108,7 @@ always_comb begin
         BranchD = 1; 
         JumpD = 0; 
         ResultSrcD = 2'b00;
-        MemWritDe = 0;
+        MemWriteD = 0;
         ALUSrcAD = 0;
         ALUSrcBD = 0;
         ImmSrcD = 3'b010;
@@ -123,7 +123,7 @@ always_comb begin
         BranchD = 0; 
         JumpD = 0; 
         ResultSrcD = 2'b00;
-        MemWritDe = 0;
+        MemWriteD = 0;
         ALUSrcAD = 0;
         ALUSrcBD = 1'b1;
         ImmSrcD = 3'b100;
@@ -138,7 +138,7 @@ always_comb begin
         BranchD = 0; 
         JumpD = 0; 
         ResultSrcD = 2'b00;
-        MemWritDe = 0;
+        MemWriteD = 0;
         ALUSrcAD = 1'b1;
         ALUSrcBD = 1'b1;
         ImmSrcD = 3'b100;
@@ -153,7 +153,7 @@ always_comb begin
         BranchD = 0; 
         JumpD = 1; 
         ResultSrcD = 2'b10;
-        MemWritDe = 0;
+        MemWriteD = 0;
         ALUSrcAD = 0;
         ALUSrcBD = 0;
         ImmSrcD = 3'b011;
@@ -168,7 +168,7 @@ always_comb begin
         BranchD = 0; 
         JumpD = 0; 
         ResultSrcD = 2'b00;
-        MemWritDe = 0;
+        MemWriteD = 0;
         ALUSrcAD = 0;
         ALUSrcBD = 0;
         ImmSrcD = 3'b000;

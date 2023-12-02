@@ -5,7 +5,7 @@ module  Stage1#(
     input logic                     rst,
 
     //instrmem input
-    input logic[DATA_WIDTH-1:0]        RD,
+    input logic[DATA_WIDTH-1:0]        RDi,
     //PC input
     input logic[DATA_WIDTH-1:0]        PCF,
     input logic[DATA_WIDTH-1:0]        PC_PlusF,
@@ -20,7 +20,7 @@ module  Stage1#(
 
 always_ff @(posedge clk or posedge rst) begin
     //instrmem
-    InstrD <= RD;
+    InstrD <= RDi;
     //pc
     PCD <= PCF;
     PC_PlusD <= PC_PlusF;

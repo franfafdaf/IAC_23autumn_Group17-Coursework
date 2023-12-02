@@ -4,7 +4,7 @@ module  Stage4#(
     input logic                     clk,
 
     // control input 
-    input logic                        RegWritM,
+    input logic                        RegWriteM,
     input logic[1:0]                   ResultSrcM,
     // ALU input
     input logic[DATA_WIDTH-1:0]        ALUResultM,
@@ -16,14 +16,14 @@ module  Stage4#(
     input logic[DATA_WIDTH-1:0]        PC_PlusM,
 
     // control output
-    output logic                        RegWritW,
+    output logic                        RegWriteW,
     output logic[1:0]                   ResultSrcW,
     // ALU output
     output logic[DATA_WIDTH-1:0]        ALUResultW,
     //datamem output
     output logic[DATA_WIDTH-1:0]        ReadDataW,
     //rd
-    output logic[4:0]                   Rdw,
+    output logic[4:0]                   RdW,
     //PC output
     output logic[DATA_WIDTH-1:0]        PC_PlusW
 

@@ -1,4 +1,4 @@
-module reg_file(
+module RegFile(
     input logic             clk,
     input logic             trigger,
     input logic [4:0]       A1,
