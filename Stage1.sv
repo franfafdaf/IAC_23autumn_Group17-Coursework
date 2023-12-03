@@ -19,12 +19,15 @@ module  Stage1#(
 
 );
 
-always_ff @((posedge clk or posedge rst)&& (en != 1)) begin
-    //instrmem
-    InstrD <= RDi;
-    //pc
-    PCD <= PCF;
-    PC_PlusD <= PC_PlusF;
+always_ff @(posedge clk) begin
+
+    if (en != 1) begin
+        //instrmem
+        InstrD <= RDi;
+        //pc
+        PCD <= PCF;
+        PC_PlusD <= PC_PlusF;
+    end
 end
     
 endmodule
