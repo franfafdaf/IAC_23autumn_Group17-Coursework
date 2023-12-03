@@ -25,6 +25,9 @@ module Stage2#(
     //PC input
     input logic[DATA_WIDTH-1:0]     PCD,
     input logic[DATA_WIDTH-1:0]     PC_PlusD,
+    // forward
+    input logic[4:0]                Rs1D,
+    input logic[4:0]                Rs2D,
 
     // control output 
     output logic                    RegWriteE,
@@ -48,6 +51,10 @@ module Stage2#(
     //PC output
     output logic[DATA_WIDTH-1:0]     PCE,
     output logic[DATA_WIDTH-1:0]     PC_PlusE
+
+    //output
+    output logic[4:0]                Rs1E,
+    output logic[4:0]                Rs2E,
 
 );
 
@@ -74,6 +81,10 @@ always_ff @(posedge clk) begin
     //PC
     PCE <= PCD;
     PC_PlusE <= PC_PlusD;
+    //forward
+    Rs1E <= Rs1D;
+    Rs2E <= Rs2D;
+
 end
     
 endmodule

@@ -223,23 +223,23 @@ void Vtop___024root__trace_chg_sub_0(Vtop___024root* vlSelf, VerilatedVcd::Buffe
         bufp->chgCData(oldp+94,((0x1fU & (vlSelf->top__DOT__InstrD 
                                           >> 0x14U))),5);
         bufp->chgIData(oldp+95,(((vlSelf->top__DOT__my_InstrD_mem__DOT__rom_array
-                                  [(0xfffU & ((IData)(3U) 
-                                              + vlSelf->top__DOT__PCF))] 
+                                  [(0xfffU & vlSelf->top__DOT__PCF)] 
                                   << 0x18U) | ((vlSelf->top__DOT__my_InstrD_mem__DOT__rom_array
                                                 [(0xfffU 
-                                                  & ((IData)(2U) 
+                                                  & ((IData)(1U) 
                                                      + vlSelf->top__DOT__PCF))] 
                                                 << 0x10U) 
                                                | ((vlSelf->top__DOT__my_InstrD_mem__DOT__rom_array
                                                    [
                                                    (0xfffU 
-                                                    & ((IData)(1U) 
+                                                    & ((IData)(2U) 
                                                        + vlSelf->top__DOT__PCF))] 
                                                    << 8U) 
                                                   | vlSelf->top__DOT__my_InstrD_mem__DOT__rom_array
                                                   [
                                                   (0xfffU 
-                                                   & vlSelf->top__DOT__PCF)])))),32);
+                                                   & ((IData)(3U) 
+                                                      + vlSelf->top__DOT__PCF))])))),32);
         bufp->chgIData(oldp+96,((vlSelf->top__DOT__InstrD 
                                  >> 7U)),25);
         bufp->chgBit(oldp+97,(vlSelf->top__DOT__JumpD));

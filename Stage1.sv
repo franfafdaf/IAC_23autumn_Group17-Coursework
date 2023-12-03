@@ -3,6 +3,7 @@ module  Stage1#(
 )(
     input logic                     clk,
     input logic                     rst,
+    input logic                     en,
 
     //instrmem input
     input logic[DATA_WIDTH-1:0]        RDi,
@@ -18,7 +19,7 @@ module  Stage1#(
 
 );
 
-always_ff @(posedge clk or posedge rst) begin
+always_ff @((posedge clk or posedge rst)&& (en != 1)) begin
     //instrmem
     InstrD <= RDi;
     //pc
