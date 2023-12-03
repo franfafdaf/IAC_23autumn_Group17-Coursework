@@ -21,10 +21,10 @@ void Vtop___024root___eval_triggers__act(Vtop___024root* vlSelf) {
                                       & (~ (IData)(vlSelf->__Vtrigprevexpr___TOP__clk__0))) 
                                      | ((IData)(vlSelf->rst) 
                                         & (~ (IData)(vlSelf->__Vtrigprevexpr___TOP__rst__0)))));
-    vlSelf->__VactTriggered.set(1U, ((~ (IData)(vlSelf->clk)) 
-                                     & (IData)(vlSelf->__Vtrigprevexpr___TOP__clk__0)));
-    vlSelf->__VactTriggered.set(2U, ((IData)(vlSelf->clk) 
+    vlSelf->__VactTriggered.set(1U, ((IData)(vlSelf->clk) 
                                      & (~ (IData)(vlSelf->__Vtrigprevexpr___TOP__clk__0))));
+    vlSelf->__VactTriggered.set(2U, ((~ (IData)(vlSelf->clk)) 
+                                     & (IData)(vlSelf->__Vtrigprevexpr___TOP__clk__0)));
     vlSelf->__Vtrigprevexpr___TOP__clk__0 = vlSelf->clk;
     vlSelf->__Vtrigprevexpr___TOP__rst__0 = vlSelf->rst;
 #ifdef VL_DEBUG

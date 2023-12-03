@@ -7,6 +7,8 @@ module HazardUnit #(
     input logic[4:0]            Rs1E,
     input logic[4:0]            Rs2E,
     input logic[4:0]            RdM,
+    input logic[4:0]            RdW,
+
     input logic                 RegWriteM,
     input logic                 RegWriteW,
 
@@ -20,7 +22,9 @@ module HazardUnit #(
     input logic[4:0]             Rs1D,
     input logic[4:0]             Rs2D,
     input logic[4:0]             RdE,
+    /* verilator lint_off UNUSEDSIGNAL */
     input logic[1:0]             ResultSrcE,
+    /* verilator lint_on UNUSEDSIGNAL */
 
     output logic                 StallF,
     output logic                 StallD,
@@ -35,15 +39,16 @@ module HazardUnit #(
     logic[1:0] ForwardBE;
     //stall
     logic      ResultSrcE0;
-    assign ResultSrcE0 = ResultSrcE[0];
+    assign     ResultSrcE0 = ResultSrcE[0];
+
     //flush
     logic      lwStall;
 
     // forwarding
     always_comb begin
-        if ((Rs1E == RdM) & RegWriteM) & (Rs1E != 0) ForwardAE = 10;// Forward from Memory stage 
-        else if ((Rs1E == RdW) & RegWriteW) & (Rs1E != 0) ForwardAE = 01;// Forward from Writeback stage 
-        else ForwardAE = 00;// No forwarding (use RF output)
+        if (((Rs1E == RdM) & RegWriteM) & (Rs1E != 0)) ForwardAE = 2'b10;// Forward from Memory stage 
+        else if (((Rs1E == RdW) & RegWriteW) & (Rs1E != 0)) ForwardAE = 2'b01;// Forward from Writeback stage 
+        else ForwardAE = 2'b00;// No forwarding (use RF output)
 
         case (ForwardAE)
             2'b00: SrcA0E = RD1E; 
@@ -52,9 +57,9 @@ module HazardUnit #(
             default: SrcA0E = 32'b0;   
         endcase
 
-        if ((Rs2E == RdM) & RegWriteM) & (Rs2E != 0) ForwardBE = 10;// Forward from Memory stage 
-        else if ((Rs2E == RdW) & RegWriteW) & (Rs2E != 0) ForwardBE = 01;// Forward from Writeback stage 
-        else ForwardBE = 00;// No forwarding (use RF output)
+        if (((Rs2E == RdM) & RegWriteM) & (Rs2E != 0)) ForwardBE = 2'b10;// Forward from Memory stage 
+        else if (((Rs2E == RdW) & RegWriteW) & (Rs2E != 0)) ForwardBE = 2'b01;// Forward from Writeback stage 
+        else ForwardBE = 2'b00;// No forwarding (use RF output)
 
         case (ForwardBE)
             2'b00: SrcB0E = RD2E; 

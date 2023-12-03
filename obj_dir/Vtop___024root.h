@@ -18,6 +18,7 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop___024root final : public VerilatedModule
     struct {
         VL_IN8(clk,0,0);
         VL_IN8(rst,0,0);
+        CData/*0:0*/ top__DOT__PCSrcE;
         CData/*0:0*/ top__DOT__ZeroE;
         CData/*1:0*/ top__DOT__ResultSrcD;
         CData/*1:0*/ top__DOT__ResultSrcE;
@@ -51,9 +52,15 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop___024root final : public VerilatedModule
         CData/*4:0*/ top__DOT__RdE;
         CData/*4:0*/ top__DOT__RdM;
         CData/*4:0*/ top__DOT__RdW;
+        CData/*4:0*/ top__DOT__Rs1E;
+        CData/*4:0*/ top__DOT__Rs2E;
+        CData/*0:0*/ top__DOT__StallD;
+        CData/*0:0*/ top__DOT__FlushE;
         CData/*1:0*/ top__DOT__my_control_unit__DOT__ALUOpD;
         CData/*1:0*/ top__DOT__my_control_unit__DOT__ALUDecode;
         CData/*7:0*/ top__DOT__my_data_memory__DOT____VdfgTmp_hac5405b8__0;
+        CData/*1:0*/ top__DOT__my_hazardunit__DOT__ForwardAE;
+        CData/*1:0*/ top__DOT__my_hazardunit__DOT__ForwardBE;
         CData/*0:0*/ __Vtrigprevexpr___TOP__clk__0;
         CData/*0:0*/ __Vtrigprevexpr___TOP__rst__0;
         CData/*0:0*/ __VactContinue;
@@ -70,18 +77,21 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop___024root final : public VerilatedModule
         IData/*31:0*/ top__DOT__InstrD;
         IData/*31:0*/ top__DOT__RD1E;
         IData/*31:0*/ top__DOT__RD2E;
+        IData/*31:0*/ top__DOT__ResultW;
         IData/*31:0*/ top__DOT__WriteDataM;
         IData/*31:0*/ top__DOT__ReadDataW;
+    };
+    struct {
         IData/*31:0*/ top__DOT__ALUResult;
         IData/*31:0*/ top__DOT__ALUResultM;
         IData/*31:0*/ top__DOT__ALUResultW;
+        IData/*31:0*/ top__DOT__SrcA0E;
+        IData/*31:0*/ top__DOT__SrcB0E;
         IData/*31:0*/ top__DOT__my_pc__DOT__PCF_Next;
-        IData/*31:0*/ top__DOT__my_alu__DOT__SrcA;
-        IData/*31:0*/ top__DOT__my_alu__DOT__SrcB;
+        IData/*31:0*/ top__DOT__my_alu__DOT__SrcAE;
+        IData/*31:0*/ top__DOT__my_alu__DOT__SrcBE;
         IData/*31:0*/ __VstlIterCount;
         IData/*31:0*/ __VactIterCount;
-    };
-    struct {
         VlUnpacked<CData/*7:0*/, 4096> top__DOT__my_InstrD_mem__DOT__rom_array;
         VlUnpacked<IData/*31:0*/, 32> top__DOT__my_reg_file__DOT__mem;
         VlUnpacked<CData/*7:0*/, 131072> top__DOT__my_data_memory__DOT__data_array;
