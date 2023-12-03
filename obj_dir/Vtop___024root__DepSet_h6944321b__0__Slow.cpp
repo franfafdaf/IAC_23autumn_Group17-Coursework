@@ -36,7 +36,7 @@ VL_ATTR_COLD void Vtop___024root___eval_initial__TOP(Vtop___024root* vlSelf) {
     // Init
     VlWide<3>/*95:0*/ __Vtemp_1;
     // Body
-    VL_READMEM_N(true, 8, 4096, 0, std::string{"hex.pdf"}
+    VL_READMEM_N(true, 8, 4096, 0, std::string{"pdf.hex"}
                  ,  &(vlSelf->top__DOT__my_InstrD_mem__DOT__rom_array)
                  , 0, ~0ULL);
     __Vtemp_1[0U] = 0x2e6d656dU;
