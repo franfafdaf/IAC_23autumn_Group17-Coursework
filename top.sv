@@ -1,6 +1,5 @@
 module top(
     input logic             clk, 
-    // input logic             trigger, 
     input logic             rst, 
     output logic [31:0]     a0
 );
@@ -88,6 +87,12 @@ module top(
     logic[4:0]          RdE;
     logic[4:0]          RdM;
     logic[4:0]          RdW;
+    //forward
+    logic[4:0]          Rs1D;
+    logic[4:0]          Rs2D;
+    logic[4:0]          Rs1E;
+    logic[4:0]          Rs2E;
+    //
 
 
 PC my_pc(
@@ -197,7 +202,11 @@ Stage2 Stage2(
     .RdE(RdE),
     .ImmExtE(ImmExtE),
     .PCE(PCE),
-    .PC_PlusE(PC_PlusE)
+    .PC_PlusE(PC_PlusE),
+    .Rs1D(Rs1D),
+    .Rs2D(Rs2D),
+    .Rs1E(Rs1E),
+    .Rs2E(Rs2E)
 );
 
 PCSrcE_decode PCSrcE_decode(
@@ -278,6 +287,29 @@ DataMux my_DataMux(
     .ResultW(ResultW)
 );
 
+HazardUnit my_hazardunit(
+    .RD1E(RD1E),
+    .RD2E(RD2E),
+    .Rs1E(Rs1E),
+    .Rs2E(Rs2E),
+    .RdM(RdM),
+    .RegWriteM(RegWriteM),
+    .RegWriteW(RegWriteW),
+    .ResultW(ResultW),
+    .ALUResultM(ALUResultM),
+    .SrcA0E(SrcA0E),
+    .SrcB0E(SrcB0E),
+    .Rs1D(Rs1D),
+    .Rs2D(Rs2D),
+    .RdE(RdE),
+    .ResultSrcE(ResultSrcE),
+    .StallF(StallF),
+    .StallD(StallD),
+    .FlushE(FlushE),
+    .PCSrcE(PCSrcE),
+    .FlushD(FlushD)
+);
+
 // assignment for Instr_mem
 assign A = PCF[11:0];
 // assignment for control_unit
@@ -290,5 +322,10 @@ assign A2 = InstrD[24:20];
 // assignment for extend
 assign Imm = InstrD[31:7];
 assign RdD =InstrD[11:7];
+
+//forward
+assign Rs1D = InstrD[19:15];
+assign Rs2D = InstrD[24:20];
+
 
 endmodule

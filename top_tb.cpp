@@ -18,7 +18,7 @@ int main(int argc, char **argv, char **env){
   tfp->open ("top.vcd");
  
   if (vbdOpen()!=1) return(-1);
-  vbdHeader("F1 light");
+  vbdHeader("Pipelined");
 
   top->clk = 1;
   top->rst = 0;
@@ -39,7 +39,7 @@ int main(int argc, char **argv, char **env){
 
     // set up input signals of testbench
     // top->trigger = vbdFlag();
-    vbdCycle(simcyc);
+    
     
 
     // vbdBar(top->a0 && 0xFF);
@@ -55,12 +55,13 @@ int main(int argc, char **argv, char **env){
     // plot ROM output and print cycle count
     if (plot >= 1) {
        vbdPlot(int(top->a0), 0, 255);
-       vbdCycle(simcyc+1);
+       vbdCycle(simcyc);
        plot += 1;
     }
     if (plot > 960) {
       break;
     }
+ 
 
     // either simulation finished, or 'q' is pressed
     if ((Verilated::gotFinish()) || (vbdGetkey()=='q')) 
