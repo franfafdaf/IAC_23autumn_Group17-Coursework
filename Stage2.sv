@@ -51,11 +51,11 @@ module Stage2#(
     output logic[DATA_WIDTH-1:0]     ImmExtE,
     //PC output
     output logic[DATA_WIDTH-1:0]     PCE,
-    output logic[DATA_WIDTH-1:0]     PC_PlusE
+    output logic[DATA_WIDTH-1:0]     PC_PlusE,
 
     //output
     output logic[4:0]                Rs1E,
-    output logic[4:0]                Rs2E,
+    output logic[4:0]                Rs2E
 
 );
 

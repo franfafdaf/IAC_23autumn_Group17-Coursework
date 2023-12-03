@@ -98,6 +98,9 @@ module top(
     //flush
     logic               FlushE;
     logic               FlushD;
+    logic[31:0]          SrcA0E;
+    logic[31:0]          SrcB0E;
+    
 
 
 PC my_pc(
@@ -226,8 +229,8 @@ PCSrcE_decode PCSrcE_decode(
 
 ALU my_alu(
     .PCE(PCE),
-    .RD1E(RD1E),
-    .RD2E(RD2E),
+    .SrcA0E(SrcA0E),
+    .SrcB0E(SrcB0E),
     .ImmExtE(ImmExtE),
     .ALUControlE(ALUControlE),
     .ALUSrcAE(ALUSrcAE),
@@ -301,6 +304,7 @@ HazardUnit my_hazardunit(
     .Rs1E(Rs1E),
     .Rs2E(Rs2E),
     .RdM(RdM),
+    .RdW(RdW),
     .RegWriteM(RegWriteM),
     .RegWriteW(RegWriteW),
     .ResultW(ResultW),
