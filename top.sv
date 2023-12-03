@@ -92,7 +92,12 @@ module top(
     logic[4:0]          Rs2D;
     logic[4:0]          Rs1E;
     logic[4:0]          Rs2E;
-    //
+    // stall
+    logic               StallD;
+    logic               StallF;
+    //flush
+    logic               FlushE;
+    logic               FlushD;
 
 
 PC my_pc(
@@ -117,7 +122,7 @@ Instruction my_InstrD_mem(
 
 Stage1 Stage1(
     .clk(clk),
-    .rst(rst),
+    .en(StallF),
     
     .RDi(RDi),
     .PCF(PCF),
@@ -169,6 +174,8 @@ Extend my_extend(
 
 Stage2 Stage2(
     .clk(clk),
+    .en(StallD),
+    .clr(FlushD),
     .RegWriteD(RegWriteD),
     .ResultSrcD(ResultSrcD),
     .MemWriteD(MemWriteD),
@@ -232,6 +239,7 @@ ALU my_alu(
 
 Stage3 Stage3(
     .clk(clk),
+    .clr(FlushE),
     .RegWriteE(RegWriteE),
     .ResultSrcE(ResultSrcE),
     .MemWriteE(MemWriteE),

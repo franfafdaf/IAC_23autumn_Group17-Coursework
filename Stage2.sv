@@ -2,7 +2,8 @@ module Stage2#(
     parameter DATA_WIDTH = 32
 )(
     input logic                     clk,
-
+    input logic                     en,
+    input logic                     clr,
     // control input
     input logic                     RegWriteD,
     input logic[1:0]                ResultSrcD,
@@ -59,31 +60,55 @@ module Stage2#(
 );
 
 always_ff @(posedge clk) begin
-    //control
-    RegWriteE <= RegWriteD;
-    ResultSrcE <= ResultSrcD;
-    MemWriteE <= MemWriteD;
-    JumpE <= JumpD;
-    BranchE <= BranchD;
-    ALUControlE <= ALUControlD;
-    ALUSrcAE <= ALUSrcAD;
-    ALUSrcBE <= ALUSrcBD;
-    LdSrcE <= LdSrcD;
-    StSrcE <= StSrcD;
-    JalSrcE <= JalSrcD;
-    //regfile
-    RD1E <= RD1;
-    RD2E<= RD2;
-    //rd
-    RdE <= RdD;
-    //extend
-    ImmExtE <= ImmExtD;
-    //PC
-    PCE <= PCD;
-    PC_PlusE <= PC_PlusD;
-    //forward
-    Rs1E <= Rs1D;
-    Rs2E <= Rs2D;
+    if (clr) begin
+        // Clear all registers when clr is active
+        RegWriteE <= 0;
+        ResultSrcE <= 0;
+        MemWriteE <= 0;
+        JumpE <= 0;
+        BranchE <= 0;
+        ALUControlE <= 0;
+        ALUSrcAE <= 0;
+        ALUSrcBE <= 0;
+        LdSrcE <= 0;
+        StSrcE <= 0;
+        JalSrcE <= 0;
+        RD1E <= 0;
+        RD2E <= 0;
+        RdE <= 0;
+        ImmExtE <= 0;
+        PCE <= 0;
+        PC_PlusE <= 0;
+        Rs1E <= 0;
+        Rs2E <= 0;
+    end 
+    else if(en != 1) begin
+        //control
+        RegWriteE <= RegWriteD;
+        ResultSrcE <= ResultSrcD;
+        MemWriteE <= MemWriteD;
+        JumpE <= JumpD;
+        BranchE <= BranchD;
+        ALUControlE <= ALUControlD;
+        ALUSrcAE <= ALUSrcAD;
+        ALUSrcBE <= ALUSrcBD;
+        LdSrcE <= LdSrcD;
+        StSrcE <= StSrcD;
+        JalSrcE <= JalSrcD;
+        //regfile
+        RD1E <= RD1;
+        RD2E<= RD2;
+        //rd
+        RdE <= RdD;
+        //extend
+        ImmExtE <= ImmExtD;
+        //PC
+        PCE <= PCD;
+        PC_PlusE <= PC_PlusD;
+        //forward
+        Rs1E <= Rs1D;
+        Rs2E <= Rs2D;
+    end
 
 end
     
