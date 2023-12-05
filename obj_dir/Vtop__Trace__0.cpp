@@ -118,14 +118,45 @@ void Vtop___024root__trace_chg_sub_0(Vtop___024root* vlSelf, VerilatedVcd::Buffe
     bufp->chgIData(oldp+70,(((0U == (IData)(vlSelf->top__DOT__ResultSrc))
                               ? vlSelf->top__DOT__ALUResult
                               : ((1U == (IData)(vlSelf->top__DOT__ResultSrc))
-                                  ? vlSelf->top__DOT__my_data_memory__DOT__data_array
-                                 [(0x1ffffU & vlSelf->top__DOT__ALUResult)]
+                                  ? ((IData)(vlSelf->top__DOT__LdSrc)
+                                      ? (IData)(vlSelf->top__DOT__my_data_memory__DOT____VdfgTmp_hac5405b8__0)
+                                      : ((vlSelf->top__DOT__my_data_memory__DOT__data_array
+                                          [(0x1ffffU 
+                                            & ((IData)(3U) 
+                                               + vlSelf->top__DOT__ALUResult))] 
+                                          << 0x18U) 
+                                         | ((vlSelf->top__DOT__my_data_memory__DOT__data_array
+                                             [(0x1ffffU 
+                                               & ((IData)(2U) 
+                                                  + vlSelf->top__DOT__ALUResult))] 
+                                             << 0x10U) 
+                                            | ((vlSelf->top__DOT__my_data_memory__DOT__data_array
+                                                [(0x1ffffU 
+                                                  & ((IData)(1U) 
+                                                     + vlSelf->top__DOT__ALUResult))] 
+                                                << 8U) 
+                                               | (IData)(vlSelf->top__DOT__my_data_memory__DOT____VdfgTmp_hac5405b8__0)))))
                                   : ((2U == (IData)(vlSelf->top__DOT__ResultSrc))
                                       ? ((IData)(4U) 
                                          + vlSelf->top__DOT__PC)
                                       : 0U)))),32);
-    bufp->chgIData(oldp+71,(vlSelf->top__DOT__my_data_memory__DOT__data_array
-                            [(0x1ffffU & vlSelf->top__DOT__ALUResult)]),32);
+    bufp->chgIData(oldp+71,(((IData)(vlSelf->top__DOT__LdSrc)
+                              ? (IData)(vlSelf->top__DOT__my_data_memory__DOT____VdfgTmp_hac5405b8__0)
+                              : ((vlSelf->top__DOT__my_data_memory__DOT__data_array
+                                  [(0x1ffffU & ((IData)(3U) 
+                                                + vlSelf->top__DOT__ALUResult))] 
+                                  << 0x18U) | ((vlSelf->top__DOT__my_data_memory__DOT__data_array
+                                                [(0x1ffffU 
+                                                  & ((IData)(2U) 
+                                                     + vlSelf->top__DOT__ALUResult))] 
+                                                << 0x10U) 
+                                               | ((vlSelf->top__DOT__my_data_memory__DOT__data_array
+                                                   [
+                                                   (0x1ffffU 
+                                                    & ((IData)(1U) 
+                                                       + vlSelf->top__DOT__ALUResult))] 
+                                                   << 8U) 
+                                                  | (IData)(vlSelf->top__DOT__my_data_memory__DOT____VdfgTmp_hac5405b8__0)))))),32);
     bufp->chgIData(oldp+72,(((IData)(vlSelf->top__DOT__JalSrc)
                               ? (vlSelf->top__DOT__ImmExt 
                                  + vlSelf->top__DOT__PC)

@@ -10,7 +10,7 @@ module DataMemory#(
     output logic [DATA_WIDTH-1:0] RD           // Read Data output
 );
 
-    logic [DATA_WIDTH-1:0] data_array [2**17-1 : 0]; 
+    logic [7:0] data_array [2**17-1 : 0]; 
 
     initial $readmemh("noisy.mem", data_array, 17'h10000);
 
