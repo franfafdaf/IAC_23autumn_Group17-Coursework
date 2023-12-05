@@ -53,6 +53,10 @@ module Stage2#(
     output logic[DATA_WIDTH-1:0]     PCE,
     output logic[DATA_WIDTH-1:0]     PC_PlusE,
 
+    //function3
+    input logic[2:0]                funct3,
+    output logic[2:0]               funct3E,
+
     //output
     output logic[4:0]                Rs1E,
     output logic[4:0]                Rs2E
@@ -81,6 +85,7 @@ always_ff @(posedge clk) begin
         PC_PlusE <= 0;
         Rs1E <= 0;
         Rs2E <= 0;
+        funct3E<=0;
     end 
     else if(en != 1) begin
         //control
@@ -108,6 +113,8 @@ always_ff @(posedge clk) begin
         //forward
         Rs1E <= Rs1D;
         Rs2E <= Rs2D;
+
+        funct3E<=funct3;
     end
 
 end

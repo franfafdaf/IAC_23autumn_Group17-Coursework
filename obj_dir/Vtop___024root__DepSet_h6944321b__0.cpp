@@ -171,6 +171,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
     vlSelf->top__DOT__RegWriteM = ((~ (IData)(vlSelf->top__DOT__FlushE)) 
                                    & (IData)(vlSelf->top__DOT__RegWriteE));
     if (vlSelf->top__DOT__PCSrcE) {
+        vlSelf->top__DOT__funct3E = 0U;
         vlSelf->top__DOT__Rs2E = 0U;
         vlSelf->top__DOT__Rs1E = 0U;
         vlSelf->top__DOT__ALUControlE = 0U;
@@ -184,6 +185,8 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
         vlSelf->top__DOT__RegWriteE = 0U;
         vlSelf->top__DOT__RdE = 0U;
     } else if ((1U & (~ (IData)(vlSelf->top__DOT__StallD)))) {
+        vlSelf->top__DOT__funct3E = (7U & (vlSelf->top__DOT__InstrD 
+                                           >> 0xcU));
         vlSelf->top__DOT__Rs2E = (0x1fU & (vlSelf->top__DOT__InstrD 
                                            >> 0x14U));
         vlSelf->top__DOT__Rs1E = (0x1fU & (vlSelf->top__DOT__InstrD 
@@ -274,25 +277,25 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
         vlSelf->top__DOT__PCD = vlSelf->top__DOT__PCF;
         vlSelf->top__DOT__PC_PlusD = ((IData)(4U) + vlSelf->top__DOT__PCF);
         vlSelf->top__DOT__InstrD = ((vlSelf->top__DOT__my_InstrD_mem__DOT__rom_array
-                                     [(0xfffU & vlSelf->top__DOT__PCF)] 
+                                     [(0xfffU & ((IData)(3U) 
+                                                 + vlSelf->top__DOT__PCF))] 
                                      << 0x18U) | ((
                                                    vlSelf->top__DOT__my_InstrD_mem__DOT__rom_array
                                                    [
                                                    (0xfffU 
-                                                    & ((IData)(1U) 
+                                                    & ((IData)(2U) 
                                                        + vlSelf->top__DOT__PCF))] 
                                                    << 0x10U) 
                                                   | ((vlSelf->top__DOT__my_InstrD_mem__DOT__rom_array
                                                       [
                                                       (0xfffU 
-                                                       & ((IData)(2U) 
+                                                       & ((IData)(1U) 
                                                           + vlSelf->top__DOT__PCF))] 
                                                       << 8U) 
                                                      | vlSelf->top__DOT__my_InstrD_mem__DOT__rom_array
                                                      [
                                                      (0xfffU 
-                                                      & ((IData)(3U) 
-                                                         + vlSelf->top__DOT__PCF))])));
+                                                      & vlSelf->top__DOT__PCF)])));
     }
     vlSelf->top__DOT__my_data_memory__DOT____VdfgTmp_hac5405b8__0 
         = vlSelf->top__DOT__my_data_memory__DOT__data_array
@@ -406,7 +409,10 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
         [__Vtableidx1];
     vlSelf->top__DOT__PCSrcE = ((IData)(vlSelf->top__DOT__JumpE) 
                                 | ((IData)(vlSelf->top__DOT__BranchE) 
-                                   & (IData)(vlSelf->top__DOT__ZeroE)));
+                                   & (((IData)(vlSelf->top__DOT__ZeroE) 
+                                       & (0U == (IData)(vlSelf->top__DOT__funct3E))) 
+                                      | ((~ (IData)(vlSelf->top__DOT__ZeroE)) 
+                                         & (1U == (IData)(vlSelf->top__DOT__funct3E))))));
     vlSelf->top__DOT__ImmExtD = ((4U & (IData)(vlSelf->top__DOT__ImmSrcD))
                                   ? ((2U & (IData)(vlSelf->top__DOT__ImmSrcD))
                                       ? 0U : ((1U & (IData)(vlSelf->top__DOT__ImmSrcD))
