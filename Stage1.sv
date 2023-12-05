@@ -27,7 +27,7 @@ always_ff @(posedge clk) begin
         PCD<= 0;
         PC_PlusD <= 0; 
     end
-    else if(en ==1) begin
+    else if(en) begin
         //instr
         InstrD <= InstrD;
         //pc
