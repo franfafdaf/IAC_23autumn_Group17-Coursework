@@ -60,25 +60,25 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__0(Vtop___024root* vlSelf) {
         __Vdly__top__DOT__PC_PlusD = ((IData)(4U) + vlSelf->top__DOT__PCF);
         __Vdly__top__DOT__PCD = vlSelf->top__DOT__PCF;
         __Vdly__top__DOT__InstrD = ((vlSelf->top__DOT__my_InstrD_mem__DOT__rom_array
-                                     [(0xfffU & ((IData)(3U) 
-                                                 + vlSelf->top__DOT__PCF))] 
+                                     [(0xfffU & vlSelf->top__DOT__PCF)] 
                                      << 0x18U) | ((
                                                    vlSelf->top__DOT__my_InstrD_mem__DOT__rom_array
                                                    [
                                                    (0xfffU 
-                                                    & ((IData)(2U) 
+                                                    & ((IData)(1U) 
                                                        + vlSelf->top__DOT__PCF))] 
                                                    << 0x10U) 
                                                   | ((vlSelf->top__DOT__my_InstrD_mem__DOT__rom_array
                                                       [
                                                       (0xfffU 
-                                                       & ((IData)(1U) 
+                                                       & ((IData)(2U) 
                                                           + vlSelf->top__DOT__PCF))] 
                                                       << 8U) 
                                                      | vlSelf->top__DOT__my_InstrD_mem__DOT__rom_array
                                                      [
                                                      (0xfffU 
-                                                      & vlSelf->top__DOT__PCF)])));
+                                                      & ((IData)(3U) 
+                                                         + vlSelf->top__DOT__PCF))])));
     }
     vlSelf->top__DOT__JalSrcE = ((~ (IData)(vlSelf->top__DOT__FlushE)) 
                                  & (IData)(vlSelf->top__DOT__JalSrcD));
