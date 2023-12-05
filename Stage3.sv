@@ -2,7 +2,7 @@ module Stage3#(
     parameter DATA_WIDTH = 32
 )(
     input logic                     clk,
-    input logic                     clr,// flush
+    // input logic                     clr,// flush
 
     // control input 
     input logic                        RegWriteE,
@@ -38,19 +38,19 @@ module Stage3#(
 
 always_ff @(posedge clk) begin
 
-    if (clr) begin
-        // Clear all outputs when clr is high
-        RegWriteM <= 0;
-        ResultSrcM <= 0;
-        MemWriteM <= 0;
-        StSrcM <= 0;
-        LdSrcM <= 0;
-        ALUResultM <= 0;
-        WriteDataM <= 0;
-        RdM <= 0;
-        PC_PlusM <= 0;
-    end 
-    else begin
+    // if (clr) begin
+    //     // Clear all outputs when clr is high
+    //     RegWriteM <= 0;
+    //     ResultSrcM <= 0;
+    //     MemWriteM <= 0;
+    //     StSrcM <= 0;
+    //     LdSrcM <= 0;
+    //     ALUResultM <= 0;
+    //     WriteDataM <= 0;
+    //     RdM <= 0;
+    //     PC_PlusM <= 0;
+    // end 
+    // else begin
         //control
         RegWriteM <= RegWriteE;
         ResultSrcM <= ResultSrcE;
@@ -66,6 +66,6 @@ always_ff @(posedge clk) begin
         //PC
         PC_PlusM <= PC_PlusE;
     end
-end
+// end
     
 endmodule

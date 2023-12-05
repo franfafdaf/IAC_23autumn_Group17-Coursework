@@ -449,6 +449,7 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__my_data_memory__DOT____VdfgTmp_hac5405b8__0 = 0;
     vlSelf->top__DOT__my_hazardunit__DOT__ForwardAE = VL_RAND_RESET_I(2);
     vlSelf->top__DOT__my_hazardunit__DOT__ForwardBE = VL_RAND_RESET_I(2);
+    vlSelf->__Vdly__top__DOT__PCF = VL_RAND_RESET_I(32);
     vlSelf->__Vtrigprevexpr___TOP__clk__0 = VL_RAND_RESET_I(1);
     vlSelf->__Vtrigprevexpr___TOP__rst__0 = VL_RAND_RESET_I(1);
     for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {

@@ -107,6 +107,7 @@ module top(
 PC my_pc(
     .clk(clk),
     .rst(rst),
+    .en(StallF),
     // input
     .PCSrcE(PCSrcE),
     .JalSrcE(JalSrcE),
@@ -126,7 +127,8 @@ Instruction my_InstrD_mem(
 
 Stage1 Stage1(
     .clk(clk),
-    .en(StallF),
+    .en(StallD),
+    .clr(FlushD),
     
     .RDi(RDi),
     .PCF(PCF),
@@ -178,8 +180,8 @@ extend my_extend(
 
 Stage2 Stage2(
     .clk(clk),
-    .en(StallD),
-    .clr(FlushD),
+    .clr(FlushE),
+
     .RegWriteD(RegWriteD),
     .ResultSrcD(ResultSrcD),
     .MemWriteD(MemWriteD),
@@ -245,7 +247,6 @@ ALU my_alu(
 
 Stage3 Stage3(
     .clk(clk),
-    .clr(FlushE),
     .RegWriteE(RegWriteE),
     .ResultSrcE(ResultSrcE),
     .MemWriteE(MemWriteE),

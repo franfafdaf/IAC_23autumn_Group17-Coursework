@@ -4,6 +4,7 @@ module PC#(
 )(
     input logic                 clk,
     input logic                 rst,
+    input logic                 en,
 
     input logic                 PCSrcE,
     input logic                 JalSrcE,
@@ -27,6 +28,9 @@ module PC#(
 
     always_ff @(posedge clk or posedge rst)begin
         if (rst) PCF <= 0;
+        else if (en == 1) begin
+            PCF <=PCF;
+        end
         else PCF <= PCF_Next;
     end
 
