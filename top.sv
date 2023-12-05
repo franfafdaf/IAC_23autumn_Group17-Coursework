@@ -21,6 +21,7 @@ module top(
     
     logic [6:0]         opcode;
     logic [2:0]         funct3;
+    logic [2:0]         funct3E;
     logic               func75;
     
     logic               ZeroE;
@@ -169,7 +170,7 @@ RegFile my_reg_file(
     // .trigger(trigger)
 );
 
-Extend my_extend(
+extend my_extend(
     .ImmSrcD(ImmSrcD),
     .Imm(Imm),
     .ImmExtD(ImmExtD)
@@ -216,14 +217,16 @@ Stage2 Stage2(
     .Rs1D(Rs1D),
     .Rs2D(Rs2D),
     .Rs1E(Rs1E),
-    .Rs2E(Rs2E)
+    .Rs2E(Rs2E),
+    .funct3(funct3),
+    .funct3E(funct3E)
 );
 
 PCSrcE_decode PCSrcE_decode(
     .ZeroE(ZeroE),
     .BranchE(BranchE),
     .JumpE(JumpE),
-    // .funct3(funct3),
+    .funct3E(funct3E),
     .PCSrcE(PCSrcE)
 );
 

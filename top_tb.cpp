@@ -32,15 +32,15 @@ int main(int argc, char **argv, char **env){
       top->eval ();
     }
 
-    // if (plot == 0 && top->a0 != 0) {
-    //    plot = 1;
-    // }
+    if (plot == 0 && top->a0 != 0) {
+       plot = 1;
+    }
     // plot ROM output and print cycle count
-    // if (plot >= 1) {
+    if (plot >= 1) {
        vbdPlot(int(top->a0), 0, 255);
        vbdCycle(simcyc);
-    //    plot += 1;
-    // }
+       plot += 1;
+    }
     // if (plot > 960) {
     //   break;
     // }
