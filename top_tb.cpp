@@ -21,8 +21,10 @@ int main(int argc, char **argv, char **env){
   vbdHeader("F1 light");
 
   top->clk = 1;
-  top->rst = 0;
-  // int plot =0;
+  top->rst = 1;
+  top->trigger = 0;
+
+  int plot =0;
 
   for (simcyc=0; simcyc<MAX_SIM_CYC; simcyc++) {
     // dump variables into VCD file and toggle clock
@@ -31,34 +33,34 @@ int main(int argc, char **argv, char **env){
       top->clk = !top->clk;
       top->eval ();
     }
+
     top->rst = 0;
-    //Guanxi Lu test 2023.11.30
-    // Display toggle neopixel
-    uint32_t value_32bit = top->a0; // 32-bit value from top->a0
-    uint8_t data_out = static_cast<uint8_t>(value_32bit & 0xFF); // Masking to get the lowest 8 bits
+
+
+    /////////////////////////////////////////////////////
+    //////////////////  FOR F!  /////////////////////////
+    /////////////////////////////////////////////////////
+    uint32_t value_32bit = top->a0;                               // Display F1 Light, toggle neopixel
+    uint8_t data_out = static_cast<uint8_t>(value_32bit & 0xFF);  // Masking to get the lowest 8 bits
     vbdBar(data_out & 0xFF);
-    // set up input signals of testbench
-    top->trigger = vbdFlag();
+
+    top->trigger = vbdFlag();                                     // set up input signals of testbench
     vbdCycle(simcyc);
-    
-    // vbdBar(top->a0 && 0xFF);
-    // top->trigger = vbdFlag();
+  
 
-    // vbdHex(4, (int(top->a0) >> 16)& 0xF);
-    // vbdHex(3, (int(top->a0) >> 8)& 0xF);
-    // vbdHex(2, (int(top->a0) >> 4)& 0xF);
-    // vbdHex(1, int(top->a0)& 0xF);
-
-
-    // if (plot == 0 && top->a0 != 0) {
+    /////////////////////////////////////////////////////
+    ///////////////  FOR REFERENCE  /////////////////////
+    /////////////////////////////////////////////////////
+    // if (plot == 0 && top->a0 != 0) {       // reference test
     //    plot = 1;
     // }
-    // // plot ROM output and print cycle count
-    // if (plot >= 1) {
+    
+    // if (plot >= 1) {                       // plot ROM output and print cycle count
     //    vbdPlot(int(top->a0), 0, 255);
-    //    vbdCycle(simcyc+1);
+    //    vbdCycle(simcyc);
     //    plot += 1;
     // }
+
     // if (plot > 960) {
     //   break;
     // }

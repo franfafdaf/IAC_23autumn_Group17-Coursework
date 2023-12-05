@@ -22,7 +22,7 @@ module pc_top#(
     assign  PC_Next = PCSrc ? PC_Target : PC_Plus;
 
     always_ff @(posedge clk or posedge rst)begin
-        if (rst) PC <= 0;
+        if (rst) PC <= 32'hBFC00000;
         else PC <= PC_Next;
     end
 

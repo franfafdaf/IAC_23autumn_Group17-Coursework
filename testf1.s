@@ -2,7 +2,7 @@ init:
     addi s1, zero, 0x1  /* assigning required values */
     addi s2, zero, 0xff 
     addi s3, zero, 0x3  /* determines delay between lights */
-    addi a3, zero, 0x7f
+    addi a3, zero, 0x1
 
 rst:
     addi a0, zero, 0x0 /* reset all */

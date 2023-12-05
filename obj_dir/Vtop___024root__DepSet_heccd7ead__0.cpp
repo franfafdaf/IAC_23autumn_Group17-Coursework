@@ -11,7 +11,7 @@ VL_INLINE_OPT void Vtop___024root___combo__TOP__0(Vtop___024root* vlSelf) {
     Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___combo__TOP__0\n"); );
     // Body
-    vlSelf->top__DOT__my_reg_file__DOT__mem[0x12U] 
+    vlSelf->top__DOT__my_reg_file__DOT__register[5U] 
         = vlSelf->trigger;
 }
 
@@ -20,9 +20,9 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__1(Vtop___024root* vlSelf) {
     Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___sequent__TOP__1\n"); );
     // Init
-    CData/*4:0*/ __Vdlyvdim0__top__DOT__my_reg_file__DOT__mem__v1;
-    IData/*31:0*/ __Vdlyvval__top__DOT__my_reg_file__DOT__mem__v1;
-    CData/*0:0*/ __Vdlyvset__top__DOT__my_reg_file__DOT__mem__v1;
+    CData/*4:0*/ __Vdlyvdim0__top__DOT__my_reg_file__DOT__register__v0;
+    IData/*31:0*/ __Vdlyvval__top__DOT__my_reg_file__DOT__register__v0;
+    CData/*0:0*/ __Vdlyvset__top__DOT__my_reg_file__DOT__register__v0;
     IData/*16:0*/ __Vdlyvdim0__top__DOT__my_data_memory__DOT__data_array__v0;
     IData/*31:0*/ __Vdlyvval__top__DOT__my_data_memory__DOT__data_array__v0;
     CData/*0:0*/ __Vdlyvset__top__DOT__my_data_memory__DOT__data_array__v0;
@@ -38,7 +38,7 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__1(Vtop___024root* vlSelf) {
     // Body
     __Vdlyvset__top__DOT__my_data_memory__DOT__data_array__v0 = 0U;
     __Vdlyvset__top__DOT__my_data_memory__DOT__data_array__v4 = 0U;
-    __Vdlyvset__top__DOT__my_reg_file__DOT__mem__v1 = 0U;
+    __Vdlyvset__top__DOT__my_reg_file__DOT__register__v0 = 0U;
     if (((IData)(vlSelf->top__DOT__MemWrite) & (~ (IData)(vlSelf->top__DOT__StSrc)))) {
         __Vdlyvval__top__DOT__my_data_memory__DOT__data_array__v0 
             = (0xffU & vlSelf->top__DOT__WriteData);
@@ -67,8 +67,12 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__1(Vtop___024root* vlSelf) {
         __Vdlyvdim0__top__DOT__my_data_memory__DOT__data_array__v4 
             = (0x1ffffU & vlSelf->top__DOT__ALUResult);
     }
-    if (vlSelf->top__DOT__RegWrite) {
-        __Vdlyvval__top__DOT__my_reg_file__DOT__mem__v1 
+    if (((IData)(vlSelf->top__DOT__RegWrite) & (0U 
+                                                != 
+                                                (0x1fU 
+                                                 & (vlSelf->top__DOT__Instr 
+                                                    >> 7U))))) {
+        __Vdlyvval__top__DOT__my_reg_file__DOT__register__v0 
             = ((0U == (IData)(vlSelf->top__DOT__ResultSrc))
                 ? vlSelf->top__DOT__ALUResult : ((1U 
                                                   == (IData)(vlSelf->top__DOT__ResultSrc))
@@ -91,8 +95,8 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__1(Vtop___024root* vlSelf) {
                                                   ((IData)(4U) 
                                                    + vlSelf->top__DOT__PC)
                                                    : 0U)));
-        __Vdlyvset__top__DOT__my_reg_file__DOT__mem__v1 = 1U;
-        __Vdlyvdim0__top__DOT__my_reg_file__DOT__mem__v1 
+        __Vdlyvset__top__DOT__my_reg_file__DOT__register__v0 = 1U;
+        __Vdlyvdim0__top__DOT__my_reg_file__DOT__register__v0 
             = (0x1fU & (vlSelf->top__DOT__Instr >> 7U));
     }
     if (__Vdlyvset__top__DOT__my_data_memory__DOT__data_array__v0) {
@@ -109,10 +113,9 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__1(Vtop___024root* vlSelf) {
         vlSelf->top__DOT__my_data_memory__DOT__data_array[__Vdlyvdim0__top__DOT__my_data_memory__DOT__data_array__v4] 
             = __Vdlyvval__top__DOT__my_data_memory__DOT__data_array__v4;
     }
-    vlSelf->top__DOT__my_reg_file__DOT__mem[0U] = 0U;
-    if (__Vdlyvset__top__DOT__my_reg_file__DOT__mem__v1) {
-        vlSelf->top__DOT__my_reg_file__DOT__mem[__Vdlyvdim0__top__DOT__my_reg_file__DOT__mem__v1] 
-            = __Vdlyvval__top__DOT__my_reg_file__DOT__mem__v1;
+    if (__Vdlyvset__top__DOT__my_reg_file__DOT__register__v0) {
+        vlSelf->top__DOT__my_reg_file__DOT__register[__Vdlyvdim0__top__DOT__my_reg_file__DOT__register__v0] 
+            = __Vdlyvval__top__DOT__my_reg_file__DOT__register__v0;
     }
 }
 
@@ -138,7 +141,7 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__2(Vtop___024root* vlSelf) {
     SData/*9:0*/ __Vtableidx1;
     CData/*7:0*/ __Vtableidx2;
     // Body
-    vlSelf->top__DOT__PC = ((IData)(vlSelf->rst) ? 0U
+    vlSelf->top__DOT__PC = ((IData)(vlSelf->rst) ? 0xbfc00000U
                              : vlSelf->top__DOT__my_pc_top__DOT__PC_Next);
     vlSelf->top__DOT__Instr = ((vlSelf->top__DOT__my_instr_mem__DOT__rom_array
                                 [(0xfffU & vlSelf->top__DOT__PC)] 
@@ -252,11 +255,11 @@ VL_INLINE_OPT void Vtop___024root___combo__TOP__1(Vtop___024root* vlSelf) {
     Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___combo__TOP__1\n"); );
     // Body
-    vlSelf->a0 = vlSelf->top__DOT__my_reg_file__DOT__mem
+    vlSelf->a0 = vlSelf->top__DOT__my_reg_file__DOT__register
         [0xaU];
-    vlSelf->top__DOT__WriteData = vlSelf->top__DOT__my_reg_file__DOT__mem
+    vlSelf->top__DOT__WriteData = vlSelf->top__DOT__my_reg_file__DOT__register
         [(0x1fU & (vlSelf->top__DOT__Instr >> 0x14U))];
-    vlSelf->top__DOT__RD1 = vlSelf->top__DOT__my_reg_file__DOT__mem
+    vlSelf->top__DOT__RD1 = vlSelf->top__DOT__my_reg_file__DOT__register
         [(0x1fU & (vlSelf->top__DOT__Instr >> 0xfU))];
     vlSelf->top__DOT__my_alu_top__DOT__SrcB = ((IData)(vlSelf->top__DOT__ALUSrcB)
                                                 ? vlSelf->top__DOT__ImmExt
