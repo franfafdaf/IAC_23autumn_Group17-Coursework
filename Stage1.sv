@@ -3,6 +3,7 @@ module  Stage1#(
 )(
     input logic                     clk,
     input logic                     en,
+    input logic                     clr,
 
     //instrmem input
     input logic[DATA_WIDTH-1:0]        RDi,
@@ -19,13 +20,26 @@ module  Stage1#(
 );
 
 always_ff @(posedge clk) begin
-
-    if (en != 1) begin
-        //instrmem
+    if (clr) begin
+        //instr
+        InstrD <= 0;
+        //pc
+        PCD<= 0;
+        PC_PlusD <= 0; 
+    end
+    else if(en ==1) begin
+        //instr
+        InstrD <= InstrD;
+        //pc
+        PCD<= PCD;
+        PC_PlusD <= PC_PlusD; 
+    end
+    else begin
+        //instr
         InstrD <= RDi;
         //pc
-        PCD <= PCF;
-        PC_PlusD <= PC_PlusF;
+        PCD<= PCF;
+        PC_PlusD <= PC_PlusF; 
     end
 end
     

@@ -2,7 +2,6 @@ module Stage2#(
     parameter DATA_WIDTH = 32
 )(
     input logic                     clk,
-    input logic                     en,
     input logic                     clr,
     // control input
     input logic                     RegWriteD,
@@ -87,7 +86,7 @@ always_ff @(posedge clk) begin
         Rs2E <= 0;
         funct3E<=0;
     end 
-    else if(en != 1) begin
+    else begin
         //control
         RegWriteE <= RegWriteD;
         ResultSrcE <= ResultSrcD;

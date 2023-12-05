@@ -106,6 +106,7 @@ VL_ATTR_COLD void Vtop___024root__trace_init_sub__TOP__0(Vtop___024root* vlSelf,
     tracep->declBus(c+120,"DATA_WIDTH", false,-1, 31,0);
     tracep->declBit(c+114,"clk", false,-1);
     tracep->declBit(c+64,"en", false,-1);
+    tracep->declBit(c+1,"clr", false,-1);
     tracep->declBus(c+113,"RDi", false,-1, 31,0);
     tracep->declBus(c+111,"PCF", false,-1, 31,0);
     tracep->declBus(c+110,"PC_PlusF", false,-1, 31,0);
@@ -116,8 +117,7 @@ VL_ATTR_COLD void Vtop___024root__trace_init_sub__TOP__0(Vtop___024root* vlSelf,
     tracep->pushNamePrefix("Stage2 ");
     tracep->declBus(c+120,"DATA_WIDTH", false,-1, 31,0);
     tracep->declBit(c+114,"clk", false,-1);
-    tracep->declBit(c+64,"en", false,-1);
-    tracep->declBit(c+1,"clr", false,-1);
+    tracep->declBit(c+65,"clr", false,-1);
     tracep->declBit(c+28,"RegWriteD", false,-1);
     tracep->declBus(c+16,"ResultSrcD", false,-1, 1,0);
     tracep->declBit(c+20,"MemWriteD", false,-1);
@@ -162,7 +162,6 @@ VL_ATTR_COLD void Vtop___024root__trace_init_sub__TOP__0(Vtop___024root* vlSelf,
     tracep->pushNamePrefix("Stage3 ");
     tracep->declBus(c+120,"DATA_WIDTH", false,-1, 31,0);
     tracep->declBit(c+114,"clk", false,-1);
-    tracep->declBit(c+65,"clr", false,-1);
     tracep->declBit(c+29,"RegWriteE", false,-1);
     tracep->declBus(c+17,"ResultSrcE", false,-1, 1,0);
     tracep->declBit(c+21,"MemWriteE", false,-1);
@@ -291,6 +290,7 @@ VL_ATTR_COLD void Vtop___024root__trace_init_sub__TOP__0(Vtop___024root* vlSelf,
     tracep->declBus(c+120,"PC_WIDTH", false,-1, 31,0);
     tracep->declBit(c+114,"clk", false,-1);
     tracep->declBit(c+115,"rst", false,-1);
+    tracep->declBit(c+64,"en", false,-1);
     tracep->declBit(c+1,"PCSrcE", false,-1);
     tracep->declBit(c+39,"JalSrcE", false,-1);
     tracep->declBus(c+7,"ImmExtE", false,-1, 31,0);
