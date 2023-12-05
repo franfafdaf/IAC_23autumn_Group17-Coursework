@@ -27,11 +27,15 @@ module PC#(
     assign  PCF_Next = PCSrcE ? PC_TargetE : PC_PlusF;
 
     always_ff @(posedge clk or posedge rst)begin
-        if (rst) PCF <= 0;
-        else if (en == 1) begin
+        if(rst) begin
+             PCF <= 0;
+        end
+        else if (en) begin
             PCF <=PCF;
         end
-        else PCF <= PCF_Next;
+        else begin
+            PCF <= PCF_Next;
+        end
     end
 
 endmodule
