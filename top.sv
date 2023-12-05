@@ -253,7 +253,7 @@ Stage3 Stage3(
     .StSrcE(StSrcE),
     .LdSrcE(LdSrcE),
     .ALUResult(ALUResult),
-    .WriteDataE(RD2E),
+    .WriteDataE(SrcB0E),
     .RdE(RdE),
     .PC_PlusE(PC_PlusE),
 
