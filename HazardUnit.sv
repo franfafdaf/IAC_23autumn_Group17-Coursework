@@ -22,9 +22,7 @@ module HazardUnit #(
     input logic[4:0]             Rs1D,
     input logic[4:0]             Rs2D,
     input logic[4:0]             RdE,
-    /* verilator lint_off UNUSEDSIGNAL */
     input logic[1:0]             ResultSrcE,
-    /* verilator lint_on UNUSEDSIGNAL */
 
     output logic                 StallF,
     output logic                 StallD,
