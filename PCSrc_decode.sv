@@ -1,4 +1,3 @@
-//This module is managed by Guanxi Lu
 module PCSrc_decode(
     input logic         Zero, 
     input logic         Branch,

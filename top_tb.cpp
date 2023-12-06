@@ -18,7 +18,7 @@ int main(int argc, char **argv, char **env){
   tfp->open ("top.vcd");
  
   if (vbdOpen()!=1) return(-1);
-  vbdHeader("SingleCycle");
+  vbdHeader("Reference");
 
   top->clk = 1;
   top->rst = 1;
@@ -41,12 +41,12 @@ int main(int argc, char **argv, char **env){
     // plot ROM output and print cycle count
     if (plot >= 1) {
        vbdPlot(int(top->a0), 0, 255);
-       vbdCycle(simcyc+1);
+       vbdCycle(simcyc);
        plot += 1;
     }
     
     
-    if (plot > 512) {
+    if (plot > 960) {
       break;
     }
     

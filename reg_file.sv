@@ -11,19 +11,13 @@ module reg_file(
     output logic [31:0]     a0
 );
 
-logic [31:0] mem [31:0];
+logic [31:0] register [31:0];
 
-assign     RD1 = mem[A1];
-assign     RD2 = mem[A2];
-assign     a0 = mem[10];
-
-// always_comb begin
-    // mem[0] = 32'b0;
-// end
+assign     RD1 = register[A1];
+assign     RD2 = register[A2];
+assign     a0 = register[10];
 
 always_ff @(posedge clk) begin
-    mem[0] <= 32'b0;
-    if (WE3 == 1'b1)
-        mem[A3] <= WD3;
+    if ((WE3 == 1'b1) && (A3 != 0)) register[A3] <= WD3;
 end
 endmodule
