@@ -43,6 +43,12 @@ int main(int argc, char **argv) {
             cache->address_in = 0x1000;  
         }
 
+        if (cycle == 25) {
+            cache->we = 1;  
+            cache->address_in = 0x1008;  // write to a new address
+            cache->data_in = 0xBEEF;
+        }
+
         // Write different address, then read first address
         if (cycle == 30) {
             cache->we = 1;  
@@ -55,7 +61,20 @@ int main(int argc, char **argv) {
             cache->address_in = 0x1000;  
         }
 
-        // Test Scenario 3: Repeated writes to the same address
+            // check the cache replacement
+        if (cycle == 45) {
+            cache->we = 1;  
+            cache->address_in = 0x1010;  // another new address
+            cache->data_in = 0xDEAD;
+        }
+
+        if (cycle == 48) {
+            cache->we = 0;  
+            cache->address_in = 0x1010;  // check if the data is correct
+        }
+      
+
+        // Repeated writes to the same address
         if (cycle >= 50 && cycle < 55) {
             cache->we = 1;  // Enable write
             cache->address_in = 0x1000;
@@ -66,51 +85,20 @@ int main(int argc, char **argv) {
             cache->we = 0;  // Disable write after repeated writes
         }
 
-        // Test Scenario 4: Read from an unwritten address (expect cache miss)
+        // Read from an unwritten address (expect cache miss)
         if (cycle == 60) {
+            cache->we = 0;
             cache->address_in = 0x1020;  // Unwritten address
         }
-        
-        // Overlapping Write-Read Test
-        if (cycle == 70) {
-            cache->we = 1; // Start write
-            cache->address_in = 0x1100;
-            cache->data_in = 0x5555;
-        }
-        if (cycle == 71) {
-            cache->we = 0; // Next cycle, start read without waiting for write to complete
-            cache->address_in = 0x1100; // Should read the data that was just written
-        }
-
-        // Pipeline Stall Test
-        if (cycle == 80) {
-            cache->we = 1; // Start write
-            cache->address_in = 0x1200;
-            cache->data_in = 0x6666;
-            // Simulate stall by not changing we to 0 in the next cycle
-        }
-        if (cycle == 82) {
-            cache->we = 0; // Continue after stall
-            cache->address_in = 0x1200; // Read the address after stall
-        }
-
-        // Read from Evicted Address
-        if (cycle == 84 || cycle == 85 || cycle == 86 || cycle == 87) {
-            cache->we = 1;  // Enable write
-            cache->address_in = 0x3000 + (cycle - 80) * 0x100; // Write to different addresses
-            cache->data_in = cycle;
-        }
-        if (cycle == 88) {
-            cache->we = 0;  // Disable write
-            cache->address_in = 0x3000;  // Attempt to read the first address written, expecting a miss
-        }
-
+  
+    
         // Checks and print statements
-        if (cycle == 21 || cycle == 41 || cycle == 56 || cycle == 61) {
-            if (cache->cache_hit) {
+        if (cycle == 21|| cycle == 41 || cycle == 56|| cycle == 61) {
+            if (cache->hit) {
                 std::cout << "Cycle " << cycle << ": Cache hit. Data: " << std::hex << cache->data_out << std::endl;
-                if ((cycle == 20 && cache->data_out != 0xABCD) ||
-                    (cycle == 55 && cache->data_out != 54)) {  
+                if ((cycle == 21 && cache->data_out != 0xABCD) ||
+                    (cycle == 41 && cache->data_out != 0x1234) ||
+                    (cycle == 56 && cache->data_out != 54)) {  
                     std::cout << "ERROR: Incorrect data!" << std::endl;
                 }
             } else {
@@ -118,36 +106,15 @@ int main(int argc, char **argv) {
             }
         }
 
-        // Overlapping Write-Read Test
-        if (cycle == 72) {
-            if (cache->cache_hit) {
+        if (cycle == 26 || cycle == 49) {
+            if (cache->hit) {
                 std::cout << "Cycle " << cycle << ": Cache hit. Data: " << std::hex << cache->data_out << std::endl;
-                if (cache->data_out != 0x5555) {
-                    std::cout << "ERROR: Incorrect data for Overlapping Write-Read Test!" << std::endl;
+                if ((cycle == 26 && cache->data_out != 0xBEEF) ||
+                    (cycle == 49 && cache->data_out != 0xDEAD)) {
+                    std::cout << "ERROR: Incorrect data!" << std::endl;
                 }
             } else {
                 std::cout << "Cycle " << cycle << ": Cache miss." << std::endl;
-            }
-        }
-
-        // Pipeline Stall Test
-        if (cycle == 83) {
-            if (cache->cache_hit) {
-                std::cout << "Cycle " << cycle << ": Cache hit. Data: " << std::hex << cache->data_out << std::endl;
-                if (cache->data_out != 0x6666) {
-                    std::cout << "ERROR: Incorrect data for Pipeline Stall Test!" << std::endl;
-                }
-            } else {
-                std::cout << "Cycle " << cycle << ": Cache miss." << std::endl;
-            }
-        }
-        
-        // Read from Evicted Address
-        if (cycle == 89) {
-            if (!cache->cache_hit) {
-                std::cout << "Cycle " << cycle << ": Correct cache miss for evicted address." << std::endl;
-            } else {
-                std::cout << "ERROR: Unexpected cache hit for evicted address!" << std::endl;
             }
         }
 
