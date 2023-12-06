@@ -1,4 +1,4 @@
-module cache #(
+module direct_mapped_cache #(
     parameter SET_WIDTH = 3,  // Index width set to 3 bits
     parameter OFFSET_WIDTH = 2,  // Block offset width set to 2 bits
     parameter TAG_WIDTH = 27,    // Tag width set to 27 bits
