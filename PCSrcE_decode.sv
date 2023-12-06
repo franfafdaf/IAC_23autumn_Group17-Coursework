@@ -1,4 +1,3 @@
-//This module is managed by Guanxi Lu
 module PCSrcE_decode(
     input logic         ZeroE, 
     input logic         BranchE,
@@ -17,7 +16,5 @@ always_comb begin
     else 
         PCSrcE = 0;
 end
-
-// assign PCSrcE = JumpE | (BranchE & ZeroE);
 
 endmodule

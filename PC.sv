@@ -28,7 +28,7 @@ module PC#(
 
     always_ff @(posedge clk or posedge rst)begin
         if(rst) begin
-             PCF <= 0;
+             PCF <= 32'hBFC00000;
         end
         else if (en) begin
             PCF <=PCF;
