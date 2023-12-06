@@ -1,6 +1,7 @@
 module top(
     input logic             clk, 
-    input logic             rst, 
+    input logic             rst,
+    input logic             trigger, 
     output logic [31:0]     a0
 );
 
@@ -168,8 +169,8 @@ RegFile my_reg_file(
     .RD1(RD1),
     .RD2(RD2),
 
-    .a0(a0)
-    // .trigger(trigger)
+    .a0(a0),
+    .trigger(trigger)
 );
 
 extend my_extend(
