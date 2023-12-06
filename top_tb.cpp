@@ -18,7 +18,7 @@ int main(int argc, char **argv, char **env){
   tfp->open ("top.vcd");
  
   if (vbdOpen()!=1) return(-1);
-  vbdHeader("Reference");
+  vbdHeader("SingleCycle Ref");
 
   top->clk = 1;
   top->rst = 1;
