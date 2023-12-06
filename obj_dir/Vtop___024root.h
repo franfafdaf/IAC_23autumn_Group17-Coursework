@@ -7,10 +7,9 @@
 
 #include "verilated.h"
 
-
 class Vtop__Syms;
 
-class alignas(VL_CACHE_LINE_BYTES) Vtop___024root final : public VerilatedModule {
+class Vtop___024root final : public VerilatedModule {
   public:
 
     // DESIGN SPECIFIC STATE
@@ -37,6 +36,7 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop___024root final : public VerilatedModule
         CData/*0:0*/ top__DOT__RegWriteE;
         CData/*0:0*/ top__DOT__RegWriteM;
         CData/*0:0*/ top__DOT__RegWriteW;
+        CData/*2:0*/ top__DOT__ALUControlD;
         CData/*2:0*/ top__DOT__ALUControlE;
         CData/*0:0*/ top__DOT__LdSrcD;
         CData/*0:0*/ top__DOT__StSrcD;
@@ -55,16 +55,13 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop___024root final : public VerilatedModule
         CData/*4:0*/ top__DOT__RdW;
         CData/*4:0*/ top__DOT__Rs1E;
         CData/*4:0*/ top__DOT__Rs2E;
-        CData/*0:0*/ top__DOT__StallD;
         CData/*0:0*/ top__DOT__FlushE;
         CData/*1:0*/ top__DOT__my_control_unit__DOT__ALUOpD;
-        CData/*1:0*/ top__DOT__my_control_unit__DOT__ALUDecode;
-        CData/*7:0*/ top__DOT__my_data_memory__DOT____VdfgTmp_hac5405b8__0;
         CData/*1:0*/ top__DOT__my_hazardunit__DOT__ForwardAE;
         CData/*1:0*/ top__DOT__my_hazardunit__DOT__ForwardBE;
-        CData/*0:0*/ __Vtrigprevexpr___TOP__clk__0;
-        CData/*0:0*/ __Vtrigprevexpr___TOP__rst__0;
-        CData/*0:0*/ __VactContinue;
+        CData/*0:0*/ top__DOT__my_hazardunit__DOT__lwStall;
+        CData/*0:0*/ __Vclklast__TOP__clk;
+        CData/*0:0*/ __Vclklast__TOP__rst;
         VL_IN(trigger,31,0);
         VL_OUT(a0,31,0);
         IData/*31:0*/ top__DOT__PC_PlusD;
@@ -80,10 +77,10 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop___024root final : public VerilatedModule
         IData/*31:0*/ top__DOT__RD1E;
         IData/*31:0*/ top__DOT__RD2E;
         IData/*31:0*/ top__DOT__ResultW;
-    };
-    struct {
         IData/*31:0*/ top__DOT__WriteDataM;
         IData/*31:0*/ top__DOT__ReadDataW;
+    };
+    struct {
         IData/*31:0*/ top__DOT__ALUResult;
         IData/*31:0*/ top__DOT__ALUResultM;
         IData/*31:0*/ top__DOT__ALUResultW;
@@ -92,31 +89,23 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop___024root final : public VerilatedModule
         IData/*31:0*/ top__DOT__my_pc__DOT__PCF_Next;
         IData/*31:0*/ top__DOT__my_alu__DOT__SrcAE;
         IData/*31:0*/ top__DOT__my_alu__DOT__SrcBE;
-        IData/*31:0*/ __Vdly__top__DOT__PCF;
-        IData/*31:0*/ __VstlIterCount;
-        IData/*31:0*/ __VicoIterCount;
-        IData/*31:0*/ __VactIterCount;
         VlUnpacked<CData/*7:0*/, 4096> top__DOT__my_InstrD_mem__DOT__rom_array;
         VlUnpacked<IData/*31:0*/, 32> top__DOT__my_reg_file__DOT__register;
         VlUnpacked<CData/*7:0*/, 131072> top__DOT__my_data_memory__DOT__data_array;
         VlUnpacked<CData/*0:0*/, 5> __Vm_traceActivity;
     };
-    VlTriggerVec<1> __VstlTriggered;
-    VlTriggerVec<1> __VicoTriggered;
-    VlTriggerVec<3> __VactTriggered;
-    VlTriggerVec<3> __VnbaTriggered;
 
     // INTERNAL VARIABLES
     Vtop__Syms* const vlSymsp;
 
     // CONSTRUCTORS
-    Vtop___024root(Vtop__Syms* symsp, const char* v__name);
+    Vtop___024root(Vtop__Syms* symsp, const char* name);
     ~Vtop___024root();
     VL_UNCOPYABLE(Vtop___024root);
 
     // INTERNAL METHODS
     void __Vconfigure(bool first);
-};
+} VL_ATTR_ALIGNED(VL_CACHE_LINE_BYTES);
 
 
 #endif  // guard
