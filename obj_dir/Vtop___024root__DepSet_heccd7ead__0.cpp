@@ -24,16 +24,16 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__1(Vtop___024root* vlSelf) {
     IData/*31:0*/ __Vdlyvval__top__DOT__my_reg_file__DOT__register__v0;
     CData/*0:0*/ __Vdlyvset__top__DOT__my_reg_file__DOT__register__v0;
     IData/*16:0*/ __Vdlyvdim0__top__DOT__my_data_memory__DOT__data_array__v0;
-    IData/*31:0*/ __Vdlyvval__top__DOT__my_data_memory__DOT__data_array__v0;
+    CData/*7:0*/ __Vdlyvval__top__DOT__my_data_memory__DOT__data_array__v0;
     CData/*0:0*/ __Vdlyvset__top__DOT__my_data_memory__DOT__data_array__v0;
     IData/*16:0*/ __Vdlyvdim0__top__DOT__my_data_memory__DOT__data_array__v1;
-    IData/*31:0*/ __Vdlyvval__top__DOT__my_data_memory__DOT__data_array__v1;
+    CData/*7:0*/ __Vdlyvval__top__DOT__my_data_memory__DOT__data_array__v1;
     IData/*16:0*/ __Vdlyvdim0__top__DOT__my_data_memory__DOT__data_array__v2;
-    IData/*31:0*/ __Vdlyvval__top__DOT__my_data_memory__DOT__data_array__v2;
+    CData/*7:0*/ __Vdlyvval__top__DOT__my_data_memory__DOT__data_array__v2;
     IData/*16:0*/ __Vdlyvdim0__top__DOT__my_data_memory__DOT__data_array__v3;
-    IData/*31:0*/ __Vdlyvval__top__DOT__my_data_memory__DOT__data_array__v3;
+    CData/*7:0*/ __Vdlyvval__top__DOT__my_data_memory__DOT__data_array__v3;
     IData/*16:0*/ __Vdlyvdim0__top__DOT__my_data_memory__DOT__data_array__v4;
-    IData/*31:0*/ __Vdlyvval__top__DOT__my_data_memory__DOT__data_array__v4;
+    CData/*7:0*/ __Vdlyvval__top__DOT__my_data_memory__DOT__data_array__v4;
     CData/*0:0*/ __Vdlyvset__top__DOT__my_data_memory__DOT__data_array__v4;
     // Body
     __Vdlyvset__top__DOT__my_data_memory__DOT__data_array__v0 = 0U;
@@ -84,10 +84,28 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__1(Vtop___024root* vlSelf) {
                                                   (0x1ffffU 
                                                    & vlSelf->top__DOT__ALUResult)]
                                                    : 
-                                                  vlSelf->top__DOT__my_data_memory__DOT__data_array
-                                                  [
-                                                  (0x1ffffU 
-                                                   & vlSelf->top__DOT__ALUResult)])
+                                                  ((vlSelf->top__DOT__my_data_memory__DOT__data_array
+                                                    [
+                                                    (0x1ffffU 
+                                                     & ((IData)(3U) 
+                                                        + vlSelf->top__DOT__ALUResult))] 
+                                                    << 0x18U) 
+                                                   | ((vlSelf->top__DOT__my_data_memory__DOT__data_array
+                                                       [
+                                                       (0x1ffffU 
+                                                        & ((IData)(2U) 
+                                                           + vlSelf->top__DOT__ALUResult))] 
+                                                       << 0x10U) 
+                                                      | ((vlSelf->top__DOT__my_data_memory__DOT__data_array
+                                                          [
+                                                          (0x1ffffU 
+                                                           & ((IData)(1U) 
+                                                              + vlSelf->top__DOT__ALUResult))] 
+                                                          << 8U) 
+                                                         | vlSelf->top__DOT__my_data_memory__DOT__data_array
+                                                         [
+                                                         (0x1ffffU 
+                                                          & vlSelf->top__DOT__ALUResult)]))))
                                                   : 
                                                  ((2U 
                                                    == (IData)(vlSelf->top__DOT__ResultSrc))
@@ -354,8 +372,6 @@ void Vtop___024root___eval_debug_assertions(Vtop___024root* vlSelf) {
     // Body
     if (VL_UNLIKELY((vlSelf->clk & 0xfeU))) {
         Verilated::overWidthError("clk");}
-    if (VL_UNLIKELY((vlSelf->trigger & 0xfeU))) {
-        Verilated::overWidthError("trigger");}
     if (VL_UNLIKELY((vlSelf->rst & 0xfeU))) {
         Verilated::overWidthError("rst");}
 }

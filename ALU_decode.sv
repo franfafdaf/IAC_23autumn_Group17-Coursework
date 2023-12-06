@@ -1,9 +1,3 @@
-//This module is managed by Guanxi Lu
-//Need to decode for 
-//R-type: add, sub, and
-//I-type: addi, lw, lbu
-//S-type: sw, sb
-//B-type: beq, bne
 module ALU_decode(
     input logic         op5, 
     input logic [2:0]   funct3, 

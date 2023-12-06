@@ -9,19 +9,10 @@ module reg_file(
     output logic [31:0]     RD1,
     output logic [31:0]     RD2,
     output logic [31:0]     a0, 
-    input logic            trigger
+    input logic  [31:0]     trigger
 );
 
 logic [31:0] register [31:0];
-
-// always_comb begin   begin 
-//     if (A1 == 0) RD1 = 32'b0;
-//     else RD1 = register[A1];
-// end begin 
-//     if (A2 == 0) RD2 = 32'b0;
-//     else RD2 = register[A2];
-// end
-// end
 
 assign     RD1 = register[A1];
 assign     RD2 = register[A2];

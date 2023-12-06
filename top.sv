@@ -1,6 +1,6 @@
 module top(
     input logic             clk, 
-    input logic trigger, 
+    input logic  [31:0]     trigger, 
     input logic             rst, 
     output logic [31:0]     a0
 );
@@ -74,7 +74,7 @@ alu_top my_alu_top(
     .ALUControl(ALUControl),
     .ALUSrcA(ALUSrcA),
     .ALUSrcB(ALUSrcB),
-    //outputs
+    //output signals
     .ALUResult(ALUResult), 
     .Zero(Zero)
 );
@@ -84,7 +84,7 @@ control_unit my_control_unit(
     .funct3(funct3),
     .func75(func75),
     .Zero(Zero),
-    //outputs
+    //output signals
     .PCSrc(PCSrc),
     .ResultSrc(ResultSrc),
     .MemWrite(MemWrite),

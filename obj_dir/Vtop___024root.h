@@ -15,7 +15,6 @@ class Vtop___024root final : public VerilatedModule {
     // DESIGN SPECIFIC STATE
     VL_IN8(clk,0,0);
     VL_IN8(rst,0,0);
-    VL_IN8(trigger,0,0);
     CData/*0:0*/ top__DOT__Zero;
     CData/*1:0*/ top__DOT__ResultSrc;
     CData/*0:0*/ top__DOT__MemWrite;
@@ -32,6 +31,7 @@ class Vtop___024root final : public VerilatedModule {
     CData/*0:0*/ top__DOT__my_control_unit__DOT__Jump;
     CData/*0:0*/ __Vclklast__TOP__clk;
     CData/*0:0*/ __Vclklast__TOP__rst;
+    VL_IN(trigger,31,0);
     VL_OUT(a0,31,0);
     IData/*31:0*/ top__DOT__ImmExt;
     IData/*31:0*/ top__DOT__PC;
@@ -44,7 +44,7 @@ class Vtop___024root final : public VerilatedModule {
     IData/*31:0*/ top__DOT__my_alu_top__DOT__SrcB;
     VlUnpacked<CData/*7:0*/, 4096> top__DOT__my_instr_mem__DOT__rom_array;
     VlUnpacked<IData/*31:0*/, 32> top__DOT__my_reg_file__DOT__register;
-    VlUnpacked<IData/*31:0*/, 131072> top__DOT__my_data_memory__DOT__data_array;
+    VlUnpacked<CData/*7:0*/, 131072> top__DOT__my_data_memory__DOT__data_array;
     VlUnpacked<CData/*0:0*/, 4> __Vm_traceActivity;
 
     // INTERNAL VARIABLES

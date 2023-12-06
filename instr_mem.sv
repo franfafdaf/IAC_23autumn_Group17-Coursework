@@ -1,4 +1,3 @@
-//This module is managed by Guanxi Lu
 //Instruction memory is from 0xBFC00000 to 0xBFC00FFF
 
 module instr_mem#(
