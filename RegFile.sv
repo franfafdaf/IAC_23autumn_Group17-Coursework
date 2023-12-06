@@ -6,20 +6,23 @@ module RegFile(
     input logic [31:0]      WD3,
     input logic             WE3,
 
+    input logic [31:0]      trigger,
+
     output logic [31:0]     RD1,
     output logic [31:0]     RD2,
     output logic [31:0]     a0 
 );
 
-logic [31:0] mem [31:0];
+logic [31:0] register [31:0];
 
-assign     RD1 = mem[A1];
-assign     RD2 = mem[A2];
-assign     a0 = mem[10];
+assign     RD1 = register[A1];
+assign     RD2 = register[A2];
+assign     a0 = register[10];
+assign     tregister[5] = rigger;
 
 always_ff @(negedge clk) begin
-    mem[0] <= 32'b0;
-    if (WE3 == 1'b1)
-        mem[A3] <= WD3;
+    if ((WE3 == 1'b1)&&(A3 != 0)) begin
+        register[A3] <= WD3;
+    end
 end
 endmodule

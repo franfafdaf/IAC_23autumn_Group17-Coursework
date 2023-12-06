@@ -1,4 +1,3 @@
-//This module is managed by Guanxi Lu
 //Instruction memory is from 0xBFC00000 to 0xBFC00FFF
 
 module Instruction#(
@@ -11,10 +10,8 @@ module Instruction#(
 
 logic [D_length-1:0] rom_array [2**A_length-1:0]; // Array size is 4096
 
-initial $readmemh("pdf.hex", rom_array);
-// initial $readmemh("instrmem1.mem", rom_array);
+initial $readmemh("F1.mem", rom_array);
 
-assign RDi = {rom_array[A+3], rom_array[A+2], rom_array[A+1], rom_array[A]};
-// assign RDi = {rom_array[A], rom_array[A+1], rom_array[A+2], rom_array[A+3]};
+assign RDi = {rom_array[A], rom_array[A+1], rom_array[A+2], rom_array[A+3]};
 
 endmodule
