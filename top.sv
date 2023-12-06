@@ -1,7 +1,7 @@
 module top(
     input logic             clk, 
     input logic             rst,
-    input logic             trigger, 
+    input logic[31:0]       trigger, 
     output logic [31:0]     a0
 );
 
