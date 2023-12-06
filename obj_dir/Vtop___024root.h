@@ -65,6 +65,7 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop___024root final : public VerilatedModule
         CData/*0:0*/ __Vtrigprevexpr___TOP__clk__0;
         CData/*0:0*/ __Vtrigprevexpr___TOP__rst__0;
         CData/*0:0*/ __VactContinue;
+        VL_IN(trigger,31,0);
         VL_OUT(a0,31,0);
         IData/*31:0*/ top__DOT__PC_PlusD;
         IData/*31:0*/ top__DOT__PC_PlusE;
@@ -79,9 +80,9 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop___024root final : public VerilatedModule
         IData/*31:0*/ top__DOT__RD1E;
         IData/*31:0*/ top__DOT__RD2E;
         IData/*31:0*/ top__DOT__ResultW;
-        IData/*31:0*/ top__DOT__WriteDataM;
     };
     struct {
+        IData/*31:0*/ top__DOT__WriteDataM;
         IData/*31:0*/ top__DOT__ReadDataW;
         IData/*31:0*/ top__DOT__ALUResult;
         IData/*31:0*/ top__DOT__ALUResultM;
@@ -93,13 +94,15 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop___024root final : public VerilatedModule
         IData/*31:0*/ top__DOT__my_alu__DOT__SrcBE;
         IData/*31:0*/ __Vdly__top__DOT__PCF;
         IData/*31:0*/ __VstlIterCount;
+        IData/*31:0*/ __VicoIterCount;
         IData/*31:0*/ __VactIterCount;
         VlUnpacked<CData/*7:0*/, 4096> top__DOT__my_InstrD_mem__DOT__rom_array;
-        VlUnpacked<IData/*31:0*/, 32> top__DOT__my_reg_file__DOT__mem;
+        VlUnpacked<IData/*31:0*/, 32> top__DOT__my_reg_file__DOT__register;
         VlUnpacked<CData/*7:0*/, 131072> top__DOT__my_data_memory__DOT__data_array;
-        VlUnpacked<CData/*0:0*/, 4> __Vm_traceActivity;
+        VlUnpacked<CData/*0:0*/, 5> __Vm_traceActivity;
     };
     VlTriggerVec<1> __VstlTriggered;
+    VlTriggerVec<1> __VicoTriggered;
     VlTriggerVec<3> __VactTriggered;
     VlTriggerVec<3> __VnbaTriggered;
 

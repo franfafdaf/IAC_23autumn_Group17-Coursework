@@ -35,7 +35,7 @@ int main(int argc, char **argv, char **env){
     top->rst = 0;
     uint32_t value_32bit = top->a0;
     uint8_t data_out = static_cast<uint8_t>(value_32bit & 0xFF);
-    vbdBar(data_out && 0xFF);
+    vbdBar(data_out & 0xFF);
 
     top->trigger = vbdFlag();
     vbdCycle(simcyc);

@@ -21,6 +21,7 @@ VL_ATTR_COLD void Vtop___024root___eval_initial(Vtop___024root* vlSelf) {
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___eval_initial\n"); );
     // Body
     Vtop___024root___eval_initial__TOP(vlSelf);
+    vlSelf->__Vm_traceActivity[4U] = 1U;
     vlSelf->__Vm_traceActivity[3U] = 1U;
     vlSelf->__Vm_traceActivity[2U] = 1U;
     vlSelf->__Vm_traceActivity[1U] = 1U;
@@ -36,7 +37,7 @@ VL_ATTR_COLD void Vtop___024root___eval_initial__TOP(Vtop___024root* vlSelf) {
     // Init
     VlWide<3>/*95:0*/ __Vtemp_1;
     // Body
-    VL_READMEM_N(true, 8, 4096, 0, std::string{"pdf.hex"}
+    VL_READMEM_N(true, 8, 4096, 0, std::string{"F1.mem"}
                  ,  &(vlSelf->top__DOT__my_InstrD_mem__DOT__rom_array)
                  , 0, ~0ULL);
     __Vtemp_1[0U] = 0x2e6d656dU;
@@ -122,14 +123,14 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
     SData/*9:0*/ __Vtableidx1;
     __Vtableidx1 = 0;
     // Body
-    vlSelf->a0 = vlSelf->top__DOT__my_reg_file__DOT__mem
-        [0xaU];
     vlSelf->top__DOT__my_control_unit__DOT__ALUDecode 
         = ((2U & (vlSelf->top__DOT__InstrD >> 4U)) 
            | (1U & (vlSelf->top__DOT__InstrD >> 0x1eU)));
     vlSelf->top__DOT__my_data_memory__DOT____VdfgTmp_hac5405b8__0 
         = vlSelf->top__DOT__my_data_memory__DOT__data_array
         [(0x1ffffU & vlSelf->top__DOT__ALUResultM)];
+    vlSelf->top__DOT__my_reg_file__DOT__register[5U] 
+        = vlSelf->trigger;
     vlSelf->top__DOT__StallD = ((IData)(vlSelf->top__DOT__ResultSrcE) 
                                 & (((IData)(vlSelf->top__DOT__RdE) 
                                     == (0x1fU & (vlSelf->top__DOT__InstrD 
@@ -170,6 +171,8 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
                                       : ((2U == (IData)(vlSelf->top__DOT__ResultSrcW))
                                           ? vlSelf->top__DOT__PC_PlusW
                                           : 0U)));
+    vlSelf->a0 = vlSelf->top__DOT__my_reg_file__DOT__register
+        [0xaU];
     vlSelf->top__DOT__ImmExtD = ((4U & (IData)(vlSelf->top__DOT__ImmSrcD))
                                   ? ((2U & (IData)(vlSelf->top__DOT__ImmSrcD))
                                       ? 0U : ((1U & (IData)(vlSelf->top__DOT__ImmSrcD))
@@ -316,12 +319,28 @@ VL_ATTR_COLD void Vtop___024root___eval_stl(Vtop___024root* vlSelf) {
     // Body
     if ((1ULL & vlSelf->__VstlTriggered.word(0U))) {
         Vtop___024root___stl_sequent__TOP__0(vlSelf);
+        vlSelf->__Vm_traceActivity[4U] = 1U;
         vlSelf->__Vm_traceActivity[3U] = 1U;
         vlSelf->__Vm_traceActivity[2U] = 1U;
         vlSelf->__Vm_traceActivity[1U] = 1U;
         vlSelf->__Vm_traceActivity[0U] = 1U;
     }
 }
+
+#ifdef VL_DEBUG
+VL_ATTR_COLD void Vtop___024root___dump_triggers__ico(Vtop___024root* vlSelf) {
+    if (false && vlSelf) {}  // Prevent unused
+    Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
+    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___dump_triggers__ico\n"); );
+    // Body
+    if ((1U & (~ (IData)(vlSelf->__VicoTriggered.any())))) {
+        VL_DBG_MSGF("         No triggers active\n");
+    }
+    if ((1ULL & vlSelf->__VicoTriggered.word(0U))) {
+        VL_DBG_MSGF("         'ico' region trigger index 0 is active: Internal 'ico' trigger - first iteration\n");
+    }
+}
+#endif  // VL_DEBUG
 
 #ifdef VL_DEBUG
 VL_ATTR_COLD void Vtop___024root___dump_triggers__act(Vtop___024root* vlSelf) {
@@ -372,6 +391,7 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     // Body
     vlSelf->clk = VL_RAND_RESET_I(1);
     vlSelf->rst = VL_RAND_RESET_I(1);
+    vlSelf->trigger = VL_RAND_RESET_I(32);
     vlSelf->a0 = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__PCSrcE = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__PC_PlusD = VL_RAND_RESET_I(32);
@@ -439,7 +459,7 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__my_control_unit__DOT__ALUOpD = VL_RAND_RESET_I(2);
     vlSelf->top__DOT__my_control_unit__DOT__ALUDecode = VL_RAND_RESET_I(2);
     for (int __Vi0 = 0; __Vi0 < 32; ++__Vi0) {
-        vlSelf->top__DOT__my_reg_file__DOT__mem[__Vi0] = VL_RAND_RESET_I(32);
+        vlSelf->top__DOT__my_reg_file__DOT__register[__Vi0] = VL_RAND_RESET_I(32);
     }
     vlSelf->top__DOT__my_alu__DOT__SrcAE = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__my_alu__DOT__SrcBE = VL_RAND_RESET_I(32);
@@ -452,7 +472,7 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->__Vdly__top__DOT__PCF = VL_RAND_RESET_I(32);
     vlSelf->__Vtrigprevexpr___TOP__clk__0 = VL_RAND_RESET_I(1);
     vlSelf->__Vtrigprevexpr___TOP__rst__0 = VL_RAND_RESET_I(1);
-    for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
+    for (int __Vi0 = 0; __Vi0 < 5; ++__Vi0) {
         vlSelf->__Vm_traceActivity[__Vi0] = 0;
     }
 }
