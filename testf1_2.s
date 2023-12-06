@@ -19,7 +19,7 @@ mainloop:
     andi t2, a3, 0x3f         
     slli t2, t2, 1          /* Shift old bits */                
     add t1, t1, t2          /* Add two segments */                
-    andi a3, t1, 0x7f       /* Return results 8?                
+    andi a3, t1, 0x7f       /* Return results 8?  */              
     jal  ra, mainloop   /* Loop  */
 
 light_up:
