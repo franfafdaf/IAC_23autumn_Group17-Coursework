@@ -8,19 +8,27 @@ module reg_file(
 
     output logic [31:0]     RD1,
     output logic [31:0]     RD2,
-    output logic [31:0]     a0
+    output logic [31:0]     a0, 
+    input logic            trigger
 );
 
-logic [31:0] mem [31:0];
+logic [31:0] register [31:0];
 
-assign RD1 = mem[A1];
-assign RD2 = mem[A2];
-assign a0= mem[10];
+// always_comb begin   begin 
+//     if (A1 == 0) RD1 = 32'b0;
+//     else RD1 = register[A1];
+// end begin 
+//     if (A2 == 0) RD2 = 32'b0;
+//     else RD2 = register[A2];
+// end
+// end
+
+assign     RD1 = register[A1];
+assign     RD2 = register[A2];
+assign     a0 = register[10];
+assign     register[5] = trigger;
 
 always_ff @(posedge clk) begin
-    assign mem[0] = 0;
-    if (WE3 == 1'b1)
-        mem[A3] <= WD3;
+    if ((WE3 == 1'b1) && (A3 != 0)) register[A3] <= WD3;
 end
-
 endmodule
