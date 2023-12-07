@@ -1,7 +1,8 @@
 module cache #(
     parameter SET_WIDTH = 3,
-    parameter TAG_WIDTH = 27,
+    parameter TAG_WIDTH = 25,
     parameter OFFSET_WIDTH = 2,
+    parameter BLOCK_OFFSET = 2,
     parameter DATA_WIDTH = 32,
     parameter CACHE_LENGTH = 32
 )(
@@ -27,8 +28,8 @@ logic [1:0] replace_way_flag[CACHE_LENGTH-1:0];
 logic [SET_WIDTH-1:0] set_index;
 logic [TAG_WIDTH-1:0] tag_field;
 
-assign tag_field = address_in[DATA_WIDTH-1:SET_WIDTH+OFFSET_WIDTH];
-assign set_index = address_in[SET_WIDTH+OFFSET_WIDTH-1:OFFSET_WIDTH];
+assign tag_field = address_in[DATA_WIDTH-1:SET_WIDTH+OFFSET_WIDTH+BLOCK_OFFSET];
+assign set_index = address_in[SET_WIDTH+BLOCK_OFFSET+OFFSET_WIDTH-1:OFFSET_WIDTH+BLOCK_OFFSET];
 
 // Hit logic
 logic [3:0] hit_ways;
