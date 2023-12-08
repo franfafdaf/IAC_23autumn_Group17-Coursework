@@ -19,23 +19,39 @@ module dataCache #( // 4-way, 8 set, block size 4 bytes
     logic [Set_Width-1:0]   set;
     logic [Tag_Width-1:0]   tag;
 
-    // logic [(Data_Width*4+Tag_Width+2):0] cacheMem  [2**5-1 : 0];  //V,U,D,Tag,4*Data
     // cache memory
     logic                   valid[3:0][Data_Width-1:0];
     logic                   dirty[3:0][(2**Set_Width)-1:0];
     logic                   used [3:0][(2**Set_Width)-1:0];
     logic [Tag_Width-1:0]   tag  [3:0][(2**Set_Width)-1:0];
     logic [Data_Width-1:0]  data [3:0][(2**Set_Width)-1:0];
-
-    logic [Set_Width-1:0] inputSet;
-    logic [Tag_Width-1:0] inputTag;
+    // input
+    logic [Set_Width-1:0]   inputSet;
+    logic [Tag_Width-1:0]   inputTag;
+    //checking
+    logic                   tagCheck;
     
 
     assign inputTag = address[Data_Width-1:Data_Width-Tag_Width];
     assign inputSet = address[(Data_Width-Tag_Width-1): (Data_Width-Tag_Width-1-Set_Width)];
+    assign inputBof = address[(BlockOffset+ByteOffset): ByteOffset];
+
+    // tag check
+    int i, j;
+    for (i = 0; i < 4; i++) {  
+        tagCheck = 0;                               // Loop over the first dimension
+        for (j = 0; j < 8; j++) {                   // Loop over the second dimension, assuming 4 from 3:0
+            if (tag[i][j] == inputTag) {
+                tagCheck = 1; 
+            }
+        }
+    }
+
+    //valid check
+    
+
 
 endmodule
-
 
 
 
