@@ -1,9 +1,9 @@
-module dataCache #( // 4-way, 8 set, block size 4 bytes
-    parameter Data_Width =32, 
+module dataCache #( // 2-way, 8 set, block size 4 bytes
+    arameter Tag_Width = 25, 
     parameter Set_Width = 3,
     parameter BlockOffset = 2,
     parameter ByteOffset = 2,
-    parameter Tag_Width = 2
+    parameter Data_Width =32
 ) (
     input logic                             clk,
     input logic [Data_Width-1:0]            data_in,    
@@ -12,24 +12,47 @@ module dataCache #( // 4-way, 8 set, block size 4 bytes
 
     output logic [Data_Width-1:0]           data_out,   
 );
-    logic                   valid; //size?
+    logic                   valid;
     logic                   hit;
-    logic                   dirty;
+    logic                   hit1;
+    logic                   hit0;
+
     logic                   used;
     logic [Set_Width-1:0]   set;
     logic [Tag_Width-1:0]   tag;
 
-    // cache memory
-    logic                   valid[3:0][Data_Width-1:0];
-    logic                   dirty[3:0][(2**Set_Width)-1:0];
-    logic                   used [3:0][(2**Set_Width)-1:0];
-    logic [Tag_Width-1:0]   tag  [3:0][(2**Set_Width)-1:0];
-    logic [Data_Width-1:0]  data [3:0][(2**Set_Width)-1:0];
     // input
     logic [Set_Width-1:0]   inputSet;
     logic [Tag_Width-1:0]   inputTag;
-    //checking
-    logic                   tagCheck;
+
+    // cache memory
+    logic [(2+1+2*Tag_Width+2*4*Data_Width):0] cacheMem [7:0];
+    logic [(2+1+2*Tag_Width+2*4*Data_Width):0] selectedWay;
+    // select way 
+    always_comb begin
+        case(inputSet)
+            3'b000:  selectedWay = cacheMem[0];
+            3'b001:  selectedWay = cacheMem[1];
+            3'b010:  selectedWay = cacheMem[2];
+            3'b011:  selectedWay = cacheMem[3];
+            3'b100:  selectedWay = cacheMem[4];
+            3'b101:  selectedWay = cacheMem[5];
+            3'b110:  selectedWay = cacheMem[6];
+            3'b111:  selectedWay = cacheMem[7];
+        endcase
+    end
+
+    assign way1tag = selectedWay[(1+2*Tag_Width+8*Data_Width-1):(1+Tag_Width+8*Data_Width)];
+    assign way0tag = selectedWay[(Tag_Width+4*Data_Width-1):(4*Data_Width)];
+    assign 
+
+    // logic                       valid[1:0][Data_Width-1:0];
+    // logic                       used [(2**Set_Width)-1:0];
+    // logic [Tag_Width-1:0]       tag  [1:0][(2**Set_Width)-1:0];
+    // logic [(4*Data_Width)-1:0]  data [1:0][(2**Set_Width)-1:0];
+
+    //
+
     
 
     assign inputTag = address[Data_Width-1:Data_Width-Tag_Width];
@@ -48,7 +71,34 @@ module dataCache #( // 4-way, 8 set, block size 4 bytes
     }
 
     //valid check
+
+
+    // hit check
+    assign hit1 = ((valid[0][inputSet])&(inputTag == way1tag));
+    assign hit0 = ((valid[0][inputSet])&(inputTag == way0tag));
+    assign hit =(hit1|hit0);
+
+    always_comb begin
+
+        //output select
+        case(way1)
+            2'b11: way1out = selectedWay[(1+Tag_Width+8*Data_Width)-1:(1+Tag_Width+7*Data_Width)];
+            2'b10: way1out = selectedWay[(1+Tag_Width+7*Data_Width)-1:(1+Tag_Width+6*Data_Width)]; 
+            2'b01: way1out = selectedWay[(1+Tag_Width+6*Data_Width)-1:(1+Tag_Width+5*Data_Width)];  
+            2'b00: way1out = selectedWay[(1+Tag_Width+5*Data_Width-1):(1+Tag_Width+4*Data_Width)];  
+        endcase
+
+        case(way0)
+            2'b11: way0out = selectedWay[(4*Data_Width)-1:3*Data_Width];
+            2'b10: way0out = selectedWay[(3*Data_Width)-1:2*Data_Width]; 
+            2'b01: way0out = selectedWay[(2*Data_Width)-1:1*Data_Width];  
+            2'b00: way0out = selectedWay[(Data_Width)-1:0];  
+        endcase
+
+        data_out = hit1 ? way1out ; way0out;
+    end
     
+
 
 
 endmodule
