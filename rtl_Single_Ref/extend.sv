@@ -1,4 +1,3 @@
-// This module is managed by Guanxi Lu
 module extend(
     input logic [2:0]            ImmSrc, 
     input logic [31:7]           Imm, 

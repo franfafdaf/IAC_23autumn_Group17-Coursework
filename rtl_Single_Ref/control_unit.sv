@@ -1,5 +1,3 @@
-//This module is managed by Guanxi Lu
-
 module control_unit (
     input logic [6:0]   opcode,
     input logic [2:0]   funct3,
