@@ -239,6 +239,12 @@ Within the ALU, the operations are determined by the `ALUControl[2:0]` signal, a
 | ALU Operation   | Add | Subtract | AND | OR  | Shift to Right | XOR | Select SrcB | Shift to Left |
 
 ### Testbench
+The design includes 4 top level signals: `clk`, `a0`, `rst` and `trigger` (exclusively for F1 program). 
+
+In the testbench for Reference Program, `clk` and `rst` are initialised to 1. Each clock tick, `rst` is set to 0, and variables are dumped into VCD file. A boolean variable `plot` is introduced. `plot` detects if the value of `a0` isn't zero, which indicates that the build process is completed. Also, the `plot` signal will automatic become 0 960 cycles after it becomes 1. 
+
+The testbench for F1 program is slightly different from that of Reference program, which will be explained in the [section below](#f1-design-vs-ref-design). 
+
 ### Shell Script
 ### Assembly Language (F1)
 ### F1 Design VS Ref Design
