@@ -11,6 +11,7 @@
     - [Control Unit](#control-unit)
     - [Data Memory](#data-memory)
     - [ALU](#alu)
+    - [Top Level Design](#top-level-design)
     - [Testbench](#testbench)
     - [Shell Script](#shell-script)
     - [Assembly Language (F1)](#assembly-language-f1)
@@ -163,6 +164,8 @@ However, there are special cases in our design where the PC is relocated to a di
 | JAL         | PC = PC + Imm20  |
 | JALR        | PC = RS1 + Imm12 |
 
+What's more, the `rst` signal sets `PC` to the start of the program. Once `rst` is asserted, the value of `PC` becomes `BFC00000`
+
 Operations on the PC can be classified easily, allowing for straightforward implementation in our design.
 
 - A multiplexer (MUX) determines if a Jump or Branch operation is required.
@@ -226,7 +229,7 @@ In summary, the Single Cycle Data Memory is conceptualized as a primary memory w
 
 ![Data Memory](/Images/Data%20Memory.png)
 
-### ALU (Arithmetic Logic Unit)
+### ALU
 The ALU is responsible for executing arithmetic and logic operations. In our design, it processes two inputs, `SrcA` and `SrcB`, to produce the output `ALUResult`. 
 
 A MUX is responsible for selecting the appropriate values for SrcA and SrcB respectively. The possible inputs for `SrcA` are `PC` and `RD1`, while for `SrcB`, they are `RD2` or `ImmExt`. The control logic governing these selections is detailed in the [preceding section](#control-unit).
@@ -238,8 +241,10 @@ Within the ALU, the operations are determined by the `ALUControl[2:0]` signal, a
 |-----------------|-----|----------|-----|-----|----------------|-----|-------------|---------------|
 | ALU Operation   | Add | Subtract | AND | OR  | Shift to Right | XOR | Select SrcB | Shift to Left |
 
+### Top Level Design
+
 ### Testbench
-The design incorporates four top-level signals: `clk`, `a0`, `rst`, and `trigger` (the latter being exclusive to the F1 program).
+In this section we mainly discuss the testbench for Reference Program. The design incorporates three top-level signals: `clk`, `a0`, `rst`. 
 
 In the testbench for the Reference Program, both `clk` and `rst` are initialized to 1. At each clock cycle, `rst` is set to 0, and variables are recorded in a VCD (Value Change Dump) file. A boolean variable, `plot`, is employed to monitor the status of `a0`. If `a0` is non-zero, it signifies that the build process has been completed. Furthermore, the `plot` signal is designed to automatically reset to 0 exactly 960 cycles after it is set to 1.
 
@@ -324,6 +329,71 @@ The algorithm's flow is visually represented in the diagram below, with straight
 </div>
 
 ### F1 Design VS Ref Design
+Upon testing the Single Cycle design on Reference program, the design is modified to accomodate the F1 program as explained above. There are a few points that differs F1 design from Ref Design. 
+
+#### 1. Data Memory
+The Reference Program utilizes `load` and `store` instructions such as `LW` and `SB`. However, the F1 design omits these instructions, resulting in no data being written to or read from the Data Memory.
+
+This design choice is linked to the method of pseudo-random number generation in the F1 program. Before the trigger signal is asserted, the program iterates through a loop generating random numbers.
+
+One alternative could involve pre-generating all random numbers and storing them in the data memory. Subsequently, the program could map the `PC` value to a specific location in the data memory to read the random number. However, `PC` would be a constant value at the point where a random number is requested to be loaded. In this case, this approach would transform the random number into a constant, as a fixed one in random number series would exist for a fixed `PC`. 
+
+Another strategy might be to generate a new random number each time `PC` changes, making the random number a by-product of the varying `PC`. However, this could significantly increase the program's complexity, an unnecessary complication.
+
+For the data memory of the reference program, the diagram below illustrates the memory organization. The `data_array` consists of pre-generated values from memory files like `sine.mem`, while the `pdf_array` represents the accumulation in each "bin." Separate memory segments are allocated for `data_array` and `pdf_array`.
+
+<div align="center">
+  <img src="Images/memory_map.jpg" alt="Memory Map Reference Program">
+</div>
+<p align="center">
+    <span style="color: grey;"> 
+    Cited from 
+        <a href="https://github.com/EIE2-IAC-Labs/Project_Brief/tree/main/reference#new-memory-map">Reference Program</a>
+    </span>
+</p>
+
+#### 2. `Trigger` Signal
+A significant difference between the F1 and Reference Programs is the `trigger` signal. As described in the [Project Brief](https://github.com/EIE2-IAC-Labs/Project_Brief/tree/main?tab=readme-ov-file#learning-the-rv32i-instruction-set), "The trigger signal is used to initiate the F1 light sequence in the RISC-V."
+
+<div align="center">
+  <img src="Images/RISC-V_F1.jpg" alt="F1 Overview">
+</div>
+<p align="center">
+    <span style="color: grey;"> 
+    RV32I F1 Overview, Cited from 
+        <a href="https://github.com/EIE2-IAC-Labs/Project_Brief/tree/main?tab=readme-ov-file#learning-the-rv32i-instruction-set">Project Brief</a>
+    </span>
+</p>
+
+In the `F1.s` assembly program, the `t0` register (`x5`) is used to represent the `Trigger` signal. At the beginning of the `mainloop`, its value is compared with the pre-defined `s1` register to determine if the `trigger` signal has been activated, as depicted in the program extract below.
+
+```s
+# F1.s
+init:
+    addi s1, zero, 0x1      /* trigger destination set as 1 */
+...
+rst:
+...
+    addi t0, zero, 0x0      /* t0 is trigger */
+
+mainloop:
+    beq  t0, s1, light_up   /* trigger? */
+...
+``` 
+
+In physical testing, the push-button switch on the Vbuddy functions as the `trigger`. This is configured in the testbench with the line 
+
+```C++
+top->trigger = vbdFlag();
+``` 
+
+Additionally, Register `t0` in the register file is designated for the trigger signal. Therefore, an extra line is incorporated into `reg_file.sv` to facilitate this:
+```SystemVerilog
+assign     register[5] = trigger;
+```
+#### 3. Testbench
+As mentioned earlier, the F1 Program employs a distinct testbench from that of the Reference Program. In this testbench, the 32-bit output `a0` is transformed into an 8-bit `data_out` by masking the top 24 bits. Subsequently, the `vbdBar()` function is invoked to display `data_out` on the neopixel.
+
 
 
 ## Pipeline Design
