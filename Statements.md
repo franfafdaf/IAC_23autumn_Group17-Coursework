@@ -1,16 +1,21 @@
-Table of contents 
-- [Section 1](#coursework-brief)
-- [Section 2](#personal-information)
-- [Section 3](#contributions)
-- [Section 4](#repo-structure)
+## Table of contents 
+- [Project Brief](#project-brief)
+- [Personal Information](#personal-information)
+- [Individual Contributions](#individual-contributions)
+- [Repo Structure](#repo-structure)
+- [Single Cycle Design](#single-cycle-design)
+    - [Design Overview: From Lab4 to Project](#design-overview-from-lab4-to-project)
+    - [Program Counter](#program-counter)
+    - [Instruction Memory](#instruction-memory)  
+
 
 
 
 ----
-## Coursework Brief
+## Project Brief
 ----
 
-This coursework aims to build a reduced RISC-V RV32I Processor. The processor is expected to execute two programs, as specified in the project brief.
+This project aims to build a reduced RISC-V RV32I Processor. The processor is expected to execute two programs, as specified in the project brief.
 
 Two additional stretch goals are specified for advanced implementation:
 1. Pipelined RV32I design.
@@ -23,7 +28,7 @@ Through joint efforts, Group 17 has successfully implemented the F1 algorithm in
 ----
 
 ----
-## Contributions
+## Individual Contributions
 ----
 
 Note: 
@@ -137,11 +142,11 @@ Among all the RV32I instructions, 18 are implemented, covering all 6 types of in
 | 10 |        | LBU         |    |        |             |
 | 11 |        | JALR        |
 ### Program Counter
-The program counter determines which instruction to be executed in the cycle. In the design, the Instruction Memory Starts from `BFC00000` to `BFC00FFF`, which indicates that the start of PC (`0` in Lab4) should be `BFC00000`. 
+The program counter (PC) determines which instruction will be executed in each cycle. In this design, the Instruction Memory starts from `BFC00000` and extends to `BFC00FFF`, indicating that the initial value of PC (set to `0` in Lab4) should be `BFC00000`. 
 
-In ordinary cases, PC increases by 4. This is due to the nature of Byte Addressing. In our CPU, each memory block can only contain 1 byte of data/instruction (equivalant to 8 bits). For RV32I CPU, the instruction width and data width are both 32 bits, which takes 4 memory locations. To execute the next instruction, PC needs to increase by 4. 
+Typically, the PC increments by 4 due to the nature of byte addressing. In our CPU, each memory block holds 1 byte of data/instruction (equivalent to 8 bits). Given that the instruction and data widths in the RV32I CPU are both 32 bits, occupying 4 memory locations, the PC must increase by 4 to execute the next instruction.
 
-There are some special cases in our design where PC needs to be relocated to another value, as shown in the table below. 
+However, there are special cases in our design where the PC is relocated to a different value, as outlined in the table below.
 
 | Instruction | Operation on PC  |
 |-------------|------------------|
@@ -150,16 +155,32 @@ There are some special cases in our design where PC needs to be relocated to ano
 | JAL         | PC = PC + Imm20  |
 | JALR        | PC = RS1 + Imm12 |
 
-We can easily clasify operations on PC, and implement our design according to the explanations above. 
+Operations on the PC can be classified easily, allowing for straightforward implementation in our design.
 
-- A MUX determines whether a Jump/Branch is required
-- For Branch, it's always the case that `PC = PC + Imm12`
-- For Jump, CPU needs to determine whether `PC` or `RS1` is added to `ImmExt`, and the value of `ImmExt` is distinct based on types of instructions. 
+- A multiplexer (MUX) determines if a Jump or Branch operation is required.
+- For Branch instructions, the operation is always `PC = PC + Imm12`.
+- For Jump instructions, the CPU needs to determine whether to add `PC` or `RS1` to `ImmExt`, with the value of `ImmExt` varying based on the instruction type.
 
 ![PC](/Images/PC.png)
 <p style="color: grey;text-align:center;">Program Counter</p>
 
+
 ### Instruction Memory
+Instruction memory stores the executable instructions. As defined by the memory map, Instruction Memory spans 12 bits (equivalent to 3 hexadecimal digits). Consequently, the address length (`A_length`) is set to 12 bits. Additionally, since the data follows byte-addressing, the data length (`D_length`) is set to 8 bits.
+
+In this design, the Instruction Memory comprises a memory array with a size of \(2^{12} = 4096\) blocks. During each cycle, 4 blocks are concatenated to form the data output (`RD(Instr)`).
+
+It is important to note that RISC-V is a byte-addressing processor employing a little-endian format, where the least significant byte is stored in the lower address. For instance, if the machine code is `F1F2F3F4`, it is stored as follows:
+
+```
+Location:   00 01 02 03
+Data:       F4 F3 F2 F1 
+```
+Therefore, the assembly of `RD` from the memory array is executed using the following SystemVerilog assignment:
+```SystemVerilog
+assign RD = {rom_array[A+3], rom_array[A+2], rom_array[A+1], rom_array[A]};
+```
+
 ### Extend Unit
 ### Control Unit
 ### Data Memory
