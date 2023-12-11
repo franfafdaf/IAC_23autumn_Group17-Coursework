@@ -86,11 +86,6 @@ module dataCache #( // 2-way, 8 set, block size 4 bytes
     assign hit1 = (way1valid&(inputTag == way1tag));
     assign hit0 = (way0valid&(inputTag == way0tag));
     assign hit =(hit1|hit0);
-
-
-
-
-
    
     // read/load data
     always_comb begin
@@ -107,11 +102,17 @@ module dataCache #( // 2-way, 8 set, block size 4 bytes
         end
         else begin
             if(used = 0)begin
-                if(LdSrcM) selectBlock = {Rd} 
+                if(LdSrcM) way1data[127:96] = {{24{1'b0}}, data_array[inputTag,inputSet,{1100}],{24{1'b0}}, data_array[inputTag,inputSet,{1000}],{24{1'b0}}, data_array[inputTag,inputSet,{0100}],{24{1'b0}}, data_array[inputTag,inputSet,{0000}]} 
+                way1data[95:64]
+                way1data[63:32]
+                way1data[31:0]
                 used = 1; 
             end
             else begin
-
+                if(LdSrcM) way0data[127:96] = {{24{1'b0}}, data_array[inputTag,inputSet,{1100}],
+                way0data[95:64]{24{1'b0}}, data_array[inputTag,inputSet,{1000}],{24{1'b0}}, data_array[inputTag,inputSet,{0100}],{24{1'b0}}, data_array[inputTag,inputSet,{0000}]} 
+                way0data[63:32]
+                way0data[31:0]
                 used = 0; 
             end
 
@@ -119,8 +120,13 @@ module dataCache #( // 2-way, 8 set, block size 4 bytes
     end
  
 
-    //if miss
+
     //write
+    always_comb begin
+        if(hit) begin
+            if(StSrcM) selectedWay
+        end
+    end
     //read
 
 
