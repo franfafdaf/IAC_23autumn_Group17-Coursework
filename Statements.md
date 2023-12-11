@@ -239,13 +239,21 @@ Within the ALU, the operations are determined by the `ALUControl[2:0]` signal, a
 | ALU Operation   | Add | Subtract | AND | OR  | Shift to Right | XOR | Select SrcB | Shift to Left |
 
 ### Testbench
-The design includes 4 top level signals: `clk`, `a0`, `rst` and `trigger` (exclusively for F1 program). 
+The design incorporates four top-level signals: `clk`, `a0`, `rst`, and `trigger` (the latter being exclusive to the F1 program).
 
-In the testbench for Reference Program, `clk` and `rst` are initialised to 1. Each clock tick, `rst` is set to 0, and variables are dumped into VCD file. A boolean variable `plot` is introduced. `plot` detects if the value of `a0` isn't zero, which indicates that the build process is completed. Also, the `plot` signal will automatic become 0 960 cycles after it becomes 1. 
+In the testbench for the Reference Program, both `clk` and `rst` are initialized to 1. At each clock cycle, `rst` is set to 0, and variables are recorded in a VCD (Value Change Dump) file. A boolean variable, `plot`, is employed to monitor the status of `a0`. If `a0` is non-zero, it signifies that the build process has been completed. Furthermore, the `plot` signal is designed to automatically reset to 0 exactly 960 cycles after it is set to 1.
 
-The testbench for F1 program is slightly different from that of Reference program, which will be explained in the [section below](#f1-design-vs-ref-design). 
+The testbench for the F1 program differs from that of the Reference Program, details of which are elaborated in the [following section](#f1-design-vs-ref-design).
 
-### Shell Script 
+
+### Shell Script
+The shell script employs Verilator to convert Verilog code into C++, which also includes the C++ testbench.
+
+The roles of the shell script are outlined as follows:
+- Clearing out data from previous simulations.
+- Use Verilator to convert Verilog into C++.
+- Build the C++ project.
+- Executing the simulation file.
 
 
 ### Assembly Language (F1)
