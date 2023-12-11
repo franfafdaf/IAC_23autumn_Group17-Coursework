@@ -7,6 +7,14 @@
     - [Design Overview: From Lab4 to Project](#design-overview-from-lab4-to-project)
     - [Program Counter](#program-counter)
     - [Instruction Memory](#instruction-memory)  
+    - [Extend Unit](#extend-unit)
+    - [Control Unit](#control-unit)
+    - [Data Memory](#data-memory)
+    - [ALU](#alu)
+    - [Testbench](#testbench)
+    - [Shell Script](#shell-script)
+    - [Assembly Language (F1)](#assembly-language-f1)
+    - [F1 Design VS Ref Design](#f1-design-vs-ref-design)
 
 
 
@@ -123,7 +131,7 @@ However, it was discovered in practice that this structure is insufficient for i
 
 In light of these findings, we modified the design (as depicted in the diagram below) to provide an appropriate framework for executing all the instructions in our program. Detailed explanation of specific blocks will be provided in the sections below. 
 
-![Overview](Images/Overview.png)
+![Overview](/Images/Overview.png)
 <p style="color: grey;text-align:center;">Single Cycle Design Overview</p>
 
 Among all the RV32I instructions, 18 are implemented, covering all 6 types of instructions. The **List of Instructions** is shown in the table below.
@@ -218,7 +226,20 @@ In summary, the Single Cycle Data Memory is conceptualized as a primary memory w
 
 ![Data Memory](/Images/Data%20Memory.png)
 
-### ALU
+### ALU (Arithmetic Logic Unit)
+The ALU is responsible for executing arithmetic and logic operations. In our design, it processes two inputs, `SrcA` and `SrcB`, to produce the output `ALUResult`. 
+
+A MUX is responsible for selecting the appropriate values for SrcA and SrcB respectively. The possible inputs for `SrcA` are `PC` and `RD1`, while for `SrcB`, they are `RD2` or `ImmExt`. The control logic governing these selections is detailed in the [preceding section](#control-unit).
+
+Within the ALU, the operations are determined by the `ALUControl[2:0]` signal, as depicted in the table below. The implementation of these operations follows a straightforward logic.
+
+
+| ALUControl[2:0] | 000 | 001      | 010 | 011 | 100            | 101 | 110         | 111           |
+|-----------------|-----|----------|-----|-----|----------------|-----|-------------|---------------|
+| ALU Operation   | Add | Subtract | AND | OR  | Shift to Right | XOR | Select SrcB | Shift to Left |
+
+### Testbench
+### Shell Script
 ### Assembly Language (F1)
 ### F1 Design VS Ref Design
 
