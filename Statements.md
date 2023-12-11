@@ -75,20 +75,23 @@ iloop:
     bne     t1, zero, mloop     # else always branch to mloop
 ```
 
-The design, as shown in the diagram below, follows a similar design to Project, despite the fact that ALU block is significantly reduced (only carries out `+` and `-` function), thus leading to a reduced control logic. 
+The design, as illustrated in the diagram below, adheres closely to the Project's framework. However, the ALU block is notably simplified, performing only addition (`+`) and subtraction (`-`) operations. This simplification results in a more streamlined control logic.
 
 ![Reduced RV32I CPU](Images/microarchitecture.jpg)
 
 <p align="center">
     <span style="color: grey;">
         Reduced RV32I CPU, Cited from  
-        <a href="https://github.com/EIE2-IAC-Labs/Lab4-Reduced-RISC-V">Project Brief</a>
+        <a href="https://github.com/EIE2-IAC-Labs/Lab4-Reduced-RISC-V?tab=readme-ov-file#the-microarchitecture-of-the-reduced-risc-v-cpu">Project Brief</a>
     </span>
 </p>
 
-In the project, the increse in instruction to be implemented leads to a more complex control logic. More control signals are intruduced, and the bit number of some signals are increased. 
-Further, a generalised logic needs to find to accomodate different types of instructions, even instructions of the same type. For example, the `JALR` and `ADDI` signals are both I-type instructions, however they have apparent difference in terms of function. In this case, it is crucially important to make the design simple (without adding too much exceptions using MUXs or extra blocks), and implement the desired instruction in the mean time. 
-What's more, in the project a `Data Memory` block is introduced, to implement instructions like `LW` and `SW`. Following this change, a memory map is set as a reference for design, as shown below. The memory map specifies the memory used by Instruction Memory and Data Memory, and all the designs should strictly follow the memory map. 
+In the project, the increase in the number of instructions to be implemented necessitates a more intricate control logic. This complexity arises from the introduction of additional control signals and the expansion in the bit count of some signals. 
+
+Moreover, a generalized logic must be established to accommodate various types of instructions, including those within the same category. For instance, the `JALR` and `ADDI` instructions are both of I-type, yet they exhibit significant functional differences. Consequently, it is imperative to maintain simplicity in the design (avoiding excessive use of multiplexers or additional blocks) while ensuring the accurate implementation of the desired instructions.
+
+Additionally, the project incorporates a `Data Memory` block to facilitate instructions like `LW` and `SW`. Following this modification, a memory map, as displayed below, is utilized as a reference for the design. This memory map delineates the allocation of memory for the Instruction Memory and Data Memory, and all designs are expected to adhere strictly to this layout.
+
 <div align="center">
   <img src="Images/memory.jpg" alt="Memory">
 </div>
@@ -100,7 +103,8 @@ What's more, in the project a `Data Memory` block is introduced, to implement in
     </span>
 </p>
 
-In Project Brief, we are provided with a design example, as shown in the diagram below, which has introduced several new control signals. 
+The Project Brief provides a design example, as shown in the diagram below, which introduces several new control signals. 
+
 ![Sample RV32I CPU](Images/single-cycle.jpg)
 
 <p align="center">
@@ -110,13 +114,31 @@ In Project Brief, we are provided with a design example, as shown in the diagram
     </span>
 </p>
 
-However, in practice, it was found that the structure isn't sufficient to implement all the signals needed. For example, the `JALR` signal required `PC` to become `RS1 + ImmExt`, which cannot be implemented using current design. Also, some specific blocks, like `Control Unit` and `Data Memory` requires a improved design, to either simplify the structure, or accommodate particular instructions, which will be explained in the following parts. 
+However, it was discovered in practice that this structure is insufficient for implementing all the required signals. For example, the `JALR` instruction necessitates the program counter (`PC`) to become `RS1 + ImmExt`, a functionality not supported by the current design. Furthermore, specific blocks like the `Control Unit` and `Data Memory` require refined designs, either to simplify the structure or to accommodate particular instructions, which will be elucidated in subsequent sections.
 
-In this sense, we modified the design (as shown in the diagram below) to provide a suitable design to execute all the instructions in our program. 
+In light of these findings, we modified the design (as depicted in the diagram below) to provide an appropriate framework for executing all the instructions in our program. Detailed explanation of specific blocks will be provided in the sections below. 
+
 ![Overview](Images/Overview.png)
-<p style = "color: grey;text-align:center;">Single Cycle Design Overview </p> 
+<p style="color: grey;text-align:center;">Single Cycle Design Overview</p>
 
+Among all the RV32I instructions, 18 are implemented, covering all 6 types of instructions. The **List of Instructions** is shown in the table below.
+ 
+| No | Type   | Instruction | No | Type   | Instruction |
+|----|--------|-------------|----|--------|-------------|
+| 1  | R-type | ADD         | 12 | S-type | SW          |
+| 2  |        | SUB         | 13 |        | SB          |
+| 3  |        | AND         | 14 | B-type | BEQ         |
+| 4  |        | XOR         | 15 |        | BNE         |
+| 5  | I-type | ADDI        | 16 | U-type | LUI         |
+| 6  |        | SLLI        | 17 |        | AUIPC       |
+| 7  |        | SRLI        | 18 | J-Type | JAL         |
+| 8  |        | ANDI        |    |        |             |
+| 9  |        | LW          |    |        |             |
+| 10 |        | LBU         |    |        |             |
+| 11 |        | JALR        |
 ### Program Counter
+
+
 ### Instruction Memory
 ### Extend Unit
 ### Control Unit
