@@ -6,8 +6,9 @@ Table of contents
 
 
 
-
-# Coursework Brief
+----
+## Coursework Brief
+----
 
 This coursework aims to build a reduced RISC-V RV32I Processor. The processor is expected to execute two programs, as specified in the project brief.
 
@@ -17,18 +18,22 @@ Two additional stretch goals are specified for advanced implementation:
 
 Through joint efforts, Group 17 has successfully implemented the F1 algorithm in assembly language, verified the program and RV32I design, implemented a pipelined RV32I
  
+----
+## Personal Information
+----
 
-# Personal Information
-
-# Contributions
+----
+## Contributions
+----
 
 Note: 
 `X` = Full Participation
 `P` = Partial Participation
 `U` = Unused Version
 
-# Repo Structure
-
+----
+## Repo Structure
+----
 The group decided to control the version in the following way:
 - Each member completes their own section in their own branch.
 - One member merges the individual work together, creating `top.sv` for testing.
@@ -49,9 +54,10 @@ This policy leads to both advantages and drawbacks:
 
 
 > Refer to draw.io file
-
-# Single Cycle Design
-## From Lab4 to Project
+-----
+## Single Cycle Design
+----
+### From Lab4 to Project
 Lab4 requires group members to complete a reduced RV32I design, to execute a program that consists only two instructions, `ADDI` and `BNE`.
 
 ```s
@@ -110,14 +116,14 @@ In this sense, we modified the design (as shown in the diagram below) to provide
 ![Overview](Images/Overview.png)
 <p style = "color: grey;text-align:center;">Single Cycle Design Overview </p> 
 
-## Program Counter
-## Instruction Memory
-## Extend Unit
-## Control Unit
-## Data Memory
-## ALU
-## Assembly Language (F1)
-## F1 Design VS Ref Design
+### Program Counter
+### Instruction Memory
+### Extend Unit
+### Control Unit
+### Data Memory
+### ALU
+### Assembly Language (F1)
+### F1 Design VS Ref Design
 
 
 
@@ -126,11 +132,11 @@ In this sense, we modified the design (as shown in the diagram below) to provide
 
 
 
-# Pipeline Design
+## Pipeline Design
 
 
-# Data Memory Cache Design
+## Data Memory Cache Design
 
-# Test Results
-## Reference Program
-## F1 Program
+## Test Results
+### Reference Program
+### F1 Program
