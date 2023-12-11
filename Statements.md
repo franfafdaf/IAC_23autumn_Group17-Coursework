@@ -57,7 +57,7 @@ This policy leads to both advantages and drawbacks:
 -----
 ## Single Cycle Design
 ----
-### From Lab4 to Project
+### Design Overview: From Lab4 to Project
 Lab4 requires group members to complete a reduced RV32I design, to execute a program that consists only two instructions, `ADDI` and `BNE`.
 
 ```s
@@ -137,7 +137,27 @@ Among all the RV32I instructions, 18 are implemented, covering all 6 types of in
 | 10 |        | LBU         |    |        |             |
 | 11 |        | JALR        |
 ### Program Counter
+The program counter determines which instruction to be executed in the cycle. In the design, the Instruction Memory Starts from `BFC00000` to `BFC00FFF`, which indicates that the start of PC (`0` in Lab4) should be `BFC00000`. 
 
+In ordinary cases, PC increases by 4. This is due to the nature of Byte Addressing. In our CPU, each memory block can only contain 1 byte of data/instruction (equivalant to 8 bits). For RV32I CPU, the instruction width and data width are both 32 bits, which takes 4 memory locations. To execute the next instruction, PC needs to increase by 4. 
+
+There are some special cases in our design where PC needs to be relocated to another value, as shown in the table below. 
+
+| Instruction | Operation on PC  |
+|-------------|------------------|
+| BEQ         | PC = PC + Imm12  |
+| BNE         | PC = PC + Imm12  |
+| JAL         | PC = PC + Imm20  |
+| JALR        | PC = RS1 + Imm12 |
+
+We can easily clasify operations on PC, and implement our design according to the explanations above. 
+
+- A MUX determines whether a Jump/Branch is required
+- For Branch, it's always the case that `PC = PC + Imm12`
+- For Jump, CPU needs to determine whether `PC` or `RS1` is added to `ImmExt`, and the value of `ImmExt` is distinct based on types of instructions. 
+
+![PC](/Images/PC.png)
+<p style="color: grey;text-align:center;">Program Counter</p>
 
 ### Instruction Memory
 ### Extend Unit
