@@ -210,6 +210,99 @@ Our group has designed a mapping for the `ImmSrc` with corresponding extension o
 In the `Extend` Unit, mapping the decoded `ImmSrc` to the appropriate extension operations is straightforward.
 
 ### Control Unit
+The Control Unit is pivotal in determining the control signals based on instructions. It fetches three segments, `Opcode`, `funct3`, and `func75` from `Instr`, and a distinct signal `Zero` from the `ALU`. These four output signals collectively dictate the control signals, influencing the operations of other blocks in the processor. 
+
+#### 1. Control Unit Overview
+The table below presents the control signals corresponding to the 18 instructions implemented in the RV32I CPU design. Each instruction type is distinguished by different colors. Among which, blue columns represent input signals, while grey columns (`PCSrc` and `ALUControl[2:0]`) indicate signals requiring two-layer decoding.
+
+<div align="center">
+  <img src="Images/Control Signal.png" alt="Control Signals">
+</div>
+<p align="center">
+    <span style="color: grey;"> 
+    Control Signal Table
+    </span>
+</p>
+
+The Control Unit is segmented into three distinct sections:
+- The `Main Decoder` utilizes `Opcode[5]` and `funct3` from `Instr`, decoding most signals and providing inputs for other decoders.
+- The `PCSrc Decoder` decodes the `PCSrc` signal, leveraging the `Branch` and `Jump` signals from the `Main Decoder`, along with the `Zero` signal from the `ALU`.
+- The `ALU Decoder` decodes the `ALUControl[2:0]` signal. It receives `ALUOp[1:0]` from the `Main Decoder`, as well as `Opcode[5]`, `funct3`, and `func75` from `Instr`.
+
+The diagram below illustrates the hierarchical relationship among these three decoder units.
+
+<div align="center">
+  <img src="Images/Control Unit.png" alt="Control Unit">
+</div>
+<p align="center">
+    <span style="color: grey;"> 
+    Single Cycle Processor Control Unit
+    </span>
+</p>
+
+"Don't Care" signals are uniquely processed since Verilator does not support them. In practical implementation, all "Don't Care" signals are set to 0. **This does not impact the overall result**, as these signals aren't expected to occur in any valid situations. 
+
+#### 2. ALU Signals
+The `ALUSrcA`, `ALUSrcB`, `ALUOp`, and `ALUControl` signals are categorized as ALU signals.
+
+`ALUSrcA` and `ALUSrcB` determine the values for `SrcA` and `SrcB`, the input signals to the `ALU`. The potential inputs for `SrcA` are `PC` and `RD1`, and for `SrcB`, they are `RD2` or `ImmExt`. The decoding logic is as follows:
+
+- R-type instructions use `RD1` and `RD2` respectively for `SrcA` and `SrcB`.
+- I-type instructions use `RD1` and `ImmExt`.
+- S-type instructions use `RD1` and `ImmExt`.
+- B-type instructions, which compare two register values, use `RD1` and `RD2`.
+- U-type instructions are more complex:
+    - For the `LUI` instruction, which loads the immediate, `SrcA` is unused, and `SrcB` selects `ImmExt`.
+    - The `AUIPC` instruction uses both `PC` and `ImmExt`.
+- J-type instructions do not utilize `SrcA` or `SrcB`, rendering both `ALUSrcA` and `ALUSrcB` as "Don't Care"s.
+
+`Main Decoder` provides an initial logic to generate `ALUOp`, varying for each instruction type. The association is shown in the following table, where I-type and S-type share the same `ALUOp` due to similar ALU usage in `Load` and `Store` instructions.
+
+| Instruction Type | I&S | B  | R  | U  | J  |
+|------------------|-----|----|----|----|----|
+| ALUOp[1:0]       | 00  | 01 | 10 | 11 | XX |
+
+The `ALU Decoder` then deciphers the `ALUControl` signal, with each value representing a specific operation. A special case is `110`, designated for "Select SrcB" and aligning with the `LUI` instruction's sole selection of the sign-extended immediate.
+
+| ALUControl[2:0] | 000 | 001 | 010 | 011 | 100 | 101 | 110         | 111           |
+|-----------------|-----|-----|-----|-----|-----|-----|-------------|---------------|
+| ALU Operation   | Add | Subtract | AND | OR  | Shift Right | XOR | Select SrcB | Shift Left |
+
+#### 3. Register and Memory Signals
+`ResultSrc`, `MemWrite`, `RegWrite`, `LdSrc`, and `StSrc` are categorized as Register and Memory Signals.
+
+The RV32I design offers three alternatives for the `Result` signal written to the Register File:
+- For ALU-utilizing instructions, `ResultSrc` is `00`, directly passing the ALU result to the register.
+- For `Load` instructions that fetch from memory, `ResultSrc` is `01`, writing data from memory to the register.
+- For `JAL` and `JALR` instructions, where `RD = PC + 4`, `ResultSrc` is `10`, and `PCPlus4` is written to the register.
+
+`MemWrite` and `RegWrite` signals follow straightforward decode logic:
+- `MemWrite` is set only for `Store` instructions; otherwise, it is 0.
+- `RegWrite` is 0 for S-type and B-type instructions, which do not write to the register. When relevant, `LdSrc` and `StSrc` act as `SELECT` bits of the MUX. The decoding logic for the two `Load` and `Store` instructions used is simple.
+
+`LdSrc` operates solely for `Load` instructions, while `StSrc` is specific to `Store` instructions. In other scenarios, their values are considered "Don't Care"s:
+- `LdSrc` equals 1 for `LBU` instructions, otherwise indicating `LW`.
+- `StSrc` equals 1 for `SB` instructions, otherwise indicating `SW`.
+
+#### 4. Jump Signals
+`Branch`, `Jump`, `PCSrc`, and `JalSrc` are categorized as Jump Signals.
+
+`Branch` and `Jump` detect whether an instruction is a Jump or Branch type, setting their values to 1 accordingly.
+
+The `PCSrc` signal indicates if the `PC` is to be redirected to a specific value. When `Jump` is 1, so is `PCSrc`. For B-type Instructions, the `Zero` signal is also considered: `PC` is redirected for `BEQ` only if `Zero` is True, and for `BNE`, the opposite applies.
+
+`JalSrc` is specific to `Branch` and `Jump` instructions:
+- Its value is 1 for `BEQ`, `BNE`, and `JAL`, indicating `PC` added to `ImmExt`.
+- For `JALR`, `JalSrc` is 0, where `RS1` is added to `ImmExt`.
+
+#### 5. Extend Signal
+`ImmSrc` is the sole Extend signal, dictating the extension methodology for the immediate part of the instruction. `ImmSrc` varies across different instruction types, and its relationship with each type is detailed in the [Extend Unit Section](#extend-unit). The table below outlines how `ImmSrc` is assigned based on the instruction type:
+
+| ImmSrc[2:0] | 000                                 | 001                                              | 010                                                            | 011                                                              | 100                             | 101        | 110        | 111        |
+|-------------|-------------------------------------|--------------------------------------------------|----------------------------------------------------------------|------------------------------------------------------------------|---------------------------------|------------|------------|------------|
+| Type        | I-type                              | S-type                                           | B-type                                                         | J-type                                                           | U-type                          | Unoccupied | Unoccupied | Unoccupied |
+| Extension Operation | `{{20{Instr[31]}}, Instr[31:20]}` | `{{20{Instr[31]}}, Instr[31:25], Instr[11:7]}` | `{{20{Instr[31]}}, Instr[7], Instr[30:25], Instr[11:8], 1'b0}` | `{{12{Instr[31]}}, Instr[19:12], Instr[20], Instr[30:21], 1'b0}` | `{Instr[31:12], {12{0}}}` |
+
 ### Data Memory
 Data Memory facilitates the execution of `Load` and `Store` instructions. For `Load` instructions, data is transferred from memory to registers, whereas for `Store` instructions, it moves from registers to memory.
 
