@@ -242,6 +242,19 @@ Within the ALU, the operations are determined by the `ALUControl[2:0]` signal, a
 | ALU Operation   | Add | Subtract | AND | OR  | Shift to Right | XOR | Select SrcB | Shift to Left |
 
 ### Top Level Design
+The top-level design of the system serves as an integrative platform, combining all submodules and establishing the necessary bus connections, thereby exemplifying the concept of hierarchical design. The top-level design encompasses the following modules:
+
+```
+pc_top              instr_mem       regfile             alu_top 
+control_unit        extend          DataMemory          DataMux
+```
+
+Concurrently, assignment statements are utilized to map portions of the bus to specific logic signals. These mappings are highlighted in red in the accompanying diagram.
+
+<div align="center">
+  <img src="Images/Top.png" alt="Assembly Language">
+</div>
+
 
 ### Testbench
 In this section we mainly discuss the testbench for Reference Program. The design incorporates three top-level signals: `clk`, `a0`, `rst`. 
@@ -391,6 +404,12 @@ Additionally, Register `t0` in the register file is designated for the trigger s
 ```SystemVerilog
 assign     register[5] = trigger;
 ```
+The modified `reg_file.sv` is illustrated as the diagram below. 
+<div align="center">
+  <img src="Images/Regfile F1.png" alt="F1 Overview">
+</div>
+
+
 #### 3. Testbench
 As mentioned earlier, the F1 Program employs a distinct testbench from that of the Reference Program. In this testbench, the 32-bit output `a0` is transformed into an 8-bit `data_out` by masking the top 24 bits. Subsequently, the `vbdBar()` function is invoked to display `data_out` on the neopixel.
 
