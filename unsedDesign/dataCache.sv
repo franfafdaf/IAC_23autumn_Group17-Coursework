@@ -6,19 +6,17 @@ module dataCache #( // 2-way, 8 set, block size 4 bytes
     parameter Data_Width =32
 ) (
     input logic                             clk,
-    input logic [Data_Width-1:0]            dataIn,    
-    input logic [Data_Width-1:0]            addressIn,  
+    input logic [Data_Width-1:0]            addressIn, 
+    input logic [Data_Width-1:0]            dataIn,     
     input logic                             we,                  
 
     output logic [Data_Width-1:0]           dataOut,   
-    output logic                            hit_out,
+    output logic                            hitOut,
 
     input  logic                            WE,          // Write Enable signal
     input  logic                            StSrcM,       // Store Type signal
     input  logic                            LdSrcM,       // Load Type signal
     input  logic [DATA_WIDTH-1:0]           WD,          // Write Data input
-    
-    output logic [DATA_WIDTH-1:0]           RD           // Read Data output
 );
     logic                   valid;
     logic                   hit;
@@ -37,25 +35,18 @@ module dataCache #( // 2-way, 8 set, block size 4 bytes
     logic [(2+1+2*Tag_Width+2*4*Data_Width):0] cacheMem [7:0];
     logic [(2+1+2*Tag_Width+2*4*Data_Width):0] selectedWay;
 
-    DataMemory my_data_memory(
-    .clk(clk),
-    .WE(WE),
-    .StSrcM(StSrcM),
-    .LdSrcM(LdSrcM),
-    .A(ALURaesultM),
-    .WD(WriteDataM),
-    .RD(RD)
-    );
+
     // input 
     assign inputTag = addressIn[Data_Width-1:Data_Width-Tag_Width];
     assign inputSet = addressIn[(Data_Width-Tag_Width-1): (Data_Width-Tag_Width-1-Set_Width)];
     assign inputBof = addressIn[(BlockOffset+ByteOffset): ByteOffset];
 
-    // inital valid
+    // inital valid&used
     initial begin
         for (int i = 0; i < 8; i++) begin
             cacheMem[i][(2+1+2*Tag_Width+2*4*Data_Width-1)] = 0; // way1valid
             cacheMem[i][Tag_Width+4*Data_Width] = 0; // way0valid
+            cacheMem[i][(2+1+2*Tag_Width+2*4*Data_Width-2)] = 0; // used bit
         end
     end
 
@@ -106,7 +97,7 @@ module dataCache #( // 2-way, 8 set, block size 4 bytes
                 way1data[95:64]
                 way1data[63:32]
                 way1data[31:0]
-                used = 1; 
+                used = ; 
             end
             else begin
                 if(LdSrcM) way0data[127:96] = {{24{1'b0}}, data_array[inputTag,inputSet,{1100}],
