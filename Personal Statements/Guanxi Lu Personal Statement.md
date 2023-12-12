@@ -92,6 +92,19 @@ end
 ```
 
 ## Special Design Decisions
+### Introduction of `ALUSrcA` Signal for `SrcA` Input Selection
+
+In the lab's example design, there is only one `ALUSrc` signal, which is used to select the input value for `SrcB`. However, for the implementation of the `LUI` and `AUIPC` instructions (functions detailed [above](#implementation-of-lui-and-auipc-instructions)), we introduced an additional multiplexer (MUX) to select the input for `SrcA`. This addition allows for two input options: `PC` and `RD1`. The control logic for this is summarized in the table below:
+
+| Instruction | ALUSrcA | ALUSrcB |
+|-------------|---------|---------|
+| LUI         | x       | 1       |
+| AUIPC       | 1       | 1       |
+
+In the case of `LUI`, the operation solely utilizes `ImmExt`, whereas `AUIPC` involves summing `PC` and `ImmExt` within the ALU.
+
+### Introduction of `JalSrc` Signal for `PC` logic
+
 
 ## What I've learnt in this project
 
