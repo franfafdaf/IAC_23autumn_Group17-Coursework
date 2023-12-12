@@ -87,6 +87,15 @@ else if(WE ==1 && StSrc ==1 ) begin
 end
 ```
 
+### Version Control Challenges
+
+As a novice Git user, I struggled with effective version control of the repository. Initially, everything functioned smoothly when each team member worked on their individual branches. However, challenges arose during the merging process. Instead of utilizing the `git merge` command, I manually copied the code to avoid potential conflicts with files like `README.md`. This approach led to misleading representations of work contributions in the commit history.
+
+Additionally, it was only late in the project that I learned about the `.gitignore` file's utility in excluding certain files or folders from being tracked. This oversight resulted in the accidental upload of large `.vcd` files, which exceeded the size limit for direct pushes to the repository.
+
+Furthermore, I realized the importance of composing more meaningful commit messages to better reflect and distinguish the progress made in the project.
+
+
 ## Special Design Decisions
 ### Introduction of `ALUSrcA` Signal for `SrcA` Input Selection
 
@@ -124,8 +133,17 @@ In the RV32I ISA, the `x0` register is always hardwired to 0, necessitating a co
 Ultimately,  a different logic is implemented, which prevents writing to `x0`. When the destination register `RD` equals 0 (representing `x0`), no register write occurs. As `x0` is initialized to 0, its value remains consistently zero.
 
 
-## What I've learnt in this project
+## What I've Learned in This Project
+### Tools
+- **Git**: Essential for version control and managing repository structure.
+- **Markdown**: A lightweight and user-friendly language that can be augmented with HTML for advanced functionality.
+- **SystemVerilog**: A Hardware Description Language (HDL) offering both behavioral and structural representations.
+- **Verilator**: Useful for compiling SystemVerilog programs into C++ projects.
+- **GTKWave**: An effective tool for displaying waveforms.
 
-
+### Soft Skills
+- **Debugging with Waveforms**: While Vbuddy provides a direct view of outcomes, waveforms are more beneficial for debugging. By examining waveforms clock by clock, we can identify any unexpected behavior in signals and refine our design accordingly.
+- **Maintaining a Logbook**: Keeping a detailed logbook, both personally and for the group, is vital. It facilitates communication, assists in decision-making, and serves as a reference when composing reports or statements.
+- **Developing Test Programs to verify specific functions**: Creating specific test programs to validate various aspects of the design proved invaluable. Examples include tests for [load and store](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/blob/top/testprogram1.s), [shift operations](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/blob/top/testprogram2-Shift.s), and the [LFSR Algorithm](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/blob/top/testprogram3-LFSR.s). These tests targeted at specific functions or algorithms, and were crucial for debugging and verifying specific functionalities.
 
 ## What I might do differently
