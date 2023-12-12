@@ -19,22 +19,53 @@ My contributions primarily focus on the Single Cycle and Cache Versions. In the 
 
 Furthermore, I undertook administrative duties within our team. These included managing the **repository structure**, **test and upload design results**, and **authoring the group's joint statement**. As the author of the joint statement, my design ideas are included in the [joint statement]().
 
-### Control Unit, Instruction Memory and Extend Unit 
-- In [742b3f2](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/742b3f2b9d3cbdc882d3ebd4e2a44154c933a736), a primilinary version that includes `Control Unit`, `Instruction Memory` and `Extend Unit` was developed. 
-- In [7ad151b](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/7ad151bcdcd05703ceac779554277482868779ec), additional control signals `LdSrc` and `StSrc` are implemented. 
-- In [b205608](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/b20560856b1a776b41823b173115e150de2bb01f), the consistancy issue was fixed for the three units. 
-- In [66ca29e](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/66ca29e78ad11d884464effced1b961cd896e20f), added another control signal `JSrc` (`JalSrc` in the subsequent versions) to support `JAL` and `JALR` instructions. 
+### Control Unit, Instruction Memory, and Extend Unit
+- In commit [742b3f2](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/742b3f2b9d3cbdc882d3ebd4e2a44154c933a736), a preliminary version including the `Control Unit`, `Instruction Memory`, and `Extend Unit` was developed.
+- In commit [7ad151b](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/7ad151bcdcd05703ceac779554277482868779ec), the control signals `LdSrc` and `StSrc` were implemented.
+- In commit [b205608](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/b20560856b1a776b41823b173115e150de2bb01f), a consistency issue within the three units was resolved, providing the final version of individual design. 
+- In commit [66ca29e](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/66ca29e78ad11d884464effced1b961cd896e20f), the control signal `JSrc` (later `JalSrc`) was added to support `JAL` and `JALR` instructions.
+- In commit [3b546db](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/3b546dbbe2ff62547c72be2c922010a1a72b18d2), the `ANDI` instruction was implemented.
+- In commit [ece7da9](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/ece7da9992e138253141a8770041873322f633da), the `XOR` instruction was implemented.
 
+### F1 Assembly Language Program
+- In commit [688cef7](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/688cef764ed9856d7f1a0f72c6e3f784b42277b2), the LFSR algorithm was tested.
+- In commit [1f43366](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/1f43366cbbf2e1cbd74327ff4b293625f8f256f4), the F1 program was tested.
+- In commit [0252720](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/0252720c67880ce14876fee235f90722fae7fdbf), updates were made to `F1.mem` and `instr_mem.sv` for little-endian compatibility.
 
 ### Top Level Design
-- In [8acd52b](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/8acd52b568e53151bcaa33f863c420eae30cb694), `top.sv` was created. 
-- In [9b217b3](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/9d217b3e988e312c5cde4419e6781a7314f40d2f), checked for wire names for consistency. 
+- In commit [8acd52b](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/8acd52b568e53151bcaa33f863c420eae30cb694), `top.sv` was created.
+- In commit [9b217b3](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/9d217b3e988e312c5cde4419e6781a7314f40d2f), wire names were reviewed for consistency.
 
+### Debug
+- In commit [b1c012e](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/b1c012e75d69ed7a718de6036ab7f22745ecbd9a), `memory_i` and `memory_o` were merged into the main memory.
+- In commit [fcc45b1](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/fcc45b10d2b2fc1b60bf25297f469b2e6ff83e5d), `DataMemory` was modified for the `SB` instruction.
+- In commit [20441ad](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/20441ad6e2f968ab042d45c96b7800301764193a), the `trigger` feature was incorporated in the design for the F1 Algorithm.
+- In commit [1f43366](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/1f43366cbbf2e1cbd74327ff4b293625f8f256f4), the initial value for `PC` was corrected, and `x0` was properly hardwired to 0.
+
+### Cache
+- In commit [5a780bf](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/5a780bf8b27b6e804563263317ff14605e552321), I defined the parameters and created a preliminary cache design, after which the task was handed over to [Haocheng](https://github.com/franfafdaf). The corresponding block diagram is shown below.
+
+<div align="center">
+  <img src="Images/Cache.png" alt="Cache Structure">
+</div>
+
+## Mistakes I've made
+### Implementation of `LUI` and `AUIPC` Instructions
+The functionalities of the `LUI` and `AUIPC` instructions are described as follows:
+```
+LUI rd, imm20:      rd <- imm20 << 12
+AUIPC rd, imm20:    rd <- PC + imm20 << 12
+```
+These instructions involve reading the top 20 bits and either directly writing them to `rd` or adding them to the `PC` before writing to `rd`. 
+
+In the [preliminary design](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/c74eb72f294e14942c7f426221aeb79656feeebd), a separate `Up` block controlled by `UpSrc` was added to execute these functions. However, this block proved to be redundant as the `Extend` unit can perform such operations. This realization enhanced my understanding of the `Extend` unit's role: it not only performs sign extension but also handles immediate value manipulations to provide the required `ImmExt` to the ALU.
+
+
+
+## Special Design Decisions
 
 ## What I've learnt in this project
 
-## Mistakes I've made
 
-## Special Design Decisions
 
 ## What I might do differently
