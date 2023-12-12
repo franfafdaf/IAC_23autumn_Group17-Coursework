@@ -64,7 +64,7 @@ module top(
     logic [4:0]         A2;
 
     logic [31:0]        RDi;
-    logic [31:0]        RD;
+    logic [31:0]        RD4;
     logic [31:0]        RD1;
     logic [31:0]        RD1E;
 
@@ -302,7 +302,7 @@ CacheMux my_cachemux(
     .hit(hit),
     .cacheInput(cacheOut),
     .memInput(memOut),
-    .Moutput(RD)
+    .Moutput(RD4)
 );
 
 Stage4 Stage4(
@@ -310,7 +310,7 @@ Stage4 Stage4(
     .RegWriteM(RegWriteM),
     .ResultSrcM(ResultSrcM),
     .ALUResultM(ALUResultM),
-    .RD(RD),
+    .RD(RD4),
     .RdM(RdM),
     .PC_PlusM(PC_PlusM),
     .RegWriteW(RegWriteW),
