@@ -14,7 +14,7 @@ don't cares
 ## Guanxi Lu Personal Statement
 
 ## My Contribution
-My contribution mainly lies in the Single Cycle version and the Cache Version. In Single Cycle version, I am responsible for the Control Unit, Instruction Memory and Extend Unit. Also, me and @Frank_enstein are responsible for debugging the design. 
+My contribution mainly lies in the Single Cycle version and the Cache Version. In Single Cycle version, I am responsible for the Control Unit, Instruction Memory and Extend Unit. Also, me and [Haocheng](https://github.com/franfafdaf) are responsible for debugging the design. 
 
 ## What I've learnt in this project
 
