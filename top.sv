@@ -283,9 +283,8 @@ Cache my_cache(
     .StSrcM(StSrcM),       // Store Type signal
     .LdSrcM(LdSrcM),       // Load Type signal                  
     .dataOut(cacheOut),   
-    .hit(hit),
-    .MdataOut(CtoMData),   
-    .MaddressOut(CtoMAdress)   
+    .hit(hit)
+ 
 );
 
 DataMemory my_data_memory(
@@ -293,8 +292,8 @@ DataMemory my_data_memory(
     .WE(MemWriteM),
     .StSrcM(StSrcM),
     .LdSrcM(LdSrcM),
-    .A(CtoMAdress),
-    .WD(CtoMData),
+    .A(ALUResultM),
+    .WD(WriteDataM),
     .RD(memOut)
 );
 
