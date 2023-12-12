@@ -24,19 +24,19 @@ always_comb begin
     ZeroE = 1'b0;
 
     if (ALUControlE == 3'b000) begin 
-        ALUResult = SrcAE + SrcBE;//add
+        ALUResult = SrcAE + SrcBE;      //add
     end
     
     if (ALUControlE == 3'b001) begin
-        ALUResult = SrcAE - SrcBE ;//subtract
+        ALUResult = SrcAE - SrcBE ;     //subtract
     end
 
     if (ALUControlE == 3'b010) begin 
-        ALUResult = SrcAE & SrcBE;//and
+        ALUResult = SrcAE & SrcBE;      //and
     end
 
     if (ALUControlE == 3'b011) begin 
-        ALUResult = SrcAE | SrcBE;//or
+        ALUResult = SrcAE | SrcBE;      //or
     end
 
     if (ALUControlE == 3'b100) begin 
@@ -44,11 +44,11 @@ always_comb begin
     end
 
     if (ALUControlE == 3'b101) begin 
-        ALUResult = SrcAE ^ SrcBE;//xor
+        ALUResult = SrcAE ^ SrcBE;      //xor
     end
     
     if (ALUControlE == 3'b110) begin 
-        ALUResult = SrcBE;//select SrcBE
+        ALUResult = SrcBE;              //select SrcBE
     end
 
     if (ALUControlE == 3'b111) begin 
