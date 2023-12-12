@@ -44,8 +44,11 @@ Through joint efforts, Group 17 has successfully implemented the F1 algorithm in
 
 Note: 
 `X` = Full Participation
-`P` = Partial Participation
+`P` = Partial Participation (modification or debug)
 `U` = Unused Version
+
+
+> **Note:** We would like to acknowledge that due to inadvertent errors in version control, the commit history on the `top` branch may not accurately represent the contributions of the group members. Notably, some files from the `top` branch, which were subsequently merged into the `SingleCycle_F1`, `SingleCycle_Ref`, `Pipelined_F1`, and other branches, were copied instead of being merged from the individual branches (`FHC`, `LGX`, `ZYY`, `CTX`). As a result, in the event of any conflicts, please refer to the table mentioned above for accurate attribution of work.
 
 ----
 ## Repo Structure
