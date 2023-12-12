@@ -41,7 +41,7 @@ int main(int argc, char **argv, char **env){
        vbdCycle(simcyc);
        plot += 1;
     }
-    if (plot > 960) {
+    if (plot > 1920) {
       break;
     }
  
