@@ -38,3 +38,18 @@ so i go abck to the vcd file to check the problem, for the instrution that just 
 then it seems that the all the instution excecurted just limited to the loop1, which means the instruion are stuck in loop one, which means the jalr, the jump type isntrution not work. after add the sginal that used for enable jal instruion, it seems that the jump opertion is not enabled correctly, so back to the control unit, and check with the isntrutyion list on the end othe Digital design and architecture of risc-v , the probelm is got. the way of immediate value located in the insturyion is different from the current design, like for >>>>>>>
 
 after this chagne, the program work well, but still not show the plotting. aftet use the vcd,  i found that it stuck in the second loop, which is load a word from data, and each time the data repeat from the .mem file the numebr is add one and store back to the place. this is for calculting the density of each value of the data. in this vserion, the cpu laod o from the percific place, add 1 , and next time it got to the same place, the cpu still laod 0, instead of 1, so that there's no value larger than 200, which will break the cycle for calcualting densityt. sicne the gram keep looping, the size of the vcd file is even 1.2 GB! take a long time to load the vcd file.
+
+back to the dat memory file, everything seems to be fine, really wired, so i go check other files, also nothing wrong. the took me two days, when i turn back to the summary of set for isntrution from the book, for the store byte(SB) instrution, it just says that address 7:0 = rd2(7:0), which just store a byte, but in our design, 24 zero bits are added as extend to this instuion, which may just romove the data in the 3 front adress, or just not been recognized by the cpu itseld. after fixing this probeldm, the correct version of the data is shown. 
+
+Pipelened processor
+for the pipelined processor, there's several moducles need to be added, the hazard control unit and the 4 flip flop which used to seperate the signle cycle processor to a pipelined version. First I concentrate on the hazard unit, I build the logic accoridng to hte conetent on book, and use comment to note the function of each part, since there's mainly three hazaed that need to be control: the forwaring, stall and flush.
+for forwarding, when the next instruiton need the data in register file, but the first instruyion haven't finish, the data can be forwad to next instrution, which won't influence the performance of the cpu. for the stall, when stalling, there
+
+when flush, it occurs when there's a jump instrution, when the jump happen, the previous instrution is loaded , but they are acutally not need, so when the juamp control enabled, these instution should be removed from each flip flop.
+
+i rename the logic in each stage, like the fetech, decode, with a prefix and change small logic to fit the pipelined version, like in the signle cycle version, the pc decode, which used to decide the value of next pc, is include in the control unit, but for now it needed to be moved out to be an independt unit to fit the pipelined logic.
+
+
+ after a lot change on the renaming and connecting in the top level, i tun the reference programming, noting is shown in vbuddy screen, back to the vcd file, it seems that that the processor again stuck in the last loop, but there's nothing wrong with the SB logic this time, when i add more related signal on the wave viewer, i found the proeblem, the mux that slelect the input to the data memory not work properly. so back to the top level, i found there's a miss conncetion with this port, after fix this problem, the correct graph is shown.
+
+ 
