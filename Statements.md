@@ -16,7 +16,9 @@
     - [Shell Script](#shell-script)
     - [Assembly Language (F1)](#assembly-language-f1)
     - [F1 Design VS Ref Design](#f1-design-vs-ref-design)
-
+- [Pipeline Design](#pipeline-design)
+- [Data Memory Cache Design](#data-memory-cache-design)
+- [Test Results](#test-results)
 
 
 
@@ -119,7 +121,9 @@ Additionally, the project incorporates a `Data Memory` block to facilitate instr
 
 The Project Brief provides a design example, as shown in the diagram below, which introduces several new control signals. 
 
-![Sample RV32I CPU](Images/single-cycle.jpg)
+<div align="center">
+  <img src="Images/single-cycle.jpg" alt="Sample RV32I CPU">
+</div>
 
 <p align="center">
     <span style="color: grey;">
@@ -507,13 +511,17 @@ The modified `reg_file.sv` is illustrated as the diagram below.
 As mentioned earlier, the F1 Program employs a distinct testbench from that of the Reference Program. In this testbench, the 32-bit output `a0` is transformed into an 8-bit `data_out` by masking the top 24 bits. Subsequently, the `vbdBar()` function is invoked to display `data_out` on the neopixel.
 
 
-
+----
 ## Pipeline Design
+----
 
-
+----
 ## Data Memory Cache Design
+----
 
+----
 ## Test Results
+----
 ### Reference Program
 
 - `sine.mem` a sinewave signal
