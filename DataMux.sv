@@ -1,9 +1,9 @@
 module DataMux (
-    input logic [1:0]   ResultSrcW, // 2-bit selector
-    input logic [31:0]  ALUResultW, // ALU ResultW
-    input logic [31:0]  ReadDataW,        // Data memory read data
-    input logic [31:0]  PC_PlusW,    // PC + 4
-    output logic [31:0] ResultW    // Output ResultW
+    input logic [1:0]   ResultSrcW,     // 2-bit selector
+    input logic [31:0]  ALUResultW,     // ALU ResultW
+    input logic [31:0]  ReadDataW,      // Data memory read data
+    input logic [31:0]  PC_PlusW,       // PC + 4
+    output logic [31:0] ResultW         // Output ResultW
 );
 
     always_comb begin

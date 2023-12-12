@@ -26,7 +26,7 @@ module PC#(
     assign  PC_TargetE = JalSrcE ? PC_Jump : RD1E; 
     assign  PCF_Next = PCSrcE ? PC_TargetE : PC_PlusF;
 
-    always_ff @(posedge clk or posedge rst)begin
+    always_ff @(posedge clk or posedge rst) begin
         if(rst) begin
              PCF <= 32'hBFC00000;
         end
