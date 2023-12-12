@@ -24,35 +24,35 @@ always_comb begin
     Zero = 1'b0;
 
     if (ALUControl == 3'b000) begin 
-        ALUResult = SrcA + SrcB;//add
+        ALUResult = SrcA + SrcB;        //add
     end
     
     if (ALUControl == 3'b001) begin
-        ALUResult = SrcA - SrcB ;//subtract
+        ALUResult = SrcA - SrcB ;       //subtract
     end
 
     if (ALUControl == 3'b010) begin 
-        ALUResult = SrcA & SrcB;//and
+        ALUResult = SrcA & SrcB;        //and
     end
 
     if (ALUControl == 3'b011) begin 
-        ALUResult = SrcA | SrcB;//or
+        ALUResult = SrcA | SrcB;        //or
     end
 
     if (ALUControl == 3'b100) begin 
-        ALUResult = SrcA >> SrcB[4:0];//shift right
+        ALUResult = SrcA >> SrcB[4:0];  //shift right
     end
 
     if (ALUControl == 3'b101) begin 
-        ALUResult = SrcA ^ SrcB;//xor
+        ALUResult = SrcA ^ SrcB;        //xor
     end
     
     if (ALUControl == 3'b110) begin 
-        ALUResult = SrcB;//select SrcB
+        ALUResult = SrcB;               //select SrcB
     end
 
     if (ALUControl == 3'b111) begin 
-        ALUResult = SrcA << SrcB[4:0];//shift left
+        ALUResult = SrcA << SrcB[4:0];  //shift left
     end
 
     Zero = (ALUResult == 32'b0);
