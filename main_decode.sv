@@ -18,7 +18,7 @@ module main_decode(
     always_comb begin
 
         case (opcode)
-        7'b0110011: begin //R-type
+        7'b0110011: begin           //R-type
             Branch = 0; 
             Jump = 0; 
             ResultSrc = 2'b00;
@@ -33,7 +33,7 @@ module main_decode(
             JalSrc = 0;
         end
 
-        7'b0010011: begin //I-type ALU
+        7'b0010011: begin           //I-type ALU
             Branch = 0; 
             Jump = 0; 
             ResultSrc = 2'b00;
@@ -48,7 +48,7 @@ module main_decode(
             JalSrc = 0;
         end
 
-        7'b0000011: begin //I-type load
+        7'b0000011: begin           //I-type load
             Branch = 0; 
             Jump = 0; 
             ResultSrc = 2'b01;
@@ -63,7 +63,7 @@ module main_decode(
             JalSrc = 0;
         end
 
-        7'b1100111: begin //I-type jump
+        7'b1100111: begin           //I-type jump
             Branch = 0; 
             Jump = 1; 
             ResultSrc = 2'b10;
@@ -78,7 +78,7 @@ module main_decode(
             JalSrc = 1'b0;
         end
 
-        7'b0100011: begin //S-type
+        7'b0100011: begin           //S-type
             Branch = 0; 
             Jump = 0; 
             ResultSrc = 2'b00;
@@ -93,7 +93,7 @@ module main_decode(
             JalSrc = 0;
         end
 
-        7'b1100011: begin //B-type
+        7'b1100011: begin           //B-type
             Branch = 1; 
             Jump = 0; 
             ResultSrc = 2'b00;
@@ -108,7 +108,7 @@ module main_decode(
             JalSrc = 1;
         end
 
-        7'b0110111: begin //U-type LUI
+        7'b0110111: begin           //U-type LUI
             Branch = 0; 
             Jump = 0; 
             ResultSrc = 2'b00;
@@ -123,7 +123,7 @@ module main_decode(
             JalSrc = 0;
         end
 
-        7'b0010111: begin //U-type AUIPC
+        7'b0010111: begin           //U-type AUIPC
             Branch = 0; 
             Jump = 0; 
             ResultSrc = 2'b00;
@@ -138,7 +138,7 @@ module main_decode(
             JalSrc = 0;
         end
 
-        7'b1101111: begin //J-type
+        7'b1101111: begin           //J-type
             Branch = 0; 
             Jump = 1; 
             ResultSrc = 2'b10;
