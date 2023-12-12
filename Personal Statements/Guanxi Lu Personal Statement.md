@@ -7,10 +7,6 @@
 
 using test programs
 
-don't cares
-
-需要做得更好：加强对git的使用，gitignore
-
 ## Guanxi Lu Personal Statement
 
 ## My Contribution
@@ -114,6 +110,18 @@ For `Jump` and `Branch` instructions, the logic determining the output for `PC` 
 | BNE         | 1      | `PC` + `ImmExt` |
 
 I introduced the `JalSrc` signal to select the appropriate signal to be added to `ImmExt`. Although the implementation appears straightforward, it effectively minimizes modifications to the overall design.
+
+### Hardwiring `x0` Register to Zero
+
+In the RV32I ISA, the `x0` register is always hardwired to 0, necessitating a corresponding hardware implementation in the `Register File` block. We explored several methods for this:
+
+- Utilizing `assign` statements to set `x0` to 0: This approach was ineffective. The assignment occurs during the "read" stage, but in the "write" stage, within the same cycle, `x0` could be modified if relevant instructions target it. Consequently, `x0` might not hold zero in that exact cycle.
+- Setting `x0` using `always_comb`: This method also faced issues. The value of `x0` could be overwritten within the same block. Moreover, if `x0` received an incorrect value, it would not be corrected in subsequent cycles, as illustrated in the image below:
+<div align="center">
+  <img src="Images/x0 issue.png" alt="x0 issue">
+</div>
+
+Ultimately,  a different logic is implemented, which prevents writing to `x0`. When the destination register `RD` equals 0 (representing `x0`), no register write occurs. As `x0` is initialized to 0, its value remains consistently zero.
 
 
 ## What I've learnt in this project
