@@ -26,7 +26,7 @@ always_comb begin
             else if (decode == 2'b10) ALUControl = 3'b000;  //add
             else  ALUControl = 3'b001;                      //sub， decode == 2'b11
         end
-        else if (funct3 == 3'b100) ALUControl = 3'b101;     //slt
+        else if (funct3 == 3'b100) ALUControl = 3'b101;     //xor
         else if (funct3 == 3'b110) ALUControl = 3'b011;     //or
         else if (funct3 == 3'b111) ALUControl = 3'b010;     //and
         else ALUControl = 3'b000;
