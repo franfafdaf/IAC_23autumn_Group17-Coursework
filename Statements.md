@@ -137,7 +137,11 @@ However, it was discovered in practice that this structure is insufficient for i
 In light of these findings, we modified the design (as depicted in the diagram below) to provide an appropriate framework for executing all the instructions in our program. Detailed explanation of specific blocks will be provided in the sections below. 
 
 ![Overview](/Images/Overview.png)
-<p style="color: grey;text-align:center;">Single Cycle Design Overview</p>
+<p align="center">
+    <span style="color: grey;">
+        Single Cycle Design Overview
+    </span>
+</p>
 
 Among all the RV32I instructions, 18 are implemented, covering all 6 types of instructions. The **List of Instructions** is shown in the table below.
  
