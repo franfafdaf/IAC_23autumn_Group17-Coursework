@@ -19,7 +19,7 @@ int main(int argc, char **argv, char **env){
   tfp->open ("top.vcd");
  
   if (vbdOpen()!=1) return(-1);
-  vbdHeader("PipelinedRef");
+  vbdHeader("CacheRef");
 
   top->clk = 1;
   top->rst = 0;
@@ -38,14 +38,14 @@ int main(int argc, char **argv, char **env){
     }
     // plot ROM output and print cycle count
     if (plot >= 1) {
-      if(count == 3){
+      // if(count == 3){
         vbdPlot(int(top->a0), 0, 255);
-        count =0;
+        // count =0;
         vbdCycle(simcyc);
-      }
-      else{
-        count = count +1;
-      }
+      // }
+      // else{
+      //   count = count +1;
+      // }
       plot += 1;
     }
     if (plot > 960) {
