@@ -146,4 +146,7 @@ Ultimately,  a different logic is implemented, which prevents writing to `x0`. W
 - **Maintaining a Logbook**: Keeping a detailed logbook, both personally and for the group, is vital. It facilitates communication, assists in decision-making, and serves as a reference when composing reports or statements.
 - **Developing Test Programs to verify specific functions**: Creating specific test programs to validate various aspects of the design proved invaluable. Examples include tests for [load and store](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/blob/top/testprogram1.s), [shift operations](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/blob/top/testprogram2-Shift.s), and the [LFSR Algorithm](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/blob/top/testprogram3-LFSR.s). These tests targeted at specific functions or algorithms, and were crucial for debugging and verifying specific functionalities.
 
-## What I might do differently
+## Future Improvements
+
+In future projects, I plan to enhance my approach to repository structure management. Additionally, I aim to dive deeper into various methodologies for implementing F1 logic from a software perspective. I'm also eager to explore more complex structural designs and experience the intricacies of advanced control logic.
+
