@@ -1,15 +1,28 @@
-- What you Contributed 
-- Reflection about what you have learned in this project
-- Mistakes you made
-- Special Design Distribution
-- What you might do differently if you were to do it again or have more time
-
-
-using test programs
-
 ## Guanxi Lu Personal Statement
+## Table of Contents
+- [My Contributions](#my-contributions)
+  - [Summary](#summary)
+  - [Control Unit, Instruction Memory, and Extend Unit](#control-unit-instruction-memory-and-extend-unit)
+  - [F1 Assembly Language Program](#f1-assembly-language-program)
+  - [Top Level Design](#top-level-design)
+  - [Debug](#debug)
+  - [Cache](#cache)
+- [Mistakes I've made](#mistakes-ive-made)
+  - [Implementation of `LUI` and `AUIPC` Instructions](#implementation-of-lui-and-auipc-instructions)
+  - [Handling "Don't Care" Values (`X`) in the Control Unit](#handling-dont-care-values-x-in-the-control-unit)
+  - [Implementing Data Memory Operations for the `SB` Instruction](#implementing-data-memory-operations-for-the-sb-instruction)
+  - [Version Control](#version-control)
+- [Special Design Decisions](#special-design-decisions)
+  - [Introduction of `ALUSrcA` Signal for `SrcA` Input Selection](#introduction-of-alusrca-signal-for-srca-input-selection)
+  - [Introduction of `JalSrc` Signal for `PC` logic](#introduction-of-jalsrc-signal-for-pc-logic)
+  - [Hardwiring `x0` Register to Zero](#hardwiring-x0-register-to-zero)
+- [What I've Learned in This Project](#what-ive-learned-in-this-project)
+  - [Tools](#tools)
+  - [Soft Skills](#soft-skills)
+- [Future Improvements](#future-improvements)
 
-## My Contribution
+
+## My Contributions
 ### Summary
 My contributions primarily focus on the Single Cycle and Cache Versions. In the Single Cycle version, I was tasked with developing the **Control Unit**, **Instruction Memory**, **Extend Unit**, **Top Level Design** and the **F1 Assembly Language Program**. Additionally, [Haocheng](https://github.com/franfafdaf) and I collaborated on debugging the design. For the Cache Version, I selected the cache parameters (2-way associative, 4-word block size, write-through cache) and **designed the corresponding block diagram**. [Haocheng](https://github.com/franfafdaf) took charge of the implementation phase.
 
@@ -87,7 +100,7 @@ else if(WE ==1 && StSrc ==1 ) begin
 end
 ```
 
-### Version Control Challenges
+### Version Control
 
 As a novice Git user, I struggled with effective version control of the repository. Initially, everything functioned smoothly when each team member worked on their individual branches. However, challenges arose during the merging process. Instead of utilizing the `git merge` command, I manually copied the code to avoid potential conflicts with files like `README.md`. This approach led to misleading representations of work contributions in the commit history.
 
