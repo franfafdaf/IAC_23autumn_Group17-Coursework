@@ -10,3 +10,5 @@ using test programs
 don't cares
 
 需要做得更好：加强对git的使用，gitignore
+
+## Guanxi Lu Personal Statement
