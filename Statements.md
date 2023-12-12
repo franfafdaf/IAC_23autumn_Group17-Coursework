@@ -181,7 +181,11 @@ Operations on the PC can be classified easily, allowing for straightforward impl
 - For Jump instructions, the CPU needs to determine whether to add `PC` or `RS1` to `ImmExt`, with the value of `ImmExt` varying based on the instruction type.
 
 ![PC](/Images/PC.png)
-<p style="color: grey;text-align:center;">Program Counter</p>
+<p align="center">
+    <span style="color: grey;">
+        Program Counter
+    </span>
+</p>
 
 
 ### Instruction Memory
@@ -317,9 +321,13 @@ Data Memory facilitates the execution of `Load` and `Store` instructions. For `L
 The diagram below depicts the structure of `Load` and `Store` instructions. `Load` instructions, which are I-type, read data from the memory location `RS1 + Imm[11:0]` and write it to `RD`, with `funct3` differentiating various `Load` types. Conversely, `Store` instructions are S-type, where data from the register `RS2` is written to the memory location `RS1 + Imm[11:0]`, and here too, `funct3` serves to distinguish among different `Store` types.
 
 ![Load&Store](/Images/Load&Store.png)
-<p style="color: grey;text-align:center;">Load & Store Structure, Cited from RV32I ISA</p>
+<p align="center">
+    <span style="color: grey;">
+        Load & Store Structure, Cited from RV32I ISA
+    </span>
+</p>
 
-As indicated in the memory map, Data Memory spans from 0x00000000 to 0x0001FFFF, necessitating an address length of 17 bits. Adhering to byte-addressing, the data length (`DATA_WIDTH`) is also set to 8 bits. Consequently, Data Memory comprises a memory array of \(2^{17} = 131072\) blocks.
+As indicated in the memory map, Data Memory spans from 0x00000000 to 0x0001FFFF, necessitating an address length of 17 bits. Adhering to byte-addressing, the data length (`DATA_WIDTH`) is also set to 8 bits. Consequently, Data Memory comprises a memory array of $\(2^{17} = 131072\)$ blocks.
 
 For the standard `LW` (load word) instruction, Data Memory transfers data from memory to register using a little-endian format. The reverse process is applied for the `SW` (store word) instruction. However, the assembly language also necessitates the implementation of `LBU` (load byte unsigned) and `SB` (store byte). `LBU` loads the least significant 8 bits, extended to 32 bits without sign extension, into the register. `SB` alters only the specific memory block addressed by `RS1 + Imm[11:0]` with the least significant 8 bits of `RS2`, rather than the entire word.
 
