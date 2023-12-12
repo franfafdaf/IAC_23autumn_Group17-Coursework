@@ -73,8 +73,23 @@ The first option adds unnecessary complexity, potentially requiring more control
 
 Consequently, I decided to assign a value of 0 to all `X` values. While this may introduce some ambiguity, we operate under the assumption that the "Don't Care" values will not be utilized by the data path, thus the arbitrary assignment should not impact functionality.
 
+### Implementing Data Memory Operations for the `SB` Instruction
 
+The functionality of the `SB` instruction is outlined as follows:
+```
+SB rs2, imm12(rs1):     rs2(7:0) -> mem[rs1 + imm12]
+```
+This instruction modifies data in a single memory location. In our initial design, we overlooked this specific behavior and erroneously modified the entire word as demonstrated in the following code:
 
+```SystemVerilog
+if (StSrc) WD_o ={{24{1'b0}}, WD_i[7:0]};//SB
+```
+The appropriate implementation should only alter the relevant part of the word, leaving the rest unchanged, as corrected in the code below:
+```SystemVerilog
+else if(WE ==1 && StSrc ==1 ) begin
+  data_array[A] <= WD[7:0]; // SB
+end
+```
 
 ## Special Design Decisions
 
