@@ -12,3 +12,14 @@ don't cares
 需要做得更好：加强对git的使用，gitignore
 
 ## Guanxi Lu Personal Statement
+
+## My Contribution
+My contribution mainly lies in the Single Cycle version and the Cache Version. In Single Cycle version, I am responsible for the Control Unit, Instruction Memory and Extend Unit. Also, me and @Frank_enstein are responsible for debugging the design. 
+
+## What I've learnt in this project
+
+## Mistakes I've made
+
+## Special Design Decisions
+
+## What I might do differently
