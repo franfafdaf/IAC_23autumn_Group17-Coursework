@@ -60,6 +60,20 @@ These instructions involve reading the top 20 bits and either directly writing t
 
 In the [preliminary design](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/c74eb72f294e14942c7f426221aeb79656feeebd), a separate `Up` block controlled by `UpSrc` was added to execute these functions. However, this block proved to be redundant as the `Extend` unit can perform such operations. This realization enhanced my understanding of the `Extend` unit's role: it not only performs sign extension but also handles immediate value manipulations to provide the required `ImmExt` to the ALU.
 
+### Handling "Don't Care" Values (`X`) in the Control Unit
+
+The concept of "Don't Care" values (`X`) in our control unit results from scenarios that isn't expected to occur. For instance, when data does not pass through memory, the `MemWrite` signal is assigned `X`. A challenge we faced was that Verilator struggles to process `X` values.
+
+Three strategies were considered to address this issue:
+- Introducing an additional "state" to manage `X` situations.
+- Leaving the `X` values as they are.
+- Assigning arbitrary values to `X`.
+
+The first option adds unnecessary complexity, potentially requiring more control signal bits. Therefore, I initially chose to leave the `X` values untouched. However, this approach led to warnings and the potential issue of Verilator not compiling parts of the SystemVerilog program.
+
+Consequently, I decided to assign a value of 0 to all `X` values. While this may introduce some ambiguity, we operate under the assumption that the "Don't Care" values will not be utilized by the data path, thus the arbitrary assignment should not impact functionality.
+
+
 
 
 ## Special Design Decisions
