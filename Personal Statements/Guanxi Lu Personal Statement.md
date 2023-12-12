@@ -94,7 +94,7 @@ end
 ## Special Design Decisions
 ### Introduction of `ALUSrcA` Signal for `SrcA` Input Selection
 
-In the lab's example design, there is only one `ALUSrc` signal, which is used to select the input value for `SrcB`. However, for the implementation of the `LUI` and `AUIPC` instructions (functions detailed [above](#implementation-of-lui-and-auipc-instructions)), we introduced an additional multiplexer (MUX) to select the input for `SrcA`. This addition allows for two input options: `PC` and `RD1`. The control logic for this is summarized in the table below:
+In the coursework's example design, there is only one `ALUSrc` signal, which is used to select the input value for `SrcB`. However, for the implementation of the `LUI` and `AUIPC` instructions (functions detailed [above](#implementation-of-lui-and-auipc-instructions)), we introduced an additional multiplexer (MUX) to select the input for `SrcA`. This addition allows for two input options: `PC` and `RD1`. The control logic for this is summarized in the table below:
 
 | Instruction | ALUSrcA | ALUSrcB |
 |-------------|---------|---------|
@@ -104,6 +104,16 @@ In the lab's example design, there is only one `ALUSrc` signal, which is used to
 In the case of `LUI`, the operation solely utilizes `ImmExt`, whereas `AUIPC` involves summing `PC` and `ImmExt` within the ALU.
 
 ### Introduction of `JalSrc` Signal for `PC` logic
+For `Jump` and `Branch` instructions, the logic determining the output for `PC` differs, as outlined in the table below:
+
+| Instruction | JalSrc | Operation       |
+|-------------|--------|-----------------|
+| JAL         | 0      | `RD1` + `ImmExt`|
+| JALR        | 0      | `RD1` + `ImmExt`|
+| BEQ         | 1      | `PC` + `ImmExt` |
+| BNE         | 1      | `PC` + `ImmExt` |
+
+I introduced the `JalSrc` signal to select the appropriate signal to be added to `ImmExt`. Although the implementation appears straightforward, it effectively minimizes modifications to the overall design.
 
 
 ## What I've learnt in this project
