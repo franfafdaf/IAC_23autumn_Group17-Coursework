@@ -282,7 +282,7 @@ Cache my_cache(
     .LdSrcM(LdSrcM),
     .A(ALUResultM),
     .WD(WriteDataM),
-    .RD(RD4)
+    .dataOut(RD4)
 );
 
 // DataMemory my_data_memory(

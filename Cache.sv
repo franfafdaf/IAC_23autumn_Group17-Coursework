@@ -30,11 +30,11 @@ module Cache #(
     assign inputSet = A[4:2];
 
     //output
-    logic [Data_Width-1:0]           RD;           // Read Data output
+    // logic [Data_Width-1:0]           RD;           // Read Data output
 
     logic [7:0] data_array [2**17-1 : 0]; 
 
-    initial $readmemh("triangle.mem", data_array, 17'h10000);
+    initial $readmemh("noisy.mem", data_array, 17'h10000);
 
     //initialization
     initial begin
@@ -50,7 +50,7 @@ module Cache #(
     always_comb begin
         // check whether hit
         for(int i =0; i< wayNum; i=i+1)begin
-            if((inputTag == tag[inputSet][i]) && (valid[inputSet][i]) && LdSrcM )begin
+            if((inputTag == tag[inputSet][i]) && (valid[inputSet][i]))begin
                 hit = 1'b1;
             end
             else begin
@@ -58,7 +58,6 @@ module Cache #(
             end
         end
         selectedWay = lru[inputSet] ? 1'b0 : 1'b1; // selecte the way
-        lru[inputSet] = !lru[inputSet];
     end
 
     //read
@@ -68,24 +67,24 @@ module Cache #(
         end
         else begin
             if (LdSrcM) begin
-                RD = {{24{1'b0}}, data_array[A]}; //LBU
-                data[inputSet][selectedWay] = RD;
+                dataOut = {{24{1'b0}}, data_array[A]}; //LBU
+
             end
             else begin
-                RD = {data_array[A+3], data_array[A+2], data_array[A+1], data_array[A]}; //LW
-                data[inputSet][selectedWay]= RD;
-            end
-            dataOut= RD;  
+                dataOut = {data_array[A+3], data_array[A+2], data_array[A+1], data_array[A]}; //LW
+            end 
         end
-
-     
     end
+
     //write
     always_ff @(posedge clk) begin
         if(WE)begin
             if(StSrcM)begin // SB
                 data_array[A] <= WD[7:0]; // cache
-                data[inputSet][selectedWay] <= WD[7:0]; // data mem
+                data[inputSet][selectedWay][7:0] <= WD[7:0]; // data mem
+                valid[inputSet][selectedWay] <= 1;
+                tag[inputSet][selectedWay] <= inputTag;
+                lru[inputSet] <= !lru[inputSet];
             end
             else begin //sw
                 data_array[A] <= WD[7:0]; // cache
@@ -96,7 +95,21 @@ module Cache #(
                 data[inputSet][selectedWay][15:8]<= WD[15:8];
                 data[inputSet][selectedWay][23:16]<= WD[23:16];
                 data[inputSet][selectedWay][31:24]<= WD[31:24];
+                valid[inputSet][selectedWay] <= 1;
+                tag[inputSet][selectedWay] <= inputTag;
+                lru[inputSet] <= !lru[inputSet];
             end
+        end
+        else begin
+            if (LdSrcM) begin
+                data[inputSet][selectedWay] <= {{24{1'b0}}, data_array[A]}; //LBU
+            end
+            else begin
+                data[inputSet][selectedWay] <= {data_array[A+3], data_array[A+2], data_array[A+1], data_array[A]}; //LW
+            end 
+
+            valid[inputSet][selectedWay] <= 1;
+            tag[inputSet][selectedWay] <= inputTag;
         end
     end
 
