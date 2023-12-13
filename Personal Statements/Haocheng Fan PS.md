@@ -11,30 +11,50 @@ I also do the job as the repo master, to build the github repossitoeryt and modi
 
 ### Single cycle processor section modification
 - in commit[296baaf](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/296baaf513f4e8ec553caf4e8feb459ab987700a), the debug of `Control Unit`, `mainDecode` and `ALUDecode`
-- in commit[b17e918](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/b17e918bd95512817b331d454390872abb4e5f8b), the debug of
+- in commit[b17e918](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/b17e918bd95512817b331d454390872abb4e5f8b), the debug of `datamem`, `instruction mem` and `top`.
+  
+
+
+- in[82f2d82](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/82f2d82677d34c992c6c302656fb9fe5cd4f4ad5), debug of `pc` and `regfile`.
+the inital version of register fiel contains duplicated if judgement, which leads to misunderstand to the people who read this code, also, the loss of all conditions, like else... makes the compiler keep on showing warining. to fix this, I just use the one condition to dicided whetehre the content of register fiel is replaced, the write enable signal. only in the positive clock clik and write enable signal is enabled, the target rgister is replaced its content.
+- in[9f5a249](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/9f5a24999856b424e760067505dd4d85696d9ea6), combine the three memory module into one `datamem`.
+the intial version of data memory provided by group member to me consists of three individual fiels, which is the datamem.sv, which used for thor the reading of data from .mem fiel, memory_out.sv, which is used for the swtiching between LBU and LW mode, and memoey_in.sv, which is resposible for the switching of store operation, changing from the SB and SW instruyion according to different input signal. this is too complex, so I combined them into one file, to simplifiy connection in the top.sv file
+for other components, the modification are mainly change the faslely set size of signal, the unrecognized variabel due to the miss use of capital letter and samll letter, and some grammer issue with systemverilog, like forggeting to add a blank line after the endmodule
 ### Single cycle version debug and testing
+- in commit[0e5bcc5](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/0e5bcc5eaca9eedd887e2bb71e0f42cbf340641f) and other commit with name test and modify, the testing of the single cycle version of processor.
 ### Pipelened processor
+- in commit[1c8b3b5](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/1c8b3b515f4128b4a561c20a929516556fecf323), the flush, stall and forward function in hazard control unit is added to the pipelined version.
+- in commit[b0a731b](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/b0a731bf8b34876275449e684cc3f78f5034d5a3), and several previous commit, the buidling of 4 flip flop that separeate the sategs.
+
 ### Pipelined version debug and testing
+- in commit[891ee88](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/891ee88a181cea1bb0545e017e88b7c0679a9761), bug of the pieplined version is fixed.
 ### 2-way Cache processor
 ### Cache version debug and testing
 
 
+----
+## mistakes i make
+----
+
+----
+## Special Designs
+----
+for the testbench, after reading the reference aseembly code for probability density function, I found that the output to vbuddy, the a0, will appear after three loops, which clean, build and show the data, which means for a large number of cycles, the output of vbuddy will be 0, since the plotting of vbuddy also take time, i add a condition to hte testbench that, only when the ao is none zero value, the graph is plotted.???
+
+also, since the last loop that shows the PDF graph for the data is repeating, i set the maximum of plot time for the `testbench`, so that only one complete graph is shown. 
+
+also, i fruther modify the `test bench` to add a count there, each time `a0` is not 0 for three times, one is plotted, just like take sample to 1 of three, in this way, the complete pdf graph can be shown on the screen of vbuddy.
+
 Single cycle processor section modification
-1. data memory
 
-the intial version of data memory provided by group member to me consists of three individual fiels, which is the datamem.sv, which used for thor the reading of data from .mem fiel, memory_out.sv, which is used for the swtiching between LBU and LW mode, and memoey_in.sv, which is resposible for the switching of store operation, changing from the SB and SW instruyion according to different input signal. this is too complex, so I combined them into one file, to simplifiy connection in the top.sv file
 
-2. register file
 
-the inital version of register fiel contains duplicated if judgement, which leads to misunderstand to the people who read this code, also, the loss of all conditions, like else... makes the compiler keep on showing warining. to fix this, I just use the one condition to dicided whetehre the content of register fiel is replaced, the write enable signal. only in the positive clock clik and write enable signal is enabled, the target rgister is replaced its content.
-3. other components
-for other components, the modification are mainly change the faslely set size of signal, the unrecognized variabel due to the miss use of capital letter and samll letter, and some grammer issue with systemverilog, like forggeting to add a blank line after the endmodule
+1. other components
+
 
 Single cycle version debug and testing
 For the doit.sh, it just follow the common as all the labs before, first clean the old data stored, and the produce the vcd file to see the wave of the erach sgianl.
-for the testbench, after reading the reference aseembly code for probability density function, I found that the output to vbuddy, the a0, will appear after three loops, which clean, build and show the data, which means for a large number of cycles, the output of vbuddy will be 0, since the plotting of vbuddy also take time, i add a condition to hte testbench that, only when the ao is none zero value, the graph is plotted.???
 
-also, since the last loop that shows the PDF graph for the data is repeating, i set the maximum of plot time for the testbench, so that only one complete graph is shown. 
 
 In the debuging, after fix all the grammar and connection issue, the first problem appear is that, the first problem appeared is that, there 's no signal in the screen of vbuddy. I first use the instruction from the lab4,which kust use addi and bne instrution, there's till on signal. So i checked the vcd file. the problem is the isntrution is different fromn the actual instrution, so i check back to the instruiyon memory, the order is wrong, for the provided instuion, pdf.hex file the loading of instrution should be little endiatn, instead of large endian, so i change the order of reading in the instrution memory moducle, and test the counter instruion, the correct graph showsm the adding line. so i turn back to the pdf instruion 
 
