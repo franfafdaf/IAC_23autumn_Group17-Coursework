@@ -422,7 +422,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__1(Vtop___024root* vlSelf) 
                                             * (7U & vlSelf->top__DOT__ALUResultM))))))
                   : 0U) == (vlSelf->top__DOT__ALUResultM 
                             >> 3U)))) {
-            vlSelf->top__DOT__hit = 0U;
+            vlSelf->top__DOT__hit = 1U;
             vlSelf->top__DOT__cacheOut = (0xffU & vlSelf->top__DOT__my_cache__DOT__data[
                                           (0xeU & (vlSelf->top__DOT__ALUResultM 
                                                    << 1U))]);
@@ -478,7 +478,7 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__1(Vtop___024root* vlSelf) 
                                                   & vlSelf->top__DOT__ALUResultM)))))))
                   : 0U) == (vlSelf->top__DOT__ALUResultM 
                             >> 3U)))) {
-            vlSelf->top__DOT__hit = 0U;
+            vlSelf->top__DOT__hit = 1U;
             vlSelf->top__DOT__cacheOut = (0xffU & (
                                                    ((0U 
                                                      == 

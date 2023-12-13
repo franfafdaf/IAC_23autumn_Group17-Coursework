@@ -9,7 +9,7 @@
 //     input  logic                            StSrcM,       // Store Type signal
 //     input  logic                            LdSrcM,       // Load Type signal                    
 //     input  logic                            WE,          // Write Enable signal
-//     input  logic [Data_Width-1:0]           A,           // Address input
+//     input  logic [Data_Width-1:0]           A,           // addressIness input
 //     input  logic [Data_Width-1:0]           WD,          // Write Data input
     
 //     output logic [Data_Width-1:0]           dataOut 
@@ -121,23 +121,20 @@
 // endmodule
 module Cache #(
   // Cache configuration parameters
-  parameter TAG_SIZE = 29,
+  parameter TAG_SIZE = 27,
   parameter SET_SIZE = 3,
   parameter NUM_SETS = 8,
   parameter NUM_WAYS = 2
 )(
-  input logic [31:0] addr,
-  input logic [31:0] data_in,
-  output logic [31:0] data_out,
+  input logic [31:0]            addressIn,
+  input logic [31:0]            dataIn,
+  output logic [31:0]           dataOut,
   input  logic                  StSrcM,       // Store Type signal
   input  logic                  LdSrcM,       // Load Type signal
-//   input logic [2:0] func3,
-  input logic wen,
-//   input logic ren,
-  input logic clk,
-  output logic hit
-//   output reg [31:0] address_main,
-//   output reg [31:0] data_in_main
+  input logic                   WE,
+  input logic                   clk,
+
+  output logic                  hit
 );
 
   // Cache data structures
@@ -145,13 +142,13 @@ module Cache #(
   logic [NUM_SETS-1:0][NUM_WAYS-1:0][TAG_SIZE-1:0] tag;
   logic [NUM_SETS-1:0][NUM_WAYS-1:0][31:0] data; // Cache data now has 4 bytes per entry
   logic [NUM_SETS-1:0] lru; // LRU bits for each set
-  logic  way_to_write;
+  logic  selectedWay;
   
-  // Address decoding
-  logic [TAG_SIZE-1:0] addr_tag;
-  logic [SET_SIZE-1:0] addr_set;
-  assign addr_tag = addr[31:3]; // Highest 29 bits
-  assign addr_set=addr[2:0];
+  // addressIness decoding
+  logic [TAG_SIZE-1:0] inputTag;
+  logic [SET_SIZE-1:0] inputSet;
+  assign inputTag = addressIn[31:4]; 
+  assign inputSet=addressIn[3:2];
 
   // Initialization
   initial begin
@@ -164,58 +161,37 @@ module Cache #(
     end
   end
 
-  // Read operation logic
+  // Read 
   always_comb begin
     hit = 1'b0; // Default to miss
-    data_out = 32'b0; // Default data_out is 0
-    // Iterate over ways to find the tag
+    dataOut = 32'b0; // Default dataOut is 0
     for (int way = 0; way < NUM_WAYS; way++) begin
-    //   if (func3 == 3'b010) begin
-    //     if (ren && valid[addr_set][way] && tag[addr_set][way] == addr_tag) begin
-    //     // Cache hit
-    //     hit = 1'b1;
-    //     end
-    //       data_out = {data[addr_set][way][31:0]};
-    //     end
-        // For load word, assemble data from four bytes
        if (LdSrcM) begin
-          if (LdSrcM && valid[addr_set][way] && tag[addr_set][way] == addr_tag) begin
-          data_out = {24'd0,data[addr_set][way][7:0]};
-           hit = 1'b1;
+          if (LdSrcM && valid[inputSet][way] && tag[inputSet][way] == inputTag) begin
+                dataOut = {24'd0,data[inputSet][way][7:0]};
+                hit = 1'b1;
             end
         end
     end
  end
 
-
-//   // Update the cache contents and the LRU status on a write
-//   always_comb begin 
-//     address_main = addr;
-//     data_in_main = data_in;
-//   end
-
-  // Additional logic to update `lru` based on read hits and perform byte stores
   always_ff @(posedge clk) begin
     if (LdSrcM && hit) begin
-      // Update LRU if there is a read hit
-      lru[addr_set] <= ~lru[addr_set];
+      lru[inputSet] <= ~lru[inputSet];
     end
     
-    if (wen) begin
+    if (WE) begin
       // Update the cache contents and the LRU status on a write
-      way_to_write <= lru[addr_set] ? 1'b0 : 1'b1; // Determine the LRU way
+      selectedWay <= lru[inputSet] ? 1'b0 : 1'b1; // Determine the LRU way
       // Update cache line
-      valid[addr_set][way_to_write] <= 1'b1;
-      tag[addr_set][way_to_write] <= addr_tag;
+      valid[inputSet][selectedWay] <= 1'b1;
+      tag[inputSet][selectedWay] <= inputTag;
       
       // For store word, break down the data into four bytes
       if (StSrcM) begin
-        data[addr_set][way_to_write][7:0] <=data_in[7:0];
+        data[inputSet][selectedWay][7:0] <=dataIn[7:0];
       end
-      // For store byte, select the byte location based on byte_select
-    //   else if (func3 == 3'b010) begin
-    //     data[addr_set][way_to_write][31:0] <= data_in;
-    //   end
+
     end
   end
 endmodule
