@@ -52,7 +52,7 @@ In this project, I focused on developing the Register File, Arithmetic Logic Uni
   - **Zero:** A flag that is set to high when the `ALUResult` is zero
 
 - **operations：**
-  | ALUctrl | operation |
+  | ALUControl | operation |
   | --- | --- |
   | 000 | Addition |
   | 001 | Subtraction |
