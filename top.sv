@@ -101,12 +101,12 @@ module top(
     logic               FlushD;
     logic[31:0]          SrcA0E;
     logic[31:0]          SrcB0E;
-    // // cache
-    // logic               hit;
+    // cache
+    logic               hit;
     // logic[31:0]         CtoMData;
     // logic[31:0]         CtoMAdress;
-    // logic[31:0]         memOut;
-    // logic[31:0]         cacheOut;
+    logic[31:0]         memOut;
+    logic[31:0]         cacheOut;
 
 
 
@@ -275,32 +275,43 @@ Stage3 Stage3(
     .PC_PlusM(PC_PlusM)
 );
 
-Cache my_cache(
-    .clk(clk),
-    .WE(MemWriteM),
-    .StSrcM(StSrcM),
-    .LdSrcM(LdSrcM),
-    .A(ALUResultM),
-    .WD(WriteDataM),
-    .dataOut(RD4)
-);
-
-// DataMemory my_data_memory(
+// Cache my_cache(
 //     .clk(clk),
 //     .WE(MemWriteM),
 //     .StSrcM(StSrcM),
 //     .LdSrcM(LdSrcM),
 //     .A(ALUResultM),
 //     .WD(WriteDataM),
-//     .RD(memOut)
+//     .dataOut(RD4)
 // );
 
-// CacheMux my_cachemux(
-//     .hit(hit),
-//     .cacheInput(cacheOut),
-//     .memInput(memOut),
-//     .Moutput(RD4)
-// );
+Cache my_cache(
+    .clk(clk),
+    .wen(MemWriteM),
+    .StSrcM(StSrcM),
+    .LdSrcM(LdSrcM),
+    .addr(ALUResultM),
+    .data_in(WriteDataM),
+    .hit(hit),
+    .data_out(cacheOut)
+);
+
+DataMemory my_data_memory(
+    .clk(clk),
+    .WE(MemWriteM),
+    .StSrcM(StSrcM),
+    .LdSrcM(LdSrcM),
+    .A(ALUResultM),
+    .WD(WriteDataM),
+    .RD(memOut)
+);
+
+CacheMux my_cachemux(
+    .hit(hit),
+    .cacheInput(cacheOut),
+    .memInput(memOut),
+    .Moutput(RD4)
+);
 
 Stage4 Stage4(
     .clk(clk),
