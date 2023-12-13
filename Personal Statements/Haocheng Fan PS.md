@@ -1,6 +1,7 @@
 ## Personal Statement of Haocheng Fan
-
+## Contents
 - [Personal Statement of Haocheng Fan](#personal-statement-of-haocheng-fan)
+- [Contents](#contents)
 - [Contributions](#contributions)
   - [Summary](#summary)
   - [Modifications in the Single Cycle Processor Section](#modifications-in-the-single-cycle-processor-section)
@@ -8,7 +9,7 @@
     - [Register File Optimization](#register-file-optimization)
     - [Data Memory Module Consolidation](#data-memory-module-consolidation)
     - [Other Component Modifications](#other-component-modifications)
-  - [Single cycle version debug and testing](#single-cycle-version-debug-and-testing)
+  - [Single Cycle Version Debug and Testing](#single-cycle-version-debug-and-testing)
   - [Pipelened processor](#pipelened-processor)
   - [Pipelined version debug and testing](#pipelined-version-debug-and-testing)
   - [Implementing Hazard Control](#implementing-hazard-control)
@@ -66,12 +67,17 @@ Commit [`9f5a249`](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework
 #### Other Component Modifications
 Additional modifications across other components include correcting incorrectly set signal sizes, fixing variable recognition issues caused by inconsistent use of uppercase and lowercase letters, and resolving some SystemVerilog syntax errors, like omitting blank lines after `endmodule`.
 
-### Single cycle version debug and testing
 
-- in commit[0e5bcc5](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/0e5bcc5eaca9eedd887e2bb71e0f42cbf340641f) and other commit with name test and modify, the testing of the single cycle version of processor.
-- In the process of debugging, after resolving grammar and connection issues, the first notable problem was the absence of signal on the vbuddy screen. Initially using instructions from lab4 (which involve `addi` and `bne` instructions), the issue persisted. Examination of the VCD file revealed a discrepancy between the expected and actual instructions. The problem was traced back to the instruction memory module, where instructions were being loaded in the wrong order due to endianness issues. Adjusting the instruction memory module to load instructions in little-endian format, as opposed to big-endian, resolved this issue.
--  The most challenging bug in the single-cycle processor was related to the `SB` instruction, where the issue of a massive `VCD` file size (1 GB) indicated a problem. The `SB`and `LW`instructions were incorrectly implemented, causing the processor to be stuck in a loop. Correcting these errors was crucial for proper processor operation.
--  Further debugging led to the discovery of an issue in the second loop of the processor's operation, where data was not being updated correctly. The processor was supposed to load a value from a specific address, increment it, and store it back. However, it was repeatedly loading the initial value of zero. After extensive investigation, the issue was identified in the handling of the store byte (SB) instruction. The design erroneously added 24 zero bits to the byte being stored, which interfered with the data storage process. Correcting this error resolved the issue, allowing for accurate data representation.
+### Single Cycle Version Debug and Testing
+
+- **Commit Analysis and Testing**: Commit [`0e5bcc5`](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/0e5bcc5eaca9eedd887e2bb71e0f42cbf340641f) and others labeled 'test and modify' were pivotal in testing the single-cycle version of the processor. This phase was critical in identifying and addressing various issues.
+
+- **Initial Debugging Steps**: The first significant challenge encountered during debugging involved an absence of signal output on the vbuddy screen. Despite utilizing lab4 instructions, including `addi` and `bne`, the issue persisted. A detailed examination of the VCD file uncovered a mismatch between expected and actual instructions. This problem was traced back to the instruction memory module, where an endianness mismatch was causing incorrect instruction loading. By adjusting the module to load instructions in little-endian rather than big-endian format, this critical issue was resolved.
+
+- **Resolving the SB Instruction Bug**: A particularly challenging bug related to the `SB` (store byte) instruction was identified when the `VCD` file size unexpectedly reached 1 GB. This anomaly suggested a looping error within the processor, primarily involving the `SB` and `LW` (load word) instructions. These instructions were initially implemented incorrectly, causing the processor to repeatedly execute the same set of operations. Addressing and correcting these implementation errors were vital for the processor to function correctly.
+
+- **Second Loop Data Update Issue**: Further debugging efforts led to the discovery of a problem in the processor's second operational loop, where data was not being updated as intended. The processor was designed to load a value from a specific address, increment this value, and then store it back. However, it continually loaded an initial value of zero, failing to execute the intended operation. This issue was eventually traced to an error in handling the `SB` instruction, where 24 zero bits were incorrectly appended to the stored byte, disrupting the data storage process. Correcting this design flaw was crucial, enabling the processor to accurately update and represent data.
+
 
 
 ### Pipelened processor
