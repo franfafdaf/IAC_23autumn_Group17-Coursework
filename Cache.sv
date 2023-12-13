@@ -159,3 +159,7 @@ endmodule
 //                 if miss, update LRU, change tag, write to cache, cacche pass to data mem
 // read logic:     if hit, read from cache, 
 //                 if miss, look up from data mem, pass to cache, update LRU
+
+
+// updated notes: 
+write logic :       if hit, 
