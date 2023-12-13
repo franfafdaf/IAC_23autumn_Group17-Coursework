@@ -62,6 +62,7 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop___024root final : public VerilatedModule
         SData/*15:0*/ top__DOT__my_cache__DOT__valid;
         CData/*7:0*/ top__DOT__my_cache__DOT__lru;
         CData/*0:0*/ top__DOT__my_cache__DOT__selectedWay;
+        CData/*0:0*/ top__DOT__my_cache__DOT__hit;
         CData/*1:0*/ top__DOT__my_hazardunit__DOT__ForwardAE;
         CData/*1:0*/ top__DOT__my_hazardunit__DOT__ForwardBE;
         CData/*0:0*/ __Vtrigprevexpr___TOP__clk__0;
@@ -79,9 +80,9 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop___024root final : public VerilatedModule
         IData/*31:0*/ top__DOT__PCE;
         IData/*31:0*/ top__DOT__InstrD;
         IData/*31:0*/ top__DOT__RD1E;
-        IData/*31:0*/ top__DOT__RD2E;
     };
     struct {
+        IData/*31:0*/ top__DOT__RD2E;
         IData/*31:0*/ top__DOT__ResultW;
         IData/*31:0*/ top__DOT__WriteDataM;
         IData/*31:0*/ top__DOT__ReadDataW;

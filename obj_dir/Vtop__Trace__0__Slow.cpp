@@ -247,10 +247,7 @@ VL_ATTR_COLD void Vtop___024root__trace_init_sub__TOP__0(Vtop___024root* vlSelf,
     tracep->declBus(c+1,"i", false,-1, 31,0);
     tracep->pushNamePrefix("unnamedblk2 ");
     tracep->declBus(c+2,"j", false,-1, 31,0);
-    tracep->popNamePrefix(2);
-    tracep->pushNamePrefix("unnamedblk3 ");
-    tracep->declBus(c+164,"i", false,-1, 31,0);
-    tracep->popNamePrefix(2);
+    tracep->popNamePrefix(3);
     tracep->pushNamePrefix("my_control_unit ");
     tracep->declBus(c+13,"opcode", false,-1, 6,0);
     tracep->declBus(c+14,"funct3", false,-1, 2,0);
@@ -486,77 +483,7 @@ VL_ATTR_COLD void Vtop___024root__trace_full_sub_0(Vtop___024root* vlSelf, Veril
                                        >> 0xfU))),5);
     bufp->fullCData(oldp+45,((0x1fU & (vlSelf->top__DOT__InstrD 
                                        >> 0x14U))),5);
-    bufp->fullIData(oldp+46,(((((vlSelf->top__DOT__ALUResultM 
-                                 >> 5U) == ((0x1afU 
-                                             >= (0x1ffU 
-                                                 & ((IData)(0x1bU) 
-                                                    + 
-                                                    ((IData)(0x36U) 
-                                                     * 
-                                                     (7U 
-                                                      & (vlSelf->top__DOT__ALUResultM 
-                                                         >> 2U))))))
-                                             ? (0x7ffffffU 
-                                                & (((0U 
-                                                     == 
-                                                     (0x1fU 
-                                                      & ((IData)(0x1bU) 
-                                                         + 
-                                                         ((IData)(0x36U) 
-                                                          * 
-                                                          (7U 
-                                                           & (vlSelf->top__DOT__ALUResultM 
-                                                              >> 2U))))))
-                                                     ? 0U
-                                                     : 
-                                                    (vlSelf->top__DOT__my_cache__DOT__tag[
-                                                     (((IData)(0x1aU) 
-                                                       + 
-                                                       (0x1ffU 
-                                                        & ((IData)(0x1bU) 
-                                                           + 
-                                                           ((IData)(0x36U) 
-                                                            * 
-                                                            (7U 
-                                                             & (vlSelf->top__DOT__ALUResultM 
-                                                                >> 2U)))))) 
-                                                      >> 5U)] 
-                                                     << 
-                                                     ((IData)(0x20U) 
-                                                      - 
-                                                      (0x1fU 
-                                                       & ((IData)(0x1bU) 
-                                                          + 
-                                                          ((IData)(0x36U) 
-                                                           * 
-                                                           (7U 
-                                                            & (vlSelf->top__DOT__ALUResultM 
-                                                               >> 2U)))))))) 
-                                                   | (vlSelf->top__DOT__my_cache__DOT__tag[
-                                                      (0xfU 
-                                                       & (((IData)(0x1bU) 
-                                                           + 
-                                                           ((IData)(0x36U) 
-                                                            * 
-                                                            (7U 
-                                                             & (vlSelf->top__DOT__ALUResultM 
-                                                                >> 2U)))) 
-                                                          >> 5U))] 
-                                                      >> 
-                                                      (0x1fU 
-                                                       & ((IData)(0x1bU) 
-                                                          + 
-                                                          ((IData)(0x36U) 
-                                                           * 
-                                                           (7U 
-                                                            & (vlSelf->top__DOT__ALUResultM 
-                                                               >> 2U))))))))
-                                             : 0U)) 
-                               & ((IData)(vlSelf->top__DOT__my_cache__DOT__valid) 
-                                  >> (0xfU & ((IData)(1U) 
-                                              + (0xeU 
-                                                 & (vlSelf->top__DOT__ALUResultM 
-                                                    >> 1U))))))
+    bufp->fullIData(oldp+46,(((IData)(vlSelf->top__DOT__my_cache__DOT__hit)
                                ? (((0U == (0x1fU & 
                                            ((0x1c0U 
                                              & (vlSelf->top__DOT__ALUResultM 
@@ -651,76 +578,7 @@ VL_ATTR_COLD void Vtop___024root__trace_full_sub_0(Vtop___024root* vlSelf, Veril
     bufp->fullWData(oldp+87,(vlSelf->top__DOT__my_cache__DOT__data),512);
     bufp->fullCData(oldp+103,(vlSelf->top__DOT__my_cache__DOT__lru),8);
     bufp->fullBit(oldp+104,(vlSelf->top__DOT__my_cache__DOT__selectedWay));
-    bufp->fullBit(oldp+105,((((vlSelf->top__DOT__ALUResultM 
-                               >> 5U) == ((0x1afU >= 
-                                           (0x1ffU 
-                                            & ((IData)(0x1bU) 
-                                               + ((IData)(0x36U) 
-                                                  * 
-                                                  (7U 
-                                                   & (vlSelf->top__DOT__ALUResultM 
-                                                      >> 2U))))))
-                                           ? (0x7ffffffU 
-                                              & (((0U 
-                                                   == 
-                                                   (0x1fU 
-                                                    & ((IData)(0x1bU) 
-                                                       + 
-                                                       ((IData)(0x36U) 
-                                                        * 
-                                                        (7U 
-                                                         & (vlSelf->top__DOT__ALUResultM 
-                                                            >> 2U))))))
-                                                   ? 0U
-                                                   : 
-                                                  (vlSelf->top__DOT__my_cache__DOT__tag[
-                                                   (((IData)(0x1aU) 
-                                                     + 
-                                                     (0x1ffU 
-                                                      & ((IData)(0x1bU) 
-                                                         + 
-                                                         ((IData)(0x36U) 
-                                                          * 
-                                                          (7U 
-                                                           & (vlSelf->top__DOT__ALUResultM 
-                                                              >> 2U)))))) 
-                                                    >> 5U)] 
-                                                   << 
-                                                   ((IData)(0x20U) 
-                                                    - 
-                                                    (0x1fU 
-                                                     & ((IData)(0x1bU) 
-                                                        + 
-                                                        ((IData)(0x36U) 
-                                                         * 
-                                                         (7U 
-                                                          & (vlSelf->top__DOT__ALUResultM 
-                                                             >> 2U)))))))) 
-                                                 | (vlSelf->top__DOT__my_cache__DOT__tag[
-                                                    (0xfU 
-                                                     & (((IData)(0x1bU) 
-                                                         + 
-                                                         ((IData)(0x36U) 
-                                                          * 
-                                                          (7U 
-                                                           & (vlSelf->top__DOT__ALUResultM 
-                                                              >> 2U)))) 
-                                                        >> 5U))] 
-                                                    >> 
-                                                    (0x1fU 
-                                                     & ((IData)(0x1bU) 
-                                                        + 
-                                                        ((IData)(0x36U) 
-                                                         * 
-                                                         (7U 
-                                                          & (vlSelf->top__DOT__ALUResultM 
-                                                             >> 2U))))))))
-                                           : 0U)) & 
-                             ((IData)(vlSelf->top__DOT__my_cache__DOT__valid) 
-                              >> (0xfU & ((IData)(1U) 
-                                          + (0xeU & 
-                                             (vlSelf->top__DOT__ALUResultM 
-                                              >> 1U))))))));
+    bufp->fullBit(oldp+105,(vlSelf->top__DOT__my_cache__DOT__hit));
     bufp->fullIData(oldp+106,((vlSelf->top__DOT__ALUResultM 
                                >> 5U)),27);
     bufp->fullCData(oldp+107,((7U & (vlSelf->top__DOT__ALUResultM 
@@ -810,5 +668,4 @@ VL_ATTR_COLD void Vtop___024root__trace_full_sub_0(Vtop___024root* vlSelf, Veril
     bufp->fullIData(oldp+161,(0x1bU),32);
     bufp->fullIData(oldp+162,(3U),32);
     bufp->fullIData(oldp+163,(2U),32);
-    bufp->fullIData(oldp+164,(2U),32);
 }

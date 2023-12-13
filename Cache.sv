@@ -49,15 +49,18 @@ module Cache #(
     //read
     always_comb begin
         // check whether hit
-        for(int i =0; i< wayNum; i=i+1)begin
-            if((inputTag == tag[inputSet][i]) && (valid[inputSet][i]))begin
-                hit = 1'b1;
-            end
-            else begin
-                hit =1'b0;
-            end
+        if((inputTag == tag[inputSet][0]) && (valid[inputSet][0]))begin
+            hit = 1'b1;
+            selectedWay =0;
         end
-        selectedWay = lru[inputSet] ? 1'b0 : 1'b1; // selecte the way
+        if((inputTag == tag[inputSet][1]) && (valid[inputSet][1]))begin
+            hit = 1'b1;
+            selectedWay =1;
+        end
+        else begin
+            hit =1'b0;
+            selectedWay=0;
+        end
     end
 
     //read
@@ -76,8 +79,10 @@ module Cache #(
         end
     end
 
+            // selectedWay = lru[inputSet] ? 1'b0 : 1'b1; // selecte the way
     //write
     always_ff @(posedge clk) begin
+
         if(WE)begin
             if(StSrcM)begin // SB
                 data_array[A] <= WD[7:0]; // cache

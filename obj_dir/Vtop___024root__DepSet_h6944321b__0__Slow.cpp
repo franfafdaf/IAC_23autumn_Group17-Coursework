@@ -153,10 +153,216 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__my_control_unit__DOT__ALUDecode 
         = ((2U & (vlSelf->top__DOT__InstrD >> 4U)) 
            | (1U & (vlSelf->top__DOT__InstrD >> 0x1eU)));
+    if ((((vlSelf->top__DOT__ALUResultM >> 5U) == (
+                                                   (0x1afU 
+                                                    >= 
+                                                    (0x1ffU 
+                                                     & ((IData)(0x36U) 
+                                                        * 
+                                                        (7U 
+                                                         & (vlSelf->top__DOT__ALUResultM 
+                                                            >> 2U)))))
+                                                    ? 
+                                                   (0x7ffffffU 
+                                                    & (((0U 
+                                                         == 
+                                                         (0x1fU 
+                                                          & ((IData)(0x36U) 
+                                                             * 
+                                                             (7U 
+                                                              & (vlSelf->top__DOT__ALUResultM 
+                                                                 >> 2U)))))
+                                                         ? 0U
+                                                         : 
+                                                        (vlSelf->top__DOT__my_cache__DOT__tag[
+                                                         (((IData)(0x1aU) 
+                                                           + 
+                                                           (0x1ffU 
+                                                            & ((IData)(0x36U) 
+                                                               * 
+                                                               (7U 
+                                                                & (vlSelf->top__DOT__ALUResultM 
+                                                                   >> 2U))))) 
+                                                          >> 5U)] 
+                                                         << 
+                                                         ((IData)(0x20U) 
+                                                          - 
+                                                          (0x1fU 
+                                                           & ((IData)(0x36U) 
+                                                              * 
+                                                              (7U 
+                                                               & (vlSelf->top__DOT__ALUResultM 
+                                                                  >> 2U))))))) 
+                                                       | (vlSelf->top__DOT__my_cache__DOT__tag[
+                                                          (0xfU 
+                                                           & (((IData)(0x36U) 
+                                                               * 
+                                                               (7U 
+                                                                & (vlSelf->top__DOT__ALUResultM 
+                                                                   >> 2U))) 
+                                                              >> 5U))] 
+                                                          >> 
+                                                          (0x1fU 
+                                                           & ((IData)(0x36U) 
+                                                              * 
+                                                              (7U 
+                                                               & (vlSelf->top__DOT__ALUResultM 
+                                                                  >> 2U)))))))
+                                                    : 0U)) 
+         & ((IData)(vlSelf->top__DOT__my_cache__DOT__valid) 
+            >> (0xeU & (vlSelf->top__DOT__ALUResultM 
+                        >> 1U))))) {
+        vlSelf->top__DOT__my_cache__DOT__hit = 1U;
+        vlSelf->top__DOT__my_cache__DOT__selectedWay = 0U;
+    }
+    vlSelf->top__DOT__my_cache__DOT__hit = (((vlSelf->top__DOT__ALUResultM 
+                                              >> 5U) 
+                                             == ((0x1afU 
+                                                  >= 
+                                                  (0x1ffU 
+                                                   & ((IData)(0x1bU) 
+                                                      + 
+                                                      ((IData)(0x36U) 
+                                                       * 
+                                                       (7U 
+                                                        & (vlSelf->top__DOT__ALUResultM 
+                                                           >> 2U))))))
+                                                  ? 
+                                                 (0x7ffffffU 
+                                                  & (((0U 
+                                                       == 
+                                                       (0x1fU 
+                                                        & ((IData)(0x1bU) 
+                                                           + 
+                                                           ((IData)(0x36U) 
+                                                            * 
+                                                            (7U 
+                                                             & (vlSelf->top__DOT__ALUResultM 
+                                                                >> 2U))))))
+                                                       ? 0U
+                                                       : 
+                                                      (vlSelf->top__DOT__my_cache__DOT__tag[
+                                                       (((IData)(0x1aU) 
+                                                         + 
+                                                         (0x1ffU 
+                                                          & ((IData)(0x1bU) 
+                                                             + 
+                                                             ((IData)(0x36U) 
+                                                              * 
+                                                              (7U 
+                                                               & (vlSelf->top__DOT__ALUResultM 
+                                                                  >> 2U)))))) 
+                                                        >> 5U)] 
+                                                       << 
+                                                       ((IData)(0x20U) 
+                                                        - 
+                                                        (0x1fU 
+                                                         & ((IData)(0x1bU) 
+                                                            + 
+                                                            ((IData)(0x36U) 
+                                                             * 
+                                                             (7U 
+                                                              & (vlSelf->top__DOT__ALUResultM 
+                                                                 >> 2U)))))))) 
+                                                     | (vlSelf->top__DOT__my_cache__DOT__tag[
+                                                        (0xfU 
+                                                         & (((IData)(0x1bU) 
+                                                             + 
+                                                             ((IData)(0x36U) 
+                                                              * 
+                                                              (7U 
+                                                               & (vlSelf->top__DOT__ALUResultM 
+                                                                  >> 2U)))) 
+                                                            >> 5U))] 
+                                                        >> 
+                                                        (0x1fU 
+                                                         & ((IData)(0x1bU) 
+                                                            + 
+                                                            ((IData)(0x36U) 
+                                                             * 
+                                                             (7U 
+                                                              & (vlSelf->top__DOT__ALUResultM 
+                                                                 >> 2U))))))))
+                                                  : 0U)) 
+                                            & ((IData)(vlSelf->top__DOT__my_cache__DOT__valid) 
+                                               >> (0xfU 
+                                                   & ((IData)(1U) 
+                                                      + 
+                                                      (0xeU 
+                                                       & (vlSelf->top__DOT__ALUResultM 
+                                                          >> 1U))))));
     vlSelf->top__DOT__my_cache__DOT__selectedWay = 
-        (1U & (~ ((IData)(vlSelf->top__DOT__my_cache__DOT__lru) 
-                  >> (7U & (vlSelf->top__DOT__ALUResultM 
-                            >> 2U)))));
+        (((vlSelf->top__DOT__ALUResultM >> 5U) == (
+                                                   (0x1afU 
+                                                    >= 
+                                                    (0x1ffU 
+                                                     & ((IData)(0x1bU) 
+                                                        + 
+                                                        ((IData)(0x36U) 
+                                                         * 
+                                                         (7U 
+                                                          & (vlSelf->top__DOT__ALUResultM 
+                                                             >> 2U))))))
+                                                    ? 
+                                                   (0x7ffffffU 
+                                                    & (((0U 
+                                                         == 
+                                                         (0x1fU 
+                                                          & ((IData)(0x1bU) 
+                                                             + 
+                                                             ((IData)(0x36U) 
+                                                              * 
+                                                              (7U 
+                                                               & (vlSelf->top__DOT__ALUResultM 
+                                                                  >> 2U))))))
+                                                         ? 0U
+                                                         : 
+                                                        (vlSelf->top__DOT__my_cache__DOT__tag[
+                                                         (((IData)(0x1aU) 
+                                                           + 
+                                                           (0x1ffU 
+                                                            & ((IData)(0x1bU) 
+                                                               + 
+                                                               ((IData)(0x36U) 
+                                                                * 
+                                                                (7U 
+                                                                 & (vlSelf->top__DOT__ALUResultM 
+                                                                    >> 2U)))))) 
+                                                          >> 5U)] 
+                                                         << 
+                                                         ((IData)(0x20U) 
+                                                          - 
+                                                          (0x1fU 
+                                                           & ((IData)(0x1bU) 
+                                                              + 
+                                                              ((IData)(0x36U) 
+                                                               * 
+                                                               (7U 
+                                                                & (vlSelf->top__DOT__ALUResultM 
+                                                                   >> 2U)))))))) 
+                                                       | (vlSelf->top__DOT__my_cache__DOT__tag[
+                                                          (0xfU 
+                                                           & (((IData)(0x1bU) 
+                                                               + 
+                                                               ((IData)(0x36U) 
+                                                                * 
+                                                                (7U 
+                                                                 & (vlSelf->top__DOT__ALUResultM 
+                                                                    >> 2U)))) 
+                                                              >> 5U))] 
+                                                          >> 
+                                                          (0x1fU 
+                                                           & ((IData)(0x1bU) 
+                                                              + 
+                                                              ((IData)(0x36U) 
+                                                               * 
+                                                               (7U 
+                                                                & (vlSelf->top__DOT__ALUResultM 
+                                                                   >> 2U))))))))
+                                                    : 0U)) 
+         & ((IData)(vlSelf->top__DOT__my_cache__DOT__valid) 
+            >> (0xfU & ((IData)(1U) + (0xeU & (vlSelf->top__DOT__ALUResultM 
+                                               >> 1U))))));
     vlSelf->top__DOT__StallD = ((IData)(vlSelf->top__DOT__ResultSrcE) 
                                 & (((IData)(vlSelf->top__DOT__RdE) 
                                     == (0x1fU & (vlSelf->top__DOT__InstrD 
@@ -475,6 +681,7 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     VL_RAND_RESET_W(512, vlSelf->top__DOT__my_cache__DOT__data);
     vlSelf->top__DOT__my_cache__DOT__lru = VL_RAND_RESET_I(8);
     vlSelf->top__DOT__my_cache__DOT__selectedWay = VL_RAND_RESET_I(1);
+    vlSelf->top__DOT__my_cache__DOT__hit = VL_RAND_RESET_I(1);
     for (int __Vi0 = 0; __Vi0 < 131072; ++__Vi0) {
         vlSelf->top__DOT__my_cache__DOT__data_array[__Vi0] = VL_RAND_RESET_I(8);
     }
