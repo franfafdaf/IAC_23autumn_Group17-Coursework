@@ -1,11 +1,5 @@
 ## Personal Statement of Haocheng Fan
 
-  
-  ### Challenges and Learning
-The most challenging bug in the single-cycle processor was related to the `SB` instruction, where the issue of a massive `VCD` file size (1 GB) indicated a problem. The `SB`and `LW`instructions were incorrectly implemented, causing the processor to be stuck in a loop. Correcting these errors was crucial for proper processor operation.
-
-In the pipelined version, a similar issue with the SB instruction was quickly resolved by fixing a connection error in the top file.
-
 - [Contributions](#contributions) 
   - [Summary](#summary)
   - [Modifications in the Single Cycle Processor Section](#modifications-in-the-single-cycle-processor-section)
@@ -35,9 +29,7 @@ In the pipelined version, a similar issue with the SB instruction was quickly re
 
 ### Summary
 
-I'm mainly resiponsible for the **debug and testing of single cycle processor**, **consttrcutiof of pipelined proseccor** and its corresposnding **debug and testing**, and the **modification of cache version**. I purchased a MacBook Air specifically for this course, as my Windows PC was unable to connect to vbuddy. 
-
-I also do the job as the repo master, to build the github repossitoeryt and modify the repo page with Guanxi
+I'm mainly resiponsible for the **debug and testing of single cycle processor**, **consttrcutiof of pipelined proseccor** and its corresposnding **debug and testing**, and the **modification of cache version**. A MacBook Air was purchased by me specifically for this course, as my Windows PC was unable to connect to vbuddy. I also do the job as the repo master, to build the github repossitoeryt and modify the repo page with Guanxi
 
   
 ### Modifications in the Single Cycle Processor Section
@@ -66,6 +58,10 @@ Additional modifications across other components include correcting incorrectly 
 ### Single cycle version debug and testing
 
 - in commit[0e5bcc5](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/0e5bcc5eaca9eedd887e2bb71e0f42cbf340641f) and other commit with name test and modify, the testing of the single cycle version of processor.
+- In the process of debugging, after resolving grammar and connection issues, the first notable problem was the absence of signal on the vbuddy screen. Initially using instructions from lab4 (which involve `addi` and `bne` instructions), the issue persisted. Examination of the VCD file revealed a discrepancy between the expected and actual instructions. The problem was traced back to the instruction memory module, where instructions were being loaded in the wrong order due to endianness issues. Adjusting the instruction memory module to load instructions in little-endian format, as opposed to big-endian, resolved this issue.
+-  The most challenging bug in the single-cycle processor was related to the `SB` instruction, where the issue of a massive `VCD` file size (1 GB) indicated a problem. The `SB`and `LW`instructions were incorrectly implemented, causing the processor to be stuck in a loop. Correcting these errors was crucial for proper processor operation.
+-  Further debugging led to the discovery of an issue in the second loop of the processor's operation, where data was not being updated correctly. The processor was supposed to load a value from a specific address, increment it, and store it back. However, it was repeatedly loading the initial value of zero. After extensive investigation, the issue was identified in the handling of the store byte (SB) instruction. The design erroneously added 24 zero bits to the byte being stored, which interfered with the data storage process. Correcting this error resolved the issue, allowing for accurate data representation.
+
 
 ### Pipelened processor
 
@@ -79,8 +75,22 @@ Additional modifications across other components include correcting incorrectly 
 ### Pipelined version debug and testing
 
 - in commit[891ee88](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/891ee88a181cea1bb0545e017e88b7c0679a9761), bug of the pieplined version is fixed.
+- 
+
+### Implementing Hazard Control
+In developing the pipelined processor, several modules were added, including a hazard control unit and flip-flops for pipeline staging. The hazard control unit was designed based on the book's content, with comments annotating the functionality of each section. It handles three main hazards: forwarding, stalling, and flushing. Forwarding is used when an instruction requires data that has not yet been written back, stalling occurs when data dependencies necessitate pausing the pipeline, and flushing is necessary during jump instructions to remove irrelevant instructions from the pipeline stages.
+
+### Pipeline Modifications and Debugging
+Renaming logic stages (like fetch and decode) and adjusting small logic aspects were necessary to accommodate the pipelined architecture. One significant challenge encountered was an issue with the multiplexer selecting inputs for the data memory, which was traced back to a misconnection at the top level. Correcting this resolved the issue, enabling proper functioning of the pipelined processor.
 
 ### 2-way Cache processor
+
+
+## Cache Implementation
+
+### Simplifying the Cache Design
+Initially, the team aimed for a complex cache design (4-way, 8-set, 128-bit block size with write-back functionality). However, due to complexity, the design was simplified to a 2-way set associative cache. The cache was segmented into smaller components like valid bits, tag, data, and least recently used (LRU) bits. This modular approach allowed for easier initialization and hit detection.
+
 
 ### Cache version debug and testing
 
@@ -88,17 +98,17 @@ Additional modifications across other components include correcting incorrectly 
   
 
 ----
-
 ## mistakes i make
-
 ----
 
 ### Wrong conncetion of port for data writen to Data memory
-----
+
 in the building of the pipelined version, the `SrcBE` port for `ALU` module should conncet tothe mux infraont of it, which switcht between the `WriteDataE` and the mux controled by `ForwardBE`, but i fasely connet the ouput of `RD2E` to the `SrcBE`, so that the forwarding and writing of data  is exculede to the `ALU`, so that wrong plot is shown.
-## Special Designs
 
 ----
+## Special Designs
+----
+
 ### Enhanced `testbench` for Improved Efficiency and Graphical Display
 
 #### Optimizations in Output Handling
@@ -131,26 +141,8 @@ These improvements to the `testbench` are expected to save time and provide a mo
 
   
 
-## Single Cycle Processor Debugging and Testing
 
-### Debugging the Single Cycle Processor
-In the process of debugging, after resolving grammar and connection issues, the first notable problem was the absence of signal on the vbuddy screen. Initially using instructions from lab4 (which involve `addi` and `bne` instructions), the issue persisted. Examination of the VCD file revealed a discrepancy between the expected and actual instructions. The problem was traced back to the instruction memory module, where instructions were being loaded in the wrong order due to endianness issues. Adjusting the instruction memory module to load instructions in little-endian format, as opposed to big-endian, resolved this issue.
 
-### Data Memory and Instruction Execution
-Further debugging led to the discovery of an issue in the second loop of the processor's operation, where data was not being updated correctly. The processor was supposed to load a value from a specific address, increment it, and store it back. However, it was repeatedly loading the initial value of zero. After extensive investigation, the issue was identified in the handling of the store byte (SB) instruction. The design erroneously added 24 zero bits to the byte being stored, which interfered with the data storage process. Correcting this error resolved the issue, allowing for accurate data representation.
-
-## Pipelined Processor Development
-
-### Implementing Hazard Control
-In developing the pipelined processor, several modules were added, including a hazard control unit and flip-flops for pipeline staging. The hazard control unit was designed based on the book's content, with comments annotating the functionality of each section. It handles three main hazards: forwarding, stalling, and flushing. Forwarding is used when an instruction requires data that has not yet been written back, stalling occurs when data dependencies necessitate pausing the pipeline, and flushing is necessary during jump instructions to remove irrelevant instructions from the pipeline stages.
-
-### Pipeline Modifications and Debugging
-Renaming logic stages (like fetch and decode) and adjusting small logic aspects were necessary to accommodate the pipelined architecture. One significant challenge encountered was an issue with the multiplexer selecting inputs for the data memory, which was traced back to a misconnection at the top level. Correcting this resolved the issue, enabling proper functioning of the pipelined processor.
-
-## Cache Implementation
-
-### Simplifying the Cache Design
-Initially, the team aimed for a complex cache design (4-way, 8-set, 128-bit block size with write-back functionality). However, due to complexity, the design was simplified to a 2-way set associative cache. The cache was segmented into smaller components like valid bits, tag, data, and least recently used (LRU) bits. This modular approach allowed for easier initialization and hit detection.
 
 ----
 ## Learnt in this Porject
