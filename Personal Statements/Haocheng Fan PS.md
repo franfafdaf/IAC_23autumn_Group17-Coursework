@@ -1,18 +1,22 @@
 ## Personal Statement of Haocheng Fan
 
-- What you Contributed 
-- Reflection about what you have learned in this project
-- Mistakes you made
-- Special Design Distribution
-- What you might do differently if you were to do it again or have more time
-  
-Single cycle processor section modification
 
-Single cycle version debug and testing
-Pipelened processor
-Pipelined version debug and testing
-2-way Cache processor
-Cache version debug and testing
+----
+## Contributions
+----
+### Summary
+I'm mainly resiponsible for the **debug and testing of single cycle processor**, **consttrcutiof of pipelined proseccor** and its corresposnding **debug and testing**, and the **modification of cache version**.
+
+I also do the job as the repo master, to build the github repossitoeryt and modify the repo page with Guanxi
+
+### Single cycle processor section modification
+- in commit[296baaf](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/296baaf513f4e8ec553caf4e8feb459ab987700a), the debug of `Control Unit`, `mainDecode` and `ALUDecode`
+- in commit[b17e918](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/b17e918bd95512817b331d454390872abb4e5f8b), the debug of
+### Single cycle version debug and testing
+### Pipelened processor
+### Pipelined version debug and testing
+### 2-way Cache processor
+### Cache version debug and testing
 
 
 Single cycle processor section modification
