@@ -101,12 +101,12 @@ module top(
     logic               FlushD;
     logic[31:0]          SrcA0E;
     logic[31:0]          SrcB0E;
-    // cache
-    logic               hit;
-    logic[31:0]         CtoMData;
-    logic[31:0]         CtoMAdress;
-    logic[31:0]         memOut;
-    logic[31:0]         cacheOut;
+    // // cache
+    // logic               hit;
+    // logic[31:0]         CtoMData;
+    // logic[31:0]         CtoMAdress;
+    // logic[31:0]         memOut;
+    // logic[31:0]         cacheOut;
 
 
 
@@ -277,32 +277,30 @@ Stage3 Stage3(
 
 Cache my_cache(
     .clk(clk),
-    .addressIn(ALUResultM), 
-    .dataIn(WriteDataM),     
-    .we(MemWriteM),
-    .StSrcM(StSrcM),       // Store Type signal
-    .LdSrcM(LdSrcM),       // Load Type signal                  
-    .dataOut(cacheOut),   
-    .hit(hit)
- 
-);
-
-DataMemory my_data_memory(
-    .clk(clk),
     .WE(MemWriteM),
     .StSrcM(StSrcM),
     .LdSrcM(LdSrcM),
     .A(ALUResultM),
     .WD(WriteDataM),
-    .RD(memOut)
+    .RD(RD4)
 );
 
-CacheMux my_cachemux(
-    .hit(hit),
-    .cacheInput(cacheOut),
-    .memInput(memOut),
-    .Moutput(RD4)
-);
+// DataMemory my_data_memory(
+//     .clk(clk),
+//     .WE(MemWriteM),
+//     .StSrcM(StSrcM),
+//     .LdSrcM(LdSrcM),
+//     .A(ALUResultM),
+//     .WD(WriteDataM),
+//     .RD(memOut)
+// );
+
+// CacheMux my_cachemux(
+//     .hit(hit),
+//     .cacheInput(cacheOut),
+//     .memInput(memOut),
+//     .Moutput(RD4)
+// );
 
 Stage4 Stage4(
     .clk(clk),
