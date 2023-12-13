@@ -64,7 +64,7 @@ module top(
     logic [4:0]         A2;
 
     logic [31:0]        RDi;
-    logic [31:0]        RD4;
+    logic [31:0]        RD;
     logic [31:0]        RD1;
     logic [31:0]        RD1E;
 
@@ -101,14 +101,7 @@ module top(
     logic               FlushD;
     logic[31:0]          SrcA0E;
     logic[31:0]          SrcB0E;
-    // cache
-    logic               hit;
-    logic[31:0]         CtoMData;
-    logic[31:0]         CtoMAdress;
-    logic[31:0]         memOut;
-    logic[31:0]         cacheOut;
-
-
+    
 
 
 PC my_pc(
@@ -275,33 +268,14 @@ Stage3 Stage3(
     .PC_PlusM(PC_PlusM)
 );
 
-Cache my_cache(
-    .clk(clk),
-    .addressIn(ALUResultM), 
-    .dataIn(WriteDataM),     
-    .we(MemWriteM),
-    .StSrcM(StSrcM),       // Store Type signal
-    .LdSrcM(LdSrcM),       // Load Type signal                  
-    .dataOut(cacheOut),   
-    .hit(hit)
- 
-);
-
-DataMemory my_data_memory(
+direct_cache_memory My_direct_cache_memory(
     .clk(clk),
     .WE(MemWriteM),
     .StSrcM(StSrcM),
     .LdSrcM(LdSrcM),
     .A(ALUResultM),
     .WD(WriteDataM),
-    .RD(memOut)
-);
-
-CacheMux my_cachemux(
-    .hit(hit),
-    .cacheInput(cacheOut),
-    .memInput(memOut),
-    .Moutput(RD4)
+    .RD(RD)
 );
 
 Stage4 Stage4(
@@ -309,7 +283,7 @@ Stage4 Stage4(
     .RegWriteM(RegWriteM),
     .ResultSrcM(ResultSrcM),
     .ALUResultM(ALUResultM),
-    .RD(RD4),
+    .RD(RD),
     .RdM(RdM),
     .PC_PlusM(PC_PlusM),
     .RegWriteW(RegWriteW),
