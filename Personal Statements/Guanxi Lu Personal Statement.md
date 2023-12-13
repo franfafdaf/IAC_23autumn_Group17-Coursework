@@ -21,8 +21,9 @@
   - [Soft Skills](#soft-skills)
 - [Future Improvements](#future-improvements)
 
-
+----
 ## My Contributions
+----
 ### Summary
 My contributions primarily focus on the Single Cycle and Cache Versions. In the Single Cycle version, I was tasked with developing the **Control Unit**, **Instruction Memory**, **Extend Unit**, **Top Level Design** and the **F1 Assembly Language Program**. Additionally, [Haocheng](https://github.com/franfafdaf) and I collaborated on debugging the design. For the Cache Version, I selected the cache parameters (2-way associative, 4-word block size, write-through cache) and **designed the corresponding block diagram**. [Haocheng](https://github.com/franfafdaf) took charge of the implementation phase.
 
@@ -58,7 +59,10 @@ Furthermore, I undertook administrative duties within our team. These included m
   <img src="Images/Cache.png" alt="Cache Structure">
 </div>
 
+----
 ## Mistakes I've made
+----
+
 ### Implementation of `LUI` and `AUIPC` Instructions
 The functionalities of the `LUI` and `AUIPC` instructions are described as follows:
 ```
@@ -108,8 +112,10 @@ Additionally, it was only late in the project that I learned about the `.gitigno
 
 Furthermore, I realized the importance of composing more meaningful commit messages to better reflect and distinguish the progress made in the project.
 
-
+----
 ## Special Design Decisions
+----
+
 ### Introduction of `ALUSrcA` Signal for `SrcA` Input Selection
 
 In the coursework's example design, there is only one `ALUSrc` signal, which is used to select the input value for `SrcB`. However, for the implementation of the `LUI` and `AUIPC` instructions (functions detailed [above](#implementation-of-lui-and-auipc-instructions)), we introduced an additional multiplexer (MUX) to select the input for `SrcA`. This addition allows for two input options: `PC` and `RD1`. The control logic for this is summarized in the table below:
@@ -145,8 +151,10 @@ In the RV32I ISA, the `x0` register is always hardwired to 0, necessitating a co
 
 Ultimately,  a different logic is implemented, which prevents writing to `x0`. When the destination register `RD` equals 0 (representing `x0`), no register write occurs. As `x0` is initialized to 0, its value remains consistently zero.
 
-
+----
 ## What I've Learned in This Project
+----
+
 ### Tools
 - **Git**: Essential for version control and managing repository structure.
 - **Markdown**: A lightweight and user-friendly language that can be augmented with HTML for advanced functionality.
@@ -159,7 +167,9 @@ Ultimately,  a different logic is implemented, which prevents writing to `x0`. W
 - **Maintaining a Logbook**: Keeping a detailed logbook, both personally and for the group, is vital. It facilitates communication, assists in decision-making, and serves as a reference when composing reports or statements.
 - **Developing Test Programs to verify specific functions**: Creating specific test programs to validate various aspects of the design proved invaluable. Examples include tests for [load and store](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/blob/top/testprogram1.s), [shift operations](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/blob/top/testprogram2-Shift.s), and the [LFSR Algorithm](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/blob/top/testprogram3-LFSR.s). These tests targeted at specific functions or algorithms, and were crucial for debugging and verifying specific functionalities.
 
+----
 ## Future Improvements
+----
 
 In future projects, I plan to enhance my approach to repository structure management. Additionally, I aim to dive deeper into various methodologies for implementing F1 logic from a software perspective. I'm also eager to explore more complex structural designs and experience the intricacies of advanced control logic.
 
