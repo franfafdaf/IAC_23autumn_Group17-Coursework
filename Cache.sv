@@ -39,7 +39,7 @@ module Cache #(
 
     //initialization
     initial begin
-        for (int i = 0; i < 2**Set_Width; i++) begin
+        for (int i = 0; i < 2**Set_Width; i=i+1) begin
             lru[i] = 1'b0; // set lru to 0
             for (int j = 0; j < wayNum; j++) begin
                 valid[i][j] = 1'b0;// set valid to 0 
@@ -53,7 +53,7 @@ module Cache #(
         hit = 1'b0;
         dataOut = 32'b0; 
         // find tag
-        for(int i =0; i< wayNum; i++)begin
+        for(int i =0; i< wayNum; i=i+1)begin
             if((inputTag == tag[inputSet][i]) && (valid[inputSet][i]) && LdSrcM )begin
                 hit = 1'b1;
                 selectedData = data[inputSet][i];
@@ -150,3 +150,12 @@ endmodule
 //     end
 
 // endmodule
+
+
+
+// note: 
+// hit logic: tag, valid, lru
+// write logic:    if hit, update LRU, write to cache, cacche pass to data mem
+//                 if miss, update LRU, change tag, write to cache, cacche pass to data mem
+// read logic:     if hit, read from cache, 
+//                 if miss, look up from data mem, pass to cache, update LRU
