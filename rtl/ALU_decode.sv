@@ -31,7 +31,7 @@ always_comb begin
         else if (funct3 == 3'b111) ALUControl = 3'b010;     //and
         else ALUControl = 3'b000;
     end
-    else if (ALUOp == 2'b11) begin                          //J-type
+    else if (ALUOp == 2'b11) begin                          //U-type
         if (op5 == 0) ALUControl = 3'b000;                  // add
         else  ALUControl = 3'b110;                          // extract out SrcB, op5 == 1
     end
