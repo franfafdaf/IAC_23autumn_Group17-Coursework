@@ -550,7 +550,7 @@ In CPU architecture, caches play a crucial role in enabling quick read/write ope
 - **`Set_WIDTH`:** 3 bits
 
   <div align="center">
-    <img src="Images/direct_mapped_cache.png" alt="Cache Read Policy">
+    <img src="Images/direct_mapped_cache.png" alt="Direct Mapped Cache">
   </div>
 
 #### Read and Write Policy
