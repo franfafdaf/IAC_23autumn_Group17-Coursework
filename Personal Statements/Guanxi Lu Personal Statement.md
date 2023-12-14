@@ -25,7 +25,7 @@
 ## My Contributions
 ----
 ### Summary
-My contributions primarily focus on the Single Cycle and Cache Versions. In the Single Cycle version, I was tasked with developing the **Control Unit**, **Instruction Memory**, **Extend Unit**, **Top Level Design** and the **F1 Assembly Language Program**. Additionally, [Haocheng](https://github.com/franfafdaf) and I collaborated on debugging the design. For the Cache Version, I selected the cache parameters (2-way associative, 4-word block size, write-through cache) and **designed the corresponding block diagram**. [Haocheng](https://github.com/franfafdaf) took charge of the implementation phase.
+My contributions primarily focus on the Single Cycle and Cache Versions. In the Single Cycle version, I was tasked with developing the **Control Unit**, **Instruction Memory**, **Extend Unit**, **Top Level Design** and the **F1 Assembly Language Program**. Additionally, [Haocheng](https://github.com/franfafdaf) and I collaborated on debugging the design. For the Cache Version, I developed and tested **Direct Mapped Cache**. 
 
 Furthermore, I undertook administrative duties within our team. These included managing the **repository structure**, **test and upload design results**, and **authoring the group's joint statement**. As the author of the joint statement (excluding 2-way assosiative Cache section), my design ideas are included in the [joint statement]().
 
@@ -53,11 +53,9 @@ Furthermore, I undertook administrative duties within our team. These included m
 - In commit [1f43366](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/1f43366cbbf2e1cbd74327ff4b293625f8f256f4), the initial value for `PC` was corrected, and `x0` was properly hardwired to 0.
 
 ### Cache
-- In commit [5a780bf](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/5a780bf8b27b6e804563263317ff14605e552321), I defined the parameters and created a preliminary cache design, after which the task was handed over to [Haocheng](https://github.com/franfafdaf). The corresponding block diagram is shown below.
-
-<div align="center">
-  <img src="Images/Cache.png" alt="Cache Structure">
-</div>
+- In commit [47d7202](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/47d72024cfbb3dd9704b0cb540926b6b580879fb), I developed a cache (didn't work) based on Pipelined_Ref, where read and write operations are implemented using combinational logic. 
+- In commit [22747dc](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/22747dca3d913f5572b036c6375d11888a522e71), I developed a cache based on SingleCycle_Ref using State Machine. 
+- In commit [24ed013](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/24ed01306c702cba41862dd7c1a4f14dbecaeeec), I converted the design to suit Pipelined_Ref, and verified the design. 
 
 ----
 ## Mistakes I've made
@@ -151,6 +149,22 @@ In the RV32I ISA, the `x0` register is always hardwired to 0, necessitating a co
 
 Ultimately,  a different logic is implemented, which prevents writing to `x0`. When the destination register `RD` equals 0 (representing `x0`), no register write occurs. As `x0` is initialized to 0, its value remains consistently zero.
 
+### Using a State Machine to Implement Cache Logic
+
+During the development of our cache system, I segmented the logic into three main components:
+- Hit Logic
+- Read Logic
+- Write Logic
+
+In the [preliminary design](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/tree/47d72024cfbb3dd9704b0cb540926b6b580879fb), combinational logic was employed. However, compilation warnings such as `Always_comb variable driven after use: 'valid', 'tag', and 'data'` were encountered. This suggests that signals read or used in the combinational logic shouldn't be reassigned within the same logic block.
+
+Consequently, for the read logic implementation, a state machine approach was adopted to represent the two distinct states:
+- Data read from cache
+- Data read from memory
+
+The state transition logic for these two states depends on the `Hit` signal. On the output side, the distinction between states is clear: the cache provides data in the `from_cache` state, while memory provides data in the `from_memory` state. Additionally, for the `from_memory` state, an extra step is needed to transfer data to the cache, preparing for potential subsequent access to the same location. This requires an additional output stage for implementation.
+
+
 ----
 ## What I've Learned in This Project
 ----
@@ -158,7 +172,7 @@ Ultimately,  a different logic is implemented, which prevents writing to `x0`. W
 ### Tools
 - **Git**: Essential for version control and managing repository structure.
 - **Markdown**: A lightweight and user-friendly language that can be augmented with HTML for advanced functionality.
-- **SystemVerilog**: A Hardware Description Language (HDL) offering both behavioral and structural representations.
+- **SystemVerilog**: A Hardware Description Language (HDL) offering both behavioral and structural representations. I am more familiar with sequential and combinational logic, and I am able to apply state machine to the design of processor. 
 - **Verilator**: Useful for compiling SystemVerilog programs into C++ projects.
 - **GTKWave**: An effective tool for displaying waveforms.
 
