@@ -116,7 +116,8 @@ Additional modifications across other components include correcting incorrectly 
 
 ### Pipelened processor
 
-graph here
+![Alt text](Images/Pipelined.png)
+
 - in commit[1c8b3b5](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/1c8b3b515f4128b4a561c20a929516556fecf323), the flush, stall and forward function in hazard control unit is added to the pipelined version.
 
 - in file[HazardUnit.sv](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/blob/Pipelined_F1/rtl/HazardUnit.sv), my design of the hazard unit in shown. Hazard unit deal with 3 situations that leads to error output in pipelined processor.
