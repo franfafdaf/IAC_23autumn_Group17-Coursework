@@ -549,6 +549,10 @@ In CPU architecture, caches play a crucial role in enabling quick read/write ope
 - **`Tag_WIDTH`:** 29 bits
 - **`Set_WIDTH`:** 3 bits
 
+  <div align="center">
+    <img src="Images/direct_mapped_cache.png" alt="Cache Read Policy">
+  </div>
+
 #### Read and Write Policy
 
 - **Read Policy**
@@ -556,14 +560,14 @@ In CPU architecture, caches play a crucial role in enabling quick read/write ope
   - **Miss:** Data is fetched from memory and then loaded into the cache.
 
   <div align="center">
-    <img src="Images/Cache_Read.png" alt="Cache Read Operation">
+    <img src="Images/Cache_Read.png" alt="Cache Read Policy">
   </div>
 
 - **Write Policy**
   Since a write-through policy is adopted, data is written simultaneously to both the cache and the memory. This approach simplifies implementation but may lead to reduced performance under high write volumes.
 
   <div align="center">
-    <img src="Images/Cache_Write.png" alt="Cache Write Operation">
+    <img src="Images/Cache_Write.png" alt="Cache Write Policy">
   </div>
 
 #### Implementation
@@ -587,9 +591,11 @@ assign hit = ((tag[inputSet] == inputTag) && (valid[inputSet]));
   Read operations realize `LW` and `LBU` instructions. They are implemented using a state machine:
   - In the event of a Hit, the next state is `from_cache`.
   - In the event of a Miss, the next state is `from_memory`.
+
   <div align="center">
     <img src="Images/state_machine_cache.png" alt="State Machine for Cache Read">
   </div>
+
   For Miss cases, in addition to updating the `tag` and `Hit`, the data is passed from memory to cache.
 
   Special attention is given to `LBU` and `SW` instructions, which involve partial word read/write operations through byte addressing. 
