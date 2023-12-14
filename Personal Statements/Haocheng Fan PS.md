@@ -27,7 +27,8 @@
     - [Sampling  Mechanism  for  Graph  Display](#sampling--mechanism--for--graph--display)
     - [Limiting  Redundant  Graph  Plots](#limiting--redundant--graph--plots)
   - [Pipelined Control Unit](#pipelined-control-unit)
-- [before, the control unit of our design constits of three part, the PC decode, main decode and alu decode](#before-the-control-unit-of-our-design-constits-of-three-part-the-pc-decode-main-decode-and-alu-decode)
+  - [2 -way Cache read and write](#2--way-cache-read-and-write)
+- [fileControlUnit.sv](#filecontrolunitsv)
 - [Learnt  in  this  Porject](#learnt--in--this--porject)
   - [Knowledge](#knowledge)
   - [Programming  Languages](#programming--languages)
@@ -346,7 +347,15 @@ It  was  also  observed  that  the  final  loop, which  generates  the  PDF  gra
 These  improvements  to  the `testbench` are  expected  to  save  time and provide  a  more  efficient and visually  effective  way  to  interpret  the  data.  
 ### Pipelined Control Unit
 
-before, the control unit of our design constits of three part, the PC decode, main decode and alu decode
+The architecture of the decode and control unit module required separation into different stages to accommodate the pipeline design. Specifically, the main decoding process occurs in the decode stage, while the PC decode, crucial for jumping or branching, takes place in the execution stage. To effectively align with this pipelined approach, the control unit has been split accordingly, ensuring that each stage handles its respective tasks efficiently.
+
+graph 
+
+### 2 -way Cache read and write
+Given that only the `LBU` and `SB` logic is executed in the instruction, other conditions should not trigger read or write operations in the `cache`. Therefore, only if conditions for `LBU`and `SB` instructions are maintained.
+
+
+file[ControlUnit.sv](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/blob/Pipelined_Ref/rtl/ControlUnit.sv)
 ----
 
 ## Learnt  in  this  Porject
