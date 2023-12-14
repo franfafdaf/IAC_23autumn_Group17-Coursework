@@ -12,14 +12,14 @@
     - [Debugging process](#debugging-process)
     - [Other Component Modifications](#other-component-modifications)
   - [Build of Pipelened processor](#build-of-pipelened-processor)
-  - [Pipelined  version  debug  and  testing](#pipelined--version--debug--and--testing)
+  - [Debug  and  testing of Pipelined  version](#debug--and--testing-of-pipelined--version)
   - [Building of 2-way Cache](#building-of-2-way-cache)
   - [Testing of 2-way Cache](#testing-of-2-way-cache)
-- [Mistakes  I  make](#mistakes--i--make)
-  - [Wrong  conncetion  of  port  for  data  writen  to  `Data Memory`](#wrong--conncetion--of--port--for--data--writen--to--data-memory)
-  - [Wrong assginment of tag and set bit in `cache`](#wrong-assginment-of-tag-and-set-bit-in-cache)
+- [Mistakes](#mistakes)
+  - [Wrong  conncetion  of  port  for  data  writen  to  Data Memory](#wrong--conncetion--of--port--for--data--writen--to--data-memory)
+  - [Wrong assginment of tag and set bit in cache](#wrong-assginment-of-tag-and-set-bit-in-cache)
 - [Special  Designs](#special--designs)
-  - [Enhanced `testbench` for  Improved  Efficiency and Graphical  Display](#enhanced-testbench-for--improved--efficiency-and-graphical--display)
+  - [Enhanced testbench](#enhanced-testbench)
     - [Optimizations  in  Output  Handling](#optimizations--in--output--handling)
     - [Sampling  Mechanism  for  Graph  Display](#sampling--mechanism--for--graph--display)
     - [Limiting  Redundant  Graph  Plots](#limiting--redundant--graph--plots)
@@ -83,7 +83,7 @@ The initial version of the register file contained redundant `if` statements, le
 ```
 #### Data Memory Module Consolidation
 
-In Commit [`9f5a249`](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/9f5a24999856b424e760067505dd4d85696d9ea6) marks the consolidation of three memory modules into one [`datamem.sv`](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/blob/SingleCycle_Ref/rtl/DataMemory.sv). The initial version, provided by a group member, consisted of separate files: `datamem.sv` for reading data, `memory_out.sv` for switching between LBU and LW modes, and `memory_in.sv` for managing store operations with SB and SW instructions. To reduce complexity, these have been merged into a single file, simplifying connections in the `top.sv` file.
+In Commit [`9f5a249`](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/9f5a24999856b424e760067505dd4d85696d9ea6) marks the consolidation of three memory modules into one [`datamem.sv`](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/blob/SingleCycle_Ref/rtl/DataMemory.sv). The initial version, provided by a group member, consisted of separate files: `datamem.sv` for reading data, `memory_out.sv` for switching between `LBU` and `LW` modes, and `memory_in.sv` for managing store operations with `SB` and `SW` instructions. To reduce complexity, these have been merged into a single file, simplifying connections in the `top.sv` file.
 
   
 
@@ -134,7 +134,7 @@ Additional modifications across other components include correcting incorrectly 
 
 - in commit [1c8b3b5]((https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/1c8b3b515f4128b4a561c20a929516556fecf323)), the flush, stall and forward function in hazard control unit is added to the pipelined version.
 
-- in file[HazardUnit.sv](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/blob/Pipelined_F1/rtl/HazardUnit.sv), my design of the hazard unit in shown. Hazard unit deal with 3 situations that leads to error output in pipelined processor.
+- in file [HazardUnit.sv](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/blob/Pipelined_F1/rtl/HazardUnit.sv), my design of the `hazard unit` in shown. Hazard unit deal with 3 situations that leads to error output in pipelined processor.
 
 -  1. Data hazards by redirecting data from one pipeline stage to a previous stage. Instead of waiting for an intermediate result to go all the way through the pipeline to be written back to a register, the result is forwarded directly to an earlier stage where it is needed. To deal with this `forwarding` is used. 
 For instance, if an instruction writes a value to a register that the next instruction immediately needs, the hazard unit can forward this value directly from the write-back stage to the input of the execution stage of the subsequent instruction. This reduces or eliminates the need for stalls in many cases.
@@ -162,16 +162,16 @@ For instance, if an instruction writes a value to a register that the next instr
 - 2.  Data hazard occurs when a subsequent instruction depends on the result of a previous instruction that has not yet completed its execution. In a pipelined processor, different stages of instruction execution are overlapped. If one instruction needs data that is yet to be produced by another instruction, the pipeline may need to be `stalled`.
 For example, if an instruction that loads data from memory is followed by an instruction that uses this data, the second instruction cannot proceed until the data is available. The hazard control unit halts the pipeline progression for a certain number of cycles, allowing time for the required data to become available.
 ```verilog
-    assign lwStall = ResultSrcE0 & ((Rs1D == RdE)|(Rs2D == RdE)); 
-    assign StallF = lwStall;
-    assign StallD = lwStall;
+  assign lwStall = ResultSrcE0 & ((Rs1D == RdE)|(Rs2D == RdE)); 
+  assign StallF = lwStall;
+  assign StallD = lwStall;
 ```
 - 3. Control hazards occur mainly due to branch instructions. When a branch instruction is executed, the outcome is not known until the execution stage. However, by that time, subsequent instructions may have already been fetched and decoded. If the branch is taken, and the fetched instructions are not part of the correct execution path, these instructions need to be `flushed` from the pipeline. The hazard control unit effectively resets or clears parts of the pipeline and fetches the correct set of instructions according to the branch outcome.
 ```verilog
     assign FlushD = PCSrcE;
     assign FlushE = lwStall | PCSrcE;
 ```
-- in commit[b0a731b](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/b0a731bf8b34876275449e684cc3f78f5034d5a3), and several previous commit, the buidling of 4 flip flop that separeate the sategs.
+- in commit [`b0a731b`](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/b0a731bf8b34876275449e684cc3f78f5034d5a3), and several previous commit, the buidling of 4 flip flop that separeate the sategs.
 - in file [Stage1.sv](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/blob/Pipelined_F1/rtl/Stage1.sv) the design of the first stage,  Fetch and Decode stage is shown. `clr` and `en` logic is used to suit the `hazard unit` for `stall` and `flush`.
 ```verilog
 always_ff @(posedge clk) begin
@@ -198,9 +198,9 @@ always_ff @(posedge clk) begin
     end
 end
 ```
-### Pipelined  version  debug  and  testing
+### Debug  and  testing of Pipelined  version
 
-- in  commit [891ee88](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/891ee88a181cea1bb0545e017e88b7c0679a9761), the biggest bug of the pieplined version is fixed.
+- in  commit [`891ee88`](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/891ee88a181cea1bb0545e017e88b7c0679a9761), the biggest bug of the pieplined version is fixed.
 I falsely connect the port in `top.sv`
 Renaming  logic  stages (like  fetch  and  decode) and adjusting small logic  aspects  were  necessary  to  accommodate  the  pipelined  architecture. One  significant  challenge  encountered  was  an  issue with the  multiplexer  selecting  inputs  for  the  `data  memory`, which  was  traced  back  to  a  misconnection  at  the  top  level. Correcting  this  resolved  the  issue, enabling  proper  functioning  of  the  pipelined  processor.
 ```verilog
@@ -219,13 +219,13 @@ In file [ControlUnit.sv](https://github.com/franfafdaf/IAC_23autumn_Group17-Cour
   <img src="Personal Statments/../../Images/2-wayCache.png" alt="Cache Structure">
 </div>
 
-- in file[`cache.sv`](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/blob/2-wayCache/rtl/Cache.sv) 
+- in file [`cache.sv`](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/blob/2-wayCache/rtl/Cache.sv) 
 
 Initially, the  team  aimed  for  a  complex  cache  design (4-way, 8-set, 128-bit  block  size with write-back  functionality). However, due  to  complexity, the  design  was  simplified  to  a  2-way  set  associative  cache. The  cache  was  segmented  into  smaller  components  like  valid  bits, tag, data, and least  recently  used (LRU) bits. This  modular  approach  allowed  for  easier  initialization and hit  detection.
 
 ### Testing of 2-way Cache 
 
-- in commit [](), during the debugging, the output appeared similar to the expected one, but not identical. Revisiting `cache.sv`, I identified a potential issue with the else condition. Given that only the `LBU` and `SB` logic is executed in the instruction, other conditions should not trigger read or write operations in the `cache`. Therefore, only if conditions for `LBU`and `SB` instructions are maintained.
+- in commit [`15f91b6`](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/15f91b6acd0cd94db00cfda61a78d0df64af065b), during the debugging, the output appeared similar to the expected one, but not identical. Revisiting `cache.sv`, I identified a potential issue with the else condition. Given that only the `LBU` and `SB` logic is executed in the instruction, other conditions should not trigger read or write operations in the `cache`. Therefore, only if conditions for `LBU`and `SB` instructions are maintained.
   
 - The overall design is illustrated above. The cache receives inputs from `DataWrite`, `AddressIn`, and other control units. The `Hit` logic is determined by checking whether the data is already in the `cache`. If a hit occurs, the output of the memory stage will be sourced from the cache. Otherwise, it will be derived from the `data memory`. The selection of output is managed by the file `CacheMux.sv`().
 
@@ -244,7 +244,7 @@ This segment initializes the least recently used logic and the valid logic of ea
   end
 ```
 - 2. Read 
-When the tag and set number of a specific block match the incoming address, and the valid bit is 1 (indicating current content), these conditions, along with an enabled LBU instruction, dictate that the output to the next stage, the write-back stage, should originate from the cache.
+When the tag and set number of a specific block match the incoming address, and the valid bit is 1 (indicating current content), these conditions, along with an enabled `LBU` instruction, dictate that the output to the next stage, the write-back stage, should originate from the cache.
 
 ```verilog
   // Read 
@@ -263,7 +263,7 @@ When the tag and set number of a specific block match the incoming address, and 
  end
 ```
 - 3. Write 
-The write policy here is write-through for simplicity. Hence, whenever the SB logic is activated, the input data is written to the corresponding location in the cache. Additionally, the least recently used lru is toggled to its opposite value to maintain temporal locality.
+The write policy here is write-through for simplicity. Hence, whenever the `SB` logic is activated, the input data is written to the corresponding location in the cache. Additionally, the least recently used `lru` is toggled to its opposite value to maintain temporal locality.
 
  ```verilog
   always_ff @(posedge clk) begin
@@ -288,26 +288,26 @@ The write policy here is write-through for simplicity. Hence, whenever the SB lo
 
 
 ----
-## Mistakes  I  make
+## Mistakes
 ----
 
-### Wrong  conncetion  of  port  for  data  writen  to  `Data Memory`
+### Wrong  conncetion  of  port  for  data  writen  to  Data Memory
 
-In the construction of the pipelined version, the SrcBE port for the ALU module should connect to the mux in front of it. This mux switches between WriteDataE and another mux controlled by ForwardBE. However, I mistakenly connected the output of RD2E to the SrcBE, which resulted in the exclusion of data forwarding and writing to the ALU, leading to an incorrect output display.
+In the construction of the pipelined version, the `SrcBE` port for the `ALU` module should connect to the mux in front of it. This mux switches between WriteDataE and another mux controlled by `ForwardBE`. However, I mistakenly connected the output of RD2E to the `SrcBE`, which resulted in the exclusion of data forwarding and writing to the `ALU`, leading to an incorrect output display.
 
 ```verilog
-	.//WriteDataE(RD2E),
+.//WriteDataE(RD2E),
 
-	.WriteDataE(SrcB0E),
+.WriteDataE(SrcB0E),
 ```
 
-### Wrong assginment of tag and set bit in `cache`
+### Wrong assginment of tag and set bit in cache
 
-In the development of the 2-way cache version, the overall plot appeared mostly accurate, yet some values were incorrect in the visualization. Upon inspecting the waveforms in the VCD file, it was evident that the values from the cache and data memory differed, indicating an error in the output. Closer examination of the address input revealed that incoming data was being stored at incorrect addresses. This discrepancy suggested a potential issue with how the tag and set were assigned.
+In the development of the 2-way cache version, the overall plot appeared mostly accurate, yet some values were incorrect in the visualization. Upon inspecting the waveforms in the VCD file, it was evident that the values from the `cache` and `data memory` differed, indicating an error in the output. Closer examination of the address input revealed that incoming data was being stored at incorrect addresses. This discrepancy suggested a potential issue with how the tag and set were assigned.
 
-The root of the problem turned out to be the handling of the byte offset. According to the textbook, a byte offset is necessary, and the textbook examples show byte-addressed locations, such as 0x4, 0xc. However, in this project, aligned with the assembly code provided in the PDF, data in memory is loaded sequentially, meaning the addresses are continuous and do not jump by 4 as in the textbook examples.
+The root of the problem turned out to be the handling of the byte offset. According to the textbook, a byte offset is necessary, and the textbook examples show word-addressed locations, such as 0x4, 0xc. However, in this project, aligned with the assembly code provided in the PDF, data in memory is loaded sequentially, meaning the addresses are continuous and do not jump by 4 as in the textbook examples.
 
-After correcting this issue and adjusting for the continuous, non-byte-jumped addressing, the output plot aligned correctly with expectations. This fix resolved the discrepancies previously observed between the cache and data memory outputs.
+After correcting this issue and adjusting for the continuous, word-addressing, the output plot aligned correctly with expectations. This fix resolved the discrepancies previously observed between the `cache`and `data memory` outputs.
 Just like the old chinese phrase: "Blind faith in books is worse than having no books at all". 
 
 ```verilog
@@ -325,7 +325,7 @@ module Cache #(
 
 ----
 
-### Enhanced `testbench` for  Improved  Efficiency and Graphical  Display
+### Enhanced testbench
 
 #### Optimizations  in  Output  Handling
 
@@ -365,7 +365,7 @@ These  improvements  to  the `testbench` are  expected  to  save  time and provi
 
 ### Pipelined Control Unit
 
-The architecture of the decode and control unit module required separation into different stages to accommodate the pipeline design. Specifically, the main decoding process occurs in the decode stage, while the PC decode, crucial for jumping or branching, takes place in the execution stage. To effectively align with this pipelined approach, the control unit has been split accordingly, ensuring that each stage handles its respective tasks efficiently. File [ControlUnit.sv](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/blob/Pipelined_Ref/rtl/ControlUnit.sv).
+The architecture of the decode and control unit module required separation into different stages to accommodate the pipeline design. Specifically, the main decoding process occurs in the decode stage, while the `PC decode`, crucial for jumping or branching, takes place in the execution stage. To effectively align with this pipelined approach, the `control unit` has been split accordingly, ensuring that each stage handles its respective tasks efficiently. File [ControlUnit.sv](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/blob/Pipelined_Ref/rtl/ControlUnit.sv).
 
 
 graph 
