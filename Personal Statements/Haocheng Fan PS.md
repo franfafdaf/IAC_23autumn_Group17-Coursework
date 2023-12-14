@@ -16,13 +16,13 @@
   - [Pipelined  version  debug  and  testing](#pipelined--version--debug--and--testing)
 - [Cache  version  debug  and  testing](#cache--version--debug--and--testing)
   - [Simplifying  the  Cache  Design](#simplifying--the--cache--design)
-- [mistakes  i  make](#mistakes--i--make)
+- [mistakes  I  make](#mistakes--i--make)
   - [Wrong  conncetion  of  port  for  data  writen  to  Data  memory](#wrong--conncetion--of--port--for--data--writen--to--data--memory)
 - [Special  Designs](#special--designs)
   - [Enhanced `testbench` for  Improved  Efficiency and Graphical  Display](#enhanced-testbench-for--improved--efficiency-and-graphical--display)
     - [Optimizations  in  Output  Handling](#optimizations--in--output--handling)
-    - [Limiting  Redundant  Graph  Plots](#limiting--redundant--graph--plots)
     - [Sampling  Mechanism  for  Graph  Display](#sampling--mechanism--for--graph--display)
+    - [Limiting  Redundant  Graph  Plots](#limiting--redundant--graph--plots)
 - [Learnt  in  this  Porject](#learnt--in--this--porject)
   - [Knowledge](#knowledge)
   - [Programming  Languages](#programming--languages)
@@ -194,9 +194,11 @@ Renaming  logic  stages (like  fetch  and  decode) and adjusting small logic  as
 	.WriteDataE(SrcB0E),
 ```
 If in this connection, the `forwarding` will not work.
+
 ## Cache  version  debug  and  testing
 
 ### Simplifying  the  Cache  Design
+- in file 
 
 Initially, the  team  aimed  for  a  complex  cache  design (4-way, 8-set, 128-bit  block  size with write-back  functionality). However, due  to  complexity, the  design  was  simplified  to  a  2-way  set  associative  cache. The  cache  was  segmented  into  smaller  components  like  valid  bits, tag, data, and least  recently  used (LRU) bits. This  modular  approach  allowed  for  easier  initialization and hit  detection.
 
@@ -207,15 +209,11 @@ Initially, the  team  aimed  for  a  complex  cache  design (4-way, 8-set, 128-b
 
 ----
 
-## mistakes  i  make
+## mistakes  I  make
 
 ----
 
-  
-
 ### Wrong  conncetion  of  port  for  data  writen  to  Data  memory
-
-  
 
 in  the  building  of  the  pipelined  version, the `SrcBE` port  for `ALU` module  should  conncet  tothe  mux  infraont  of  it, which  switcht  between  the `WriteDataE` and the  mux  controled  by `ForwardBE`, but  i  fasely  connet  the  ouput  of `RD2E` to  the `SrcBE`, so  that  the  forwarding and writing  of  data  is  exculede  to  the `ALU`, so  that  wrong  plot  is  shown.
 
@@ -237,58 +235,43 @@ in  the  building  of  the  pipelined  version, the `SrcBE` port  for `ALU` modu
 
 In  analyzing  the  reference  assembly  code  for  the  probability  density  function, an  interesting  behavior  of `vbuddy` was  noted. Specifically, the  output  to `vbuddy` (variable `a0`) materializes  after  a  sequence  of  three  operations: cleaning, building, and displaying  data. This  means  that  during  multiple  cycles, the  initial  output  of `vbuddy` could  be  zero. Considering  the  additional time  taken  by  plotting, an  optimization  was  introduced  in  the `testbench`. Now, graphs  are  plotted  only  when `a0` holds  a  non-zero  value, significantly  enhancing  efficiency.
 
+```verilog
+	if (plot == 0 && top->a0 != 0) {
+		plot = 1;
+	}
 ```
-if (plot == 0 && top->a0 != 0) {
+#### Sampling  Mechanism  for  Graph  Display
 
-plot = 1;
-
+Further, the `testbench` has  been  refined  to  include  a  counting  mechanism. Under  this  new  system, a  graph  is  plotted  only  after `a0` has  been  non-zero  three  times, effectively  sampling  one  out  of  every  three  occurrences. This  approach  balances  the  need  to  display  a  complete PDF graph  on  the `vbuddy` screen, while  avoiding  an  overload  of  information and maintaining  a  clear, concise  visual  representation.
+ ``` verilog
+ if (plot >= 1) {
+		if(count == 3){
+			vbdPlot(int(top->a0), 0, 255);
+			count =0;
+			vbdCycle(simcyc);
+		}
+		else{
+			count = count +1;	
+		}
+		plot += 1;
 }
-
-if (plot >= 1) {
-
-if(count == 3){
-
-vbdPlot(int(top->a0), 0, 255);
-
-count =0;
-
-vbdCycle(simcyc);
-
-}
-
-else{
-
-count = count +1;
-
-}
-
-plot += 1;
-
-}
-
-if (plot > 960) {
-
-break;
-
-}
-```
-
-  
-
+``` 
 #### Limiting  Redundant  Graph  Plots
 
 It  was  also  observed  that  the  final  loop, which  generates  the  PDF  graph, tends  to  repeat  itself. To  address  this, a  modification  was  made  to  set  a  maximum  plotting  limit within the `testbench`. This  ensures  that  only  one  complete, meaningful  graph  is  displayed, eliminating  redundant  visual  outputs.
 
+ ``` verilog
+	 if (plot > 960) {
+		 break;
+	}
+```
+
+
+
+
   
 
-#### Sampling  Mechanism  for  Graph  Display
-
-Further, the `testbench` has  been  refined  to  include  a  counting  mechanism. Under  this  new  system, a  graph  is  plotted  only  after `a0` has  been  non-zero  three  times, effectively  sampling  one  out  of  every  three  occurrences. This  approach  balances  the  need  to  display  a  complete PDF graph  on  the `vbuddy` screen, while  avoiding  an  overload  of  information and maintaining  a  clear, concise  visual  representation.
-
-  
-
-These  improvements  to  the `testbench` are  expected  to  save  time and provide  a  more  efficient and visually  effective  way  to  interpret  the  data.
-
+These  improvements  to  the `testbench` are  expected  to  save  time and provide  a  more  efficient and visually  effective  way  to  interpret  the  data.  
 
 ----
 
