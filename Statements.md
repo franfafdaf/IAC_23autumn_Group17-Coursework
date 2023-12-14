@@ -1,24 +1,44 @@
 ## Table of contents 
+- [Table of contents](#table-of-contents)
 - [Project Brief](#project-brief)
 - [Personal Information](#personal-information)
 - [Individual Contributions](#individual-contributions)
 - [Repo Structure](#repo-structure)
 - [Single Cycle Design](#single-cycle-design)
-    - [Design Overview: From Lab4 to Project](#design-overview-from-lab4-to-project)
-    - [Program Counter](#program-counter)
-    - [Instruction Memory](#instruction-memory)  
-    - [Extend Unit](#extend-unit)
-    - [Control Unit](#control-unit)
-    - [Data Memory](#data-memory)
-    - [ALU](#alu)
-    - [Top Level Design](#top-level-design)
-    - [Testbench](#testbench)
-    - [Shell Script](#shell-script)
-    - [Assembly Language (F1)](#assembly-language-f1)
-    - [F1 Design VS Ref Design](#f1-design-vs-ref-design)
+  - [Design Overview: From Lab4 to Project](#design-overview-from-lab4-to-project)
+  - [Program Counter](#program-counter)
+  - [Instruction Memory](#instruction-memory)
+  - [Extend Unit](#extend-unit)
+  - [Control Unit](#control-unit)
+    - [1. Control Unit Overview](#1-control-unit-overview)
+    - [2. ALU Signals](#2-alu-signals)
+    - [3. Register and Memory Signals](#3-register-and-memory-signals)
+    - [4. Jump Signals](#4-jump-signals)
+    - [5. Extend Signal](#5-extend-signal)
+  - [Data Memory](#data-memory)
+  - [ALU](#alu)
+  - [Top Level Design](#top-level-design)
+  - [Testbench](#testbench)
+  - [Shell Script](#shell-script)
+  - [Assembly Language (F1)](#assembly-language-f1)
+  - [F1 Design VS Ref Design](#f1-design-vs-ref-design)
+    - [1. Data Memory](#1-data-memory)
+    - [2. `Trigger` Signal](#2-trigger-signal)
+    - [3. Testbench](#3-testbench)
 - [Pipeline Design](#pipeline-design)
 - [Data Memory Cache Design](#data-memory-cache-design)
+  - [Design Overview](#design-overview)
+  - [Direct Mapped Cache](#direct-mapped-cache)
+    - [Parameters:](#parameters)
+    - [Read and Write Policy](#read-and-write-policy)
+    - [Implementation](#implementation)
+  - [2-Way Associative Cache](#2-way-associative-cache)
+    - [Parameters:](#parameters-1)
+    - [Read and Write Policy](#read-and-write-policy-1)
+    - [Implementation](#implementation-1)
 - [Test Results](#test-results)
+  - [Reference Program](#reference-program)
+  - [F1 Program](#f1-program)
 
 
 
@@ -604,7 +624,51 @@ assign hit = ((tag[inputSet] == inputTag) && (valid[inputSet]));
 
 ### 2-Way Associative Cache
 
+#### Parameters:
 
+- **Capacity:** 16 words
+- **Block Size:** 1 word
+- **Number of Sets:** 8
+- **Number of Ways:** 2
+- **`Tag_WIDTH`:** 29 bits
+- **`Set_WIDTH`:** 3 bits
+
+  <div align="center">
+    <img src="Personal Statements/../Images/2-wayCache.png" alt="2-way Cache">
+  </div>
+
+#### Read and Write Policy
+
+- **Read Policy**
+  - **Hit:** Data is directly read from the cache.
+  - **Miss:** Data is fetched from memory and then loaded into the cache.
+
+- **Write Policy**
+  Adopting a write-through policy, data gets written concurrently to both the cache and the memory. While this method eases implementation, it can potentially diminish performance, especially with a high volume of write operations.
+
+#### Implementation
+
+- **Overview**
+  The cache is integrated with the memory system. Since "memory passes data to cache", implementing cache and memory as separate blocks would complicate the configuration where data can be transferred bidirectionally. 
+  An additional MUX is implemented to determine the source of output—selecting from the cache in case of a hit, and from the data memory in case of a miss.
+- **Hit Logic**
+  A hit occurs when the `inputTag` matches the cache's `tag` and the `valid` bit is set to `TRUE`. The logic can be expressed as:
+```SystemVerilog
+  if ((valid[inputSet][way]) && (tag[inputSet][way] == inputTag)) begin // find the block
+```
+- **Least Recently Used**
+  The `lru` (Least Recently Used) logic determines which cache way has been more recently accessed. If way 1 is identified as more recently used (indicated by `lru`=1), this suggests a higher probability of it being accessed again soon, due to temporal locality. Consequently, subsequent write or read operations will target the content in the alternative way, maintaining the same `tag` and `set`, but differing in the way used.
+```verilog
+  if (LdSrcM && hit) begin
+        lru[inputSet] <= !lru[inputSet]; // rest the least used 
+      end
+```
+- **Write Logic**
+  Write operations are executed for and `SB` instructions. In our write-through scheme, data is simultaneously written to both the cache and memory. This approach maintains data consistency between cache and memory, though it may affect performance during intensive write operations. The design involves updating the `tag` and `Hit` signals concurrently during these write operations. In instances of a cache hit, these signals retain their previous values.
+
+- **Read Logic**
+  When a hit occurs, the output is sourced from the cache memory. Conversely, in the event of a miss, data is loaded to the sepcific block in cache, and the output for the current cycle is derived from this data memory.
+  
 ----
 ## Test Results
 ----
