@@ -68,13 +68,15 @@ Through joint efforts, Group 17 has successfully implemented the F1 algorithm in
 | Yiyao Zhou   | 2213516 | TaylorZYY  | yiyao.zhou22@imperial.ac.uk  | [Personal Statement](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/blob/main/Personal%20Statements/Yiyao%20Zhou%20Personal%20Statement.md)  |
 | Haocheng Fan | 2262158 | franfafdaf | frank.fan22@imperial.ac.uk   | [Personal Statement](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/blob/main/Personal%20Statements/Haocheng%20Fan%20PS.md)                  |
 | Guanxi Lu    | 2233412 | lgxi24     | guanxi.lu22@imperial.ac.uk   | [Personal Statement](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/blob/main/Personal%20Statements/Guanxi%20Lu%20Personal%20Statement.md)   |
+
 <br>
-<br>
+
 ----
 ## Individual Contributions
 ----
+
 <br>
-<br>
+
 | Version         | Section                              | File Name              | Tingxu Chen | Yiyao Zhou | Haocheng Fan | Guanxi Lu |
 |-----------------|--------------------------------------|------------------------|-------------|------------|--------------|-----------|
 | SingleCycle_Ref | PC                                   | pc_top.sv              | X           |            | P            |           |
