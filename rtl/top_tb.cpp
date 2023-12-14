@@ -19,7 +19,7 @@ int main(int argc, char **argv, char **env){
   tfp->open ("top.vcd");
  
   if (vbdOpen()!=1) return(-1);
-  vbdHeader("PipelinedRef");
+  vbdHeader("CacheRef");
 
   top->clk = 1;
   top->rst = 0;
@@ -48,7 +48,7 @@ int main(int argc, char **argv, char **env){
       }
       plot += 1;
     }
-    if (plot > 960) {
+    if (plot > 1920) {
       break;
     }
  
