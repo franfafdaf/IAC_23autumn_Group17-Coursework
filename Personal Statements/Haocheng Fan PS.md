@@ -14,15 +14,20 @@
     - [Other Component Modifications](#other-component-modifications)
   - [Pipelened processor](#pipelened-processor)
   - [Pipelined  version  debug  and  testing](#pipelined--version--debug--and--testing)
-- [Cache  version  debug  and  testing](#cache--version--debug--and--testing)
-  - [Simplifying  the  Cache  Design](#simplifying--the--cache--design)
+    - [Control Unit  Module Consolidation](#control-unit--module-consolidation)
+- [2-way Cache version](#2-way-cache-version)
+  - [Building of 2-way Cache](#building-of-2-way-cache)
+  - [Testing of 2-way Cache](#testing-of-2-way-cache)
 - [mistakes  I  make](#mistakes--i--make)
-  - [Wrong  conncetion  of  port  for  data  writen  to  Data  memory](#wrong--conncetion--of--port--for--data--writen--to--data--memory)
+  - [Wrong  conncetion  of  port  for  data  writen  to  `Data Memory`](#wrong--conncetion--of--port--for--data--writen--to--data-memory)
+  - [Wrong assginment of tag and set bit in `cache`](#wrong-assginment-of-tag-and-set-bit-in-cache)
 - [Special  Designs](#special--designs)
   - [Enhanced `testbench` for  Improved  Efficiency and Graphical  Display](#enhanced-testbench-for--improved--efficiency-and-graphical--display)
     - [Optimizations  in  Output  Handling](#optimizations--in--output--handling)
     - [Sampling  Mechanism  for  Graph  Display](#sampling--mechanism--for--graph--display)
     - [Limiting  Redundant  Graph  Plots](#limiting--redundant--graph--plots)
+  - [Pipelined Control Unit](#pipelined-control-unit)
+- [before, the control unit of our design constits of three part, the PC decode, main decode and alu decode](#before-the-control-unit-of-our-design-constits-of-three-part-the-pc-decode-main-decode-and-alu-decode)
 - [Learnt  in  this  Porject](#learnt--in--this--porject)
   - [Knowledge](#knowledge)
   - [Programming  Languages](#programming--languages)
@@ -35,23 +40,12 @@
 
 ----
 
-  
-
 ## Contributions
 
-  
-
 ----
-
-  
-
 ### Summary
 
-  
-
-I primarily handled the **debugging and testing of the single-cycle processor**, the **construction of the pipelined processor** along with its subsequent **debugging and testing**, and also the **debugging and testing of the cache version**. Additionally, I served as the repository master, responsible for establishing and updating the GitHub repository, and collaborated with Guanxi to enhance the repository's webpage.
-
-  
+I primarily handled the **debugging and testing of the single-cycle processor**, the **construction of the pipelined processor** along with its subsequent **debugging and testing**, and also the **construction, debugging and testing of the 2-way cache version**. Additionally, I served as the repository master, responsible for establishing and updating the GitHub repository, and collaborated with Guanxi to enhance the repository's github page.
 
 ### Debug and Testing in the Single Cycle Processor Section
 
@@ -67,7 +61,6 @@ The single cycle processor section has undergone several key modifications, as d
 
 In commit [`296baaf`](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/296baaf513f4e8ec553caf4e8feb459ab987700a), significant debugging was performed on the `Control Unit`, `mainDecode`, and `ALUDecode`.
 
-  
 
 -  **Datamem, Instruction Mem, and Top:**
 
@@ -83,9 +76,7 @@ In commit [`82f2d82`](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursew
 
 #### Register File Optimization
 
-The initial version of the register file contained redundant `if` statements, leading to confusion and compiler warnings due to missing conditions like `else`. To streamline this, I simplified the logic to use a single condition based on the write enable signal. Now, the content of the target register is replaced only when the positive clock click is active, and the write enable signal is enabled.
-
-  
+The initial version of the register file contained redundant `if` statements, leading to confusion and compiler warnings due to missing conditions like `else`. To streamline this, I simplified the logic to use a single condition based on the write enable signal. Now, the content of the target register is replaced only when the positive clock click is active, and the write enable signal is enabled. 
 
 #### Data Memory Module Consolidation
 
@@ -112,6 +103,13 @@ Additional modifications across other components include correcting incorrectly 
   
 
 -  **Second Loop Data Update Issue**: Further debugging efforts led to the discovery of a problem in the processor's second operational loop, where data was not being updated as intended. The processor was designed to load a value from a specific address, increment this value, and then store it back. However, it continually loaded an initial value of zero, failing to execute the intended operation. This issue was eventually traced to an error in handling the `SB` instruction, where 24 zero bits were incorrectly appended to the stored byte, disrupting the data storage process. Correcting this design flaw was crucial, enabling the processor to accurately update and represent data.
+
+
+
+
+
+
+
 
 
 ### Pipelened processor
@@ -196,29 +194,112 @@ Renaming  logic  stages (like  fetch  and  decode) and adjusting small logic  as
 ```
 If in this connection, the `forwarding` will not work.
 
-## Cache  version  debug  and  testing
+#### Control Unit  Module Consolidation  
+Previously, the control unit was composed of three distinct units: the PC decode, the ALU decode, and the main decode. These units were responsible for decoding instructions, but this setup was quite messy and prone to errors in connectivity. To streamline the process, I consolidated these components into a single file named `control_unit`, simplifying the overall design.
+In file [ControlUnit.sv](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/blob/Pipelined_Ref/rtl/ControlUnit.sv)
 
-### Simplifying  the  Cache  Design
-- in file 
+## 2-way Cache version
+
+### Building of 2-way Cache 
+- in file[]() 
 
 Initially, the  team  aimed  for  a  complex  cache  design (4-way, 8-set, 128-bit  block  size with write-back  functionality). However, due  to  complexity, the  design  was  simplified  to  a  2-way  set  associative  cache. The  cache  was  segmented  into  smaller  components  like  valid  bits, tag, data, and least  recently  used (LRU) bits. This  modular  approach  allowed  for  easier  initialization and hit  detection.
 
+### Testing of 2-way Cache 
 
+- in commit [](), during the debugging, the output appeared similar to the expected one, but not identical. Revisiting `cache.sv`, I identified a potential issue with the else condition. Given that only the `LBU` and `SB` logic is executed in the instruction, other conditions should not trigger read or write operations in the `cache`. Therefore, only if conditions for `LBU`and `SB` instructions are maintained.
   
+- The overall design is illustrated above. The cache receives inputs from `DataWrite`, `AddressIn`, and other control units. The `Hit` logic is determined by checking whether the data is already in the `cache`. If a hit occurs, the output of the memory stage will be sourced from the cache. Otherwise, it will be derived from the `data memory`. The selection of output is managed by the file `CacheMux.sv`().
 
-  
+- 1. Initalizaztion 
+This segment initializes the least recently used logic and the valid logic of each block to 0. This implies that all the data in the blocks is invalid, and new data should be loaded first when encountered by the cache for the first time, indicating misses.
+``` verilog
+ // Initialization
+  initial begin
+    // set valid to 0
+    for (int set = 0; set < setNum; set++) begin
+        lru[set] = 0; // set lru to 0 
+      for (int way = 0; way < wayNum; way++) begin
+            valid[set][way] = 1'b0;
+      end
+    end
+  end
+```
+- 2. Read 
+When the tag and set number of a specific block match the incoming address, and the valid bit is 1 (indicating current content), these conditions, along with an enabled LBU instruction, dictate that the output to the next stage, the write-back stage, should originate from the cache.
+
+```verilog
+  // Read 
+  always_comb begin
+    // Default values
+    hit = 1'b0; 
+    dataOut = 32'b0; 
+    for (int way = 0; way < wayNum; way++) begin
+       if (LdSrcM) begin // lbu 
+          if ((valid[inputSet][way]) && (tag[inputSet][way] == inputTag)) begin // find the block
+                dataOut = {24{1'b0},data[inputSet][way][7:0]};
+                hit = 1'b0;
+            end
+        end
+    end
+ end
+```
+- 3. Write 
+The write policy here is write-through for simplicity. Hence, whenever the SB logic is activated, the input data is written to the corresponding location in the cache. Additionally, the least recently used lru is toggled to its opposite value to maintain temporal locality.
+
+ ```verilog
+  always_ff @(posedge clk) begin
+    if (LdSrcM && hit) begin
+      lru[inputSet] <= !lru[inputSet]; // rest the least used 
+    end
+    
+    if (WE) begin
+      // choose the way
+      selectedWay <= lru[inputSet] ? 1'b0 : 1'b1; 
+      // Update tag & valid
+      valid[inputSet][selectedWay] <= 1'b1;
+      tag[inputSet][selectedWay] <= inputTag;
+      lru[inputSet] <= !lru[inputSet]; // rest the least used 
+      // SB instruction
+      if (StSrcM) begin
+            data[inputSet][selectedWay][7:0] <=dataIn[7:0];
+      end
+    end
+  end
+```
+
 
 ----
-
 ## mistakes  I  make
-
 ----
 
-### Wrong  conncetion  of  port  for  data  writen  to  Data  memory
+### Wrong  conncetion  of  port  for  data  writen  to  `Data Memory`
 
-in  the  building  of  the  pipelined  version, the `SrcBE` port  for `ALU` module  should  conncet  tothe  mux  infraont  of  it, which  switcht  between  the `WriteDataE` and the  mux  controled  by `ForwardBE`, but  i  fasely  connet  the  ouput  of `RD2E` to  the `SrcBE`, so  that  the  forwarding and writing  of  data  is  exculede  to  the `ALU`, so  that  wrong  plot  is  shown.
+In the construction of the pipelined version, the SrcBE port for the ALU module should connect to the mux in front of it. This mux switches between WriteDataE and another mux controlled by ForwardBE. However, I mistakenly connected the output of RD2E to the SrcBE, which resulted in the exclusion of data forwarding and writing to the ALU, leading to an incorrect output display.
 
-  
+```verilog
+	.//WriteDataE(RD2E),
+
+	.WriteDataE(SrcB0E),
+```
+
+### Wrong assginment of tag and set bit in `cache`
+
+In the development of the 2-way cache version, the overall plot appeared mostly accurate, yet some values were incorrect in the visualization. Upon inspecting the waveforms in the VCD file, it was evident that the values from the cache and data memory differed, indicating an error in the output. Closer examination of the address input revealed that incoming data was being stored at incorrect addresses. This discrepancy suggested a potential issue with how the tag and set were assigned.
+
+The root of the problem turned out to be the handling of the byte offset. According to the textbook, a byte offset is necessary, and the textbook examples show byte-addressed locations, such as 0x4, 0xc. However, in this project, aligned with the assembly code provided in the PDF, data in memory is loaded sequentially, meaning the addresses are continuous and do not jump by 4 as in the textbook examples.
+
+After correcting this issue and adjusting for the continuous, non-byte-jumped addressing, the output plot aligned correctly with expectations. This fix resolved the discrepancies previously observed between the cache and data memory outputs.
+Just like the old chinese phrase: "Blind faith in books is worse than having no books at all". 
+
+```verilog
+module Cache #(
+  parameter tagSize = 29,
+  parameter setSize = 3,
+  parameter setNum = 8,
+  parameter wayNum = 2
+)
+```  
 
 ----
 
@@ -226,11 +307,7 @@ in  the  building  of  the  pipelined  version, the `SrcBE` port  for `ALU` modu
 
 ----
 
-  
-
 ### Enhanced `testbench` for  Improved  Efficiency and Graphical  Display
-
-  
 
 #### Optimizations  in  Output  Handling
 
@@ -259,21 +336,17 @@ Further, the `testbench` has  been  refined  to  include  a  counting  mechanism
 ``` 
 #### Limiting  Redundant  Graph  Plots
 
-It  was  also  observed  that  the  final  loop, which  generates  the  PDF  graph, tends  to  repeat  itself. To  address  this, a  modification  was  made  to  set  a  maximum  plotting  limit within the `testbench`. This  ensures  that  only  one  complete, meaningful  graph  is  displayed, eliminating  redundant  visual  outputs.
+It  was  also  observed  that  the  final  loop, which  generates  the  PDF  graph, tends  to  repeat  itself. To  address  this, a  modification  was  made  to  set  a  maximum  plotting  limit within the `testbench`. This  ensures  that  only  one  complete, meaningful  graph  is  displayed, eliminating  redundant  visual  outputs. This limit value changes according to different memory contents.    
 
  ``` verilog
 	 if (plot > 960) {
 		 break;
 	}
 ```
-
-
-
-
-  
-
 These  improvements  to  the `testbench` are  expected  to  save  time and provide  a  more  efficient and visually  effective  way  to  interpret  the  data.  
+### Pipelined Control Unit
 
+before, the control unit of our design constits of three part, the PC decode, main decode and alu decode
 ----
 
 ## Learnt  in  this  Porject
