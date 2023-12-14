@@ -4,8 +4,7 @@
 * [PC Module](#pc)
 * [Data Memory Module](#data-memory-module)
 * [Cache Module](#cache)
-* [Mistakes I Made](#mistakes-i-made)
-* [Reflections about The Project](#reflections-about-the-project)
+* [Mistakes and Reflections about the Project](#mistakes-i-made-and-reflections-about-the-project)
 * [Future Work](#future-work)
 
 ___
@@ -77,12 +76,11 @@ And then, i wrote a very simple [(testbench commit)](https://github.com/franfafd
 
 ___
 
-## Mistakes I made
+## Mistakes I made and Reflections about the Project
 
 Reflecting on this project, I recognize that my initial approach of meticulously dissecting each aspect into smaller fragments, while thorough, occasionally posed integration challenges. This method, though detail-oriented, sometimes led me to overlook the cohesive structure of the entire system. I aslo wrote about the [Hazard Unit](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/blob/ctx/hazard_unit.sv) and [Write Back Stage](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/blob/ctx/WriteBack.sv), however, they were not comprehensive enough and failed to consider specific design details, leading to its ultimate non-adoption.
 
-## Reflections about the Project
-I also updated [F1](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/0a2a302c688c5d771017f65c39dc40badde29d7a#diff-459ccd3741eab6ef299332d555a1d48bb4194ae7abcec5e2fcf713b273713f4f) and [PDF](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/07987e2013d860883f839faf3294c1c5e5626840#diff-e913dcf4ac9ab2c024452e14dc5f97453138975767976ff363552c00333a4e45) code, ‘nop’ instructions have been added to address software hazards, ensuring safe data processing in pipelined executions. The experience has been enlightening, particularly in enhancing my understanding of the RISC-V CPU's operations. The process of developing various components and trying to integrate them provided me with a deeper insight into how different parts of a CPU work together. The project also required me to adapt to new concepts and changes in design. This experience has improved my ability to be flexible and adjust strategies as needed.
+The experience has been enlightening, particularly in enhancing my understanding of the RISC-V CPU's operations. The process of developing various components and trying to integrate them provided me with a deeper insight into how different parts of a CPU work together. The project also required me to adapt to new concepts and changes in design. This experience has improved my ability to be flexible and adjust strategies as needed.
 
 ___
 

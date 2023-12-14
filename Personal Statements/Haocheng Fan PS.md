@@ -128,8 +128,9 @@ Additional modifications across other components include correcting incorrectly 
 
 ### Build of Pipelened processor
 
-![Alt text](Images/Pipelined.png)
-
+<div align="center">
+  <img src="Images/Pipelined.png" alt="Cache Structure">
+</div>
 - in commit[1c8b3b5](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/1c8b3b515f4128b4a561c20a929516556fecf323), the flush, stall and forward function in hazard control unit is added to the pipelined version.
 
 - in file[HazardUnit.sv](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/blob/Pipelined_F1/rtl/HazardUnit.sv), my design of the hazard unit in shown. Hazard unit deal with 3 situations that leads to error output in pipelined processor.
@@ -213,6 +214,9 @@ In file [ControlUnit.sv](https://github.com/franfafdaf/IAC_23autumn_Group17-Cour
 
 
 ### Building of 2-way Cache 
+<div align="center">
+  <img src="Images/2-wayCache.png" alt="Cache Structure">
+</div>
 - in file[]() 
 
 Initially, the  team  aimed  for  a  complex  cache  design (4-way, 8-set, 128-bit  block  size with write-back  functionality). However, due  to  complexity, the  design  was  simplified  to  a  2-way  set  associative  cache. The  cache  was  segmented  into  smaller  components  like  valid  bits, tag, data, and least  recently  used (LRU) bits. This  modular  approach  allowed  for  easier  initialization and hit  detection.
