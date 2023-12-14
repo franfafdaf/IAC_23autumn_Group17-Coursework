@@ -50,7 +50,7 @@ module Cache #(
        if (LdSrcM) begin // lbu 
           if ((valid[inputSet][way]) && (tag[inputSet][way] == inputTag)) begin // find the block
                 dataOut = {{24{1'b0}},data[inputSet][way][7:0]};
-                hit = 1'b0;
+                hit = 1'b1;
             end
         end
     end
