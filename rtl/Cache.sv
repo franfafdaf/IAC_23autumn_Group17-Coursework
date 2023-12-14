@@ -11,6 +11,7 @@ module Cache #(
   input  logic                  LdSrcM,       // Load Type signal
   input logic                   WE,           // write enable
   input logic                   clk,
+  input logic[31:0]             memIn,
 
   output logic [31:0]           dataOut,    
   output logic                  hit           // decide whether hit
@@ -64,7 +65,7 @@ module Cache #(
       lru[inputSet] <= !lru[inputSet]; // rest the least used
       alid[inputSet][selectedWay] <= 1'b1;
       tag[inputSet][selectedWay] <= inputTag;
-      data[inputSet][selectedWay][7:0] <=dataIn[7:0];
+      data[inputSet][selectedWay] <= memIn;
     end
     
     if (WE) begin

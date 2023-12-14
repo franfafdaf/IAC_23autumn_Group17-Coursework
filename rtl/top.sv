@@ -281,6 +281,7 @@ Cache my_cache(
     .LdSrcM(LdSrcM),
     .addressIn(ALUResultM),
     .dataIn(WriteDataM),
+    .memIn(memOut),
     .dataOut(cacheOut)
 );
 
