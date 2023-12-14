@@ -6,5 +6,6 @@ module CacheMux #(
     input logic[Data_Width-1:0] memInput,
     output logic[Data_Width-1:0] Moutput
 );
-    assign Moutput = hit ? cacheInput:memInput;
+    // if hit, use cache, if miss, use data memory
+    assign Moutput = hit ? cacheInput:memInput; 
 endmodule
