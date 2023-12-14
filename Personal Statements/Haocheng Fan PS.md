@@ -129,7 +129,7 @@ Additional modifications across other components include correcting incorrectly 
 ### Build of Pipelened processor
 
 <div align="center">
-  <img src="Images/Pipelined.png" alt="Pipeliend Structure">
+  <img src="Personal Statments/../../Images/Pipelined.png" alt="Pipeliend Structure">
 </div>
 - in commit[1c8b3b5](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/1c8b3b515f4128b4a561c20a929516556fecf323), the flush, stall and forward function in hazard control unit is added to the pipelined version.
 
@@ -215,7 +215,7 @@ In file [ControlUnit.sv](https://github.com/franfafdaf/IAC_23autumn_Group17-Cour
 
 ### Building of 2-way Cache 
 <div align="center">
-  <img src="Images/2-wayCache.png" alt="Cache Structure">
+  <img src="Personal Statments/../../Images/2-wayCache.png" alt="Cache Structure">
 </div>
 - in file[]() 
 
