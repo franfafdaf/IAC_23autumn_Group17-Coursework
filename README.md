@@ -73,6 +73,45 @@ Through joint efforts, Group 17 has successfully implemented the F1 algorithm in
 ## Individual Contributions
 ----
 
+| Version         | Section                              | File Name              | Tingxu Chen | Yiyao Zhou | Haocheng Fan | Guanxi Lu |
+|-----------------|--------------------------------------|------------------------|-------------|------------|--------------|-----------|
+| SingleCycle_Ref | PC                                   | pc_top.sv              | X           |            | P            |           |
+|                 | Instruction Memory                   | instr_mem.sv           |             |            |              | X         |
+|                 | Extend                               | extend.sv              |             |            | P            | X         |
+|                 | Register File                        | reg_file.sv            |             | X          | P            | P         |
+|                 | Control Unit                         | ALU_decode.sv          |             |            | p            | X         |
+|                 |                                      | control_unit.sv        |             |            | P            | X         |
+|                 |                                      | main_decode.sv         |             |            | P            | X         |
+|                 |                                      | PCSrc_Decode           |             |            | P            | X         |
+|                 | Data Memory                          | DataMemory.sv          | X           |            | P            | P         |
+|                 |                                      | DataMux.sv             | X           |            | P            |           |
+|                 | ALU                                  | alu_top.sv             |             | X          |              |           |
+|                 | Testbench and Shell Script           | doit.sh                |             |            | X            |           |
+|                 |                                      | top_tb.cpp             |             |            | X            |           |
+|                 | Debug and Testing                    | top.sv                 |             |            | P            | X         |
+|                 |                                      | `debug`                |             |            | X            | X         |
+| SingleCycle_F1  | Assembly Language                    | F1.s                   | U           | U          | U            | X         |
+|                 |                                      | F1.mem                 |             |            |              | X         |
+|                 | Testbench and Shell Script           | top_tb.cpp             |             |            | P            | X         |
+|                 | Debug and Testing                    | `debug`                |             |            | X            | X         |
+| Pipelined_Ref   | Pipelining                           | Stage1.sv              |             |            | X            |           |
+|                 |                                      | Stage2.sv              |             |            | X            |           |
+|                 |                                      | Stage3.sv              |             |            | X            |           |
+|                 |                                      | Stage4.sv              | U           |            | X            |           |
+|                 |                                      | Stage.sv               |             |            | X            |           |
+|                 | Hazard Unit                          | HazardUnit.sv          | U           | U          | X            |           |
+|                 | Debug and Testing                    | `debug`                |             |            | X            |           |
+| Pipelined_F1    | Debug and Testing                    | `debug`                |             |            | X            |           |
+| Cache           | Direct Mapped Cache                  | direct_mapped_cache.sv | U           | U          |              |           |
+|                 |                                      | direct_cache_memory.sv |             |            |              | X         |
+|                 |                                      | `debug`                |             |            |              | X         |
+|                 | 4-Way Associative Cache              | cache.sv               | U           | U          |              |           |
+|                 | 2-Way Block Size 1 Associative Cache | Cache.sv               |             |            | X            |           |
+|                 |                                      | CacheMux.sv            |             |            | X            |           |
+|                 |                                      | `debug`                |             |            | X            |           |
+| Administrative  | Repo Master                          | `Repo Master`          |             |            | P            | X         |
+|                 | Joint Statement                      | `Joint Statement`      |             |            | P            | X         |
+
 Note: 
 `X` = Full Participation
 `P` = Partial Participation (modification or debug)
