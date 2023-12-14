@@ -27,7 +27,7 @@
 ### Summary
 My contributions primarily focus on the Single Cycle and Cache Versions. In the Single Cycle version, I was tasked with developing the **Control Unit**, **Instruction Memory**, **Extend Unit**, **Top Level Design** and the **F1 Assembly Language Program**. Additionally, [Haocheng](https://github.com/franfafdaf) and I collaborated on debugging the design. For the Cache Version, I selected the cache parameters (2-way associative, 4-word block size, write-through cache) and **designed the corresponding block diagram**. [Haocheng](https://github.com/franfafdaf) took charge of the implementation phase.
 
-Furthermore, I undertook administrative duties within our team. These included managing the **repository structure**, **test and upload design results**, and **authoring the group's joint statement**. As the author of the joint statement, my design ideas are included in the [joint statement]().
+Furthermore, I undertook administrative duties within our team. These included managing the **repository structure**, **test and upload design results**, and **authoring the group's joint statement**. As the author of the joint statement (excluding 2-way assosiative Cache section), my design ideas are included in the [joint statement]().
 
 ### Control Unit, Instruction Memory, and Extend Unit
 - In commit [742b3f2](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/742b3f2b9d3cbdc882d3ebd4e2a44154c933a736), a preliminary version including the `Control Unit`, `Instruction Memory`, and `Extend Unit` was developed.

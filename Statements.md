@@ -534,6 +534,71 @@ As mentioned earlier, the F1 Program employs a distinct testbench from that of t
 ## Data Memory Cache Design
 ----
 
+### Design Overview
+
+In CPU architecture, caches play a crucial role in enabling quick read/write operations, thereby enhancing performance. This is achieved by exploiting two key principles: temporal locality and spatial locality. Temporal locality is based on the premise that if data is used once, it's likely to be accessed again soon. Conversely, spatial locality posits that when data is accessed, adjacent data is likely to be needed in the near future. Our research group has developed two distinct cache designs: Direct Mapped Cache and 2-Way Associative Cache. Notably, both designs utilize a single word as the block size, focusing primarily on leveraging temporal locality.
+
+### Direct Mapped Cache
+
+#### Parameters:
+
+- **Capacity:** 8 words
+- **Block Size:** 1 word
+- **Number of Sets:** 8
+- **Number of Ways:** 1
+- **`Tag_WIDTH`:** 29 bits
+- **`Set_WIDTH`:** 3 bits
+
+#### Read and Write Policy
+
+- **Read Policy**
+  - **Hit:** Data is directly read from the cache.
+  - **Miss:** Data is fetched from memory and then loaded into the cache.
+
+  <div align="center">
+    <img src="Images/Cache_Read.png" alt="Cache Read Operation">
+  </div>
+
+- **Write Policy**
+  Since a write-through policy is adopted, data is written simultaneously to both the cache and the memory. This approach simplifies implementation but may lead to reduced performance under high write volumes.
+
+  <div align="center">
+    <img src="Images/Cache_Write.png" alt="Cache Write Operation">
+  </div>
+
+#### Implementation
+
+- **Overview**
+  The cache is integrated with the memory system. Since "memory passes data to cache", implementing cache and memory as separate blocks would complicate the configuration where data can be transferred bidirectionally. The design is illustrated in the diagram below.
+  
+  <div align="center">
+    <img src="Images/Cache Memory.png" alt="Cache-Memory Integration">
+  </div>
+
+- **Hit Logic**
+  A hit occurs when the `inputTag` matches the cache's `tag` and the `valid` bit is set to `TRUE`. The logic can be expressed as:
+```SystemVerilog
+assign hit = ((tag[inputSet] == inputTag) && (valid[inputSet]));
+```
+- **Write Logic**
+  Write operations realize to `SW` and `SB` instructions. In our write-through approach, data is concurrently written to both the cache and memory. This method ensures data consistency between cache and memory but might impact performance under heavy write operations. The design updates the `tag` and `Hit` signals simultaneously during write operations, and for Hit cases, the singals remain their previous values.
+
+- **Read Logic**
+  Read operations realize `LW` and `LBU` instructions. They are implemented using a state machine:
+  - In the event of a Hit, the next state is `from_cache`.
+  - In the event of a Miss, the next state is `from_memory`.
+  <div align="center">
+    <img src="Images/state_machine_cache.png" alt="State Machine for Cache Read">
+  </div>
+  For Miss cases, in addition to updating the `tag` and `Hit`, the data is passed from memory to cache.
+
+  Special attention is given to `LBU` and `SW` instructions, which involve partial word read/write operations through byte addressing. 
+  
+  Further, Unlike standard word-aligned addressing, RV32I employs byte addressing. Hence, our design adjusts the bit layout for `Set` and `Tag` to accommodate this difference. The last two bits of the address are used for byte offset in byte-addressed systems, allowing for `00`, `01`, `10`, or `11` as possible values. Consequently, we designate the last three bits as `Set` and the preceding 29 bits as `Tag`.
+
+### 2-Way Associative Cache
+
+
 ----
 ## Test Results
 ----
