@@ -59,15 +59,23 @@ module Cache #(
     if (LdSrcM && hit) begin
       lru[inputSet] <= !lru[inputSet]; // rest the least used 
     end
+
+    if (LdSrcM && !hit) begin
+      lru[inputSet] <= !lru[inputSet]; // rest the least used
+      alid[inputSet][selectedWay] <= 1'b1;
+      tag[inputSet][selectedWay] <= inputTag;
+      data[inputSet][selectedWay][7:0] <=dataIn[7:0];
+    end
     
     if (WE) begin
       // choose the way
       selectedWay <= lru[inputSet] ? 1'b0 : 1'b1; 
       // Update tag & valid
-      valid[inputSet][selectedWay] <= 1'b1;
-      tag[inputSet][selectedWay] <= inputTag;
+      ;
       // SB instruction
       if (StSrcM) begin
+            valid[inputSet][selectedWay] <= 1'b1;
+            tag[inputSet][selectedWay] <= inputTag
             data[inputSet][selectedWay][7:0] <=dataIn[7:0];
       end
     end
