@@ -18,16 +18,16 @@ module Cache #(
 
   // Cache
   logic [setNum-1:0][wayNum-1:0] valid;
-  logic [setNum-1:0][wayNum-1:0] tag [tagSize-1:0];
-  logic [setNum-1:0][wayNum-1:0] data[31:0] ;        // block size:32 bits 
+  logic [setNum-1:0][wayNum-1:0] [tagSize-1:0] tag ;
+  logic [setNum-1:0][wayNum-1:0] [31:0]        data ;        // block size:32 bits 
   logic [setNum-1:0]             lru;                // leaat used bit, if 0 choose way0, else choose way 1
   logic                          selectedWay;
   
   // input
   logic [tagSize-1:0] inputTag;
   logic [setSize-1:0] inputSet;
-  assign inputTag = addressIn[31:4]; 
-  assign inputSet = addressIn[3:2]; // byte offset for [1:0]
+  assign inputTag = addressIn[31:5]; 
+  assign inputSet = addressIn[4:2]; // byte offset for [1:0]
 
   // Initialization
   initial begin
@@ -49,7 +49,7 @@ module Cache #(
        if (LdSrcM) begin // lbu 
           if ((valid[inputSet][way]) && (tag[inputSet][way] == inputTag)) begin // find the block
                 dataOut = {{24{1'b0}},data[inputSet][way][7:0]};
-                hit = 1'b1;
+                hit = 1'b0;
             end
         end
     end

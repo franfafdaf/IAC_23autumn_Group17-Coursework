@@ -62,7 +62,7 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop___024root final : public VerilatedModule
         CData/*1:0*/ top__DOT__my_control_unit__DOT__ALUDecode;
         SData/*15:0*/ top__DOT__my_cache__DOT__valid;
         CData/*7:0*/ top__DOT__my_cache__DOT__lru;
-        CData/*0:0*/ top__DOT__my_cache__DOT__way_to_write;
+        CData/*0:0*/ top__DOT__my_cache__DOT__selectedWay;
         CData/*7:0*/ top__DOT__my_data_memory__DOT____VdfgTmp_hac5405b8__0;
         CData/*1:0*/ top__DOT__my_hazardunit__DOT__ForwardAE;
         CData/*1:0*/ top__DOT__my_hazardunit__DOT__ForwardBE;
@@ -96,11 +96,11 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop___024root final : public VerilatedModule
         IData/*31:0*/ top__DOT__my_pc__DOT__PCF_Next;
         IData/*31:0*/ top__DOT__my_alu__DOT__SrcAE;
         IData/*31:0*/ top__DOT__my_alu__DOT__SrcBE;
-        VlWide<15>/*463:0*/ top__DOT__my_cache__DOT__tag;
+        VlWide<14>/*431:0*/ top__DOT__my_cache__DOT__tag;
         VlWide<16>/*511:0*/ top__DOT__my_cache__DOT__data;
         IData/*31:0*/ top__DOT__my_cache__DOT__unnamedblk1__DOT__set;
         IData/*31:0*/ top__DOT__my_cache__DOT__unnamedblk1__DOT__unnamedblk2__DOT__way;
-        IData/*28:0*/ top__DOT__my_cache__DOT____Vlvbound_h83bf5de3__0;
+        IData/*26:0*/ top__DOT__my_cache__DOT____Vlvbound_h4d95f196__0;
         IData/*31:0*/ __Vdly__top__DOT__PCF;
         IData/*31:0*/ __VstlIterCount;
         IData/*31:0*/ __VactIterCount;
