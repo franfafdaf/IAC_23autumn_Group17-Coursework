@@ -551,20 +551,68 @@ As mentioned earlier, the F1 Program employs a distinct testbench from that of t
 ----
 
 ### Design Overview
-Pipelining is a very useful, and widely applied technique in the design of processors. Through pipelining, performance can be greately enhanced. Our pipelined processor design divide the single-cycle processor into five stages: 
+Pipelining is a highly useful and widely applied technique in processor design. Through pipelining, performance can be greatly enhanced. Our pipelined processor design divides the single-cycle processor into five stages:
 
 - **F:** Fetch Instruction
 - **D:** Decode
 - **E:** Execute ALU
-- **M:** Memory read and write
+- **M:** Memory Read and Write
 - **W:** Write Register
 
-It's worth being mentioned that instructions will not necessarily use all these five stages.
-Pipelining execute different stages for different instructions in the same cycle. For example, after the first line of instruction completed **F** stage, the second line execute its **F** stage the same time as the first line executes **D** stage. 
+It's worth mentioning that instructions will not necessarily use all of these five stages. Pipelining executes different stages for different instructions in the same cycle. For example, after the first instruction completes the **F** stage, the second instruction executes its **F** stage at the same time as the first instruction executes its **D** stage.
 
-Although this techniques seems to be easy, problems also raises: data hazards and control hazards can exist. A simple way to deal with hazard is to add `NOP` instructions between "useful" ones, which can reduce performance. A more advanced way is to introduce a Hazard Unit to implement **Forwarding**, **Stall** and **Flush**. 
+Although this technique seems simple, it also raises problems: data hazards and control hazards can exist. A straightforward way to deal with hazards is to add `NOP` instructions between the "useful" ones, which can reduce performance. A more advanced method is to introduce a Hazard Unit to implement **Forwarding**, **Stall**, and **Flush**.
 
-The following diagram (modified based on [H&H Digital Design and Computer Architecture, RISC-V Edition: RISC-V Edition](https://www.sciencedirect.com/book/9780128200643/digital-design-and-computer-architecture)) illustrate the Pipelined Processor design with Hazard Unit, which is implemented in our project. 
+The following diagram (modified based on [H&H Digital Design and Computer Architecture, RISC-V Edition: RISC-V Edition](https://www.sciencedirect.com/book/9780128200643/digital-design-and-computer-architecture)) illustrates the Pipelined Processor design with a Hazard Unit, as implemented in our project.
+
+The pipelined version is applied to both the F1 Program and the Reference Program.
+
+  <div align="center">
+    <img src="Images/hazard.png" alt="Pipeline with Hazard Unit">
+  </div>
+
+### Forwarding Logic
+Forwarding is required where result is needed by the next instructions before it is written to register. For example, in the program below, s8 needs to be forwarded. 
+```s
+add s8, s4, s5
+sub s2, s8, s3
+or  s9, s6, s8
+and s7, s8, t2
+```
+Forwarding can be implemented by adding MUXes in front of the ALU to select its operand. It's logic can be illustrated with the following program: 
+```SystemVerilog
+//forwarding
+if (((Rs1E == RdM) & RegWriteM) & (Rs1E != 0)) ForwardAE = 2'b10;       // Forward from Memory stage 
+else if (((Rs1E == RdW) & RegWriteW) & (Rs1E != 0)) ForwardAE = 2'b01;  // Forward from Writeback stage 
+else ForwardAE = 2'b00;                                                 // No forwarding (use RF output)
+```
+
+### Stall Logic
+Stall is required where the next instruction requires the data from destination register in the previous instruction. For example, in the program below, s7 needs to be stalled, which practically means the second line needs to wait for first line to give correct data. 
+```s
+lw  s7, 40(s5)
+and s8, s7, t3
+or  t2, s6, s7
+sub s3, s7, s2
+```
+
+Stalls are supported by adding enable inputs (EN) to the **Fetch** and **Decode** pipeline registers and a synchronous reset/clear (CLR) input to **Execute** pipeline register. If data needs to be cleared, `FlushE` will flush the data. In practice, the logic can be implemented as follows: 
+```SystemVerilog
+//stall
+assign lwStall = ResultSrcE0 & ((Rs1D == RdE)|(Rs2D == RdE)); 
+assign StallF = lwStall;
+assign StallD = lwStall;
+```
+
+### Flush Logic
+Flush can also be used to deal with control hazard, where the pipelined processor doesn't know what instruction to fetch next because the branch decision hasn't been made. First a prediction is made on whether the branch will be taken. If the prediction proves to be wrong, the results should be flushed, which is called branch misprediction panalty. 
+
+The Flush logic can be implemented as shown in the following program: 
+```SystemVerilog
+//flush
+assign FlushD = PCSrcE;
+assign FlushE = lwStall | PCSrcE;
+```
 
 
 
