@@ -284,17 +284,6 @@ Cache my_cache(
     .dataOut(cacheOut)
 );
 
-// Cache my_cache(
-//     .clk(clk),
-//     .wen(MemWriteM),
-//     .StSrcM(StSrcM),
-//     .LdSrcM(LdSrcM),
-//     .addr(ALUResultM),
-//     .data_in(WriteDataM),
-//     .hit(hit),
-//     .data_out(cacheOut)
-// );
-
 DataMemory my_data_memory(
     .clk(clk),
     .WE(MemWriteM),
