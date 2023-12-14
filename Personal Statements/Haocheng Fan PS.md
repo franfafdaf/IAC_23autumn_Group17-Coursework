@@ -14,11 +14,10 @@
     - [Other Component Modifications](#other-component-modifications)
   - [Pipelened processor](#pipelened-processor)
   - [Pipelined  version  debug  and  testing](#pipelined--version--debug--and--testing)
-    - [Control Unit  Module Consolidation](#control-unit--module-consolidation)
 - [2-way Cache version](#2-way-cache-version)
   - [Building of 2-way Cache](#building-of-2-way-cache)
   - [Testing of 2-way Cache](#testing-of-2-way-cache)
-- [mistakes  I  make](#mistakes--i--make)
+- [Mistakes  I  make](#mistakes--i--make)
   - [Wrong  conncetion  of  port  for  data  writen  to  `Data Memory`](#wrong--conncetion--of--port--for--data--writen--to--data-memory)
   - [Wrong assginment of tag and set bit in `cache`](#wrong-assginment-of-tag-and-set-bit-in-cache)
 - [Special  Designs](#special--designs)
@@ -195,8 +194,7 @@ Renaming  logic  stages (like  fetch  and  decode) and adjusting small logic  as
 ```
 If in this connection, the `forwarding` will not work.
 
-#### Control Unit  Module Consolidation  
-Previously, the control unit was composed of three distinct units: the PC decode, the ALU decode, and the main decode. These units were responsible for decoding instructions, but this setup was quite messy and prone to errors in connectivity. To streamline the process, I consolidated these components into a single file named `control_unit`, simplifying the overall design.
+- Previously, the control unit was composed of three distinct units: the PC decode, the ALU decode, and the main decode. These units were responsible for decoding instructions, but this setup was quite messy and prone to errors in connectivity. To streamline the process, I consolidated these components into a single file named `control_unit`, simplifying the overall design.
 In file [ControlUnit.sv](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/blob/Pipelined_Ref/rtl/ControlUnit.sv)
 
 ## 2-way Cache version
@@ -271,7 +269,7 @@ The write policy here is write-through for simplicity. Hence, whenever the SB lo
 
 
 ----
-## mistakes  I  make
+## Mistakes  I  make
 ----
 
 ### Wrong  conncetion  of  port  for  data  writen  to  `Data Memory`
@@ -345,6 +343,7 @@ It  was  also  observed  that  the  final  loop, which  generates  the  PDF  gra
 	}
 ```
 These  improvements  to  the `testbench` are  expected  to  save  time and provide  a  more  efficient and visually  effective  way  to  interpret  the  data.  
+
 ### Pipelined Control Unit
 
 The architecture of the decode and control unit module required separation into different stages to accommodate the pipeline design. Specifically, the main decoding process occurs in the decode stage, while the PC decode, crucial for jumping or branching, takes place in the execution stage. To effectively align with this pipelined approach, the control unit has been split accordingly, ensuring that each stage handles its respective tasks efficiently.
@@ -370,25 +369,26 @@ file[ControlUnit.sv](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursewo
 
 ### Programming  Languages
 
-- **SystemVerilog**: A Hardware  Description  Language (HDL) offering  the  construction  of  architecture  of  computer.
+- **SystemVerilog**: Knowing SystemVerilog is crucial for professionals in the fields of electronic design and hardware engineering, as these languages are the cornerstones of digital system design and FPGA/ASIC development. SystemVerilog extends these capabilities with advanced features for more efficient and robust hardware design, verification, and modeling. Mastery of these languages enables engineers to create and validate complex digital systems, making them indispensable tools in the design of modern electronic devices, from simple logic gates to intricate processors and integrated circuits.
 
-- **Verilator**: Useful  for  compiling  SystemVerilog  programs  into C++ projects  for  simulating.
+
+- **Verilator**: Understanding the functionality of Verilator is essential for hardware designers and system developers, as it stands as one of the leading open-source tools for hardware simulation and verification. Verilator specializes in converting Verilog code into C++ or SystemC, enabling faster simulation speeds compared to traditional event-driven simulators. This feature is particularly valuable for large-scale designs and complex digital systems, allowing for more efficient testing and debugging processes. By integrating Verilator into their workflow, developers can significantly enhance the accuracy and speed of their hardware verification cycles, a critical aspect in the development of reliable and high-performance electronic systems.
 
 ### Tools
 
-- **Git**: Essential  for  version  control and managing  repository  structure.
-
-- **vcd**: file  format  that  used  for  displaying  waveforms.
+- **Git&Github**: Using Git and GitHub is crucial in software development for efficient version control and collaboration. Git allows developers to track and manage changes in their codebase, while GitHub provides a central platform for storing code, facilitating team collaboration through features like pull requests and issue tracking. Additionally, GitHub acts as a cloud backup and offers tools for automation, making it a valuable resource for individual developers and teams alike.
 
 ### Note  Language
 
-- **Markdown**: the  language  that  can  be  augmented with HTML for  advanced  functionality  in  taking  note.
+- **Markdown**: Markdown is highly valued for its simplicity, readability, and versatility, making it a popular choice in software development and content creation. Its straightforward syntax is easy to learn and read, enhancing the focus on content rather than formatting. Markdown files are widely supported across various platforms and can be seamlessly converted to other formats like HTML and PDF. This universal compatibility, coupled with its strong presence in communities like GitHub, makes Markdown an essential tool for creating clear, structured documentation, README files, and online posts, ensuring effective communication and collaboration in diverse digital environments.
 
 ### Skills
 
 - **Utilizing  Waveform  Analysis  for  Troubleshooting**: Waveform  analysis  is  an  essential  tool  in  the  debugging  process. By  closely  examining  the  behavior  of  signals  on  a  clock-by-clock  basis, we  can  effectively  identify and address  any  anomalies or unexpected  behaviors  in  the  design. This  method  offers  a  detailed and precise  approach  to  refining  our  project.
 
 - **The  Importance  of  Comprehensive  Record-Keeping**: Maintaining  detailed  records, both  on  an  individual and team  level, is  of  utmost  importance. This  systematic  approach  to  documentation  ensures  that  every  decision and change  is  well-recorded and easy  to  reference.
+- **Enhanced Teamwork with Group Members**: Improved collaboration is achievable through the use of Git, as it allows teams to efficiently track progress and revert to earlier stages when needed. The commit history in Git provides clear insights into each member's contributions, making it easier to understand the current workload of others and ensuring that no one falls behind.
+xe
 
 ----
 
@@ -396,4 +396,4 @@ file[ControlUnit.sv](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursewo
 
 ----
 
-If  given  another  opportunity, I would  focus  on  implementing  the  single and pipelined  processor  versions  more  efficiently and with greater  attention  to  detail. This  would  potentially  allow  for  the  completion  of  the  more  complex  cache  module. Also, the  used  instruction  will  be  added  to  the `control  unit` so  that  this  processor  can  deal with more  situations.
+Given another chance, I would concentrate on optimizing the implementation of both the single and pipelined processor versions, dedicating more attention to detail to enhance efficiency. Such improvements could pave the way for successfully completing a more complex `cache` module. Additionally, I would expand the `control unit` to include a broader range of instructions, equipping the processor to handle a wider variety of scenarios.
