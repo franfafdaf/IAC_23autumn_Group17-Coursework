@@ -16,6 +16,7 @@
   - [Introduction of `ALUSrcA` Signal for `SrcA` Input Selection](#introduction-of-alusrca-signal-for-srca-input-selection)
   - [Introduction of `JalSrc` Signal for `PC` logic](#introduction-of-jalsrc-signal-for-pc-logic)
   - [Hardwiring `x0` Register to Zero](#hardwiring-x0-register-to-zero)
+  - [Using a State Machine for Cache Design](#using-a-state-machine-for-cache-design)
 - [What I've Learned in This Project](#what-ive-learned-in-this-project)
   - [Tools](#tools)
   - [Soft Skills](#soft-skills)
@@ -149,7 +150,7 @@ In the RV32I ISA, the `x0` register is always hardwired to 0, necessitating a co
 
 Ultimately,  a different logic is implemented, which prevents writing to `x0`. When the destination register `RD` equals 0 (representing `x0`), no register write occurs. As `x0` is initialized to 0, its value remains consistently zero.
 
-### Using a State Machine to Implement Cache Logic
+### Using a State Machine for Cache Design
 
 During the development of our cache system, I segmented the logic into three main components:
 - Hit Logic
