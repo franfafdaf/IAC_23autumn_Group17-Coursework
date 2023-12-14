@@ -75,7 +75,7 @@ module Cache #(
       // SB instruction
       if (StSrcM) begin
         valid[inputSet][selectedWay] <= 1'b1;
-        tag[inputSet][selectedWay] <= inputTag
+        tag[inputSet][selectedWay] <= inputTag;
         data[inputSet][selectedWay][7:0] <=dataIn[7:0];
       end
     end
