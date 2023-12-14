@@ -62,7 +62,7 @@ In commit [`296baaf`](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursew
 
 -  **Datamem, Instruction Mem, and Top:**
 
-Commit [`b17e918`](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/b17e918bd95512817b331d454390872abb4e5f8b) focused on debugging the `datamem`, `instruction mem`, and `top`.
+In commit [`b17e918`](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/b17e918bd95512817b331d454390872abb4e5f8b) focused on debugging the `datamem`, `instruction mem`, and `top`.
 
   
 
@@ -83,7 +83,7 @@ The initial version of the register file contained redundant `if` statements, le
 ```
 #### Data Memory Module Consolidation
 
-Commit [`9f5a249`](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/9f5a24999856b424e760067505dd4d85696d9ea6) marks the consolidation of three memory modules into one `datamem.sv`(https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/blob/SingleCycle_Ref/rtl/DataMemory.sv). The initial version, provided by a group member, consisted of separate files: `datamem.sv` for reading data, `memory_out.sv` for switching between LBU and LW modes, and `memory_in.sv` for managing store operations with SB and SW instructions. To reduce complexity, these have been merged into a single file, simplifying connections in the `top.sv` file.
+In Commit [`9f5a249`](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/9f5a24999856b424e760067505dd4d85696d9ea6) marks the consolidation of three memory modules into one [`datamem.sv`](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/blob/SingleCycle_Ref/rtl/DataMemory.sv). The initial version, provided by a group member, consisted of separate files: `datamem.sv` for reading data, `memory_out.sv` for switching between LBU and LW modes, and `memory_in.sv` for managing store operations with SB and SW instructions. To reduce complexity, these have been merged into a single file, simplifying connections in the `top.sv` file.
 
   
 
@@ -131,7 +131,8 @@ Additional modifications across other components include correcting incorrectly 
 <div align="center">
   <img src="Personal Statments/../../Images/Pipelined.png" alt="Pipeliend Structure">
 </div>
-- in commit[1c8b3b5](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/1c8b3b515f4128b4a561c20a929516556fecf323), the flush, stall and forward function in hazard control unit is added to the pipelined version.
+
+- in commit [1c8b3b5]((https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/1c8b3b515f4128b4a561c20a929516556fecf323)), the flush, stall and forward function in hazard control unit is added to the pipelined version.
 
 - in file[HazardUnit.sv](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/blob/Pipelined_F1/rtl/HazardUnit.sv), my design of the hazard unit in shown. Hazard unit deal with 3 situations that leads to error output in pipelined processor.
 
@@ -199,7 +200,7 @@ end
 ```
 ### Pipelined  version  debug  and  testing
 
-- in  commit[891ee88](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/891ee88a181cea1bb0545e017e88b7c0679a9761), the biggest bug of the pieplined version is fixed.
+- in  commit [891ee88](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/891ee88a181cea1bb0545e017e88b7c0679a9761), the biggest bug of the pieplined version is fixed.
 I falsely connect the port in `top.sv`
 Renaming  logic  stages (like  fetch  and  decode) and adjusting small logic  aspects  were  necessary  to  accommodate  the  pipelined  architecture. One  significant  challenge  encountered  was  an  issue with the  multiplexer  selecting  inputs  for  the  `data  memory`, which  was  traced  back  to  a  misconnection  at  the  top  level. Correcting  this  resolved  the  issue, enabling  proper  functioning  of  the  pipelined  processor.
 ```verilog
