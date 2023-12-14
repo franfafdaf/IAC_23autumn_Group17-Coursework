@@ -46,13 +46,13 @@
 ## Project Brief
 ----
 
-This project aims to build a reduced RISC-V RV32I Processor. The processor is expected to execute two programs, as specified in the project brief.
+This project aims to build a reduced RISC-V RV32I Processor that is able to execute two programs, as specified in the project brief. Tests are taken to verify the Processor design and F1 Algorithm. 
 
 Two additional stretch goals are specified for advanced implementation:
 1. Pipelined RV32I design.
 2. Data Memory Cache.
 
-Through joint efforts, Group 17 has successfully implemented the F1 algorithm in assembly language, verified the program and RV32I design, implemented a pipelined RV32I
+Through joint efforts, Group 17 has successfully implemented the F1 algorithm in assembly language, verified the program and RV32I design, implemented a pipelined RV32I, and included data memory cache. 
  
 ----
 ## Personal Information
@@ -68,7 +68,7 @@ Note:
 `U` = Unused Version
 
 
-> **Note:** We would like to acknowledge that due to inadvertent errors in version control, the commit history on the `top` branch may not accurately represent the contributions of the group members. Notably, some files from the `top` branch, which were subsequently merged into the `SingleCycle_F1`, `SingleCycle_Ref`, `Pipelined_F1`, and other branches, were copied instead of being merged from the individual branches (`FHC`, `LGX`, `ZYY`, `CTX`). As a result, in the event of any conflicts, please refer to the table mentioned above for accurate attribution of work.
+> **Note:** We would like to acknowledge that, due to inadvertent errors in version control, the commit history on the `top` branch may not accurately represent the contributions of the group members. Notably, some files from the `top` branch, which were subsequently merged into the `SingleCycle_F1`, `SingleCycle_Ref`, `Pipelined_F1`, and other branches, were copied instead of being merged from the individual branches (`FHC`, `LGX`, `ZYY`, `CTX`). As a result, in the event of any conflicts, please refer to the table mentioned above for accurate attribution of work.
 
 ----
 ## Repo Structure
@@ -633,7 +633,7 @@ assign hit = ((tag[inputSet] == inputTag) && (valid[inputSet]));
 - **`Tag_WIDTH`:** 29 bits
 - **`Set_WIDTH`:** 3 bits
 
-  <div align="center">
+  <div align="center" style="width: 60%; margin: auto;">
     <img src="Personal Statements/../Images/2-wayCache.png" alt="2-way Cache">
   </div>
 
