@@ -1,40 +1,82 @@
 ## Personal Statement of Tingxu Chen
 
 ## Overview
-* [PC Module](#pc)
+* [PC Module](#pc-module)
 * [Data Memory Module](#data-memory-module)
+  * [DataMemory](#datamemory)
+  * [DataMux](#datamux)
 * [Cache Module](#cache)
-* [Mistakes and Reflections about the Project](#mistakes-i-made-and-reflections-about-the-project)
+  * [Direct Mapped Cache](#direct-mapped-cache)
+  * [4-Way Associative Cache](#4-way-associative-cache)
+* [Mistakes I Made](#mistakes-i-made)
+* [What I Learned](#what-i-learned)
 * [Future Work](#future-work)
 
 ___
 
-## PC 
+## PC Module
 
 This module is central to controlling the program counter (PC) in the architecture. [(pc module commit)](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/6aa6b993b8752f16c7e7337d3006bb28a0c2efe2)
 
-- **Inputs:** The module takes in clock (`clk`), reset (`rst`), and several control signals (`PCSrc`, `JalSrc`), along with immediate extension (`ImmExt`) and register data (`RD1`).
-- **Outputs:** It outputs the next program counter value (`PC`) and the incremented program counter value (`PC_Plus`).
-- **Functionality:** The module calculates the next PC value based on control signals. It selects between jump and branch addresses, and increments the PC accordingly.
+- **Inputs:**
+  - `clk`: Clock signal that drives the updates to the program counter.
+  - `rst`: Reset signal that initializes the program counter to a predefined address.
+  - `PCSrc`: Control signal to select the next value of the PC.
+  - `JalSrc`: Control signal to determine the use of the jump address.
+  - `ImmExt`: Immediate value for calculating branch addresses.
+  - `RD1`: Register data used for jump address calculation.
+
+- **Outputs:**
+  - `PC_Plus`: The current PC value incremented by 4, typically used for the next sequential instruction address.
+  - `PC`: The next program counter value that will be used by the CPU to fetch the next instruction.
+
+- **Functionality:**
+  - The `PC` module updates the program counter based on the provided control signals. It supports standard sequential execution, conditional branches, and jumps. On reset, it sets the PC to a starting address. When enabled, it selects the next PC value based on whether a branch or jump is being taken, or proceeds sequentially.
+
+| Control Signal | Next PC Value               | Description                           |
+|----------------|-----------------------------|---------------------------------------|
+| `PCSrc`        | `PC_Target` or `PC_Plus`    | Selects between branch target and the next sequential address. |
+| `JalSrc`       | `PC_Jump` or `RD1`          | Selects between the jump target and register-based jump address. |
 
 ![pc image](../Personal%20Statements/Images/ctx_pc_module.png)
 ___
 
 ## Data Memory Module
 
-The `DataMemory` module simulates the CPU's memory component, dealing with the storage and retrieval of data. 
+### DataMemory
 
-- **Inputs:** Receives clock signal (`clk`), write enable (`WE`), store and load type signals (`StSrc`, `LdSrc`), address (`A`), and write data (`WD`).
-- **Outputs:** Provides read data output (`RD`).
-- **Functionality:** The module is capable of both reading from and writing to a simulated memory array. It handles different types of load and store operations, ensuring correct data manipulation as per instruction requirements.
+The `DataMemory` module is a critical component that simulates the memory of a CPU. It manages two main operations: storing data into memory and retrieving data from it.
+
+- **Inputs:** 
+  - `clk`: Clock signal to synchronize operations.
+  - `WE`: Write enable signal for allowing data storage.
+  - `StSrc`, `LdSrc`: Signals indicating the type of storage or load operation.
+  - `A`: Address in memory where data is stored or retrieved.
+  - `WD`: Data to be written into the memory.
+
+- **Outputs:** 
+  - `RD`: Data read from the memory.
+
+- **Functionality:** 
+  - This module efficiently handles various memory operations, such as reading and writing data. It is designed to work with different types of data load and store instructions, ensuring that data is accurately manipulated according to the CPU's requirements.
+
 
 In the initial phase of developing the DataMemory module, my focus was primarily on basic load and store operations, specifically handling whole words (32 bits). The first version of the module was straightforward, catering only to these whole-word operations.[(1st version commit)](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/0cbc6d43edb3240f4cd97543063ee1066876af62) As the project progressed, my teammates introduced additional functionality for byte-wise manipulation, allowing us to handle more granular data operations. This enhancement was crucial for operations like SB (store byte) and LBU (load byte unsigned), providing us the flexibility to work with single bytes.So, firstly i only used 'BE' to represent the type of operation.[(2nd version commit)](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/99389ef5d3e26b237e4acf8a502acc6dee36b1b6)
 
 At first, i added 2 blocks to prepare for the correct version of data to be loaded and stored separately.[(3rd version p1 commit)](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/5a9c7c1e9ffbeaf08a1180077f31225f7d7f63c3),[(3rd version p2 commit)](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/6a3e3c46f9b6ce6c86b8ad880c43fbbbe5dadce8),[(3rd version p3 commit)](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/8f2f756e7f3fa9c44dd746199804985639e9df6f).Unfortunately, this led to complications, and the module didn't function as expected. For the final version, it worked in a single module which was similar and more logical than the 2nd version.[(4th version commit)](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/87b4f5e04cdb38b76a5298fe1c16340e928a8256)
 
-## Data Mux
+### DataMux
 
-This module functions as a data selector. It chooses between different data inputs like the ALU result, data read from memory, the incremented program counter value, and then directs the chosen data to its output. This selection is based on the control signal provided to it. [(data mux module commit)](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/c4a6135593346b9a64454955b24c7be1a8a59d7b)
+This module functions as a data selector. It chooses between different data inputs and directs the chosen data to its output based on a 2-bit control signal.
+
+| Control Signal (`ResultSrc`) | Data Selected |
+|-------------------------------|---------------|
+| `2'b00`                       | ALU Result (`ALUResult`) |
+| `2'b01`                       | Data Memory Read (`ReadData`) |
+| `2'b10`                       | Program Counter Increment (`PC_Plus`) |
+| Default                       | Zero (32'b0) |
+
+Each input corresponds to a specific scenario in CPU operations, and the `DataMux` selects the appropriate data path in a flexible manner. [(data mux module commit)](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/c4a6135593346b9a64454955b24c7be1a8a59d7b)
 
 ![Data module](../Personal%20Statements/Images/ctx_data_module.png)
 ___
@@ -43,12 +85,12 @@ ___
 
 ### Direct Mapped Cache
 
-We initially implemented a direct-mapped cache approach.The module operates with inputs like the clock signal, address input, and data input, and outputs the data retrieved from the cache along with a hit signal indicating successful data retrieval.[(direct module commit)](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/f1bca92fce395beb0b1330499e958dae02881769) We also write a simple testbench to test for the very basic scenarios. I co-authored this part with Yiyao Zhou and the details of the logic would be in her personal statement.
+Yiyao and I initially implemented a direct-mapped cache approach.The module operates with inputs like the clock signal, address input, and data input, and outputs the data retrieved from the cache along with a hit signal indicating successful data retrieval.[(direct module commit)](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/f1bca92fce395beb0b1330499e958dae02881769) We also write a simple testbench to test for the very basic scenarios. I co-authored this part with Yiyao Zhou and the details of the logic would be in her personal statement.
 ___
 
-### 4-Way Associative Cache
+### 4 Way Associative Cache
 
-Since the Direct_mapped_cache was not enough, we implemented a 4-way associative cache with 8 sets.[(4-way module commit)](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/e72619723225143b5b0abf1c6b6e8e16d904c5c5) Each set in this cache comprises four lines, and each line is equipped with its own valid and dirty bits. The valid bit in each line indicates whether the data in that line is valid, while the dirty bit shows if the data has been modified since being loaded into the cache.
+Since the Direct_mapped_cache was not enough, we implemented a 4-way associative cache with 8 sets independently.[(4-way module commit)](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/e72619723225143b5b0abf1c6b6e8e16d904c5c5) Each set in this cache comprises four lines, and each line is equipped with its own valid and dirty bits. The valid bit in each line indicates whether the data in that line is valid, while the dirty bit shows if the data has been modified since being loaded into the cache.
 
 For the hit processing logic:
 
@@ -76,11 +118,13 @@ And then, i wrote a very simple [(testbench commit)](https://github.com/franfafd
 
 ___
 
-## Mistakes I made and Reflections about the Project
+## Mistakes I made
 
 Reflecting on this project, I recognize that my initial approach of meticulously dissecting each aspect into smaller fragments, while thorough, occasionally posed integration challenges. This method, though detail-oriented, sometimes led me to overlook the cohesive structure of the entire system. I aslo wrote about the [Hazard Unit](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/blob/ctx/hazard_unit.sv) and [Write Back Stage](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/blob/ctx/WriteBack.sv), however, they were not comprehensive enough and failed to consider specific design details, leading to its ultimate non-adoption.
 
-The experience has been enlightening, particularly in enhancing my understanding of the RISC-V CPU's operations. The process of developing various components and trying to integrate them provided me with a deeper insight into how different parts of a CPU work together. The project also required me to adapt to new concepts and changes in design. This experience has improved my ability to be flexible and adjust strategies as needed.
+## What I Learned
+
+I also updated [F1](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/0a2a302c688c5d771017f65c39dc40badde29d7a#diff-459ccd3741eab6ef299332d555a1d48bb4194ae7abcec5e2fcf713b273713f4f) and [PDF](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/07987e2013d860883f839faf3294c1c5e5626840#diff-e913dcf4ac9ab2c024452e14dc5f97453138975767976ff363552c00333a4e45) code, ‘nop’ instructions have been added to address software hazards, ensuring safe data processing in pipelined executions. Working on this project has been a practical learning experience, especially in understanding how the RISC-V CPU operates. Building the different components and fitting them together gave me a clearer picture of the CPU's functionality. I also learned SystemVerilog for this project, which was necessary for writing the simulation and hardware models. The project was challenging and required me to adapt to new design changes quickly. Overall, it improved my problem-solving skills and my ability to adjust to new situations in hardware design.
 
 ___
 
