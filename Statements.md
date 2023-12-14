@@ -649,8 +649,7 @@ assign hit = ((tag[inputSet] == inputTag) && (valid[inputSet]));
 #### Implementation
 
 - **Overview**
-  The cache is integrated with the memory system. Since "memory passes data to cache", implementing cache and memory as separate blocks would complicate the configuration where data can be transferred bidirectionally. 
-  An additional MUX is implemented to determine the source of output—selecting from the cache in case of a hit, and from the data memory in case of a miss.
+  The 2-way cache is designed with a connection to the data memory and a cache multiplexer. This connection serves to fetch data in the event of a miss during a read operation. Within the cache, each block is equipped with `tag` and `valid` components to determine whether the block's content is a hit. When a hit occurs (with hit logic set to 1), the multiplexer selects the cache's output as the memory stage output. Conversely, when there's a cache miss (hit logic is 0), the output selection opts for the data memory's output, which is then loaded into the cache block. This configuration ensures efficient data retrieval and storage within the memory hierarchy of the system. 
 - **Hit Logic**
   A hit occurs when the `inputTag` matches the cache's `tag` and the `valid` bit is set to `TRUE`. The logic can be expressed as:
 ```SystemVerilog
@@ -667,7 +666,7 @@ assign hit = ((tag[inputSet] == inputTag) && (valid[inputSet]));
   Write operations are executed for and `SB` instructions. In our write-through scheme, data is simultaneously written to both the cache and memory. This approach maintains data consistency between cache and memory, though it may affect performance during intensive write operations. The design involves updating the `tag` and `Hit` signals concurrently during these write operations. In instances of a cache hit, these signals retain their previous values.
 
 - **Read Logic**
-  When a hit occurs, the output is sourced from the cache memory. Conversely, in the event of a miss, data is loaded to the sepcific block in cache, and the output for the current cycle is derived from this data memory.
+  When a hit occurs, the output is sourced from the cache memory. Conversely, in the event of a miss, data is loaded to the sepcific block in cache from data memory, and the output for the current cycle is derived from this data memory.
   
 ----
 ## Test Results
