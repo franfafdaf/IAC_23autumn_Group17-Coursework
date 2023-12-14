@@ -1,5 +1,5 @@
 module Cache #(
-  parameter tagSize = 27,
+  parameter tagSize = 29,
   parameter setSize = 3,
   parameter setNum = 8,
   parameter wayNum = 2
@@ -26,8 +26,8 @@ module Cache #(
   // input
   logic [tagSize-1:0] inputTag;
   logic [setSize-1:0] inputSet;
-  assign inputTag = addressIn[31:5]; 
-  assign inputSet = addressIn[4:2]; // byte offset for [1:0]
+  assign inputTag = addressIn[31:3]; 
+  assign inputSet = addressIn[2:0]; // byte offset for [1:0]
 
   // Initialization
   initial begin
@@ -35,7 +35,7 @@ module Cache #(
     for (int set = 0; set < setNum; set++) begin
         lru[set] = 0; // set lru to 0 
       for (int way = 0; way < wayNum; way++) begin
-            valid[set][way] = 1'b0;
+            valid[set][way] = 1'b1;
       end
     end
   end
