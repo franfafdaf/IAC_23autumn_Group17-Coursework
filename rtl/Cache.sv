@@ -63,7 +63,7 @@ module Cache #(
 
     if (LdSrcM && !hit) begin
       lru[inputSet] <= !lru[inputSet]; // rest the least used
-      alid[inputSet][selectedWay] <= 1'b1;
+      valid[inputSet][selectedWay] <= 1'b1;
       tag[inputSet][selectedWay] <= inputTag;
       data[inputSet][selectedWay] <= memIn;
     end
