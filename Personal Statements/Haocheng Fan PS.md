@@ -1,20 +1,18 @@
 
 ## Personal Statement of Haocheng Fan
 
-## Contents
 
 - [Personal Statement of Haocheng Fan](#personal-statement-of-haocheng-fan)
-- [Contents](#contents)
 - [Contributions](#contributions)
   - [Summary](#summary)
   - [Debug and Testing in the Single Cycle Processor Section](#debug-and-testing-in-the-single-cycle-processor-section)
     - [Commits and Debugging](#commits-and-debugging)
     - [Register File Optimization](#register-file-optimization)
     - [Data Memory Module Consolidation](#data-memory-module-consolidation)
+    - [Debugging process](#debugging-process)
     - [Other Component Modifications](#other-component-modifications)
-  - [Pipelened processor](#pipelened-processor)
+  - [Build of Pipelened processor](#build-of-pipelened-processor)
   - [Pipelined  version  debug  and  testing](#pipelined--version--debug--and--testing)
-- [2-way Cache version](#2-way-cache-version)
   - [Building of 2-way Cache](#building-of-2-way-cache)
   - [Testing of 2-way Cache](#testing-of-2-way-cache)
 - [Mistakes  I  make](#mistakes--i--make)
@@ -45,7 +43,8 @@
 ----
 ### Summary
 
-I primarily handled the **debugging and testing of the single-cycle processor**, the **construction of the pipelined processor** along with its subsequent **debugging and testing**, and also the **construction, debugging and testing of the 2-way cache version**. Additionally, I served as the repository master, responsible for establishing and updating the GitHub repository, and collaborated with Guanxi to enhance the repository's github page.
+My primary responsibilities included handling the **debugging and testing of the single-cycle processor**, **constructing and subsequently debugging and testing the pipelined processor**, as well as **developing, debugging, and testing the 2-way cache version**. In addition to these technical tasks, I also took on the role of repository master, managing and updating our project's GitHub repository and authoring the section on the 2-way cache in our joint statement.
+
 
 ### Debug and Testing in the Single Cycle Processor Section
 
@@ -76,43 +75,59 @@ In commit [`82f2d82`](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursew
 
 #### Register File Optimization
 
-The initial version of the register file contained redundant `if` statements, leading to confusion and compiler warnings due to missing conditions like `else`. To streamline this, I simplified the logic to use a single condition based on the write enable signal. Now, the content of the target register is replaced only when the positive clock click is active, and the write enable signal is enabled. 
+The initial version of the register file contained redundant `if` statements, leading to confusion and compiler warnings due to missing conditions like `else`. To streamline this, I simplified the logic to use a single condition based on the `write enable` signal. Now, the content of the target register is replaced only when the positive clock click is active, and the `write enable` signal is enabled. 
 
+```verilog
+  always_ff @(posedge clk) begin
+      if ((WE3 == 1'b1) && (A3 != 0)) register[A3] <= WD3;
+  end
+```
 #### Data Memory Module Consolidation
 
-Commit [`9f5a249`](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/9f5a24999856b424e760067505dd4d85696d9ea6) marks the consolidation of three memory modules into one `datamem`. The initial version, provided by a group member, consisted of separate files: `datamem.sv` for reading data, `memory_out.sv` for switching between LBU and LW modes, and `memory_in.sv` for managing store operations with SB and SW instructions. To reduce complexity, these have been merged into a single file, simplifying connections in the `top.sv` file.
+Commit [`9f5a249`](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/9f5a24999856b424e760067505dd4d85696d9ea6) marks the consolidation of three memory modules into one `datamem.sv`(https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/blob/SingleCycle_Ref/rtl/DataMemory.sv). The initial version, provided by a group member, consisted of separate files: `datamem.sv` for reading data, `memory_out.sv` for switching between LBU and LW modes, and `memory_in.sv` for managing store operations with SB and SW instructions. To reduce complexity, these have been merged into a single file, simplifying connections in the `top.sv` file.
 
   
+
+#### Debugging process 
+The first significant challenge encountered during debugging involved an absence of signal output on the vbuddy screen. Despite utilizing lab4 instructions, including `addi` and `bne`, the issue persisted. A detailed examination of the VCD file uncovered a mismatch between expected and actual instructions. This problem was traced back to the instruction memory module, where an endianness mismatch was causing incorrect instruction loading. By adjusting the module to load instructions in little-endian rather than big-endian format, this critical issue was resolved.
+
+```verilog
+  assign RD = {rom_array[A+3], rom_array[A+2], rom_array[A+1], rom_array[A]};
+```
+  
+
+-  **Resolving the SB Instruction Bug**: A particularly challenging bug related to the `SB` (store byte) instruction was identified when the `VCD` file size unexpectedly reached 1 GB. This anomaly suggested a looping error within the processor, primarily involving the `SB` and `LW` (load word) instructions. These instructions were initially implemented incorrectly, causing the processor to repeatedly execute the same set of operations. Addressing and correcting these implementation errors were vital for the processor to function correctly.
+
+
+
+-  **Second Loop Data Update Issue**: Further debugging efforts led to the discovery of a problem in the processor's second operational loop, where data was not being updated as intended. The processor was designed to load a value from a specific address, increment this value, and then store it back. However, it continually loaded an initial value of zero, failing to execute the intended operation. This issue was eventually traced to an error in handling the `SB` instruction, where 24 zero bits were incorrectly appended to the stored byte, disrupting the data storage process. Correcting this design flaw was crucial, enabling the processor to accurately update and represent data.
+
+```verilog
+ always_ff @(posedge clk) begin
+        if (WE == 1 && StSrc == 0) begin        // SW
+            data_array[A] <= WD[7:0];
+            data_array[A+1] <= WD[15:8];
+            data_array[A+2] <= WD[23:16];
+            data_array[A+3] <= WD[31:24];
+        end
+        else if(WE ==1 && StSrc ==1 ) begin
+            data_array[A] <= WD[7:0];           // SB
+        end
+    end 
+```
 
 #### Other Component Modifications
 
 Additional modifications across other components include correcting incorrectly set signal sizes, fixing variable recognition issues caused by inconsistent use of uppercase and lowercase letters, and resolving some SystemVerilog syntax errors, like omitting blank lines after `endmodule`.
 
-  
-
 -  **Commit Analysis and Testing**: Commit [`0e5bcc5`](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/0e5bcc5eaca9eedd887e2bb71e0f42cbf340641f) and others labeled 'test and modify' were pivotal in testing the single-cycle version of the processor. This phase was critical in identifying and addressing various issues.
 
-  
-
--  **Initial Debugging Steps**: The first significant challenge encountered during debugging involved an absence of signal output on the vbuddy screen. Despite utilizing lab4 instructions, including `addi` and `bne`, the issue persisted. A detailed examination of the VCD file uncovered a mismatch between expected and actual instructions. This problem was traced back to the instruction memory module, where an endianness mismatch was causing incorrect instruction loading. By adjusting the module to load instructions in little-endian rather than big-endian format, this critical issue was resolved.
-
-  
-
--  **Resolving the SB Instruction Bug**: A particularly challenging bug related to the `SB` (store byte) instruction was identified when the `VCD` file size unexpectedly reached 1 GB. This anomaly suggested a looping error within the processor, primarily involving the `SB` and `LW` (load word) instructions. These instructions were initially implemented incorrectly, causing the processor to repeatedly execute the same set of operations. Addressing and correcting these implementation errors were vital for the processor to function correctly.
-
-  
-
--  **Second Loop Data Update Issue**: Further debugging efforts led to the discovery of a problem in the processor's second operational loop, where data was not being updated as intended. The processor was designed to load a value from a specific address, increment this value, and then store it back. However, it continually loaded an initial value of zero, failing to execute the intended operation. This issue was eventually traced to an error in handling the `SB` instruction, where 24 zero bits were incorrectly appended to the stored byte, disrupting the data storage process. Correcting this design flaw was crucial, enabling the processor to accurately update and represent data.
 
 
 
 
 
-
-
-
-
-### Pipelened processor
+### Build of Pipelened processor
 
 ![Alt text](Images/Pipelined.png)
 
@@ -197,7 +212,6 @@ If in this connection, the `forwarding` will not work.
 - Previously, the control unit was composed of three distinct units: the PC decode, the ALU decode, and the main decode. These units were responsible for decoding instructions, but this setup was quite messy and prone to errors in connectivity. To streamline the process, I consolidated these components into a single file named `control_unit`, simplifying the overall design.
 In file [ControlUnit.sv](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/blob/Pipelined_Ref/rtl/ControlUnit.sv)
 
-## 2-way Cache version
 
 ### Building of 2-way Cache 
 - in file[]() 
