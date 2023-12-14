@@ -558,14 +558,14 @@ In CPU architecture, caches play a crucial role in enabling quick read/write ope
 - **Read Policy**
   - **Hit:** Data is directly read from the cache.
   - **Miss:** Data is fetched from memory and then loaded into the cache.
-
+<br>
   <div align="center">
     <img src="Images/Cache_Read.png" alt="Cache Read Policy">
   </div>
 
 - **Write Policy**
   Since a write-through policy is adopted, data is written simultaneously to both the cache and the memory. This approach simplifies implementation but may lead to reduced performance under high write volumes.
-
+<br>
   <div align="center">
     <img src="Images/Cache_Write.png" alt="Cache Write Policy">
   </div>
@@ -574,7 +574,7 @@ In CPU architecture, caches play a crucial role in enabling quick read/write ope
 
 - **Overview**
   The cache is integrated with the memory system. Since "memory passes data to cache", implementing cache and memory as separate blocks would complicate the configuration where data can be transferred bidirectionally. The design is illustrated in the diagram below.
-  
+<br>
   <div align="center">
     <img src="Images/Cache Memory.png" alt="Cache-Memory Integration">
   </div>
