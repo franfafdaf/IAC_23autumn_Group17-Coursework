@@ -550,13 +550,33 @@ As mentioned earlier, the F1 Program employs a distinct testbench from that of t
 ## Pipeline Design
 ----
 
+### Design Overview
+Pipelining is a very useful, and widely applied technique in the design of processors. Through pipelining, performance can be greately enhanced. Our pipelined processor design divide the single-cycle processor into five stages: 
+
+- **F:** Fetch Instruction
+- **D:** Decode
+- **E:** Execute ALU
+- **M:** Memory read and write
+- **W:** Write Register
+
+It's worth being mentioned that instructions will not necessarily use all these five stages.
+Pipelining execute different stages for different instructions in the same cycle. For example, after the first line of instruction completed **F** stage, the second line execute its **F** stage the same time as the first line executes **D** stage. 
+
+Although this techniques seems to be easy, problems also raises: data hazards and control hazards can exist. A simple way to deal with hazard is to add `NOP` instructions between "useful" ones, which can reduce performance. A more advanced way is to introduce a Hazard Unit to implement **Forwarding**, **Stall** and **Flush**. 
+
+The following diagram (modified based on [H&H Digital Design and Computer Architecture, RISC-V Edition: RISC-V Edition](https://www.sciencedirect.com/book/9780128200643/digital-design-and-computer-architecture)) illustrate the Pipelined Processor design with Hazard Unit, which is implemented in our project. 
+
+
+
 ----
 ## Data Memory Cache Design
 ----
 
 ### Design Overview
 
-In CPU architecture, caches play a crucial role in enabling quick read/write operations, thereby enhancing performance. This is achieved by exploiting two key principles: temporal locality and spatial locality. Temporal locality is based on the premise that if data is used once, it's likely to be accessed again soon. Conversely, spatial locality posits that when data is accessed, adjacent data is likely to be needed in the near future. Our research group has developed two distinct cache designs: Direct Mapped Cache and 2-Way Associative Cache. Notably, both designs utilize a single word as the block size, focusing primarily on leveraging temporal locality.
+In CPU architecture, caches play a crucial role in enabling quick read/write operations, thereby enhancing performance. This is achieved by exploiting two key principles: temporal locality and spatial locality. Temporal locality is based on the premise that if data is used once, it's likely to be accessed again soon. Conversely, spatial locality posits that when data is accessed, adjacent data is likely to be needed in the near future. 
+Our project has developed two distinct cache designs: Direct Mapped Cache and 2-Way Associative Cache. Notably, both designs utilize a single word as the block size, focusing primarily on leveraging temporal locality. 
+Further, as discussed earlier, our F1 program didn't use Data Memory. In this sense, only the Reference Program version using cache is developed. 
 
 ### Direct Mapped Cache
 
