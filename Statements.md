@@ -576,14 +576,15 @@ The pipelined version is applied to both the F1 Program and the Reference Progra
   </div>
 
 ### Forwarding Logic
-Forwarding is required where result is needed by the next instructions before it is written to register. For example, in the program below, s8 needs to be forwarded. 
+Forwarding is necessary when the result of an instruction is required by subsequent instructions before it has been written back to the register. Consider the following program snippet as an example, where the value of `s8` needs to be forwarded:
 ```s
 add s8, s4, s5
 sub s2, s8, s3
 or  s9, s6, s8
 and s7, s8, t2
 ```
-Forwarding can be implemented by adding MUXes in front of the ALU to select its operand. It's logic can be illustrated with the following program: 
+Forwarding can be effectively implemented by integrating MUXes before the ALU to select its operands. In practice, the implementation of this logic can be structured as follows:
+
 ```SystemVerilog
 //forwarding
 if (((Rs1E == RdM) & RegWriteM) & (Rs1E != 0)) ForwardAE = 2'b10;       // Forward from Memory stage 
@@ -592,7 +593,7 @@ else ForwardAE = 2'b00;                                                 // No fo
 ```
 
 ### Stall Logic
-Stall is required where the next instruction requires the data from destination register in the previous instruction. For example, in the program below, s7 needs to be stalled, which practically means the second line needs to wait for first line to give correct data. 
+A Stall is necessary when a subsequent instruction requires data from the destination register of a previous instruction. For instance, in the program below, `s7` needs to be stalled. This means that the second line must wait for the first line to finish in order to receive the correct data:
 ```s
 lw  s7, 40(s5)
 and s8, s7, t3
@@ -600,7 +601,8 @@ or  t2, s6, s7
 sub s3, s7, s2
 ```
 
-Stalls are supported by adding enable inputs (EN) to the **Fetch** and **Decode** pipeline registers and a synchronous reset/clear (CLR) input to **Execute** pipeline register. If data needs to be cleared, `FlushE` will flush the data. In practice, the logic can be implemented as follows: 
+To support stalls, enable inputs (EN) are added to the Fetch and Decode pipeline registers, along with a synchronous reset/clear (CLR) input for the Execute pipeline register. If data needs to be cleared, `FlushE` is used to flush the data. In practice, the implementation of this logic can be structured as follows:
+
 ```SystemVerilog
 //stall
 assign lwStall = ResultSrcE0 & ((Rs1D == RdE)|(Rs2D == RdE)); 
@@ -609,9 +611,11 @@ assign StallD = lwStall;
 ```
 
 ### Flush Logic
-Flush can also be used to deal with control hazard, where the pipelined processor doesn't know what instruction to fetch next because the branch decision hasn't been made. First a prediction is made on whether the branch will be taken. If the prediction proves to be wrong, the results should be flushed, which is called branch misprediction panalty. 
+Flush operations are chosen for addressing control hazards, which occur when a pipelined processor is uncertain about the next instruction to fetch due to an unresolved branch decision. 
+Initially, a prediction is made regarding whether the branch will be taken. If this prediction turns out to be incorrect, the results from the incorrectly predicted path must be discarded, a process known as incurring a branch misprediction penalty.
 
-The Flush logic can be implemented as shown in the following program: 
+In practice, the implementation of this logic can be structured as follows:
+
 ```SystemVerilog
 //flush
 assign FlushD = PCSrcE;
