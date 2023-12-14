@@ -138,6 +138,14 @@ The group decided to control the version in the following way:
 
 The repo structure can be viewed in the picture below.
 
+<div align="center">
+  <img src="Images/Repo Structure.png" alt="Repo Structure">
+</div>
+
+<br>
+
+**Note: Only `SingleCycle_F1` and `Pipelined F1` contains F1 Program.**
+<br>
 This policy leads to both advantages and drawbacks:
 - During the individual work stage, all the group members work on separate branches, ensuring their work is not disrupted.
 - After all sections are merged, only one final version exists, and all members debug the same version.
@@ -145,8 +153,6 @@ This policy leads to both advantages and drawbacks:
 - Individual contributions may become unclear, with contributions possibly being attributed incorrectly to different team members due to the commit history, especially when all individual branches are merged. This issue may be mitigated with increased familiarity with Git commands.
 - Only one or two members can debug at a time, as simultaneous debugging by more members might cause version conflicts.
 
-
-> Refer to draw.io file
 -----
 ## Single Cycle Design
 ----
