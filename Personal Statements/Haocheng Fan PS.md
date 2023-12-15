@@ -215,9 +215,10 @@ In file [ControlUnit.sv](https://github.com/franfafdaf/IAC_23autumn_Group17-Cour
 
 
 ### Building of 2-way Cache 
-<div align="center">
-  <img src="Personal Statments/../../Images/2-wayCache.png" alt="Cache Structure">
-</div>
+
+<p align="center">
+  <img src="Personal Statments/../../Images/2-wayCache.png" width="400">
+</p>
 
 File [cache.sv](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/blob/Cache_Ref_2Way/rtl/Cache.sv) 
 
