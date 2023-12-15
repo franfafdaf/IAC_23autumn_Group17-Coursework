@@ -868,32 +868,44 @@ initial $readmemh("sine.mem", data_array, 17'h10000);
 
 Reference programme test results:
 
-
 <div style="display: flex; justify-content: center;">
   <div style="max-width: 50%; text-align: center;">
-    Single Cycle Sine 
+    <!-- Single Cycle Sine Graph -->
+    <div>
+      <strong>Single Cycle Sine</strong>
+    </div>
     <div style="max-width: 100%; height: auto; display: inline-block;">
       <img src="ref/singleCycle/sine.jpg" alt="SingleCycleSine" style="width: 80%; height: auto;">
     </div>
 
-    Pipelined Gaussian 
-  <div style="max-width: 100%; height: auto; display: inline-block;">
-    <img src="ref/pipelined/gaussian.jpg" alt="PipelinedGaussian" style="width: 80%; height: auto;">
-  </div>
+    <!-- Pipelined Gaussian Graph -->
+    <div>
+      <strong>Pipelined Gaussian</strong>
+    </div>
+    <div style="max-width: 100%; height: auto; display: inline-block;">
+      <img src="ref/pipelined/gaussian.jpg" alt="PipelinedGaussian" style="width: 80%; height: auto;">
+    </div>
   </div>
 
   <div style="max-width: 50%; text-align: center;">
-    2-Way Associative Cache Noisy 
+    <!-- 2-Way Associative Cache Noisy Graph -->
+    <div>
+      <strong>2-Way Associative Cache Noisy</strong>
+    </div>
     <div style="max-width: 100%; height: auto; display: inline-block;">
       <img src="ref/2wayCache/noisy.jpg" alt="2WayNoisy" style="width: 80%; height: auto;">
     </div>
 
-    Direct Mapping Cache Triangle 
-  <div style="max-width: 100%; height: auto; display: inline-block;">
-    <img src="ref/directMap/triangle.jpg" alt="DirectTriangle" style="width: 80%; height: auto;">
-  </div>
+    <!-- Direct Mapping Cache Triangle Graph -->
+    <div>
+      <strong>Direct Mapping Cache Triangle</strong>
+    </div>
+    <div style="max-width: 100%; height: auto; display: inline-block;">
+      <img src="ref/directMap/triangle.jpg" alt="DirectTriangle" style="width: 80%; height: auto;">
+    </div>
   </div>
 </div>
+
 
 ### F1 Program
 #### Desired Results
