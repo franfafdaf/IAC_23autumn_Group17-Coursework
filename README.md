@@ -779,7 +779,7 @@ assign hit = ((tag[inputSet] == inputTag) && (valid[inputSet]));
 
   Special attention is given to `LBU` and `SW` instructions, which involve partial word read/write operations through byte addressing. 
   
-  Further, Unlike standard word-aligned addressing, RV32I employs byte addressing. Hence, our design adjusts the bit layout for `Set` and `Tag` to accommodate this difference. The last two bits of the address are used for byte offset in byte-addressed systems, allowing for `00`, `01`, `10`, or `11` as possible values. Consequently, we designate the last three bits as `Set` and the preceding 29 bits as `Tag`.
+  Further, Unlike standard word-aligned addressing, RV32I employs byte addressing. Hence, our design adjusts the bit layout for `Set` and `Tag` to accommodate this difference. In the given example, the last two bits of the address are used for byte offset, allowing only `00`. However, in our design, it allows for `00`, `01`, `10`, or `11` as possible values. Consequently, we designate the last three bits as `Set` and the preceding 29 bits as `Tag`.
 
 ### 2-Way Associative Cache
 
