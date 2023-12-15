@@ -427,9 +427,9 @@ As indicated in the memory map, Data Memory spans from `00000000` to `0001FFFF`,
 
 For the standard `LW` (load word) instruction, Data Memory transfers data from memory to register using a little-endian format. The reverse process is applied for the `SW` (store word) instruction. However, the assembly language also requires the implementation of `LBU` (load byte unsigned) and `SB` (store byte). `LBU` loads the least significant 8 bits, extended to 32 bits without sign extension, into the register. `SB` **alters only the specific memory block** addressed by `RS1 + Imm[11:0]` with the least significant 8 bits of `RS2`, rather than the entire word.
 
-To facilitate this, two additional control signals, `LdSrc` and `StSrc`, are introduced (as detailed in the [Control Unit](#control-unit) section). These figure out the exact `Load` or `Store` instruction being executed, ensuring the correct corresponding operation.
+To facilitate this, two additional control signals, `LdSrc` and `StSrc`, are introduced (as detailed in the [Control Unit](#3-register-and-memory-signals) section). These figure out the exact `Load` or `Store` instruction being executed, ensuring the correct corresponding operation.
 
-In summary, the Single Cycle Data Memory is conceptualized as a primary memory with two auxiliary functional blocks. For `Store` instructions, data passes through an additional `Store` block before entering the `Memory` block. Conversely, for `Load` instructions, data traverses an extra `Load` block before being written to registers.
+Further, the Single Cycle Data Memory is conceptualized as a primary memory **with two auxiliary functional blocks**. For `Store` instructions, data passes through an additional `Store` block before entering the `Memory` block. Conversely, for `Load` instructions, data traverses an extra `Load` block before being written to registers.
 
 
 ![Data Memory](/Images/Data%20Memory.png)
@@ -437,14 +437,14 @@ In summary, the Single Cycle Data Memory is conceptualized as a primary memory w
 ### ALU
 The ALU is responsible for executing arithmetic and logic operations. In our design, it processes two inputs, `SrcA` and `SrcB`, to produce the output `ALUResult`. 
 
-A MUX is responsible for selecting the appropriate values for SrcA and SrcB respectively. The possible inputs for `SrcA` are `PC` and `RD1`, while for `SrcB`, they are `RD2` or `ImmExt`. The control logic governing these selections is detailed in the [preceding section](#control-unit).
+A MUX is responsible for selecting the appropriate values for SrcA and SrcB respectively. The possible inputs for `SrcA` are `PC` and `RD1`, while for `SrcB`, they are `RD2` or `ImmExt`. The control logic governing these selections is detailed in the [preceding section](#2-alu-signals).
 
 Within the ALU, the operations are determined by the `ALUControl[2:0]` signal, as depicted in the table below. The implementation of these operations follows a straightforward logic.
 
 
 | ALUControl[2:0] | 000 | 001      | 010 | 011 | 100            | 101 | 110         | 111           |
 |-----------------|-----|----------|-----|-----|----------------|-----|-------------|---------------|
-| ALU Operation   | Add | Subtract | AND | OR  | Shift to Right | XOR | Select SrcB | Shift to Left |
+| ALU Operation   | Add | Subtract | AND | OR  | Shift Right | XOR | Select SrcB | Shift Left |
 
 ### Top Level Design
 The top-level design of the system serves as an integrative platform, combining all submodules and establishing the necessary bus connections, thereby exemplifying the concept of hierarchical design. The top-level design encompasses the following modules:
