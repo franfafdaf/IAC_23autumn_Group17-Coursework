@@ -68,7 +68,7 @@ In commit [b17e918](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursewor
 
 -  **PC and Regfile:**
 
-In commit [82f2d82](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/82f2d82677d34c992c6c302656fb9fe5cd4f4ad5), there was a debug of `pc` and `regfile`.
+In commit [3ea5ac8](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/3ea5ac88d891ea48c781437d2a00f1734cc2a544), there was a debug of `pc` and `regfile`.
 
   
 
@@ -83,7 +83,7 @@ The initial version of the register file contained redundant `if` statements, le
 ```
 #### Data Memory Module Consolidation
 
-In commit [9f5a249](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/9f5a24999856b424e760067505dd4d85696d9ea6) marks the consolidation of three memory modules into one [datamem.sv](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/blob/SingleCycle_Ref/rtl/DataMemory.sv). The initial version, provided by a group member, consisted of separate files: `datamem.sv` for reading data, `memory_out.sv` for switching between `LBU` and `LW` modes, and `memory_in.sv` for managing store operations with `SB` and `SW` instructions. To reduce complexity, these have been merged into a single file, simplifying connections in the `top.sv` file.
+In commit [82f2d82](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/82f2d82677d34c992c6c302656fb9fe5cd4f4ad5) marks the consolidation of three memory modules into one [datamem.sv](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/blob/SingleCycle_Ref/rtl/DataMemory.sv). The initial version, provided by a group member, consisted of separate files: `datamem.sv` for reading data, `memory_out.sv` for switching between `LBU` and `LW` modes, and `memory_in.sv` for managing store operations with `SB` and `SW` instructions. To reduce complexity, these have been merged into a single file, simplifying connections in the `top.sv` file.
 
   
 
