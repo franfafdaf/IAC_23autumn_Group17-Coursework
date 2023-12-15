@@ -332,7 +332,7 @@ The table below presents the control signals corresponding to the 18 instruction
     </span>
 </p>
 
-The Control Unit is segmented into three distinct sections:
+The Control Unit is formed of three decoders:
 - The `Main Decoder` utilizes `Opcode[5]` and `funct3` from `Instr`, decoding most signals and providing inputs for other decoders.
 - The `PCSrc Decoder` decodes the `PCSrc` signal, leveraging the `Branch` and `Jump` signals from the `Main Decoder`, along with the `Zero` signal from the `ALU`.
 - The `ALU Decoder` decodes the `ALUControl[2:0]` signal. It receives `ALUOp[1:0]` from the `Main Decoder`, as well as `Opcode[5]`, `funct3`, and `func75` from `Instr`.
