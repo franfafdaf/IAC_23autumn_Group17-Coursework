@@ -348,7 +348,7 @@ The diagram below illustrates the hierarchical relationship among these three de
     </span>
 </p>
 
-"Don't Care" signals are uniquely processed since Verilator does not support them. In practical implementation, all "Don't Care" signals are set to 0. **This does not impact the overall result**, as these signals aren't expected to occur in any valid situations. 
+**"Don't Care" signals are uniquely processed** since Verilator does not support them. In practical implementation, all "Don't Care" signals are set to 0. **This does not impact the overall result**, as these signals aren't expected to occur in any valid situations. 
 
 #### 2. ALU Signals
 The `ALUSrcA`, `ALUSrcB`, `ALUOp`, and `ALUControl` signals are categorized as ALU signals.
