@@ -462,7 +462,7 @@ Concurrently, assignment statements are utilized to map portions of the bus to s
 
 
 ### Testbench
-In this section we mainly discuss the testbench for Reference Program. The design incorporates three top-level signals: `clk`, `a0`, `rst`. 
+A C++ testbench is added to test the sesign. In this section we mainly discuss the testbench for Reference Program. The corresponding testbench incorporates three top-level signals: `clk`, `a0`, `rst`. 
 
 In the testbench for the Reference Program, both `clk` and `rst` are initialized to a value of 1. Subsequently, at each clock cycle, `rst` is set to 0, and the value of `a0` is dumped to a VCD file. A boolean variable, `plot`, is used to monitor the status of `a0`. A non-zero value of `a0` denotes the successful completion of the build process, thus `plot` will enable the plotting on Vbuddy. Furthermore, the program is designed to terminate after a specific number of cycles, which varies depending on the version (either 960 or 1920 cycles).
 
