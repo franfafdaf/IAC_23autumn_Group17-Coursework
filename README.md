@@ -729,6 +729,7 @@ Further, as discussed earlier, our F1 program didn't use Data Memory. In this se
 #### Read and Write Policy
 
 - **Read Policy**
+
   - **Hit:** Data is directly read from the cache.
   - **Miss:** Data is fetched from memory and then loaded into the cache.
 <br>
@@ -737,6 +738,7 @@ Further, as discussed earlier, our F1 program didn't use Data Memory. In this se
   </div>
 
 - **Write Policy**
+
   Since a write-through policy is adopted, data is written simultaneously to both the cache and the memory. This approach simplifies implementation but may lead to reduced performance under high write volumes.
 <br>
   <div align="center">
@@ -746,6 +748,7 @@ Further, as discussed earlier, our F1 program didn't use Data Memory. In this se
 #### Implementation
 
 - **Overview**
+
   The cache is integrated with the memory system. Since "memory passes data to cache", implementing cache and memory as separate blocks would complicate the configuration where data can be transferred bidirectionally. The design is illustrated in the diagram below.
 <br>
   <div align="center">
@@ -753,14 +756,17 @@ Further, as discussed earlier, our F1 program didn't use Data Memory. In this se
   </div>
 
 - **Hit Logic**
+
   A hit occurs when the `inputTag` matches the cache's `tag` and the `valid` bit is set to `TRUE`. The logic can be expressed as:
 ```SystemVerilog
 assign hit = ((tag[inputSet] == inputTag) && (valid[inputSet]));
 ```
 - **Write Logic**
+
   Write operations realize to `SW` and `SB` instructions. In our write-through approach, data is concurrently written to both the cache and memory. This method ensures data consistency between cache and memory but might impact performance under heavy write operations. The design updates the `tag` and `Hit` signals simultaneously during write operations, and for Hit cases, the singals remain their previous values.
 
 - **Read Logic**
+
   Read operations realize `LW` and `LBU` instructions. They are implemented using a state machine:
   - In the event of a Hit, the next state is `from_cache`.
   - In the event of a Miss, the next state is `from_memory`.
@@ -797,18 +803,22 @@ assign hit = ((tag[inputSet] == inputTag) && (valid[inputSet]));
   - **Miss:** Data is fetched from memory and then loaded into the cache.
 
 - **Write Policy**
+
   Adopting a write-through policy, data gets written concurrently to both the cache and the memory. While this method eases implementation, it can potentially diminish performance, especially with a high volume of write operations.
 
 #### Implementation
 
 - **Overview**
+
   The 2-way cache is designed with a connection to the data memory and a cache multiplexer. This connection serves to fetch data in the event of a miss during a read operation. Within the cache, each block is equipped with `tag` and `valid` components to determine whether the block's content is a hit. When a hit occurs (with hit logic set to 1), the multiplexer selects the cache's output as the memory stage output. Conversely, when there's a cache miss (hit logic is 0), the output selection opts for the data memory's output, which is then loaded into the cache block. This configuration ensures efficient data retrieval and storage within the memory hierarchy of the system. 
 - **Hit Logic**
+
   A hit occurs when the `inputTag` matches the cache's `tag` and the `valid` bit is set to `TRUE`. The logic can be expressed as:
 ```SystemVerilog
   if ((valid[inputSet][way]) && (tag[inputSet][way] == inputTag)) begin // find the block
 ```
 - **Least Recently Used**
+
   The `lru` (Least Recently Used) logic determines which cache way has been more recently accessed. If way 1 is identified as more recently used (indicated by `lru`=1), this suggests a higher probability of it being accessed again soon, due to temporal locality. Consequently, subsequent write or read operations will target the content in the alternative way, maintaining the same `tag` and `set`, but differing in the way used.
 ```verilog
   if (LdSrcM && hit) begin
@@ -816,9 +826,11 @@ assign hit = ((tag[inputSet] == inputTag) && (valid[inputSet]));
       end
 ```
 - **Write Logic**
+
   Write operations are executed for and `SB` instructions. In our write-through scheme, data is simultaneously written to both the cache and memory. This approach maintains data consistency between cache and memory, though it may affect performance during intensive write operations. The design involves updating the `tag` and `Hit` signals concurrently during these write operations. In instances of a cache hit, these signals retain their previous values.
 
 - **Read Logic**
+
   When a hit occurs, the output is sourced from the cache memory. Conversely, in the event of a miss, data is loaded to the sepcific block in cache from data memory, and the output for the current cycle is derived from this data memory.
   
 ----
