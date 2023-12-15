@@ -83,7 +83,7 @@ Three strategies were considered to address this issue:
 
 The first option adds unnecessary complexity, potentially requiring more control signal bits. Therefore, I initially chose to leave the `X` values untouched. However, this approach led to warnings and the potential issue of Verilator not compiling parts of the SystemVerilog program.
 
-Consequently, I decided to assign a value of 0 to all `X` values. While this may introduce some ambiguity, we operate under the assumption that the "Don't Care" values will not be utilized by the data path, thus the arbitrary assignment should not impact functionality.
+Consequently, I decided to assign a value of 0 to all `X` values. While this may introduce some ambiguity, we operate under the assumption that **the "Don't Care" values will not be used by the data path**, thus the arbitrary assignment should not impact functionality.
 
 ### Implementing Data Memory Operations for the `SB` Instruction
 
@@ -109,7 +109,7 @@ As a novice Git user, I struggled with effective version control of the reposito
 
 Additionally, it was only late in the project that I learned about the `.gitignore` file's utility in excluding certain files or folders from being tracked. This oversight resulted in the accidental upload of large `.vcd` files, which exceeded the size limit for direct pushes to the repository.
 
-Furthermore, I realized the importance of composing more meaningful commit messages to better reflect and distinguish the progress made in the project.
+Furthermore, I realized the importance of composing meaningful commit messages to better reflect and distinguish the progress made in the project.
 
 ----
 ## Special Design Decisions
