@@ -571,7 +571,7 @@ For the data memory of the reference program, the diagram below illustrates the 
 </p>
 
 #### 2. Trigger Signal
-A significant difference between the F1 and Reference Programs is the `trigger` signal. As described in the [Project Brief](https://github.com/EIE2-IAC-Labs/Project_Brief/tree/main?tab=readme-ov-file#learning-the-rv32i-instruction-set), "The trigger signal is used to initiate the F1 light sequence in the RISC-V."
+A significant difference between the F1 Program and Reference Program is the `trigger` signal. As described in the [Project Brief](https://github.com/EIE2-IAC-Labs/Project_Brief/tree/main?tab=readme-ov-file#learning-the-rv32i-instruction-set), "The trigger signal is used to initiate the F1 light sequence in the RISC-V."
 
 <div align="center">
   <img src="Images/RISC-V_F1.jpg" alt="F1 Overview">
