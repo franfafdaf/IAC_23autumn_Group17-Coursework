@@ -404,7 +404,7 @@ The `PCSrc` signal indicates if the `PC` is to be redirected to a specific value
 - For `JALR`, `JalSrc` is 0, where `RS1` is added to `ImmExt`.
 
 #### 5. Extend Signal
-`ImmSrc` is the sole Extend signal, dictating the extension methodology for the immediate part of the instruction. `ImmSrc` varies across different instruction types, and its relationship with each type is detailed in the [Extend Unit Section](#extend-unit). The table below outlines how `ImmSrc` is assigned based on the instruction type:
+`ImmSrc` is the sole Extend signal, dictating the extension methodology for the immediate part of the instruction. `ImmSrc` varies across different instruction types, and its relationship with each type is detailed in the [Extend Unit Section](#extend-unit), and the table is also attached below. The table below outlines how `ImmSrc` is assigned based on the instruction type:
 
 | ImmSrc[2:0] | 000                                 | 001                                              | 010                                                            | 011                                                              | 100                             | 101        | 110        | 111        |
 |-------------|-------------------------------------|--------------------------------------------------|----------------------------------------------------------------|------------------------------------------------------------------|---------------------------------|------------|------------|------------|
