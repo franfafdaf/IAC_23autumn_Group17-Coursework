@@ -12,7 +12,7 @@ module DataMemory#(
 
     logic [7:0] data_array [2**17-1 : 0]; 
 
-    initial $readmemh("sine.mem", data_array, 17'h10000);
+    initial $readmemh("gaussian.mem", data_array, 17'h10000);
 
     always_comb begin
         if (LdSrc) RD = {{24{1'b0}}, data_array[A]};                                    //LBU
