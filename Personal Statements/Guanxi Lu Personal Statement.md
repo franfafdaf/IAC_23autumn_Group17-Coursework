@@ -54,9 +54,9 @@ Furthermore, I undertook administrative duties within our team. These included m
 - In commit [1f43366](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/1f43366cbbf2e1cbd74327ff4b293625f8f256f4), the initial value for `PC` was corrected, and `x0` was properly hardwired to 0.
 
 ### Cache
-- In commit [47d7202](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/47d72024cfbb3dd9704b0cb540926b6b580879fb), I developed a cache (didn't work) based on Pipelined_Ref, where read and write operations are implemented using combinational logic. 
-- In commit [22747dc](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/22747dca3d913f5572b036c6375d11888a522e71), I developed a cache based on SingleCycle_Ref using State Machine. 
-- In commit [24ed013](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/24ed01306c702cba41862dd7c1a4f14dbecaeeec), I converted the design to suit Pipelined_Ref, and verified the design. 
+- In commit [47d7202](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/47d72024cfbb3dd9704b0cb540926b6b580879fb), a cache (didn't work) based on Pipelined_Ref, where read and write operations are implemented using combinational logic was developed. 
+- In commit [22747dc](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/22747dca3d913f5572b036c6375d11888a522e71), a cache based on SingleCycle_Ref using State Machine was developed and tested. 
+- In commit [24ed013](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/24ed01306c702cba41862dd7c1a4f14dbecaeeec), the single cycle design was converted to suit Pipelined_Ref, and the design was verified. 
 
 ----
 ## Mistakes I've made
