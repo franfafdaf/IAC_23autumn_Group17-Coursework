@@ -858,6 +858,7 @@ This program is designed to simulate the F1 light mechanism, as detailed in the 
 
 #### Test Results
 Attached below are the test results for `SingleCycle_F1`. For the results (video & `.vcd` file) of other branches, refer to the `test` folders. 
+
 **Video**
 
 https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/assets/115477676/a2bccc1f-33a7-404b-9d0b-ee208160491f
