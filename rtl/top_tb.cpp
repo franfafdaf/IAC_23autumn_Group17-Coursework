@@ -38,7 +38,7 @@ int main(int argc, char **argv, char **env){
 
 
     /////////////////////////////////////////////////////
-    //////////////////  FOR F!  /////////////////////////
+    //////////////////  FOR F1  /////////////////////////
     /////////////////////////////////////////////////////
     uint32_t value_32bit = top->a0;                               // Display F1 Light, toggle neopixel
     uint8_t data_out = static_cast<uint8_t>(value_32bit & 0xFF);  // Masking to get the lowest 8 bits
