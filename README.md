@@ -867,44 +867,16 @@ initial $readmemh("sine.mem", data_array, 17'h10000);
 #### Test Results
 
 Reference programme test results:
-
-<div style="display: flex; justify-content: center;">
-  <div style="max-width: 50%; text-align: center;">
-    <!-- Single Cycle Sine Graph -->
-    <div>
-      <strong>Single Cycle Sine</strong>
-    </div>
-    <div style="max-width: 100%; height: auto; display: inline-block;">
-      <img src="ref/singleCycle/sine.jpg" alt="SingleCycleSine" style="width: 80%; height: auto;">
-    </div>
-
-  <!-- Pipelined Gaussian Graph -->
-  <div>
-    <strong>Pipelined Gaussian</strong>
-  </div>
-  <div style="max-width: 100%; height: auto; display: inline-block;">
-    <img src="ref/pipelined/gaussian.jpg" alt="PipelinedGaussian" style="width: 80%; height: auto;">
-  </div>
-  </div>
-
-  <div style="max-width: 50%; text-align: center;">
-    <!-- 2-Way Associative Cache Noisy Graph -->
-    <div>
-      <strong>2-Way Associative Cache Noisy</strong>
-    </div>
-    <div style="max-width: 100%; height: auto; display: inline-block;">
-      <img src="ref/2wayCache/noisy.jpg" alt="2WayNoisy" style="width: 80%; height: auto;">
-    </div>
-
-  <!-- Direct Mapping Cache Triangle Graph -->
-  <div>
-    <strong>Direct Mapping Cache Triangle</strong>
-  </div>
-  <div style="max-width: 100%; height: auto; display: inline-block;">
-    <img src="ref/directMap/triangle.jpg" alt="DirectTriangle" style="width: 80%; height: auto;">
-  </div>
-  </div>
-</div>
+<table>
+  <tr>
+    <td style="text-align: center;"><img src="ref/singleCycle/sine.jpg" alt="sine"><br><span style="color: grey;">Sine</span></td>
+    <td style="text-align: center;"><img src="ref/pipelined/triangle.jpg" alt="triangle"><br><span style="color: grey;">Triangle</span></td>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><img src="ref/2wayCache/gaussian.jpg" alt="gaussian"><br><span style="color: grey;">Gaussian</span></td>
+    <td style="text-align: center;"><img src="ref/directMap/noisy.jpg" alt="noisy"><br><span style="color: grey;">Noisy</span></td>
+  </tr>
+</table>
 
 
 ### F1 Program
