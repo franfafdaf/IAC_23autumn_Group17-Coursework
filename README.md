@@ -49,7 +49,7 @@
     - [Desired Results](#desired-results-1)
     - [Test Results](#test-results-1)
 
-
+> Note: The `rtl` and `test`folders for all versions can be found in relevant branches, as explained in [Repo Structure section](#repo-structure)
 
 ----
 ## Project Brief
