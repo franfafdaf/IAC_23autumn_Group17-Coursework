@@ -362,7 +362,7 @@ The `ALUSrcA`, `ALUSrcB`, `ALUOp`, and `ALUControl` signals are categorized as A
 - U-type instructions are more complex:
     - For the `LUI` instruction, which loads the immediate, `SrcA` is unused, and `SrcB` selects `ImmExt`.
     - The `AUIPC` instruction uses both `PC` and `ImmExt`.
-- J-type instructions do not utilize `SrcA` or `SrcB`, rendering both `ALUSrcA` and `ALUSrcB` as "Don't Care"s.
+- J-type instructions do not use `SrcA` or `SrcB`, rendering both `ALUSrcA` and `ALUSrcB` as "Don't Care"s.
 
 `Main Decoder` provides an initial logic to generate `ALUOp`, varying for each instruction type. The association is shown in the following table, where I-type and S-type share the same `ALUOp` due to similar ALU usage in `Load` and `Store` instructions.
 
