@@ -40,7 +40,7 @@
     - [Parameters:](#parameters-1)
     - [Read and Write Policy](#read-and-write-policy-1)
     - [Implementation](#implementation-1)
-- [Test Results](#test-results)
+- [Tests](#tests)
   - [Reference Program](#reference-program)
   - [F1 Program](#f1-program)
 
@@ -801,13 +801,53 @@ assign hit = ((tag[inputSet] == inputTag) && (valid[inputSet]));
   When a hit occurs, the output is sourced from the cache memory. Conversely, in the event of a miss, data is loaded to the sepcific block in cache from data memory, and the output for the current cycle is derived from this data memory.
   
 ----
-## Test Results
+## Tests
 ----
-### Reference Program
 
-- `sine.mem` a sinewave signal
-- `triangle.mem` a triangular wave signal
-- `gaussian.mem` a noise signal with a gaussian distribution
-- `noise.mem` a noisy sinewave signal
+### Test Instructions
+1. Configure Vbuddy
+- For Windows user, type 
+```
+ls /dev/ttyUSB*
+```
+- For Mac user, type 
+```
+ls /dev/tty.u*
+```
+- Copy the name of the USB device
+- Go to `rtl/vbuddy.cfg`, paste the name, don't forget the line breaks
+2. Go to terminal, type 
+```
+source doit.sh
+```
+3. A `.vcd` file will be generated while Vbuddy demonstrating the test results
+
+### Reference Program
+#### Desired Results
+This program aims to generate the probability distribution function (PDF) for four distinct signals. The theoretical PDFs for these signals are depicted as follows:
+- `sine.mem`: a sine wave signal
+- `triangle.mem`: a triangular wave signal
+- `gaussian.mem`: a noise signal with a Gaussian distribution
+- `noisy.mem`: a noisy sine wave signal
+
+<table>
+  <tr>
+    <td style="text-align: center;"><img src="/Images/sine.jpg" alt="sine"><br><span style="color: grey;">Sine</span></td>
+    <td style="text-align: center;"><img src="/Images/triangle.jpg" alt="triangle"><br><span style="color: grey;">Triangle</span></td>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><img src="/Images/gaussian.jpg" alt="gaussian"><br><span style="color: grey;">Gaussian</span></td>
+    <td style="text-align: center;"><img src="/Images/noisy.jpg" alt="noisy"><br><span style="color: grey;">Noisy</span></td>
+  </tr>
+</table>
+
+To change the displayed signal, please go to Data Memory and modify the file name on the line
+```
+initial $readmemh("sine.mem", data_array, 17'h10000);
+```
 
 ### F1 Program
+This program is designed to simulate the F1 light mechanism, as detailed in the [previous section](#assembly-language-f1):
+- Initially, all 8 lights illuminate simultaneously at a unit step **(assumed as 0x8 in our program)**.
+- Once all 8 lights are lit, the program initiates a random number countdown **(we using a 7-bit random number, which may take longer than expected)**.
+- Upon completion of the countdown, all lights turn off synchronously.
