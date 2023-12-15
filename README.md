@@ -33,19 +33,21 @@
 - [Data Memory Cache Design](#data-memory-cache-design)
   - [Design Overview](#design-overview-1)
   - [Direct Mapped Cache](#direct-mapped-cache)
-    - [Parameters:](#parameters)
+    - [Parameters](#parameters)
     - [Read and Write Policy](#read-and-write-policy)
     - [Implementation](#implementation)
   - [2-Way Associative Cache](#2-way-associative-cache)
-    - [Parameters:](#parameters-1)
+    - [Parameters](#parameters-1)
     - [Read and Write Policy](#read-and-write-policy-1)
     - [Implementation](#implementation-1)
 - [Tests](#tests)
   - [Test Instructions](#test-instructions)
   - [Reference Program](#reference-program)
     - [Desired Results](#desired-results)
+    - [Test Results](#test-results)
   - [F1 Program](#f1-program)
     - [Desired Results](#desired-results-1)
+    - [Test Results](#test-results-1)
 
 
 
@@ -852,6 +854,7 @@ To change the displayed signal, please go to Data Memory and modify the file nam
 ```
 initial $readmemh("sine.mem", data_array, 17'h10000);
 ```
+#### Test Results
 
 ### F1 Program
 #### Desired Results
