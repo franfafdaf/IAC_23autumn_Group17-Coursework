@@ -207,7 +207,7 @@ Additionally, the project incorporates a `Data Memory` block to execute instruct
 <p align="center">
     <span style="color: grey;">
         Memory Map, Cited From 
-        <a href="https://github.com/EIE2-IAC-Labs/Lab4-Reduced-RISC-V?tab=readme-ov-file#the-microarchitecture-of-the-reduced-risc-v-cpu">Project Brief</a>
+        <a href="https://github.com/EIE2-IAC-Labs/Project_Brief/blob/main/TeamProject.md#learning-the-rv32i-instruction-set">Project Brief</a>
     </span>
 </p>
 
@@ -220,7 +220,7 @@ The Project Brief provides a design example, as shown in the diagram below, whic
 <p align="center">
     <span style="color: grey;">
         Sample RV32I CPU, Cited from 
-        <a href="https://github.com/EIE2-IAC-Labs/Project_Brief/blob/main/TeamProject.md#learning-the-rv32i-instruction-set">Project Brief</a>
+        <a href="https://github.com/EIE2-IAC-Labs/Project_Brief?tab=readme-ov-file#single-cycle-rv32i-design">Project Brief</a>
     </span>
 </p>
 
