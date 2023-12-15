@@ -23,7 +23,7 @@
   - [Assembly Language (F1)](#assembly-language-f1)
   - [F1 Design VS Ref Design](#f1-design-vs-ref-design)
     - [1. Data Memory](#1-data-memory)
-    - [2. `Trigger` Signal](#2-trigger-signal)
+    - [2. Trigger Signal](#2-trigger-signal)
     - [3. Testbench](#3-testbench)
 - [Pipeline Design](#pipeline-design)
   - [Design Overview](#design-overview)
@@ -867,26 +867,31 @@ initial $readmemh("sine.mem", data_array, 17'h10000);
 
 Reference programme test results:
 
-<div style="text-align: center;">
+Reference programme test results:
 
--  Single Cycle Sine
+<div style="display: flex; justify-content: center;">
+  <div style="max-width: 50%; text-align: center;">
+    Single Cycle Sine -->
+    <div style="max-width: 100%; height: auto; display: inline-block;">
+      <img src="ref/singleCycle/sine.jpg" alt="SingleCycleSine" style="width: 80%; height: auto;">
+    </div>
+
+    Pipelined Gaussian 
   <div style="max-width: 100%; height: auto; display: inline-block;">
-    <img src="ref/singleCycle/sine.jpg" alt="SingleCycleSine" style="width: 50%; height: 50%;">
+    <img src="ref/pipelined/gaussian.jpg" alt="PipelinedGaussian" style="width: 80%; height: auto;">
+  </div>
   </div>
 
--  Pipelined Gaussian 
-  <div style="max-width: 100%; height: auto; display: inline-block;">
-    <img src="ref/pipelined/gaussian.jpg" alt="PipelinedGaussian" style="width: 50%; height: 50%;">
-  </div>
+  <div style="max-width: 50%; text-align: center;">
+    2-Way Associative Cache Noisy 
+    <div style="max-width: 100%; height: auto; display: inline-block;">
+      <img src="ref/2wayCache/noisy.jpg" alt="2WayNoisy" style="width: 80%; height: auto;">
+    </div>
 
--  2-Way Associative Cache Noisy 
+    Direct Mapping Cache Triangle 
   <div style="max-width: 100%; height: auto; display: inline-block;">
-    <img src="ref/2wayCache/noisy.jpg" alt="2WayNoisy" style="width: 50%; height: 50%;">
+    <img src="ref/directMap/triangle.jpg" alt="DirectTriangle" style="width: 80%; height: auto;">
   </div>
-
--  Direct Mapping Cache Triangle
-  <div style="max-width: 100%; height: auto; display: inline-block;">
-    <img src="ref/directMap/triangle.jpg" alt="DirectTriangle" style="width: 50%; height: 50%;">
   </div>
 </div>
 
