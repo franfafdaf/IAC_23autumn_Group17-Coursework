@@ -784,12 +784,9 @@ assign hit = ((tag[inputSet] == inputTag) && (valid[inputSet]));
 - **`Tag_WIDTH`:** 29 bits
 - **`Set_WIDTH`:** 3 bits
 
-<img src='/Images/2-wayCache.png' width='400'>
-
 <p align="center">
   <img src="/Images/2-wayCache.png" width="400">
 </p>
-
 
 #### Read and Write Policy
 
