@@ -219,7 +219,7 @@ In file [ControlUnit.sv](https://github.com/franfafdaf/IAC_23autumn_Group17-Cour
   <img src="Personal Statments/../../Images/2-wayCache.png" alt="Cache Structure">
 </div>
 
-File [cache.sv](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/blob/2-wayCache/rtl/Cache.sv) 
+File [cache.sv](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/blob/Cache_Ref_2Way/rtl/Cache.sv) 
 
 Initially, the  team  aimed  for  a  complex  cache  design (4-way, 8-set, 128-bit  block  size with write-back  functionality). However, due  to  complexity, the  design  was  simplified  to  a  2-way  set  associative  cache. The  `cache`  was  segmented  into  smaller  components  like  valid  bits, tag, data, and least  recently  used (`LRU`) bits. This  modular  approach  allowed  for  easier  initialization and hit  detection.
 
