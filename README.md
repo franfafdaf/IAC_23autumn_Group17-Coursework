@@ -786,9 +786,10 @@ assign hit = ((tag[inputSet] == inputTag) && (valid[inputSet]));
 
 <img src='/Images/2-wayCache.png' width='400'>
 
-  <div align="center" style="width: 50%; margin: auto;">
-    <img src="Personal Statements/../Images/2-wayCache.png" alt="2-way Cache">
-  </div>
+<p align="center">
+  <img src="/Images/2-wayCache.png" width="400">
+</p>
+
 
 #### Read and Write Policy
 
