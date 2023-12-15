@@ -55,7 +55,7 @@
 ## Project Brief
 ----
 
-This project aims to build a reduced RISC-V RV32I Processor that is able to execute two programs, as specified in the project brief. Tests are taken to verify the Processor design and F1 Algorithm. 
+This project aims to build a reduced RISC-V RV32I Processor that is able to execute two programs, as specified in the project brief. Tests are taken to verify the processor design and F1 Algorithm. 
 
 Two additional stretch goals are specified for advanced implementation:
 1. Pipelined RV32I design.
@@ -123,7 +123,7 @@ Through joint efforts, Group 17 has successfully implemented the F1 algorithm in
 |                          |                                      | CacheMux.sv            |             |            | X            |           |
 |                          |                                      | `debug`                |             |            | X            |           |
 | **Administrative**           | Repo Master                          | `Repo Master`          |             |            | P            | X         |
-|                          | Joint Statement                      | `Joint Statement`      |             |            | P            | X+A1:G41  |
+|                          | Joint Statement                      | `Joint Statement`      |             |            | P            | X  |
 
 Note: 
 `X` = Full Participation
