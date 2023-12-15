@@ -18,11 +18,11 @@ module Cache #(
 );
 
   // Cache
-  logic [setNum-1:0][wayNum-1:0] valid;
+  logic [setNum-1:0][wayNum-1:0]               valid;
   logic [setNum-1:0][wayNum-1:0] [tagSize-1:0] tag ;
-  logic [setNum-1:0][wayNum-1:0] [31:0]        data ;        // block size:32 bits 
-  logic [setNum-1:0]             lru;                // leaat used bit, if 0 choose way0, else choose way 1
-  logic                          selectedWay;
+  logic [setNum-1:0][wayNum-1:0] [31:0]        data ; // block size:32 bits 
+  logic [setNum-1:0]                           lru;   // leaat used bit, if 0 choose way0, else choose way 1
+  logic                                        selectedWay;
   
   // input
   logic [tagSize-1:0] inputTag;
@@ -61,7 +61,7 @@ module Cache #(
       lru[inputSet] <= !lru[inputSet]; // rest the least used 
     end
 
-    if (LdSrcM && !hit) begin
+    if (LdSrcM && !hit) begin // when miss,load the cache
       lru[inputSet] <= !lru[inputSet]; // rest the least used
       valid[inputSet][selectedWay] <= 1'b1;
       tag[inputSet][selectedWay] <= inputTag;
