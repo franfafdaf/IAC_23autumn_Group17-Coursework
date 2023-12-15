@@ -867,7 +867,6 @@ initial $readmemh("sine.mem", data_array, 17'h10000);
 
 Reference programme test results:
 
-Reference programme test results:
 
 <div style="display: flex; justify-content: center;">
   <div style="max-width: 50%; text-align: center;">
