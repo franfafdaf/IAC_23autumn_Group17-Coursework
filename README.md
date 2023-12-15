@@ -552,7 +552,7 @@ Having tested the Single Cycle design on Reference program, the design is modifi
 #### 1. Data Memory
 The Reference Program uses `load` and `store` instructions such as `LW` and `SB`. However, the F1 design omits these instructions, resulting in no data being written to or read from the Data Memory.
 
-This design choice is linked to the method of pseudo-random number generation in the F1 program. Before the trigger signal is asserted, the program iterates through a loop generating random numbers.
+This design choice is linked to the method of pseudo-random number generation in the F1 program. **Before the `trigger` signal is asserted, the program iterates through a loop generating random numbers. Once `trigger` is asserted, a random number is generated.**
 
 One alternative could involve pre-generating all random numbers and storing them in the data memory. Subsequently, the program could map the `PC` value to a specific location in the data memory to read the random number. However, `PC` would be a constant value at the point where a random number is requested to be loaded. In this case, this approach would transform the random number into a constant, as a fixed one in random number series would exist for a fixed `PC`. 
 
