@@ -300,7 +300,11 @@ assign RD = {rom_array[A+3], rom_array[A+2], rom_array[A+1], rom_array[A]};
 The Extend Unit is responsible for fetching parts of the instruction and extending them according to the Instruction Set Architecture (ISA). Among the six types of instructions in RV32I, the I-type, S-type, B-type, U-type, and J-type require extension.
 
 ![Instruction Extend](/Images/Instruction%20Extend.png)
-<p style="color: grey;text-align:center;">Cited from RV32I ISA</p>
+<p align="center">
+    <span style="color: grey;">
+        Cited from RV32I ISA
+    </span>
+</p>
 
 There are two key points to note. Firstly, all immediates in RV32I are sign-extended. Secondly, the union of bits covered by the immediates is `31:7`; therefore, fetching these instruction bits would be sufficient.
 
