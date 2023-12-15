@@ -101,6 +101,10 @@ Through joint efforts, Group 17 has successfully implemented the F1 algorithm in
 |                          |                                      | F1.mem                 |             |            |              | X         |
 |                          | Testbench and Shell Script           | top_tb.cpp             |             |            | P            | X         |
 |                          | Debug and Testing                    | `debug`                |             |            | X            | X         |
+| **Pipelined_NOP_F1**         |                                      | F1.s                   | U           | U          |              |           |
+|                          |                                      | F1.mem                 | U           | U          |              |           |
+| **Pipeline_NOP_Ref**         |                                      | pdf.s                  | U           | U          |              |           |
+|                          |                                      | pdf.hex                | U           | U          |              |           |
 | **Pipelined_Ref**            | Pipelining                           | Stage1.sv              |             |            | X            |           |
 |                          |                                      | Stage2.sv              |             |            | X            |           |
 |                          |                                      | Stage3.sv              |             |            | X            |           |
@@ -117,7 +121,7 @@ Through joint efforts, Group 17 has successfully implemented the F1 algorithm in
 |                          |                                      | CacheMux.sv            |             |            | X            |           |
 |                          |                                      | `debug`                |             |            | X            |           |
 | **Administrative**           | Repo Master                          | `Repo Master`          |             |            | P            | X         |
-|                          | Joint Statement                      | `Joint Statement`      |             |            | P            | X         |
+|                          | Joint Statement                      | `Joint Statement`      |             |            | P            | X+A1:G41  |
 
 Note: 
 `X` = Full Participation
