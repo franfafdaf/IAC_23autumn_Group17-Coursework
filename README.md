@@ -153,7 +153,7 @@ The repo structure can be viewed in the picture below.
 
 <br>
 
-**Note: Only `SingleCycle_F1` and `Pipelined F1` contains F1 Program.**
+**Note: Only the `test` folder in `SingleCycle_F1` and `Pipelined F1` branches contains F1 Program.**
 <br>
 This policy leads to both advantages and drawbacks:
 - During the individual work stage, all the group members work on separate branches, ensuring their work is not disrupted.
@@ -183,7 +183,7 @@ iloop:
     bne     t1, zero, mloop     # else always branch to mloop
 ```
 
-The design, as illustrated in the diagram below, adheres closely to the Project's framework. However, the ALU block is notably simplified, performing only addition (`+`) and subtraction (`-`) operations. This simplification results in a more streamlined control logic.
+The design, as illustrated in the diagram below, adheres closely to the Project's framework. However, the ALU block is notably simplified, performing only addition (`+`) and subtraction (`-`) operations. This simplification results in a significantly reduced control logic.
 
 ![Reduced RV32I CPU](Images/microarchitecture.jpg)
 
@@ -194,11 +194,11 @@ The design, as illustrated in the diagram below, adheres closely to the Project'
     </span>
 </p>
 
-In the project, the increase in the number of instructions to be implemented necessitates a more intricate control logic. This complexity arises from the introduction of additional control signals and the expansion in the bit count of some signals. 
+In the project, the increase in the number of instructions to be implemented necessitates a more intricate control logic. This complexity arises from the introduction of additional control signals and the expansion in the bit number of some signals. 
 
 Moreover, a generalized logic must be established to accommodate various types of instructions, including those within the same category. For instance, the `JALR` and `ADDI` instructions are both of I-type, yet they exhibit significant functional differences. Consequently, it is imperative to maintain simplicity in the design (avoiding excessive use of multiplexers or additional blocks) while ensuring the accurate implementation of the desired instructions.
 
-Additionally, the project incorporates a `Data Memory` block to facilitate instructions like `LW` and `SW`. Following this modification, a memory map, as displayed below, is utilized as a reference for the design. This memory map delineates the allocation of memory for the Instruction Memory and Data Memory, and all designs are expected to adhere strictly to this layout.
+Additionally, the project incorporates a `Data Memory` block to execute instructions like `LW` and `SW`. Following this modification, a memory map, as displayed below, is utilized as a reference for the design. This memory map delineates the allocation of memory for the Instruction Memory and Data Memory, and all designs are expected to adhere strictly to this layout.
 
 <div align="center">
   <img src="Images/memory.jpg" alt="Memory">
@@ -220,7 +220,7 @@ The Project Brief provides a design example, as shown in the diagram below, whic
 <p align="center">
     <span style="color: grey;">
         Sample RV32I CPU, Cited from 
-        <a href="https://github.com/EIE2-IAC-Labs/Project_Brief?tab=readme-ov-file#single-cycle-rv32i-design">Project Brief</a>
+        <a href="https://github.com/EIE2-IAC-Labs/Project_Brief/blob/main/TeamProject.md#learning-the-rv32i-instruction-set">Project Brief</a>
     </span>
 </p>
 
