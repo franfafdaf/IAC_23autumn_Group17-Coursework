@@ -42,7 +42,7 @@
 ----
 ### Summary
 
-My primary responsibilities included handling the **debugging and testing of the single-cycle processor**, **constructing and subsequently debugging and testing the pipelined processor**, as well as **developing, debugging, and testing the 2-way cache version**. In addition to these technical tasks, I also took on the role of repository master, managing and updating our project's GitHub repository and authoring the section on the 2-way cache in our joint statement.
+My primary responsibilities included handling the **debugging and testing of the single-cycle processor**, **constructing and subsequently debugging & testing the pipelined processor**, as well as **building, debugging, and testing the 2-way cache version**. In addition to these technical tasks, I also took on the role of managing and updating our project's GitHub repository and authoring the section on the 2-way cache in our joint statement.
 
 
 ### Debug and Testing in the Single Cycle Processor Section
@@ -57,24 +57,24 @@ The single cycle processor section has undergone several key modifications, as d
 
 -  **Control Unit, MainDecode, and ALUDecode:**
 
-In commit [`296baaf`](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/296baaf513f4e8ec553caf4e8feb459ab987700a), significant debugging was performed on the `Control Unit`, `mainDecode`, and `ALUDecode`.
+In commit [296baaf](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/296baaf513f4e8ec553caf4e8feb459ab987700a), significant debugging was performed on the `Control Unit`, `mainDecode`, and `ALUDecode`.
 
 
 -  **Datamem, Instruction Mem, and Top:**
 
-In commit [`b17e918`](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/b17e918bd95512817b331d454390872abb4e5f8b) focused on debugging the `datamem`, `instruction mem`, and `top`.
+In commit [b17e918](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/b17e918bd95512817b331d454390872abb4e5f8b) focused on debugging the `datamem`, `instruction mem`, and `top`.
 
   
 
 -  **PC and Regfile:**
 
-In commit [`82f2d82`](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/82f2d82677d34c992c6c302656fb9fe5cd4f4ad5), there was a debug of `pc` and `regfile`.
+In commit [82f2d82](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/82f2d82677d34c992c6c302656fb9fe5cd4f4ad5), there was a debug of `pc` and `regfile`.
 
   
 
 #### Register File Optimization
 
-The initial version of the register file contained redundant `if` statements, leading to confusion and compiler warnings due to missing conditions like `else`. To streamline this, I simplified the logic to use a single condition based on the `write enable` signal. Now, the content of the target register is replaced only when the positive clock click is active, and the `write enable` signal is enabled. 
+The initial version of the register file contained redundant `if` statements, leading to confusion and compiler warnings due to missing conditions like `else`. To streamline this, I simplified the logic to use a single condition based on the `write enable` signal. Now, the content of the target register is replaced only when the positive clock click is active, and the `write enable` signal is enabled. [regfile.sv](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/blob/SingleCycle_Ref/rtl/reg_file.sv)
 
 ```verilog
   always_ff @(posedge clk) begin
@@ -83,12 +83,12 @@ The initial version of the register file contained redundant `if` statements, le
 ```
 #### Data Memory Module Consolidation
 
-In Commit [`9f5a249`](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/9f5a24999856b424e760067505dd4d85696d9ea6) marks the consolidation of three memory modules into one [`datamem.sv`](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/blob/SingleCycle_Ref/rtl/DataMemory.sv). The initial version, provided by a group member, consisted of separate files: `datamem.sv` for reading data, `memory_out.sv` for switching between `LBU` and `LW` modes, and `memory_in.sv` for managing store operations with `SB` and `SW` instructions. To reduce complexity, these have been merged into a single file, simplifying connections in the `top.sv` file.
+In commit [9f5a249](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/9f5a24999856b424e760067505dd4d85696d9ea6) marks the consolidation of three memory modules into one [datamem.sv](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/blob/SingleCycle_Ref/rtl/DataMemory.sv). The initial version, provided by a group member, consisted of separate files: `datamem.sv` for reading data, `memory_out.sv` for switching between `LBU` and `LW` modes, and `memory_in.sv` for managing store operations with `SB` and `SW` instructions. To reduce complexity, these have been merged into a single file, simplifying connections in the `top.sv` file.
 
   
 
 #### Debugging process 
-The first significant challenge encountered during debugging involved an absence of signal output on the vbuddy screen. Despite utilizing lab4 instructions, including `addi` and `bne`, the issue persisted. A detailed examination of the VCD file uncovered a mismatch between expected and actual instructions. This problem was traced back to the instruction memory module, where an endianness mismatch was causing incorrect instruction loading. By adjusting the module to load instructions in little-endian rather than big-endian format, this critical issue was resolved.
+The first significant challenge encountered during debugging involved an absence of signal output on the vbuddy screen. Despite utilizing lab4 instructions, including `addi` and `bne`, the issue persisted. A detailed examination of the VCD file uncovered a mismatch between expected and actual instructions. This problem was traced back to the instruction memory module, where an endianness mismatch was causing incorrect instruction loading. By adjusting the module to load instructions in little-endian rather than big-endian format, this critical issue was resolved. [instrumem.sv](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/blob/SingleCycle_Ref/rtl/instr_mem.sv)
 
 ```verilog
   assign RD = {rom_array[A+3], rom_array[A+2], rom_array[A+1], rom_array[A]};
@@ -119,7 +119,7 @@ The first significant challenge encountered during debugging involved an absence
 
 Additional modifications across other components include correcting incorrectly set signal sizes, fixing variable recognition issues caused by inconsistent use of uppercase and lowercase letters, and resolving some SystemVerilog syntax errors, like omitting blank lines after `endmodule`.
 
--  **Commit Analysis and Testing**: Commit [`0e5bcc5`](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/0e5bcc5eaca9eedd887e2bb71e0f42cbf340641f) and others labeled 'test and modify' were pivotal in testing the single-cycle version of the processor. This phase was critical in identifying and addressing various issues.
+-  **Commit Analysis and Testing**: Commit [0e5bcc5](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/0e5bcc5eaca9eedd887e2bb71e0f42cbf340641f) and others labeled 'test and modify' were pivotal in testing the single-cycle version of the processor. This phase was critical in identifying and addressing various issues.
 
 
 
@@ -171,7 +171,7 @@ For example, if an instruction that loads data from memory is followed by an ins
     assign FlushD = PCSrcE;
     assign FlushE = lwStall | PCSrcE;
 ```
-- in commit [`b0a731b`](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/b0a731bf8b34876275449e684cc3f78f5034d5a3), and several previous commit, the buidling of 4 flip flop that separeate the sategs.
+- in commit [b0a731b](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/b0a731bf8b34876275449e684cc3f78f5034d5a3), and several previous commit, the buidling of 4 flip flop that separeate the sategs.
 - in file [Stage1.sv](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/blob/Pipelined_F1/rtl/Stage1.sv) the design of the first stage,  Fetch and Decode stage is shown. `clr` and `en` logic is used to suit the `hazard unit` for `stall` and `flush`.
 ```verilog
 always_ff @(posedge clk) begin
@@ -200,7 +200,7 @@ end
 ```
 ### Debug  and  testing of Pipelined  version
 
-- in  commit [`891ee88`](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/891ee88a181cea1bb0545e017e88b7c0679a9761), the biggest bug of the pieplined version is fixed.
+- in  commit [891ee88](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/891ee88a181cea1bb0545e017e88b7c0679a9761), the biggest bug of the pieplined version is fixed.
 I falsely connect the port in `top.sv`
 Renaming  logic  stages (like  fetch  and  decode) and adjusting small logic  aspects  were  necessary  to  accommodate  the  pipelined  architecture. One  significant  challenge  encountered  was  an  issue with the  multiplexer  selecting  inputs  for  the  `data  memory`, which  was  traced  back  to  a  misconnection  at  the  top  level. Correcting  this  resolved  the  issue, enabling  proper  functioning  of  the  pipelined  processor.
 ```verilog
@@ -219,13 +219,13 @@ In file [ControlUnit.sv](https://github.com/franfafdaf/IAC_23autumn_Group17-Cour
   <img src="Personal Statments/../../Images/2-wayCache.png" alt="Cache Structure">
 </div>
 
-- in file [`cache.sv`](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/blob/2-wayCache/rtl/Cache.sv) 
+File [cache.sv](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/blob/2-wayCache/rtl/Cache.sv) 
 
-Initially, the  team  aimed  for  a  complex  cache  design (4-way, 8-set, 128-bit  block  size with write-back  functionality). However, due  to  complexity, the  design  was  simplified  to  a  2-way  set  associative  cache. The  cache  was  segmented  into  smaller  components  like  valid  bits, tag, data, and least  recently  used (LRU) bits. This  modular  approach  allowed  for  easier  initialization and hit  detection.
+Initially, the  team  aimed  for  a  complex  cache  design (4-way, 8-set, 128-bit  block  size with write-back  functionality). However, due  to  complexity, the  design  was  simplified  to  a  2-way  set  associative  cache. The  `cache`  was  segmented  into  smaller  components  like  valid  bits, tag, data, and least  recently  used (`LRU`) bits. This  modular  approach  allowed  for  easier  initialization and hit  detection.
 
 ### Testing of 2-way Cache 
 
-- in commit [`15f91b6`](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/15f91b6acd0cd94db00cfda61a78d0df64af065b), during the debugging, the output appeared similar to the expected one, but not identical. Revisiting `cache.sv`, I identified a potential issue with the else condition. Given that only the `LBU` and `SB` logic is executed in the instruction, other conditions should not trigger read or write operations in the `cache`. Therefore, only if conditions for `LBU`and `SB` instructions are maintained.
+- in commit [15f91b6](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/commit/15f91b6acd0cd94db00cfda61a78d0df64af065b), during the debugging, the output appeared similar to the expected one, but not identical. Revisiting `cache.sv`, I identified a potential issue with the else condition. Given that only the `LBU` and `SB` logic is executed in the instruction, other conditions should not trigger read or write operations in the `cache`. Therefore, only if conditions for `LBU`and `SB` instructions are maintained.
   
 - The overall design is illustrated above. The cache receives inputs from `DataWrite`, `AddressIn`, and other control units. The `Hit` logic is determined by checking whether the data is already in the `cache`. If a hit occurs, the output of the memory stage will be sourced from the cache. Otherwise, it will be derived from the `data memory`. The selection of output is managed by the file `CacheMux.sv`().
 
