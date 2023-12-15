@@ -550,7 +550,7 @@ The algorithm's flow is visually represented in the diagram below, with straight
 Having tested the Single Cycle design on Reference program, the design is modified to accomodate the F1 program as explained above. There are a few points that differs F1 design from Ref Design. 
 
 #### 1. Data Memory
-The Reference Program utilizes `load` and `store` instructions such as `LW` and `SB`. However, the F1 design omits these instructions, resulting in no data being written to or read from the Data Memory.
+The Reference Program uses `load` and `store` instructions such as `LW` and `SB`. However, the F1 design omits these instructions, resulting in no data being written to or read from the Data Memory.
 
 This design choice is linked to the method of pseudo-random number generation in the F1 program. Before the trigger signal is asserted, the program iterates through a loop generating random numbers.
 
