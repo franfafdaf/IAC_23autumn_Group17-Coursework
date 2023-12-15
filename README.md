@@ -283,7 +283,7 @@ Operations on the PC can be classified easily, allowing for straightforward impl
 ### Instruction Memory
 Instruction memory stores the executable instructions. As defined by the memory map, Instruction Memory spans 12 bits (from `BFC00000` to `BFC00FFF`). Consequently, the address length (`A_length`) is set to 12 bits. Additionally, since the data follows byte-addressing, the data length (`D_length`) is set to 8 bits.
 
-In this design, the Instruction Memory comprises a memory array with a size of $ \(2^{12} = 4096\) $ blocks. During each cycle, 4 blocks are concatenated to form the data output (`RD(Instr)`).
+In this design, the Instruction Memory comprises a memory array with a size of $2^{12} = 4096$ blocks. During each cycle, 4 blocks are concatenated to form the data output (`RD(Instr)`).
 
 It is important to note that RISC-V is a byte-addressing processor employing a little-endian format, where the least significant byte is stored in the lower address. For instance, if the machine code is `F1F2F3F4`, it is stored as follows:
 
