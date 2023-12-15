@@ -23,7 +23,7 @@
   - [Assembly Language (F1)](#assembly-language-f1)
   - [F1 Design VS Ref Design](#f1-design-vs-ref-design)
     - [1. Data Memory](#1-data-memory)
-    - [2. `Trigger` Signal](#2-trigger-signal)
+    - [2. Trigger Signal](#2-trigger-signal)
     - [3. Testbench](#3-testbench)
 - [Pipeline Design](#pipeline-design)
     - [Design Overview](#design-overview)
