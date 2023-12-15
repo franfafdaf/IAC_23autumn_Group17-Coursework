@@ -318,7 +318,7 @@ Our group has designed a mapping for the `ImmSrc` with corresponding extension o
 In the `Extend` Unit, mapping the decoded `ImmSrc` to the appropriate extension operations is straightforward.
 
 ### Control Unit
-The Control Unit is pivotal in determining the control signals based on instructions. It fetches three segments, `Opcode`, `funct3`, and `func75` from `Instr`, and a distinct signal `Zero` from the `ALU`. These four output signals collectively dictate the control signals, influencing the operations of other blocks in the processor. 
+The Control Unit is pivotal in determining the control signals based on instructions. It fetches three segments, `Opcode`, `funct3`, and `func75` from `Instr`, and a distinct signal `Zero` from the `ALU`. These four output signals collectively decide the control signals, determining the operations of other blocks in the processor. 
 
 #### 1. Control Unit Overview
 The table below presents the control signals corresponding to the 18 instructions implemented in the RV32I CPU design. Each instruction type is distinguished by different colors. Among which, blue columns represent input signals, while grey columns (`PCSrc` and `ALUControl[2:0]`) indicate signals requiring two-layer decoding.
