@@ -23,21 +23,21 @@
   - [Assembly Language (F1)](#assembly-language-f1)
   - [F1 Design VS Ref Design](#f1-design-vs-ref-design)
     - [1. Data Memory](#1-data-memory)
-    - [2. Trigger Signal](#2-trigger-signal)
+    - [2. `Trigger` Signal](#2-trigger-signal)
     - [3. Testbench](#3-testbench)
 - [Pipeline Design](#pipeline-design)
-    - [Design Overview](#design-overview)
-    - [Forwarding Logic](#forwarding-logic)
-    - [Stall Logic](#stall-logic)
-    - [Flush Logic](#flush-logic)
+  - [Design Overview](#design-overview)
+  - [Forwarding Logic](#forwarding-logic)
+  - [Stall Logic](#stall-logic)
+  - [Flush Logic](#flush-logic)
 - [Data Memory Cache Design](#data-memory-cache-design)
   - [Design Overview](#design-overview-1)
   - [Direct Mapped Cache](#direct-mapped-cache)
-    - [Parameters](#parameters)
+    - [Parameters:](#parameters)
     - [Read and Write Policy](#read-and-write-policy)
     - [Implementation](#implementation)
   - [2-Way Associative Cache](#2-way-associative-cache)
-    - [Parameters](#parameters-1)
+    - [Parameters:](#parameters-1)
     - [Read and Write Policy](#read-and-write-policy-1)
     - [Implementation](#implementation-1)
 - [Tests](#tests)
@@ -859,6 +859,31 @@ To change the displayed signal, please go to Data Memory and modify the file nam
 initial $readmemh("sine.mem", data_array, 17'h10000);
 ```
 #### Test Results
+
+Reference programme test results:
+
+<div style="text-align: center;">
+
+-  Single Cycle Sine
+  <div style="max-width: 100%; height: auto; display: inline-block;">
+    <img src="ref/singleCycle/sine.jpg" alt="SingleCycleSine" style="width: 50%; height: 50%;">
+  </div>
+
+-  Pipelined Gaussian 
+  <div style="max-width: 100%; height: auto; display: inline-block;">
+    <img src="ref/pipelined/gaussian.jpg" alt="PipelinedGaussian" style="width: 50%; height: 50%;">
+  </div>
+
+-  2-Way Associative Cache Noisy 
+  <div style="max-width: 100%; height: auto; display: inline-block;">
+    <img src="ref/2wayCache/noisy.jpg" alt="2WayNoisy" style="width: 50%; height: 50%;">
+  </div>
+
+-  Direct Mapping Cache Triangle
+  <div style="max-width: 100%; height: auto; display: inline-block;">
+    <img src="ref/directMap/triangle.jpg" alt="DirectTriangle" style="width: 50%; height: 50%;">
+  </div>
+</div>
 
 ### F1 Program
 #### Desired Results
