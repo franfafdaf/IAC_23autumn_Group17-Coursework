@@ -784,6 +784,8 @@ assign hit = ((tag[inputSet] == inputTag) && (valid[inputSet]));
 - **`Tag_WIDTH`:** 29 bits
 - **`Set_WIDTH`:** 3 bits
 
+<img src='/Images/2-wayCache.png' width='400'>
+
   <div align="center" style="width: 50%; margin: auto;">
     <img src="Personal Statements/../Images/2-wayCache.png" alt="2-way Cache">
   </div>
