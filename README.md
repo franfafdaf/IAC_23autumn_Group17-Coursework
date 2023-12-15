@@ -2,7 +2,7 @@
 
 
 **Test Image**
-Reference programme test results:
+
 <table>
   <tr>
     <td style="text-align: center;"><img src="/test/Ref Results/Single_Sine.jpg" alt="sine" height = "500"><br><span style="color: grey;">Sine</span></td>
