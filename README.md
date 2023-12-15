@@ -547,7 +547,7 @@ The algorithm's flow is visually represented in the diagram below, with straight
 </div>
 
 ### F1 Design VS Ref Design
-Upon testing the Single Cycle design on Reference program, the design is modified to accomodate the F1 program as explained above. There are a few points that differs F1 design from Ref Design. 
+Having tested the Single Cycle design on Reference program, the design is modified to accomodate the F1 program as explained above. There are a few points that differs F1 design from Ref Design. 
 
 #### 1. Data Memory
 The Reference Program utilizes `load` and `store` instructions such as `LW` and `SB`. However, the F1 design omits these instructions, resulting in no data being written to or read from the Data Memory.
