@@ -606,7 +606,7 @@ In physical testing, the push-button switch on the Vbuddy functions as the `trig
 top->trigger = vbdFlag();
 ``` 
 
-Additionally, Register `t0` in the register file is designated for the trigger signal. Therefore, an extra line is incorporated into `reg_file.sv` to facilitate this:
+Additionally, the `t0` in `reg_file.sv` is isolated for the representation of trigger signal. Therefore, an extra line is incorporated into `reg_file.sv` to facilitate this:
 ```SystemVerilog
 assign     register[5] = trigger;
 ```
