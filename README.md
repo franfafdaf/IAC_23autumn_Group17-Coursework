@@ -41,8 +41,11 @@
     - [Read and Write Policy](#read-and-write-policy-1)
     - [Implementation](#implementation-1)
 - [Tests](#tests)
+  - [Test Instructions](#test-instructions)
   - [Reference Program](#reference-program)
+    - [Desired Results](#desired-results)
   - [F1 Program](#f1-program)
+    - [Desired Results](#desired-results-1)
 
 
 
@@ -847,6 +850,7 @@ initial $readmemh("sine.mem", data_array, 17'h10000);
 ```
 
 ### F1 Program
+#### Desired Results
 This program is designed to simulate the F1 light mechanism, as detailed in the [previous section](#assembly-language-f1):
 - Initially, all 8 lights illuminate simultaneously at a unit step **(assumed as 0x8 in our program)**.
 - Once all 8 lights are lit, the program initiates a random number countdown **(we using a 7-bit random number, which may take longer than expected)**.
