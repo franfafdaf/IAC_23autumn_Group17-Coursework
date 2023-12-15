@@ -380,7 +380,7 @@ The `ALU Decoder` then deciphers the `ALUControl` signal, with each value repres
 `ResultSrc`, `MemWrite`, `RegWrite`, `LdSrc`, and `StSrc` are categorized as Register and Memory Signals.
 
 The RV32I design offers three alternatives for the `Result` signal written to the Register File:
-- For ALU-utilizing instructions, `ResultSrc` is `00`, directly passing the ALU result to the register.
+- For instructions that use ALU, `ResultSrc` is `00`, directly passing the ALU result to the register.
 - For `Load` instructions that fetch from memory, `ResultSrc` is `01`, writing data from memory to the register.
 - For `JAL` and `JALR` instructions, where `RD = PC + 4`, `ResultSrc` is `10`, and `PCPlus4` is written to the register.
 
