@@ -779,7 +779,9 @@ assign hit = ((tag[inputSet] == inputTag) && (valid[inputSet]));
 
   Special attention is given to `LBU` and `SW` instructions, which involve partial word read/write operations through byte addressing. 
   
-  Further, Unlike standard word-aligned addressing, RV32I employs byte addressing. Hence, our design adjusts the bit layout for `Set` and `Tag` to accommodate this difference. In the given example, the last two bits of the address are used for byte offset, allowing only `00`. However, in our design, it allows for `00`, `01`, `10`, or `11` as possible values. Consequently, we designate the last three bits as `Set` and the preceding 29 bits as `Tag`.
+  Further, Unlike standard word-aligned addressing, RV32I employs byte addressing. Hence, our design adjusts the bit layout for `Set` and `Tag` to accommodate this difference. In the given example, the last two bits of the address are used for byte offset, allowing only `00`. However, in our design, it allows for `00`, `01`, `10`, or `11` as possible values. 
+  
+  Consequently, we allocate the last three bits to `Set` and the preceding 29 bits to `Tag`.
 
 ### 2-Way Associative Cache
 
@@ -810,7 +812,7 @@ assign hit = ((tag[inputSet] == inputTag) && (valid[inputSet]));
 
 - **Overview**
 
-  The 2-way cache is designed with a connection to the data memory and a cache multiplexer. This connection serves to fetch data in the event of a miss during a read operation. Within the cache, each block is equipped with `tag` and `valid` components to determine whether the block's content is a hit. When a hit occurs (with hit logic set to 1), the multiplexer selects the cache's output as the memory stage output. Conversely, when there's a cache miss (hit logic is 0), the output selection opts for the data memory's output, which is then loaded into the cache block. This configuration ensures efficient data retrieval and storage within the memory hierarchy of the system. 
+  The 2-way cache is designed with a connection to the data memory and a cache multiplexer. This connection serves to fetch data in the event of a miss during a read operation. Within the cache, each block is equipped with `tag` and `valid` components to determine whether the block's content is a hit. When a hit occurs (with `hit` set to 1), the multiplexer selects the cache's output as the memory stage output. Conversely, when there's a cache miss (hit logic is 0), the output selection opts for the data memory's output, which is then loaded into the cache block. This configuration ensures efficient data retrieval and storage within the memory hierarchy of the system. 
 - **Hit Logic**
 
   A hit occurs when the `inputTag` matches the cache's `tag` and the `valid` bit is set to `TRUE`. The logic can be expressed as:
@@ -883,12 +885,12 @@ initial $readmemh("sine.mem", data_array, 17'h10000);
 Reference programme test results:
 <table>
   <tr>
-    <td style="text-align: center;"><img src="ref/singleCycle/sine.jpg" alt="sine"><br><span style="color: grey;">Sine</span></td>
-    <td style="text-align: center;"><img src="ref/pipelined/triangle.jpg" alt="triangle"><br><span style="color: grey;">Triangle</span></td>
+    <td style="text-align: center;"><img src="ref/singleCycle/sine.jpg" alt="sine" height = "500"><br><span style="color: grey;">Sine</span></td>
+    <td style="text-align: center;"><img src="ref/pipelined/triangle.jpg" alt="triangle" height = "500"><br><span style="color: grey;">Triangle</span></td>
   </tr>
   <tr>
-    <td style="text-align: center;"><img src="ref/2wayCache/gaussian.jpg" alt="gaussian"><br><span style="color: grey;">Gaussian</span></td>
-    <td style="text-align: center;"><img src="ref/directMap/noisy.jpg" alt="noisy"><br><span style="color: grey;">Noisy</span></td>
+    <td style="text-align: center;"><img src="ref/2wayCache/gaussian.jpg" alt="gaussian" height = "500"><br><span style="color: grey;">Gaussian</span></td>
+    <td style="text-align: center;"><img src="ref/directMap/noisy.jpg" alt="noisy" height = "500"><br><span style="color: grey;">Noisy</span></td>
   </tr>
 </table>
 
