@@ -865,5 +865,5 @@ https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/assets/115477676/a
 
 **Waveform Explained**
   <div align="center">
-    <img src="[Images/Cache Memory.png](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/blob/SingleCycle_F1/test/F1%20Results/SingleCycle_F1.drawio.png)https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/blob/SingleCycle_F1/test/F1%20Results/SingleCycle_F1.drawio.png" alt="F1 Waveform">
+    <img src="/Images/SingleCycle_F1.drawio.png" alt="F1 Waveform">
   </div>
