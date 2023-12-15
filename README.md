@@ -640,7 +640,7 @@ Pipelining is a highly useful and widely applied technique in processor design. 
 
 It's worth mentioning that instructions will not necessarily use all of these five stages. Pipelining executes different stages for different instructions in the same cycle. For example, after the first instruction completes the **F** stage, the second instruction executes its **F** stage at the same time as the first instruction executes its **D** stage.
 
-Although this technique seems simple, it also raises problems: data hazards and control hazards can exist. A straightforward way to deal with hazards is to add `NOP` instructions between the "useful" ones, which can reduce performance. A more advanced method is to introduce a Hazard Unit to implement **Forwarding**, **Stall**, and **Flush**.
+Although this technique seems simple, it also raises problems: data hazards and control hazards can exist. A straightforward way to deal with hazards is to **add `NOP` instructions between the "useful" ones**, which can reduce performance. A more advanced method is to introduce a Hazard Unit to implement **Forwarding**, **Stall**, and **Flush**.
 
 The following diagram (modified based on [H&H Digital Design and Computer Architecture, RISC-V Edition: RISC-V Edition](https://www.sciencedirect.com/book/9780128200643/digital-design-and-computer-architecture)) illustrates the Pipelined Processor design with a Hazard Unit, as implemented in our project.
 
@@ -651,7 +651,7 @@ The pipelined version is applied to both the F1 Program and the Reference Progra
   </div>
 
 ### Forwarding Logic
-Forwarding is necessary when the result of an instruction is required by subsequent instructions before it has been written back to the register. Consider the following program snippet as an example, where the value of `s8` needs to be forwarded:
+Forwarding is necessary when the result of an instruction is used by subsequent instructions before it has been written to the register. Consider the following program snippet as an example, where the value of `s8` needs to be forwarded:
 ```s
 add s8, s4, s5
 sub s2, s8, s3
@@ -686,7 +686,7 @@ assign StallD = lwStall;
 ```
 
 ### Flush Logic
-Flush operations are chosen for addressing control hazards, which occur when a pipelined processor is uncertain about the next instruction to fetch due to an unresolved branch decision. 
+Flush operations are also useful for addressing control hazards, which occur when a pipelined processor is uncertain about the next instruction to fetch due to an unresolved branch decision. 
 Initially, a prediction is made regarding whether the branch will be taken. If this prediction turns out to be incorrect, the results from the incorrectly predicted path must be discarded, a process known as incurring a branch misprediction penalty.
 
 In practice, the implementation of this logic can be structured as follows:
@@ -705,8 +705,10 @@ assign FlushE = lwStall | PCSrcE;
 
 ### Design Overview
 
-In CPU architecture, caches play a crucial role in enabling quick read/write operations, thereby enhancing performance. This is achieved by exploiting two key principles: temporal locality and spatial locality. Temporal locality is based on the premise that if data is used once, it's likely to be accessed again soon. Conversely, spatial locality posits that when data is accessed, adjacent data is likely to be needed in the near future. 
-Our project has developed two distinct cache designs: Direct Mapped Cache and 2-Way Associative Cache. Notably, both designs utilize a single word as the block size, focusing primarily on leveraging temporal locality. 
+In CPU architecture, caches play a crucial role in enabling quick read/write operations, thereby enhancing performance. This is achieved by **exploiting two key principles: temporal locality and spatial locality.** Temporal locality is based on the assumption that if data is used once, it's likely to be accessed again soon. Conversely, spatial locality posits that when data is accessed, adjacent data is likely to be needed in the near future. 
+
+Our project has developed two distinct cache designs: **Direct Mapped Cache** and **2-Way Associative Cache**. Notably, both designs utilize a single word as the block size, focusing primarily on leveraging temporal locality. 
+
 Further, as discussed earlier, our F1 program didn't use Data Memory. In this sense, only the Reference Program version using cache is developed. 
 
 ### Direct Mapped Cache
