@@ -871,7 +871,7 @@ Reference programme test results:
 
 <div style="display: flex; justify-content: center;">
   <div style="max-width: 50%; text-align: center;">
-    Single Cycle Sine -->
+    Single Cycle Sine 
     <div style="max-width: 100%; height: auto; display: inline-block;">
       <img src="ref/singleCycle/sine.jpg" alt="SingleCycleSine" style="width: 80%; height: auto;">
     </div>
