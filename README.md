@@ -878,13 +878,13 @@ Reference programme test results:
       <img src="ref/singleCycle/sine.jpg" alt="SingleCycleSine" style="width: 80%; height: auto;">
     </div>
 
-    <!-- Pipelined Gaussian Graph -->
-    <div>
-      <strong>Pipelined Gaussian</strong>
-    </div>
-    <div style="max-width: 100%; height: auto; display: inline-block;">
-      <img src="ref/pipelined/gaussian.jpg" alt="PipelinedGaussian" style="width: 80%; height: auto;">
-    </div>
+  <!-- Pipelined Gaussian Graph -->
+  <div>
+    <strong>Pipelined Gaussian</strong>
+  </div>
+  <div style="max-width: 100%; height: auto; display: inline-block;">
+    <img src="ref/pipelined/gaussian.jpg" alt="PipelinedGaussian" style="width: 80%; height: auto;">
+  </div>
   </div>
 
   <div style="max-width: 50%; text-align: center;">
@@ -896,13 +896,13 @@ Reference programme test results:
       <img src="ref/2wayCache/noisy.jpg" alt="2WayNoisy" style="width: 80%; height: auto;">
     </div>
 
-    <!-- Direct Mapping Cache Triangle Graph -->
-    <div>
-      <strong>Direct Mapping Cache Triangle</strong>
-    </div>
-    <div style="max-width: 100%; height: auto; display: inline-block;">
-      <img src="ref/directMap/triangle.jpg" alt="DirectTriangle" style="width: 80%; height: auto;">
-    </div>
+  <!-- Direct Mapping Cache Triangle Graph -->
+  <div>
+    <strong>Direct Mapping Cache Triangle</strong>
+  </div>
+  <div style="max-width: 100%; height: auto; display: inline-block;">
+    <img src="ref/directMap/triangle.jpg" alt="DirectTriangle" style="width: 80%; height: auto;">
+  </div>
   </div>
 </div>
 
