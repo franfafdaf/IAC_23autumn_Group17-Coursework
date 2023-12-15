@@ -466,7 +466,7 @@ A C++ testbench is added to test the sesign. In this section we mainly discuss t
 
 In the testbench for the Reference Program, both `clk` and `rst` are initialized to a value of 1. Subsequently, at each clock cycle, `rst` is set to 0, and the value of `a0` is dumped to a VCD file. A boolean variable, `plot`, is used to monitor the status of `a0`. A non-zero value of `a0` denotes the successful completion of the build process, thus `plot` will enable the plotting on Vbuddy. Furthermore, the program is designed to terminate after a specific number of cycles, which varies depending on the version (either 960 or 1920 cycles).
 
-The testbench for the F1 program differs from that of the Reference Program, details of which are elaborated in the [following section](#f1-design-vs-ref-design).
+The testbench for the F1 program differs from that of the Reference Program, details of which are elaborated in the [following section](#3-testbench).
 
 
 ### Shell Script
@@ -570,7 +570,7 @@ For the data memory of the reference program, the diagram below illustrates the 
     </span>
 </p>
 
-#### 2. `Trigger` Signal
+#### 2. Trigger Signal
 A significant difference between the F1 and Reference Programs is the `trigger` signal. As described in the [Project Brief](https://github.com/EIE2-IAC-Labs/Project_Brief/tree/main?tab=readme-ov-file#learning-the-rv32i-instruction-set), "The trigger signal is used to initiate the F1 light sequence in the RISC-V."
 
 <div align="center">
@@ -616,8 +616,13 @@ The modified `reg_file.sv` is illustrated as the diagram below.
 
 
 #### 3. Testbench
-As mentioned earlier, the F1 Program employs a distinct testbench from that of the Reference Program. In this testbench, the 32-bit output `a0` is transformed into an 8-bit `data_out` by masking the top 24 bits. Subsequently, the `vbdBar()` function is invoked to display `data_out` on the neopixel.
+As mentioned earlier, the F1 Program employs a distinct testbench from that of the Reference Program. In this testbench, the 32-bit output `a0` is transformed into an 8-bit `data_out` by masking the top 24 bits. Subsequently, the `vbdBar()` function is invoked to display `data_out` on the neopixel, which is implemented using the following code snippet
 
+```C++
+uint32_t value_32bit = top->a0;                               // Display F1 Light, toggle neopixel
+uint8_t data_out = static_cast<uint8_t>(value_32bit & 0xFF);  // Masking to get the lowest 8 bits
+vbdBar(data_out & 0xFF);
+```
 
 ----
 ## Pipeline Design
