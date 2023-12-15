@@ -855,3 +855,14 @@ This program is designed to simulate the F1 light mechanism, as detailed in the 
 - Initially, all 8 lights illuminate simultaneously at a unit step **(assumed as 0x8 in our program)**.
 - Once all 8 lights are lit, the program initiates a random number countdown **(we using a 7-bit random number, which may take longer than expected)**.
 - Upon completion of the countdown, all lights turn off synchronously.
+
+#### Test Results
+Attached below are the test results for `SingleCycle_F1`. For the results (video & `.vcd` file) of other branches, refer to the `test` folders. 
+**Video**
+
+https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/assets/115477676/a2bccc1f-33a7-404b-9d0b-ee208160491f
+
+**Waveform Explained**
+  <div align="center">
+    <img src="[Images/Cache Memory.png](https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/blob/SingleCycle_F1/test/F1%20Results/SingleCycle_F1.drawio.png)https://github.com/franfafdaf/IAC_23autumn_Group17-Coursework/blob/SingleCycle_F1/test/F1%20Results/SingleCycle_F1.drawio.png" alt="F1 Waveform">
+  </div>
